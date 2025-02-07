@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 
 from dotenv import load_dotenv
+
 load_dotenv(dotenv_path='.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,6 +32,7 @@ DEBUG = True
 # Marked up when publish------------------------------------
 ALLOWED_HOSTS = ["localhost", '127.0.0.1']
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 DATABASES = {
     'default': {
@@ -64,7 +66,10 @@ CORS_ALLOW_METHODS = [
     'OPTIONS'
 ]
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:5713',
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
 ]
 # ---------------------------------------------------------
 
@@ -82,9 +87,12 @@ INSTALLED_APPS = [
     'rest_framework',
     # API
     'backend',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
+    # coresheaders
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -92,9 +100,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # coresheaders
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'yzuic114_webstudy.urls'
@@ -116,21 +121,10 @@ TEMPLATES = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend', 'dist'),
-    os.path.join(BASE_DIR, 'frontend', 'dist', 'assets')
+    os.path.join(BASE_DIR, "frontend/dist/static"),
 ]
 
 WSGI_APPLICATION = 'yzuic114_webstudy.wsgi.application'
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -162,7 +156,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-STATIC_URL = '/assets/'
+STATIC_URL = "/static/"
+MEDIA_URL = '/files/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'frontend/dist/files')
+
+AUTH_USER_MODEL = 'backend.User'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -171,19 +169,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Security Setting
 """
-1. CSRF_COOKIE_SAMESITE = 'Strict'
+1. CSRF_COOKIE_SAMESITE = 'Strict' | 'Lax'
     Cookie 請求只有在同一個網址下才可以發送
-2. SESSION_COOKIE_SAMESITE = 'Strict'
+2. SESSION_COOKIE_SAMESITE = 'Strict' | 'Lax'
     請求來自同一個網址下才會發送 Cookie
 3. CSRF_COOKIE_HTTPONLY = False
     HttpOnly 為 False 表示 Cookie 可以透過 Js 訪問(通常用於使前端框架能夠讀取 CSRF Token 並能夠在 Request 中使用)
 4. SESSION_COOKIE_HTTPONLY = True
     Session Cookie 不能透過 Js 訪問
 """
-CSRF_COOKIE_SAMESITE = 'Strict'
-SESSION_COOKIE_SAMESITE = 'Strict'
+# CSRF_COOKIE_SAMESITE = 'Strict'
+# SESSION_COOKIE_SAMESITE = 'Strict'
 CSRF_COOKIE_HTTPONLY = False
-SESSION_COOKIE_HTTPONLY = False
+SESSION_COOKIE_HTTPONLY = True
 # production Setting
 # CSRF_COOKIE_HTTPONLY = True
 # SESSION_COOKIE_HTTPONLY = True
