@@ -1,12 +1,13 @@
-import { defineConfig } from 'vite'
+import {defineConfig} from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  assetsInclude: ['**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.svg', '**/*.gif'],
   build: {
     outDir: 'dist',
-    assetsDir: 'assets',
-    manifest: true,
-  }
+    assetsDir: 'static', // 將靜態資源放入 static 資料夾
+    emptyOutDir: true,
+  },
 })

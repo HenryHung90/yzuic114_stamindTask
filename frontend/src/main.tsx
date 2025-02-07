@@ -1,10 +1,18 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+import {ThemeProvider} from "@material-tailwind/react";
+import {BrowserRouter as Router} from "react-router-dom";
+
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+  <ThemeProvider>
+    <Router>
+      <div className='bg-gradient-to-l from-stamindTask-primary-blue-200 to-stamindTask-white-150'>
+        <App/>
+      </div>
+    </Router>
+  </ThemeProvider>
+  ,
+);
