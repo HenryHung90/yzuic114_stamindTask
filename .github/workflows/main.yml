@@ -1,0 +1,103 @@
+name: StamindTask CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: stamindtask
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v3
+
+    # Python 設定
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.10'
+
+    # Node.js 設定
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    # 安裝後端依賴
+    - name: Install Backend Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    # 安裝前端依賴
+    - name: Install Frontend Dependencies
+      working-directory: ./frontend
+      run: |
+        npm install
+
+    # 運行後端測試
+    - name: Run Backend Tests
+      env:
+        DEBUG: "True"
+        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+        DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/stamindtask"
+      run: |
+        python manage.py test
+
+    # 運行前端測試
+#    - name: Run Frontend Tests
+#      working-directory: ./frontend
+#      run: |
+#        npm run test
+
+    # 建置前端
+    - name: Build Frontend
+      working-directory: ./frontend
+      run: |
+        npm run build
+
+#  deploy:
+#    needs: build-and-test
+#    runs-on: ubuntu-latest
+#    if: github.ref == 'refs/heads/main'
+#
+#    steps:
+#    - uses: actions/checkout@v3
+
+#    # 部署到伺服器
+#    - name: Deploy to Server
+#      uses: appleboy/ssh-action@master
+#      with:
+#        host: ${{ secrets.SERVER_HOST }}
+#        username: ${{ secrets.SERVER_USERNAME }}
+#        key: ${{ secrets.SERVER_SSH_KEY }}
+#        script: |
+#          cd /path/to/your/project
+#          git pull origin main
+#          source venv/bin/activate
+#          pip install -r requirements.txt
+#          cd frontend
+#          npm install
+#          npm run build
+#          cd ..
+#          python manage.py migrate
+#          python manage.py collectstatic --noinput
+#          sudo systemctl restart gunicorn
+#          sudo systemctl restart nginx
