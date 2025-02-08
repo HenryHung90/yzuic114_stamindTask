@@ -10,6 +10,7 @@ import Home from "./pages/home/Home";
 import AlertLog from "./pages/alertLogAndLoadingPage/AlertLog";
 import Loading from "./pages/alertLogAndLoadingPage/Loading";
 import {CSRF_cookies, ResponseData} from "./utils/API/API_Interface";
+import Task from "./pages/Task/Task";
 // interface
 
 
@@ -51,7 +52,8 @@ export default function App() {
   const unauth_routes = [
     {
       path: '*',
-      element: <Login settingAlertLogAndLoading={settingAlertLogAndLoading} setAuth={setAuth} setName={setName} setStudentId={setStudentId}/>
+      element: <Login settingAlertLogAndLoading={settingAlertLogAndLoading} setAuth={setAuth} setName={setName}
+                      setStudentId={setStudentId}/>
     },
   ]
 
@@ -63,6 +65,10 @@ export default function App() {
     {
       path: '/home',
       element: <Home auth={auth} name={name} studentId={studentId}/>
+    },
+    {
+      path: '/task/:id',
+      element: <Task studentId={studentId}/>
     }
   ]
 
