@@ -5,8 +5,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
 # User model
-from backend.models import User
-from backend.models import ClassName
+from backend.models import *
 
 # session-based Login require
 from django.contrib.auth import authenticate, login, logout
@@ -103,7 +102,8 @@ def login_system(request):
         login(request._request, user)
 
         return Response(
-            {'message': 'success', 'name': student_info.name, 'user_type': student_info.user_type, 'student_id': student_info.student_id, 'status': 200},
+            {'message': 'success', 'name': student_info.name, 'user_type': student_info.user_type,
+             'student_id': student_info.student_id, 'status': 200},
             status=status.HTTP_200_OK)
 
     except Exception as e:
@@ -138,6 +138,28 @@ def userinfo_view(request):
                 status=status.HTTP_200_OK)
         else:
             return Response({'isAuthenticated': request.user.is_authenticated}, status=status.HTTP_200_OK)
+    except Exception as e:
+        print(f'Userinfo Error: {e}')
+        return Response({'userinfo Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# Task Info
+@ensure_csrf_cookie
+@api_view(['POST'])
+def get_tasks_info(request):
+    try:
+        tasks_info = Task.objects.filter(class_name=request.user.class_name, is_open=True)
+
+        # 將 QuerySet 轉換為可序列化的格式
+        tasks_data = []
+        for task in tasks_info:
+            tasks_data.append({
+                'id': task.id,
+                'name': task.name,
+                'created_at': task.created_at.strftime('%Y-%m-%d %H:%M'),
+                'updated_at': task.updated_at.strftime('%Y-%m-%d %H:%M'),
+            })
+        return Response({'tasks_info': tasks_data, 'message': 'success'}, status=status.HTTP_200_OK)
     except Exception as e:
         print(f'Userinfo Error: {e}')
         return Response({'userinfo Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

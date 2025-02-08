@@ -6,9 +6,31 @@ interface RequestParams {
 // Response 訊息內容
 interface ResponseData {
   message: string
+  data: any
   status: number
 }
 
+// API Extension ---------------------------------------------------------
+// API Request Extension
+interface Req_login extends RequestParams {
+  student_id: string
+  password: string
+}
+
+interface Req_register extends RequestParams {
+  student_id: string
+  user_type: 'STUDENT' | 'TEACHER'
+  password: string
+  name: string
+  class_name: string
+}
+
+interface Req_tasksInfo extends RequestParams {
+  student_id: string
+}
+
+
+// API Response Extension
 // csrf cookie Response
 interface CSRF_cookies extends ResponseData {
   isAuthenticated: false | 'STUDENT' | 'TEACHER'
@@ -24,19 +46,16 @@ interface Res_login extends ResponseData {
   status: number
 }
 
-// API Extension ---------------------------------------------------------
-interface Req_login extends RequestParams {
-  student_id: string
-  password: string
-}
-
-interface Req_register extends RequestParams {
-  student_id: string
-  user_type: 'STUDENT' | 'TEACHER'
-  password: string
-  name: string
-  class_name: string
+interface Res_tasksInfo extends ResponseData {
+  id: number;
+  name: string;
+  created_at: string;
+  updated_at: string;
 }
 
 
-export type{RequestParams, ResponseData, CSRF_cookies, Req_login, Res_login, Req_register}
+export type{
+  RequestParams, ResponseData,
+  Req_login, Req_register, Req_tasksInfo,
+  CSRF_cookies, Res_login, Res_tasksInfo
+}

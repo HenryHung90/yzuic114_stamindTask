@@ -30,34 +30,10 @@ class APIController {
         "Content-Type": "application/json",
         "X-CSRFToken": this.cookies.get("csrftoken")
       }
-    }).then((response: { data: { message: any }; status: any }) => {
+    }).then((response) => {
       const resData: ResponseData = {
         message: response.data.message,
-        status: response.status
-      }
-      return resData
-    }).catch((error: AxiosError) => {
-      return this.handleError(error)
-    })
-  }
-
-  public async sendLogin() {
-    // axios request
-    return await axios({
-      method: this.method,
-      url: this.baseURL,
-      withCredentials: this.TEST_MODE,
-      data: this.data,
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": this.cookies.get("csrftoken")
-      }
-    }).then((response) => {
-      const resData: Res_login = {
-        message: response.data.message,
-        name: response.data.name,
-        student_id: response.data.student_id,
-        user_type: response.data.user_type,
+        data: response.data,
         status: response.status
       }
       return resData
@@ -87,6 +63,7 @@ class APIController {
       status: error.response ? error.response.status : 500,
       isAuthenticated: false,
       user_type: false,
+      data: JSON,
       name: 'nobody',
       student_id: ''
     }
@@ -99,6 +76,32 @@ class API_POST extends APIController {
     super(baseURL, "POST", data)
     this.data = data
     this.baseURL = baseURL
+  }
+
+  public async sendLogin() {
+    // axios request
+    return await axios({
+      method: this.method,
+      url: this.baseURL,
+      withCredentials: this.TEST_MODE,
+      data: this.data,
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": this.cookies.get("csrftoken")
+      }
+    }).then((response) => {
+      const resData: Res_login = {
+        message: response.data.message,
+        name: response.data.name,
+        data: response.data,
+        student_id: response.data.student_id,
+        user_type: response.data.user_type,
+        status: response.status
+      }
+      return resData
+    }).catch((error: AxiosError) => {
+      return this.handleError(error)
+    })
   }
 }
 
@@ -124,7 +127,8 @@ class API_GET extends APIController {
         isAuthenticated: response.data.isAuthenticated,
         user_type: response.data.isAuthenticated,
         name: response.data.name || '',
-        student_id: response.data.student_id || ''
+        student_id: response.data.student_id || '',
+        data: JSON
       }
       return resData
     }).catch((error: AxiosError) => {
