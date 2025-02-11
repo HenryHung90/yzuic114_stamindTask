@@ -100,7 +100,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'backend.middleware.AuthenticationMiddleware'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',  # 預設要求所有 API 都需要認證
+    ]
+}
 
 ROOT_URLCONF = 'yzuic114_webstudy.urls'
 
@@ -178,6 +189,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 4. SESSION_COOKIE_HTTPONLY = True
     Session Cookie 不能透過 Js 訪問
 """
+SESSION_COOKIE_AGE = 86400  # 24小時
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # 瀏覽器關閉時session過期
 # CSRF_COOKIE_SAMESITE = 'Strict'
 # SESSION_COOKIE_SAMESITE = 'Strict'
 CSRF_COOKIE_HTTPONLY = False
