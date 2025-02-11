@@ -1,27 +1,39 @@
+import {useEffect, useState} from "react";
 // style
 
 // API
+import {API_getTasksInfo, API_getAllTasksInfo} from "../../../utils/API/API_Home";
 
 // components
 import TaskCardComponent from "./TaskCard";
 // interface
-import {useEffect, useState} from "react";
-import {API_getTasksInfo} from "../../../utils/API/API_Home";
 import {Res_tasksInfo} from "../../../utils/API/API_Interface";
+import {ISettingAlertLogAndLoading} from "../../../utils/interface/alertLog";
 
 interface ITaskAreaProps {
-  studentId: string;
+  auth: false | 'STUDENT' | 'TEACHER'
+  studentId: string
+  settingAlertLogAndLoading: ISettingAlertLogAndLoading
 }
 
 const TaskAreaComponent = (props: ITaskAreaProps) => {
-  const {studentId} = props;
+  const {auth, studentId, settingAlertLogAndLoading} = props;
 
   const [tasks, setTasks] = useState<Array<Res_tasksInfo>>([]);
 
   useEffect(() => {
-    API_getTasksInfo(studentId).then(response => {
-      setTasks(response.data.tasks_info ?? []);
-    })
+    settingAlertLogAndLoading.setLoadingOpen(true)
+    if (auth === 'STUDENT') {
+      API_getTasksInfo(studentId).then(response => {
+        setTasks(response.data.tasks_info ?? [])
+        settingAlertLogAndLoading.setLoadingOpen(false)
+      })
+    } else {
+      API_getAllTasksInfo().then(response => {
+        setTasks(response.data.tasks_info ?? [])
+        settingAlertLogAndLoading.setLoadingOpen(false)
+      })
+    }
 
   }, []);
 

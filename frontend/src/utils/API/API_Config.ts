@@ -48,6 +48,7 @@ class APIController {
       const data = error.response?.data as { message: string; status: number }
       // 回應錯誤
       console.error("Error Response:", data.message || error.message)
+      alert(data.message || error.message)
     } else if (error.request) {
       // 请求已发出，但没有收到响应
       console.error("Error Request:", error.request)

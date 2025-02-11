@@ -71,16 +71,6 @@ class User(AbstractUser):
         max_length=100,
         help_text="姓名"
     )
-    first_name = models.CharField(
-        max_length=150,
-        null=True,
-        blank=True
-    )
-    last_name = models.CharField(
-        max_length=150,
-        null=True,
-        blank=True
-    )
 
     class_name = models.ForeignKey(
         'ClassName',
@@ -106,7 +96,7 @@ class User(AbstractUser):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name='user',
+        related_name='users',
         verbose_name="學生組別"
     )
 

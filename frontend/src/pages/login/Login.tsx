@@ -57,7 +57,8 @@ const Login = (props: ILoginProps) => {
         setAuth(response.user_type)
         setStudentId(response.student_id)
         settingAlertLogAndLoading.setLoadingOpen(false)
-        NavLocation("/home")
+
+        response.user_type === 'TEACHER' ? NavLocation("/admin") : NavLocation("/home")
       } else {
         settingAlertLogAndLoading.setLoadingOpen(false)
         settingAlertLogAndLoading.setAlertLog('錯誤', response.message)

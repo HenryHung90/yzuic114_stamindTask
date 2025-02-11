@@ -1,17 +1,14 @@
-# rest framework require
-from django.http import HttpResponse
+from django.contrib.auth import authenticate, login, logout
+from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework import status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from torch.distributed import group
 
 # User model
-from backend.models import *
+from backend.models import User, ClassName, StudentGroup
 
-# session-based Login require
-from django.contrib.auth import authenticate, login, logout
-from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
-
-# Create your views here.
 """
  Response Status List:
  1. 200: success
@@ -21,20 +18,19 @@ from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 """
 
 
-# Create your views here.
+# CSRF Token
+@api_view(['GET'])
+@permission_classes([AllowAny])
+@ensure_csrf_cookie
+def get_csrf_token(request):
+    return Response({'message': 'CSRF cookie set'})
+
+
+# 註冊系統
 @api_view(['POST'])
+@permission_classes([AllowAny])
 @ensure_csrf_cookie
 def register(request):
-    """
-       新增並註冊一名學生
-       request.data 內應包含
-       1. student_id
-       2. user_type
-       3. name
-       4. password
-       5. class_name
-
-    """
     try:
         data = request.data
 
@@ -70,7 +66,9 @@ def register(request):
 
         # 如果是學生，設置 class_name
         if user_type == User.UserType.STUDENT:
+            student_group = StudentGroup.objects.get(group_type="CONTROL", class_name=class_name)
             user.class_name = class_name
+            user.student_group = student_group
 
         # 保存用戶
         user.save()
@@ -83,6 +81,7 @@ def register(request):
 
 # 登入系統
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def login_system(request):
     try:
         data = request.data
@@ -113,6 +112,7 @@ def login_system(request):
 
 # 登出系統
 @ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
 @api_view(['GET'])
 def logout_system(request):
     try:
@@ -126,7 +126,9 @@ def logout_system(request):
         return Response({'Logout Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
+# User Info
 @ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
 @api_view(['GET'])
 def userinfo_view(request):
     try:
@@ -138,28 +140,6 @@ def userinfo_view(request):
                 status=status.HTTP_200_OK)
         else:
             return Response({'isAuthenticated': request.user.is_authenticated}, status=status.HTTP_200_OK)
-    except Exception as e:
-        print(f'Userinfo Error: {e}')
-        return Response({'userinfo Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-
-
-# Task Info
-@ensure_csrf_cookie
-@api_view(['POST'])
-def get_tasks_info(request):
-    try:
-        tasks_info = Task.objects.filter(class_name=request.user.class_name, is_open=True)
-
-        # 將 QuerySet 轉換為可序列化的格式
-        tasks_data = []
-        for task in tasks_info:
-            tasks_data.append({
-                'id': task.id,
-                'name': task.name,
-                'created_at': task.created_at.strftime('%Y-%m-%d %H:%M'),
-                'updated_at': task.updated_at.strftime('%Y-%m-%d %H:%M'),
-            })
-        return Response({'tasks_info': tasks_data, 'message': 'success'}, status=status.HTTP_200_OK)
     except Exception as e:
         print(f'Userinfo Error: {e}')
         return Response({'userinfo Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
