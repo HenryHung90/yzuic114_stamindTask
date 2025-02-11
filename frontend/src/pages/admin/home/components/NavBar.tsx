@@ -2,22 +2,18 @@ import React, {useEffect, useState} from "react";
 // style
 import {Button, IconButton, Collapse, Navbar, Typography} from "@material-tailwind/react";
 // API
-import {API_logout} from "../../../utils/API/API_LoginSystem";
+import {API_logout} from "../../../../utils/API/API_LoginSystem";
 import {useNavigate} from "react-router-dom";
 // components
 
 // interface
-import {ISettingAlertLogAndLoading} from "../../../utils/interface/alertLog";
-
-interface INavBarProps {
-  auth: false | 'STUDENT' | 'TEACHER'
-  name: string
-  studentId: string
-  settingAlertLogAndLoading: ISettingAlertLogAndLoading
+interface IAdminNavBarProps {
+  name: string;
+  adminId: string;
 }
 
-const NavBarComponent = (props: INavBarProps) => {
-  const {auth, name, studentId, settingAlertLogAndLoading} = props
+const NavBarComponent = (props: IAdminNavBarProps) => {
+  const {name, adminId} = props
   const NavLocation = useNavigate()
 
   const [openNav, setOpenNav] = useState(false);
@@ -36,39 +32,45 @@ const NavBarComponent = (props: INavBarProps) => {
     })
   }
 
-  function switchTeacherSide(){
-    NavLocation('/admin')
+  function handleSwitchLocation(location: string) {
+    NavLocation(location)
   }
 
   const navList = (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-ri lg:gap-6">
       <Typography className="flex justify-center items-center px-2 select-none text-sm" placeholder={undefined}>
-        {name} {studentId}
+        {name}
       </Typography>
       <Button
         variant="text"
-        color="blue-gray"
+        color="deep-orange"
         placeholder={undefined}
       >
-        任務
+        任務設定
       </Button>
       <Button
         variant="text"
-        color="blue-gray"
+        color="deep-orange"
         placeholder={undefined}
       >
-        個人數據
+        班級/組別設定
       </Button>
-      {auth === 'TEACHER' &&
-          <Button
-              variant="text"
-              color='deep-orange'
-              placeholder={undefined}
-              onClick={() => switchTeacherSide()}
-          >
-              教師頁面
-          </Button>
-      }
+      <Button
+        variant="text"
+        color="deep-orange"
+        placeholder={undefined}
+        onClick={() => handleSwitchLocation('/admin/studentMange')}
+      >
+        學生管理
+      </Button>
+      <Button
+        variant="text"
+        color="deep-orange"
+        placeholder={undefined}
+        onClick={() => handleSwitchLocation('/home')}
+      >
+        學生版頁面
+      </Button>
     </ul>
   );
 
@@ -82,13 +84,13 @@ const NavBarComponent = (props: INavBarProps) => {
           placeholder={undefined}
         >
           <img src='/files/img/logo.PNG' height='24px' width='24px'/>
-          Stamind Task
+          Admin Center
         </Typography>
         <div className="flex items-center gap-4">
           <div className="mr-4 hidden lg:block">{navList}</div>
           <div className="flex items-center gap-x-1">
             <Button
-              variant="outlined"
+              variant="gradient"
               size="sm"
               className="hidden lg:inline-block"
               placeholder={undefined}

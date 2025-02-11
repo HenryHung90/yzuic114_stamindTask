@@ -29,6 +29,24 @@ interface Req_tasksInfo extends RequestParams {
   student_id: string
 }
 
+interface Req_studentsInfo extends RequestParams {
+  class_name: string
+}
+
+interface Req_studentInfo extends RequestParams {
+  student_id: string
+  exchange_class_name?: string
+  new_name?: string
+  new_password?: string
+}
+
+interface Req_registerStudentInfo extends RequestParams {
+  student_id: string
+  user_type: 'STUDENT' | 'TEACHER'
+  password: string
+  name: string
+  class_name: string
+}
 
 // API Response Extension
 // csrf cookie Response
@@ -53,9 +71,28 @@ interface Res_tasksInfo extends ResponseData {
   updated_at: string;
 }
 
+interface Res_classNamesInfo extends ResponseData {
+  id: number;
+  name: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface Res_studentsInfo extends ResponseData {
+  id: number;
+  is_active: boolean;
+  class_name: string;
+  group_type: string;
+  student_id: string;
+  name: string;
+  created_at: string;
+  updated_at: string;
+}
+
 
 export type{
   RequestParams, ResponseData,
-  Req_login, Req_register, Req_tasksInfo,
-  CSRF_cookies, Res_login, Res_tasksInfo
+  Req_login, Req_register, Req_tasksInfo, Req_studentsInfo, Req_studentInfo, Req_registerStudentInfo,
+  CSRF_cookies,
+  Res_login, Res_tasksInfo, Res_classNamesInfo, Res_studentsInfo
 }

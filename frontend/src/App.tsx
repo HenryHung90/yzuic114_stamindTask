@@ -1,5 +1,5 @@
-import {useRoutes} from "react-router-dom";
-import {useState, useEffect} from "react";
+import {useNavigate, useRoutes} from "react-router-dom";
+import React, {useState, useEffect} from "react";
 // style
 
 // API
@@ -11,11 +11,13 @@ import AlertLog from "./pages/alertLogAndLoadingPage/AlertLog";
 import Loading from "./pages/alertLogAndLoadingPage/Loading";
 import {CSRF_cookies, ResponseData} from "./utils/API/API_Interface";
 import Task from "./pages/Task/Task";
+import AdminHome from "./pages/admin/home/AdminHome";
 // interface
 
 
 export default function App() {
   const [auth, setAuth] = useState<false | 'STUDENT' | 'TEACHER'>(false)
+  const [routes, setRoutes] = useState<Array<{ path: string; element: JSX.Element }>>([])
   const [name, setName] = useState<string>("")
   const [studentId, setStudentId] = useState<string>("")
 
@@ -44,10 +46,22 @@ export default function App() {
         setStudentId(response.student_id)
       }
     }).catch((err: ResponseData) => {
-      alert(err.message)
+      settingAlertLogAndLoading.setAlertLog("Server Error", err.message);
     })
   }, []);
 
+  useEffect(() => {
+    switch (auth) {
+      case "STUDENT":
+        setRoutes(auth_routes)
+        break
+      case "TEACHER":
+        setRoutes([...auth_routes, ...teacher_routes])
+        break
+      default:
+        setRoutes(unauth_routes)
+    }
+  }, [auth]);
 
   const unauth_routes = [
     {
@@ -60,15 +74,28 @@ export default function App() {
   const auth_routes = [
     {
       path: '/',
-      element: <Home auth={auth} name={name} studentId={studentId}/>
+      element: <Home auth={auth} name={name} studentId={studentId}
+                     settingAlertLogAndLoading={settingAlertLogAndLoading}/>
     },
     {
       path: '/home',
-      element: <Home auth={auth} name={name} studentId={studentId}/>
+      element: <Home auth={auth} name={name} studentId={studentId}
+                     settingAlertLogAndLoading={settingAlertLogAndLoading}/>
     },
     {
       path: '/task/:id',
       element: <Task studentId={studentId}/>
+    }
+  ]
+
+  const teacher_routes = [
+    {
+      path: '/admin',
+      element: <AdminHome name={name} adminId={studentId} settingAlertLogAndLoading={settingAlertLogAndLoading}/>
+    },
+    {
+      path: '/admin/:page',
+      element: <AdminHome name={name} adminId={studentId} settingAlertLogAndLoading={settingAlertLogAndLoading}/>
     }
   ]
 
@@ -77,7 +104,7 @@ export default function App() {
       <Loading loadingOpen={loadingOpen}/>
       <AlertLog AlertOpen={alertOpen} AlertTitle={alertTitle} AlertMsg={alertMsg}
                 AlertLogClose={() => settingAlertLogAndLoading.handleAlertClose()}/>
-      {auth == false ? useRoutes(unauth_routes) : useRoutes(auth_routes)}
+      {useRoutes(routes)}
     </>
   )
 }
