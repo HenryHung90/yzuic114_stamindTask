@@ -8,7 +8,7 @@ class ChatHistory(models.Model):
     chat_history = ArrayField(
         models.JSONField(
             default={
-                'time': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                'time':'%Y-%m-%d %H:%M:%S',
                 'sender': '',
                 'content': '',
             }
