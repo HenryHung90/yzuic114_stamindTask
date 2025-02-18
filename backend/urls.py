@@ -44,6 +44,8 @@ API_ADMIN_GET = [
     path('admin/get_all_students/', get_all_students, name='get_all_students'),
     # get all class_name
     path('admin/get_all_class_name/', get_all_class_names, name='all_class_names'),
+    # get all tasks
+    path('admin/get_all_tasks_info/', get_all_tasks_info, name='all_tasks_info'),
 ]
 
 urlpatterns += API_POST + API_GET + API_ADMIN_POST + API_ADMIN_GET
