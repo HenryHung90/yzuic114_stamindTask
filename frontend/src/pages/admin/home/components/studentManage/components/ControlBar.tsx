@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 // style
 import {Button, Menu, MenuList, MenuHandler, MenuItem, Input, Option, Select} from "@material-tailwind/react"
 // API
@@ -12,7 +12,7 @@ import {
 import {Res_classNamesInfo} from "../../../../../../utils/API/API_Interface";
 import {ISettingAlertLogAndLoading} from "../../../../../../utils/interface/alertLog";
 
-interface IStudentManageProps {
+interface IControlBarProps {
   classList: Array<Res_classNamesInfo>
   className: string
   setClassName: React.Dispatch<React.SetStateAction<string>>
@@ -21,7 +21,7 @@ interface IStudentManageProps {
   settingAlertLogAndLoading: ISettingAlertLogAndLoading
 }
 
-const ControlBarComponent = (props: IStudentManageProps) => {
+const ControlBarComponent = (props: IControlBarProps) => {
   const {classList, className, setClassName, searchStudentId, setSearchStudentId, settingAlertLogAndLoading} = props
 
   const controlButtons = [
