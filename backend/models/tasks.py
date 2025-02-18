@@ -31,6 +31,16 @@ class Task(models.Model):
         related_name='task'
     )
 
+    target = models.OneToOneField(
+        'Target',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        verbose_name="學習目標",
+        help_text="該任務的學習目標+子任務列舉",
+        related_name='task'
+    )
+
     text_book = models.OneToOneField(
         'TextBook',
         on_delete=models.CASCADE,
