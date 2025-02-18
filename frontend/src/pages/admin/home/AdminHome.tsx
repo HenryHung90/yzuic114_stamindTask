@@ -8,6 +8,7 @@ import {API_getAllClassNames} from "../../../utils/API/API_ClassName";
 // components
 import StudentManageComponent from "./components/studentManage/StudentMange";
 import NavBarComponent from './components/NavBar'
+import ClassAndGroupManageComponent from "./components/classAndGroupManage/ClassAndGroupManage";
 
 // interface
 import {Res_classNamesInfo} from "../../../utils/API/API_Interface";
@@ -21,8 +22,9 @@ interface IAdminHomeProps {
 
 const AdminHome = (props: IAdminHomeProps) => {
   const {name, adminId, settingAlertLogAndLoading} = props
-  const {page} = useParams<{ page: 'studentMange' | 'taskManage' | 'classAndGroupManage' }>();
+  const {page} = useParams<{ page: 'studentManage' | 'taskManage' | 'classAndGroupManage' }>();
 
+  // init class list
   const [classList, setClassList] = useState<Array<Res_classNamesInfo>>([{
     message: 'loading',
     data: '',
@@ -33,6 +35,7 @@ const AdminHome = (props: IAdminHomeProps) => {
     updated_at: ''
   }])
 
+  // get all class name when loading
   useEffect(() => {
     const fetchDataAsync = async () => {
       settingAlertLogAndLoading.setLoadingOpen(true)
@@ -50,7 +53,8 @@ const AdminHome = (props: IAdminHomeProps) => {
       <NavBarComponent name={name} adminId={adminId}/>
       <div
         className='p-10 h-[56rem] bg-gradient-to-tl from-transparent to-stamindTask-decoration-warn-2 mix-blend-soft-light backdrop-blur-sm'>
-        {page === 'studentMange' && <StudentManageComponent classList={classList} settingAlertLogAndLoading={settingAlertLogAndLoading}/>}
+        {(page === 'studentManage' || page === undefined) && <StudentManageComponent classList={classList} settingAlertLogAndLoading={settingAlertLogAndLoading}/>}
+        {page === 'classAndGroupManage' && <ClassAndGroupManageComponent settingAlertLogAndLoading={settingAlertLogAndLoading}/>}
       </div>
     </div>
   )

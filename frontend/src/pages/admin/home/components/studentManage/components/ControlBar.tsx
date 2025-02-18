@@ -1,6 +1,6 @@
 import React from "react";
 // style
-import {Button, Input, Option, Select} from "@material-tailwind/react"
+import {Button, Menu, MenuList, MenuHandler, MenuItem, Input, Option, Select} from "@material-tailwind/react"
 // API
 import {
   handleAddNewStudent,
@@ -12,7 +12,7 @@ import {
 import {Res_classNamesInfo} from "../../../../../../utils/API/API_Interface";
 import {ISettingAlertLogAndLoading} from "../../../../../../utils/interface/alertLog";
 
-interface IStudentManageProps {
+interface IControlBarProps {
   classList: Array<Res_classNamesInfo>
   className: string
   setClassName: React.Dispatch<React.SetStateAction<string>>
@@ -21,11 +21,28 @@ interface IStudentManageProps {
   settingAlertLogAndLoading: ISettingAlertLogAndLoading
 }
 
-const ControlBarComponent = (props: IStudentManageProps) => {
+const ControlBarComponent = (props: IControlBarProps) => {
   const {classList, className, setClassName, searchStudentId, setSearchStudentId, settingAlertLogAndLoading} = props
+
+  const controlButtons = [
+    {
+      onClick: () => handleAddNewStudent(settingAlertLogAndLoading),
+      name: '新增學生'
+    },
+    {
+      onClick: () => handleDownloadStudentList(settingAlertLogAndLoading),
+      name: '下載學生名單'
+    },
+    {
+      onClick: () => handleUploadStudentList(settingAlertLogAndLoading),
+      name: '批量上傳學生'
+    }
+  ]
+
   return (
-    <div className='flex justify-between my-5 p-5 rounded-2xl bg-stamindTask-black-600 bg-opacity-50'>
-      <div className='flex gap-6'>
+    <div className='block lg:flex justify-between my-5 p-5 rounded-2xl bg-stamindTask-black-600 bg-opacity-50'>
+      {/*左側欄*/}
+      <div className='block gap-6 lg:flex'>
         <div>
           <Select
             value={className}
@@ -47,7 +64,7 @@ const ControlBarComponent = (props: IStudentManageProps) => {
             ))}
           </Select>
         </div>
-        <div>
+        <div className='mt-5 lg:mt-0'>
           <Input
             value={searchStudentId}
             onChange={e => {
@@ -61,25 +78,27 @@ const ControlBarComponent = (props: IStudentManageProps) => {
             crossOrigin={undefined}/>
         </div>
       </div>
-      <div className='flex gap-6'>
-        <Button
-          variant="gradient"
-          placeholder={undefined}
-          onClick={() => handleAddNewStudent(settingAlertLogAndLoading)}>
-          新增單一學生
-        </Button>
-        <Button
-          variant="gradient"
-          placeholder={undefined}
-          onClick={() => handleDownloadStudentList(settingAlertLogAndLoading)}>
-          下載學生名單
-        </Button>
-        <Button
-          variant="gradient"
-          placeholder={undefined}
-          onClick={() => handleUploadStudentList(settingAlertLogAndLoading)}>
-          批量上傳學生
-        </Button>
+      {/*右側欄*/}
+      <div className='hidden gap-6 lg:flex'>
+        {controlButtons.map(({onClick, name}, index) => (
+          <Button key={index} variant="gradient" onClick={onClick} placeholder={undefined}>
+            {name}
+          </Button>
+        ))}
+      </div>
+      <div className='block mt-6 lg:hidden'>
+        <Menu>
+          <MenuHandler>
+            <Button variant="gradient" color='white' placeholder={undefined}>設定</Button>
+          </MenuHandler>
+          <MenuList placeholder={undefined}>
+            {controlButtons.map(({onClick, name}, index) => (
+              <MenuItem key={index} onClick={onClick} placeholder={undefined}>
+                {name}
+              </MenuItem>
+            ))}
+          </MenuList>
+        </Menu>
       </div>
     </div>
   )

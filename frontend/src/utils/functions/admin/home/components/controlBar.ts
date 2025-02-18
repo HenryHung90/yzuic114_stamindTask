@@ -6,6 +6,7 @@ function handlePromise(messageTitle: string, messageInfo: string, loading: ISett
   loading.setLoadingOpen(false)
 }
 
+// For student management
 function handleAddNewStudent(loading: ISettingAlertLogAndLoading) {
   const className = prompt("請輸入年級")
   if (className === '' || className === null) return
@@ -41,8 +42,14 @@ function handleUploadStudentList(loading: ISettingAlertLogAndLoading) {
   loading.setAlertLog("錯誤", "暫不支援")
 }
 
+
+// For class and group management
+function handleAddNewClass(loading: ISettingAlertLogAndLoading) {
+
+}
 export {
   handleAddNewStudent,
   handleDownloadStudentList,
   handleUploadStudentList,
+  handleAddNewClass,
 }

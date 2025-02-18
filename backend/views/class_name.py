@@ -36,3 +36,27 @@ def get_all_class_names(request):
     except Exception as e:
         print(f'Userinfo Error: {e}')
         return Response({'get all class names Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# get all class and groups (include student_list)
+@ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
+@api_view(['GET'])
+def get_all_class_and_groups(request):
+    try:
+        classes_info = ClassName.objects.all()
+        output_data = []
+
+        for class_data in classes_info:
+            data = {
+                'id': class_data.id,
+                'class_name': class_data.name,
+                'group_list': list(class_data.student_groups.all().values('id', 'group_type')),
+                'student_list': list(class_data.users.all().values('student_id', 'name')),
+            }
+            output_data.append(data)
+
+        return Response({'data_info': output_data, 'message': 'success'}, status=status.HTTP_200_OK)
+    except Exception as e:
+        print(f'Userinfo Error: {e}')
+        return Response({'get all class names Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

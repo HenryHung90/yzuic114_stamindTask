@@ -52,6 +52,7 @@ const NavBarComponent = (props: IAdminNavBarProps) => {
         variant="text"
         color="deep-orange"
         placeholder={undefined}
+        onClick={() => handleSwitchLocation('/admin/classAndGroupManage')}
       >
         班級/組別設定
       </Button>
@@ -59,7 +60,7 @@ const NavBarComponent = (props: IAdminNavBarProps) => {
         variant="text"
         color="deep-orange"
         placeholder={undefined}
-        onClick={() => handleSwitchLocation('/admin/studentMange')}
+        onClick={() => handleSwitchLocation('/admin/studentManage')}
       >
         學生管理
       </Button>

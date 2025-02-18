@@ -89,10 +89,17 @@ interface Res_studentsInfo extends ResponseData {
   updated_at: string;
 }
 
+interface Res_classWithStudentsInfo extends ResponseData {
+  id: number
+  class_name: string
+  group_list: Array<string>
+  student_list: Array<Res_studentsInfo>
+}
+
 
 export type{
   RequestParams, ResponseData,
   Req_login, Req_register, Req_tasksInfo, Req_studentsInfo, Req_studentInfo, Req_registerStudentInfo,
   CSRF_cookies,
-  Res_login, Res_tasksInfo, Res_classNamesInfo, Res_studentsInfo
+  Res_login, Res_tasksInfo, Res_classNamesInfo, Res_studentsInfo, Res_classWithStudentsInfo
 }

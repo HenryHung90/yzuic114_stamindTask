@@ -4,4 +4,8 @@ const API_getAllClassNames = () => {
   return new API_GET(import.meta.env.VITE_APP_API_GET_ALL_CLASSNAMES || '').sendRequest()
 }
 
-export {API_getAllClassNames}
+const APIT_getAllClassAndGroups = () => {
+  return new API_GET(import.meta.env.VITE_APP_API_GET_ALL_CLASS_AND_GROUPS || '').sendRequest()
+}
+
+export {API_getAllClassNames, APIT_getAllClassAndGroups}

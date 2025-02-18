@@ -126,7 +126,7 @@ const StudentListComponent = (props: IStudentListProps) => {
   ]
 
   return (
-    <Card className="h-[70vh] w-full overflow-scroll" placeholder={undefined}>
+    <Card className="h-[60vh] w-full overflow-scroll" placeholder={undefined}>
       <table className="w-full min-w-max table-auto text-left">
         <thead>
         <tr>

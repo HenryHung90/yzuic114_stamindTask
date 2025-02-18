@@ -1,6 +1,6 @@
 from django.urls import path
 
-from backend.views.class_name import get_all_class_names
+from backend.views.class_name import *
 from backend.views.core import *
 from backend.views.task import *
 from backend.views.students import *
@@ -43,7 +43,9 @@ API_ADMIN_GET = [
     # get all students
     path('admin/get_all_students/', get_all_students, name='get_all_students'),
     # get all class_name
-    path('admin/get_all_class_name/', get_all_class_names, name='all_class_names'),
+    path('admin/get_all_class_name/', get_all_class_names, name='get_all_class_names'),
+    # get all class and groups
+    path('admin/get_all_class_and_groups/', get_all_class_and_groups,name='get_all_class_and_groups'),
 ]
 
 urlpatterns += API_POST + API_GET + API_ADMIN_POST + API_ADMIN_GET
