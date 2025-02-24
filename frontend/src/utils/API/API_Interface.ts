@@ -55,6 +55,10 @@ interface Req_registerStudentInfo extends RequestParams {
   class_name: string
 }
 
+interface Req_experienceInfo extends RequestParams {
+  task_id: string | undefined
+}
+
 // API Response Extension
 // csrf cookie Response
 interface CSRF_cookies extends ResponseData {
@@ -100,7 +104,7 @@ interface Res_studentsInfo extends ResponseData {
 
 export type{
   RequestParams, ResponseData,
-  Req_login, Req_register, Req_tasksInfo, Req_studentsInfo, Req_studentInfo, Req_registerStudentInfo,
+  Req_login, Req_register, Req_tasksInfo, Req_studentsInfo, Req_studentInfo, Req_registerStudentInfo,Req_experienceInfo,
   CSRF_cookies,
   Res_login, Res_tasksInfo, Res_classNamesInfo, Res_studentsInfo
 }

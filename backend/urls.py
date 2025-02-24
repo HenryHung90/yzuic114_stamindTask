@@ -4,6 +4,7 @@ from backend.views.class_name import get_all_class_names
 from backend.views.core import *
 from backend.views.task import *
 from backend.views.students import *
+from backend.views.experience import *
 
 urlpatterns = []
 
@@ -14,6 +15,8 @@ API_POST = [
 
     # get Task Diagram
     path('get_task_diagram/', get_task_diagram, name='get_task_diagram'),
+    # get Task Experience
+    path('get_task_experience/', get_task_experience, name='get_task_experience'),
 ]
 
 API_GET = [
