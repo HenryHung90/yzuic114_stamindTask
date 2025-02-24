@@ -4,18 +4,19 @@ import * as go from "gojs";
 // style
 
 // API
+import {API_getTaskDiagram} from "../../utils/API/API_Tasks";
 
 // components
 import DiagramInitComponent from "../../components/Diagram/DiagramInit";
-import {Link, Node} from "../../utils/interface/diagram";
-import {API_getTaskDiagram} from "../../utils/API/API_Tasks";
-import {ISettingAlertLogAndLoading} from "../../utils/interface/alertLog";
+import TaskContentComponent from "../admin/task/components/TaskContent";
 
 // interface
 interface ITaskProps {
   studentId: string;
   settingAlertLogAndLoading: ISettingAlertLogAndLoading
 }
+import {Link, Node} from "../../utils/interface/diagram";
+import {ISettingAlertLogAndLoading} from "../../utils/interface/alertLog";
 
 
 const Task = (props: ITaskProps) => {
@@ -29,8 +30,14 @@ const Task = (props: ITaskProps) => {
     diagramRef.current = diagram;
   };
 
-  const [nodes, setNodes] = useState<Array<Node>>([]);
-  const [links, setLinks] = useState<Array<Link>>([]);
+  const [nodes, setNodes] = useState<Array<Node>>([])
+  const [links, setLinks] = useState<Array<Link>>([])
+
+  const [selectNode, setSelectNode] = useState<{ key: number, category: string, text: string }>({
+    key: 0,
+    category: '',
+    text: ''
+  })
 
   useEffect(() => {
     const fetchTaskDiagram = async () => {
@@ -46,10 +53,16 @@ const Task = (props: ITaskProps) => {
 
   return (
     <div>
+      <TaskContentComponent
+        taskId={taskId}
+        selectNode={selectNode}
+        settingAlertLogAndLoading={settingAlertLogAndLoading}
+      />
       <DiagramInitComponent
         divRef={divRef}
         diagramRef={diagramRef}
         setDiagramRef={setDiagramRef}
+        setSelectNode={setSelectNode}
         nodeDataArray={nodes}
         linkDataArray={links}
         isEditMode={false}
