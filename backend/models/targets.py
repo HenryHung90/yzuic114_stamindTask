@@ -10,11 +10,15 @@ class Target(models.Model):
     targets = ArrayField(
         models.CharField(max_length=500),
         default=list,
+        null=True,
+        blank=True,
         verbose_name='目標內容'
     )
     sub_targets = ArrayField(
         models.CharField(max_length=500),
         default=list,
+        null=True,
+        blank=True,
         verbose_name='子任務'
     )
 

@@ -2,15 +2,6 @@ from django.db import models
 
 
 class Experience(models.Model):
-    class_name = models.ForeignKey(
-        'ClassName',
-        on_delete=models.SET_NULL,
-        related_name='experiences',
-        null=True,
-        blank=True,
-        verbose_name="班級"
-    )
-
     name = models.CharField(
         max_length=100,
         verbose_name='體驗任務名稱'
@@ -18,6 +9,8 @@ class Experience(models.Model):
 
     content = models.JSONField(
         default=dict,
+        null=True,
+        blank=True,
         verbose_name='體驗任務內容'
     )
 

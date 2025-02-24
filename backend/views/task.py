@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.db import transaction
 
 # model
 from backend.models import Task, ClassName, Experience, Target, TextBook, ReflectionQuestion
