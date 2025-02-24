@@ -58,7 +58,7 @@ const StudentListComponent = (props: IStudentListProps) => {
 
   useEffect(() => {
     if (className !== 'loading') fetchStudentListAsync()
-  }, [className]);
+  }, [className])
 
   useEffect(() => {
     if (stableStudentList && searchStudentId !== '') {
