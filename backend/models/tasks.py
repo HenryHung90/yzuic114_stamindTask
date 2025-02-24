@@ -21,6 +21,13 @@ class Task(models.Model):
         verbose_name='是否開放'
     )
 
+    diagram_content = models.JSONField(
+        null=True,
+        blank=True,
+        verbose_name='圖表內容',
+        help_text='包含 node_data 和 link_data 的 JSON 格式資料'
+    )
+
     experience = models.OneToOneField(
         'Experience',
         on_delete=models.CASCADE,
