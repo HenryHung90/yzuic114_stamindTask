@@ -47,7 +47,7 @@ def get_tasks_info(request):
         return Response({'tasks_info': tasks_data, 'message': 'success'}, status=status.HTTP_200_OK)
     except Exception as e:
         print(f'get tasks info Error: {e}')
-        return Response({'userinfo Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'get tasks info Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @ensure_csrf_cookie
@@ -62,7 +62,7 @@ def get_all_tasks_info(request):
         return Response({'tasks_info': tasks_data, 'message': 'success'}, status=status.HTTP_200_OK)
     except Exception as e:
         print(f'get all tasks info Error: {e}')
-        return Response({'userinfo Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'get all tasks Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
 # get Tasks by class_name
