@@ -21,6 +21,13 @@ class Task(models.Model):
         verbose_name='是否開放'
     )
 
+    diagram_content = models.JSONField(
+        null=True,
+        blank=True,
+        verbose_name='圖表內容',
+        help_text='包含 node_data 和 link_data 的 JSON 格式資料'
+    )
+
     experience = models.OneToOneField(
         'Experience',
         on_delete=models.CASCADE,
@@ -28,6 +35,16 @@ class Task(models.Model):
         blank=True,
         verbose_name='體驗任務',
         help_text='該任務的完整內容體驗',
+        related_name='task'
+    )
+
+    target = models.OneToOneField(
+        'Target',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        verbose_name="學習目標",
+        help_text="該任務的學習目標+子任務列舉",
         related_name='task'
     )
 

@@ -9,6 +9,8 @@ class TextBook(models.Model):
 
     content = models.JSONField(
         default=dict,
+        null=True,
+        blank=True,
         verbose_name='教材內容'
     )
 

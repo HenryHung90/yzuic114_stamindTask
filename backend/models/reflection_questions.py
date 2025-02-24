@@ -11,6 +11,8 @@ class ReflectionQuestion(models.Model):
     questions = ArrayField(
         models.CharField(max_length=500),
         default=list,
+        null=True,
+        blank=True,
         verbose_name='反思問題列表'
     )
 

@@ -6,20 +6,21 @@ import * as go from "gojs";
 // API
 
 // components
-import DiagramInitComponent from "../../components/Diagram/DiagramInit";
-import {Link, Node} from "../../utils/interface/diagram";
-import {API_getTaskDiagram} from "../../utils/API/API_Tasks";
-import {ISettingAlertLogAndLoading} from "../../utils/interface/alertLog";
+import DiagramInitComponent from "../../../components/Diagram/DiagramInit";
+import DiagramControlComponent from "../../../components/Diagram/DiagramControl";
 
 // interface
+import {Node, Link} from '../../../utils/interface/diagram'
+
 interface ITaskProps {
-  studentId: string;
   settingAlertLogAndLoading: ISettingAlertLogAndLoading
 }
 
+import {ISettingAlertLogAndLoading} from "../../../utils/interface/alertLog";
+import {API_getTaskDiagram} from "../../../utils/API/API_Tasks";
 
-const Task = (props: ITaskProps) => {
-  const {studentId, settingAlertLogAndLoading} = props;
+const AdminTask = (props: ITaskProps) => {
+  const {settingAlertLogAndLoading} = props
   const {taskId} = useParams();
 
   const divRef = useRef<HTMLDivElement>(null)
@@ -29,8 +30,8 @@ const Task = (props: ITaskProps) => {
     diagramRef.current = diagram;
   };
 
-  const [nodes, setNodes] = useState<Array<Node>>([]);
-  const [links, setLinks] = useState<Array<Link>>([]);
+  const [nodes, setNodes] = useState<Array<Node>>([])
+  const [links, setLinks] = useState<Array<Link>>([])
 
   useEffect(() => {
     const fetchTaskDiagram = async () => {
@@ -46,16 +47,22 @@ const Task = (props: ITaskProps) => {
 
   return (
     <div>
+      <DiagramControlComponent
+        taskId={taskId}
+        diagramRef={diagramRef}
+        settingAlertLogAndLoading={settingAlertLogAndLoading}
+      />
       <DiagramInitComponent
         divRef={divRef}
         diagramRef={diagramRef}
         setDiagramRef={setDiagramRef}
         nodeDataArray={nodes}
         linkDataArray={links}
-        isEditMode={false}
+        isEditMode={true}
       />
     </div>
   )
 }
 
-export default Task
+export default AdminTask
+export type {Link, Node}

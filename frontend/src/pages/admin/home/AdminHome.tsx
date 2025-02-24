@@ -12,6 +12,7 @@ import NavBarComponent from './components/NavBar'
 // interface
 import {Res_classNamesInfo} from "../../../utils/API/API_Interface";
 import {ISettingAlertLogAndLoading} from "../../../utils/interface/alertLog";
+import TaskManageComponent from "./components/taskManage/TaskManage";
 
 interface IAdminHomeProps {
   name: string;
@@ -51,6 +52,7 @@ const AdminHome = (props: IAdminHomeProps) => {
       <div
         className='p-10 h-[56rem] bg-gradient-to-tl from-transparent to-stamindTask-decoration-warn-2 mix-blend-soft-light backdrop-blur-sm'>
         {page === 'studentMange' && <StudentManageComponent classList={classList} settingAlertLogAndLoading={settingAlertLogAndLoading}/>}
+        {page === 'taskManage' && <TaskManageComponent classList={classList} settingAlertLogAndLoading={settingAlertLogAndLoading}/>}
       </div>
     </div>
   )

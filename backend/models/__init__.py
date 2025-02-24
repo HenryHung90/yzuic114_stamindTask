@@ -13,6 +13,7 @@ from .student_task_process_note import StudentTaskProcessNote
 from .student_task_processes import StudentTaskProcess
 from .student_task_reflections import StudentTaskReflection
 from .student_tasks import StudentTask
+from .targets import Target
 from .tasks import Task
 from .text_books import TextBook
 from .users import User
@@ -33,6 +34,7 @@ __all__ = [
     'StudentTaskProcess',
     'StudentTaskReflection',
     'StudentTask',
+    'Target',
     'Task',
     'TextBook',
     'User'

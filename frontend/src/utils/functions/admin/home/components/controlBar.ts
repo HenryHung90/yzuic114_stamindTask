@@ -1,5 +1,7 @@
 import {ISettingAlertLogAndLoading} from "../../../../interface/alertLog";
 import {API_addStudent} from "../../../../API/API_Students";
+import {API_addNewTask} from "../../../../API/API_Tasks";
+import {Res_classNamesInfo} from "../../../../API/API_Interface";
 
 function handlePromise(messageTitle: string, messageInfo: string, loading: ISettingAlertLogAndLoading) {
   loading.setAlertLog(messageTitle, messageInfo)
@@ -41,8 +43,26 @@ function handleUploadStudentList(loading: ISettingAlertLogAndLoading) {
   loading.setAlertLog("錯誤", "暫不支援")
 }
 
+// For classManagement
+function handleAddNewTask(classList: Array<Res_classNamesInfo>, loading: ISettingAlertLogAndLoading) {
+  const className = prompt("請輸入年級")
+  if (className === '' || className === null) return
+  if (!classList.some(classInfo => classInfo.name === className)) return handlePromise("錯誤", "此班級不存在", loading)
+  const taskName = prompt("請輸入課程名稱")
+  if (taskName === '' || taskName === null) return
+
+  API_addNewTask(className, taskName).then(response => {
+    const messageInfo = "建立成功"
+    handlePromise(response.message, messageInfo, loading)
+    setTimeout(() => {
+      window.location.reload()
+    }, 1000)
+  })
+}
+
 export {
   handleAddNewStudent,
   handleDownloadStudentList,
   handleUploadStudentList,
+  handleAddNewTask
 }

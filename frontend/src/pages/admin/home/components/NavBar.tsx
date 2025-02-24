@@ -45,6 +45,7 @@ const NavBarComponent = (props: IAdminNavBarProps) => {
         variant="text"
         color="deep-orange"
         placeholder={undefined}
+        onClick={() => handleSwitchLocation('/admin/taskManage')}
       >
         任務設定
       </Button>

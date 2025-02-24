@@ -11,6 +11,9 @@ API_POST = [
     # User 常規操作
     path('register/', register, name='register'),
     path('login/', login_system, name='login'),
+
+    # get Task Diagram
+    path('get_task_diagram/', get_task_diagram, name='get_task_diagram'),
 ]
 
 API_GET = [
@@ -27,6 +30,14 @@ API_GET = [
 API_ADMIN_POST = [
     # get students by class_name
     path('admin/get_students_by_class_name/', get_students_by_class_name, name='get_students_by_class_name'),
+    # get class name by class_name
+    path('admin/get_tasks_by_class_name/', get_tasks_by_class_name, name='get_tasks_by_class_name'),
+
+    # add new Task
+    path('admin/add_new_task/',add_new_task, name='add_new_task'),
+    # save Task
+    path('admin/save_task_diagram/', save_task_diagram, name='save_task_diagram'),
+
 
     # switch student active
     path('admin/switch_student_active/', switch_student_active, name='switch_student_active'),
@@ -44,6 +55,8 @@ API_ADMIN_GET = [
     path('admin/get_all_students/', get_all_students, name='get_all_students'),
     # get all class_name
     path('admin/get_all_class_name/', get_all_class_names, name='all_class_names'),
+    # get all tasks
+    path('admin/get_all_tasks_info/', get_all_tasks_info, name='all_tasks_info'),
 ]
 
 urlpatterns += API_POST + API_GET + API_ADMIN_POST + API_ADMIN_GET

@@ -9,10 +9,12 @@ import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
 import AlertLog from "./pages/alertLogAndLoadingPage/AlertLog";
 import Loading from "./pages/alertLogAndLoadingPage/Loading";
-import {CSRF_cookies, ResponseData} from "./utils/API/API_Interface";
-import Task from "./pages/Task/Task";
+import Task from "./pages/task/Task";
+
 import AdminHome from "./pages/admin/home/AdminHome";
+import AdminTask from "./pages/admin/task/Task"
 // interface
+import {CSRF_cookies, ResponseData} from "./utils/API/API_Interface";
 
 
 export default function App() {
@@ -83,8 +85,8 @@ export default function App() {
                      settingAlertLogAndLoading={settingAlertLogAndLoading}/>
     },
     {
-      path: '/task/:id',
-      element: <Task studentId={studentId}/>
+      path: '/task/:taskId',
+      element: <Task studentId={studentId} settingAlertLogAndLoading={settingAlertLogAndLoading}/>
     }
   ]
 
@@ -96,6 +98,10 @@ export default function App() {
     {
       path: '/admin/:page',
       element: <AdminHome name={name} adminId={studentId} settingAlertLogAndLoading={settingAlertLogAndLoading}/>
+    },
+    {
+      path: '/admin/task/:taskId',
+      element: <AdminTask settingAlertLogAndLoading={settingAlertLogAndLoading}/>
     }
   ]
 
