@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import {ISettingAlertLogAndLoading} from "../../../../utils/interface/alertLog";
-import {API_getTaskExperience} from "../../../../utils/API/API_Experiences";
+import {ISettingAlertLogAndLoading} from "../../../utils/interface/alertLog";
+import {API_getTaskExperience} from "../../../utils/API/API_Experiences";
 // style
 
 // API

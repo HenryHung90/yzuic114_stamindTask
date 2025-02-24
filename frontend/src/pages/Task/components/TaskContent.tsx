@@ -12,7 +12,7 @@ import {
 
 // components
 import ExperiencePageComponent from "./Experience";
-import {ISettingAlertLogAndLoading} from "../../../../utils/interface/alertLog";
+import {ISettingAlertLogAndLoading} from "../../../utils/interface/alertLog";
 
 // interface
 interface ITaskContent {

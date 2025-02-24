@@ -33,6 +33,12 @@ const AdminTask = (props: ITaskProps) => {
   const [nodes, setNodes] = useState<Array<Node>>([])
   const [links, setLinks] = useState<Array<Link>>([])
 
+  const [selectNode, setSelectNode] = useState<{ key: number, category: string, text: string }>({
+    key: 0,
+    category: '',
+    text: ''
+  })
+
   useEffect(() => {
     const fetchTaskDiagram = async () => {
       settingAlertLogAndLoading.setLoadingOpen(true)
@@ -56,6 +62,7 @@ const AdminTask = (props: ITaskProps) => {
         divRef={divRef}
         diagramRef={diagramRef}
         setDiagramRef={setDiagramRef}
+        setSelectNode={setSelectNode}
         nodeDataArray={nodes}
         linkDataArray={links}
         isEditMode={true}
