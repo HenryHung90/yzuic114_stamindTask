@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 // style
 
 // API
-import {API_getTasksInfo, API_getAllTasksInfo} from "../../../utils/API/API_Home";
+import {API_getTasksInfo, API_getAllTasksInfo} from "../../../utils/API/API_Tasks";
 
 // components
 import TaskCardComponent from "./TaskCard";

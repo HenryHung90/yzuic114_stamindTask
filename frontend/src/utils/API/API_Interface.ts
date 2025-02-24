@@ -1,3 +1,5 @@
+import {Node, Link} from '../interface/diagram'
+
 // Request 訊息內容
 interface RequestParams {
   message?: string
@@ -26,7 +28,12 @@ interface Req_register extends RequestParams {
 }
 
 interface Req_tasksInfo extends RequestParams {
-  student_id: string
+  student_id?: string
+  class_name?: string
+  task_name?: string
+  task_id?: string
+  node_array?: Array<Node>
+  link_array?: Array<Link>
 }
 
 interface Req_studentsInfo extends RequestParams {
@@ -65,30 +72,31 @@ interface Res_login extends ResponseData {
 }
 
 interface Res_tasksInfo extends ResponseData {
-  id: number;
-  name: string;
-  created_at: string;
-  updated_at: string;
+  id: number
+  is_open?: boolean
+  class_name?: string
+  name: string
+  created_at: string
+  updated_at: string
 }
 
 interface Res_classNamesInfo extends ResponseData {
-  id: number;
-  name: string;
-  created_at: string;
-  updated_at: string;
+  id: number
+  name: string
+  created_at: string
+  updated_at: string
 }
 
 interface Res_studentsInfo extends ResponseData {
-  id: number;
-  is_active: boolean;
-  class_name: string;
-  group_type: string;
-  student_id: string;
-  name: string;
-  created_at: string;
-  updated_at: string;
+  id: number
+  is_active: boolean
+  class_name: string
+  group_type: string
+  student_id: string
+  name: string
+  created_at: string
+  updated_at: string
 }
-
 
 export type{
   RequestParams, ResponseData,
