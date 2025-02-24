@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display Current Time</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f9;
+    }
+
+    .container {
+      text-align: center;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .time {
+      margin-top: 20px;
+      font-size: 24px;
+      color: #555;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Display Current Time</h1>
+    <button onclick="displayTime()">Show Current Time</button>
+    <div class="time" id="timeDisplay">Time will appear here</div>
+  </div>
+
+  <script>
+    function displayTime() {
+      const timeDisplay = document.getElementById('timeDisplay');
+      const now = new Date();
+      const timeString = now.toLocaleTimeString(); // 格式化時間
+      timeDisplay.textContent = `Current Time: ${timeString}`;
+    }
+  </script>
+</body>
+</html>

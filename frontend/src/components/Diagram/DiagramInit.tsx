@@ -13,6 +13,7 @@ interface IDiagramInitProps {
   divRef: React.RefObject<HTMLDivElement>
   diagramRef: React.RefObject<go.Diagram>
   setDiagramRef: (diagram: go.Diagram | null) => void
+  setSelectNode?: React.Dispatch<React.SetStateAction<{ key: number, category: string, text: string }>>
   nodeDataArray: Array<Node>
   linkDataArray: Array<Link>
   isEditMode: boolean
@@ -23,6 +24,7 @@ const DiagramInitComponent = (props: IDiagramInitProps) => {
     divRef,
     diagramRef,
     setDiagramRef,
+    setSelectNode,
     nodeDataArray,
     linkDataArray,
     isEditMode
@@ -238,7 +240,13 @@ const DiagramInitComponent = (props: IDiagramInitProps) => {
       diagram.addDiagramListener("ObjectDoubleClicked", (e: go.DiagramEvent) => {
         const part = e.subject.part;
         if (part instanceof go.Node) {
-          console.log("點擊節點:", part.data);
+          if (setSelectNode) {
+            setSelectNode({
+              category: part.data.category,
+              text: part.data.text,
+              key: part.data.key
+            });
+          }
         }
       });
 
