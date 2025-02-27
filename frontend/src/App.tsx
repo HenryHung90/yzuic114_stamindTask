@@ -7,8 +7,8 @@ import {API_getUserInfo} from "./utils/API/API_LoginSystem";
 // components
 import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
-import AlertLog from "./pages/alertLogAndLoadingPage/AlertLog";
-import Loading from "./pages/alertLogAndLoadingPage/Loading";
+import AlertLog from "./components/alertLogAndLoadingPage/AlertLog";
+import Loading from "./components/alertLogAndLoadingPage/Loading";
 import Task from "./pages/task/Task";
 
 import AdminHome from "./pages/admin/home/AdminHome";
