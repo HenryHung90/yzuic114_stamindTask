@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import * as go from "gojs";
+import {useNavigate} from "react-router-dom";
 // style
 import {
   Navbar,
@@ -24,6 +25,8 @@ import {ISettingAlertLogAndLoading} from "../../utils/interface/alertLog";
 
 function NavList(props: IDiagramControlProps) {
   const {taskId, diagramRef, settingAlertLogAndLoading} = props
+  const NavLocation = useNavigate()
+
   const buttonList = [
     {
       name: "儲存",
@@ -31,8 +34,6 @@ function NavList(props: IDiagramControlProps) {
         if (diagramRef.current && taskId) {
           settingAlertLogAndLoading.setLoadingOpen(true)
           const data = JSON.parse(diagramRef.current.model.toJson())
-          console.log(data.nodeDataArray)
-          console.log(data.linkDataArray)
           API_saveTaskDiagram(data.nodeDataArray, data.linkDataArray, taskId).then(response => {
             settingAlertLogAndLoading.setAlertLog(response.message, response.message)
             settingAlertLogAndLoading.setLoadingOpen(false)
@@ -43,6 +44,7 @@ function NavList(props: IDiagramControlProps) {
     {
       name: "離開",
       onClick: () => {
+        NavLocation('/admin')
       }
     },
   ]
