@@ -8,7 +8,7 @@ import {API_getTaskDiagram} from "../../utils/API/API_Tasks";
 
 // components
 import DiagramInitComponent from "../../components/Diagram/DiagramInit";
-import TaskContentComponent from "../admin/task/components/TaskContent";
+import TaskContentComponent from "./components/TaskContent";
 
 // interface
 interface ITaskProps {

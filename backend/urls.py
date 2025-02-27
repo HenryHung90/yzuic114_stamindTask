@@ -40,6 +40,8 @@ API_ADMIN_POST = [
     path('admin/add_new_task/',add_new_task, name='add_new_task'),
     # save Task
     path('admin/save_task_diagram/', save_task_diagram, name='save_task_diagram'),
+    # upload Experience file
+    path('admin/upload_experience_file/', upload_experience_file, name='upload_experience_file'),
 
 
     # switch student active

@@ -18,6 +18,7 @@ interface ITaskProps {
 
 import {ISettingAlertLogAndLoading} from "../../../utils/interface/alertLog";
 import {API_getTaskDiagram} from "../../../utils/API/API_Tasks";
+import TaskContentComponent from "./components/TaskContent";
 
 const AdminTask = (props: ITaskProps) => {
   const {settingAlertLogAndLoading} = props
@@ -32,6 +33,12 @@ const AdminTask = (props: ITaskProps) => {
 
   const [nodes, setNodes] = useState<Array<Node>>([])
   const [links, setLinks] = useState<Array<Link>>([])
+
+  const [selectNode, setSelectNode] = useState<{ key: number, category: string, text: string }>({
+    key: 0,
+    category: '',
+    text: ''
+  })
 
   useEffect(() => {
     const fetchTaskDiagram = async () => {
@@ -52,10 +59,16 @@ const AdminTask = (props: ITaskProps) => {
         diagramRef={diagramRef}
         settingAlertLogAndLoading={settingAlertLogAndLoading}
       />
+      <TaskContentComponent
+        taskId={taskId}
+        selectNode={selectNode}
+        settingAlertLogAndLoading={settingAlertLogAndLoading}
+      />
       <DiagramInitComponent
         divRef={divRef}
         diagramRef={diagramRef}
         setDiagramRef={setDiagramRef}
+        setSelectNode={setSelectNode}
         nodeDataArray={nodes}
         linkDataArray={links}
         isEditMode={true}

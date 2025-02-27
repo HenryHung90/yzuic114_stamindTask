@@ -6,11 +6,11 @@ class APIController {
   // 设置后端 API 地址
   protected baseURL: string;
   protected method: string;
-  protected data: RequestParams | undefined
+  protected data: RequestParams | undefined | FormData
   protected cookies: Cookies
   protected TEST_MODE: boolean
 
-  constructor(baseURL: string, method: string, data: RequestParams | undefined) {
+  constructor(baseURL: string, method: string, data: RequestParams | undefined | FormData) {
     this.baseURL = window.location.origin + baseURL
     this.method = method
     this.data = data
@@ -27,7 +27,6 @@ class APIController {
       withCredentials: this.TEST_MODE,
       data: this.data,
       headers: {
-        "Content-Type": "application/json",
         "X-CSRFToken": this.cookies.get("csrftoken")
       }
     }).then((response) => {
@@ -73,7 +72,7 @@ class APIController {
 }
 
 class API_POST extends APIController {
-  constructor(baseURL: string, data: RequestParams) {
+  constructor(baseURL: string, data: RequestParams | FormData) {
     super(baseURL, "POST", data)
     this.data = data
     this.baseURL = baseURL

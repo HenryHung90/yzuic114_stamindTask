@@ -103,8 +103,18 @@ interface Res_studentsInfo extends ResponseData {
 }
 
 export type{
-  RequestParams, ResponseData,
-  Req_login, Req_register, Req_tasksInfo, Req_studentsInfo, Req_studentInfo, Req_registerStudentInfo,Req_experienceInfo,
+  RequestParams,
+  ResponseData,
+  Req_login,
+  Req_register,
+  Req_tasksInfo,
+  Req_studentsInfo,
+  Req_studentInfo,
+  Req_registerStudentInfo,
+  Req_experienceInfo,
   CSRF_cookies,
-  Res_login, Res_tasksInfo, Res_classNamesInfo, Res_studentsInfo
+  Res_login,
+  Res_tasksInfo,
+  Res_classNamesInfo,
+  Res_studentsInfo
 }
