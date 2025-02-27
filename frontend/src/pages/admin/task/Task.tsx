@@ -18,6 +18,7 @@ interface ITaskProps {
 
 import {ISettingAlertLogAndLoading} from "../../../utils/interface/alertLog";
 import {API_getTaskDiagram} from "../../../utils/API/API_Tasks";
+import TaskContentComponent from "./components/TaskContent";
 
 const AdminTask = (props: ITaskProps) => {
   const {settingAlertLogAndLoading} = props
@@ -56,6 +57,11 @@ const AdminTask = (props: ITaskProps) => {
       <DiagramControlComponent
         taskId={taskId}
         diagramRef={diagramRef}
+        settingAlertLogAndLoading={settingAlertLogAndLoading}
+      />
+      <TaskContentComponent
+        taskId={taskId}
+        selectNode={selectNode}
         settingAlertLogAndLoading={settingAlertLogAndLoading}
       />
       <DiagramInitComponent

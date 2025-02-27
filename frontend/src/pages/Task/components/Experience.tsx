@@ -1,9 +1,8 @@
 import {useEffect, useState} from "react";
-import {ISettingAlertLogAndLoading} from "../../../utils/interface/alertLog";
-import {API_getTaskExperience} from "../../../utils/API/API_Experiences";
 // style
 
 // API
+import {API_getTaskExperience} from "../../../utils/API/API_Experiences";
 
 // components
 
@@ -15,6 +14,7 @@ interface IExperiencePageProps {
   settingAlertLogAndLoading: ISettingAlertLogAndLoading
 }
 
+import {ISettingAlertLogAndLoading} from "../../../utils/interface/alertLog";
 
 const ExperiencePageComponent = (props: IExperiencePageProps) => {
   const {taskId, selectNode, iframeKey, settingAlertLogAndLoading} = props
@@ -26,7 +26,7 @@ const ExperiencePageComponent = (props: IExperiencePageProps) => {
       settingAlertLogAndLoading.setLoadingOpen(true)
       API_getTaskExperience(taskId).then(response => {
         settingAlertLogAndLoading.setLoadingOpen(false)
-        setExperienceData(response.data.experience_info.experience_file[selectNode.key])
+        setExperienceData(response.data.experience_info.experience_files[selectNode.key])
       })
     }
     fetchTaskExperience()
