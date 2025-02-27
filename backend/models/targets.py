@@ -7,14 +7,21 @@ class Target(models.Model):
         verbose_name='目標名稱'
     )
 
-    targets = ArrayField(
-        models.CharField(max_length=500),
-        default=list,
+    target = models.CharField(
+        max_length=120,
         null=True,
         blank=True,
-        verbose_name='目標內容'
+        verbose_name='目標名稱'
     )
-    sub_targets = ArrayField(
+
+    description = models.CharField(
+        max_length=500,
+        null=True,
+        blank=True,
+        verbose_name='目標描述'
+    )
+
+    sub_target_list = ArrayField(
         models.CharField(max_length=500),
         default=list,
         null=True,
