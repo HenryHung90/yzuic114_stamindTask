@@ -5,6 +5,7 @@ from backend.views.core import *
 from backend.views.task import *
 from backend.views.students import *
 from backend.views.experience import *
+from backend.views.target import *
 
 urlpatterns = []
 
@@ -17,6 +18,8 @@ API_POST = [
     path('get_task_diagram/', get_task_diagram, name='get_task_diagram'),
     # get Task Experience
     path('get_task_experience/', get_task_experience, name='get_task_experience'),
+    # get Task Target
+    path('get_task_target/', get_task_target, name='get_task_target'),
 ]
 
 API_GET = [
@@ -42,7 +45,8 @@ API_ADMIN_POST = [
     path('admin/save_task_diagram/', save_task_diagram, name='save_task_diagram'),
     # upload Experience file
     path('admin/upload_experience_file/', upload_experience_file, name='upload_experience_file'),
-
+    # upload Task Target
+    path('admin/upload_task_target/', upload_task_target, name='upload_task_target'),
 
     # switch student active
     path('admin/switch_student_active/', switch_student_active, name='switch_student_active'),
