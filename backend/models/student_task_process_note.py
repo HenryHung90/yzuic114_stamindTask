@@ -1,7 +1,12 @@
 from django.db import models
 
+
 class StudentTaskProcessNote(models.Model):
-    content = models.TextField()
+    content = models.JSONField(
+        blank=True,
+        null=True,
+        default=dict,
+    )
 
     # 時間戳記
     created_at = models.DateTimeField(auto_now_add=True)

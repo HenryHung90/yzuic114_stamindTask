@@ -1,8 +1,11 @@
 from django.db import models
 
+
 class StudentTaskPlan(models.Model):
     content = models.JSONField(
         default=dict,
+        null=True,
+        blank=True,
         verbose_name='任務計畫設定內容'
     )
 
