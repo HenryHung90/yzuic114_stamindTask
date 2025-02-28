@@ -12,17 +12,13 @@ import {
 
 // components
 import ExperiencePageComponent from "./Experience";
-import {ISettingAlertLogAndLoading} from "../../../utils/interface/alertLog";
+import TargetComponent from "./Target";
 import {calculateExperienceStep} from "../../../utils/functions/tasks/experience";
 
 // interface
-interface ITaskContent {
-  taskId: string | undefined
-  selectNode: { key: number, category: string, text: string }
-  settingAlertLogAndLoading: ISettingAlertLogAndLoading
-}
+import {ITaskContentProps} from "../../../utils/interface/Task";
 
-const TaskContentComponent = (props: ITaskContent) => {
+const TaskContentComponent = (props: ITaskContentProps) => {
   const {taskId, selectNode, settingAlertLogAndLoading} = props;
   const [open, setOpen] = useState(false)
 
@@ -51,6 +47,10 @@ const TaskContentComponent = (props: ITaskContent) => {
         {selectNode.category === 'Experience' && <ExperiencePageComponent taskId={taskId} selectNode={selectNode}
                                                                           settingAlertLogAndLoading={settingAlertLogAndLoading}
                                                                           iframeKey={iframeKey}/>}
+        {selectNode.category === 'Target' &&
+            <TargetComponent taskId={taskId} selectNode={selectNode}
+                             settingAlertLogAndLoading={settingAlertLogAndLoading}/>
+        }
       </DialogBody>
       <DialogFooter placeholder={undefined} className='gap-x-2'>
         {selectNode.category === 'Experience' &&
@@ -58,6 +58,7 @@ const TaskContentComponent = (props: ITaskContent) => {
                 <span>Reset</span>
             </Button>
         }
+
         <Button variant="gradient" color="red" onClick={handleOpen} placeholder={undefined}>
           <span>Leave</span>
         </Button>

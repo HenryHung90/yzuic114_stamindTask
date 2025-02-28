@@ -7,16 +7,10 @@ import {API_getTaskExperience} from "../../../utils/API/API_Experiences";
 // components
 
 // interface
-interface IExperiencePageProps {
-  taskId: string | undefined
-  selectNode: { key: number, category: string, text: string }
-  iframeKey: number
-  settingAlertLogAndLoading: ISettingAlertLogAndLoading
-}
+import {ITaskExperienceProps} from "../../../utils/interface/Task";
 
-import {ISettingAlertLogAndLoading} from "../../../utils/interface/alertLog";
 
-const ExperiencePageComponent = (props: IExperiencePageProps) => {
+const ExperiencePageComponent = (props: ITaskExperienceProps) => {
   const {taskId, selectNode, iframeKey, settingAlertLogAndLoading} = props
 
   const [experienceData, setExperienceData] = useState<String>()
