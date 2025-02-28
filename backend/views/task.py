@@ -22,15 +22,16 @@ def serialize_tasks(tasks):
     將 Task QuerySet 序列化為列表格式
     """
     tasks_data = []
-    for task in tasks:
-        tasks_data.append({
-            'id': task.id,
-            'is_open': task.is_open,
-            'class_name': task.class_name.name,
-            'name': task.name,
-            'created_at': task.created_at.strftime('%Y-%m-%d %H:%M'),
-            'updated_at': task.updated_at.strftime('%Y-%m-%d %H:%M'),
-        })
+    if tasks:
+        for task in tasks:
+            tasks_data.append({
+                'id': task.id,
+                'is_open': task.is_open,
+                'class_name': task.class_name.name,
+                'name': task.name,
+                'created_at': task.created_at.strftime('%Y-%m-%d %H:%M'),
+                'updated_at': task.updated_at.strftime('%Y-%m-%d %H:%M'),
+            })
     return tasks_data
 
 
@@ -124,11 +125,15 @@ def get_task_diagram(request):
         task_id = request.data.get('task_id')
         task_data = Task.objects.get(id=task_id)
 
-        return Response({
-            'message': 'success',
-            'nodes_data': task_data.diagram_content.get("nodes_data", []),
-            'links_data': task_data.diagram_content.get("links_data", []),
-        }, status=status.HTTP_200_OK)
+
+        if task_data.diagram_content:
+            return Response({
+                'message': 'success',
+                'nodes_data': task_data.diagram_content.get("nodes_data", []),
+                'links_data': task_data.diagram_content.get("links_data", []),
+            }, status=status.HTTP_200_OK)
+        else:
+            return Response({'message': 'empty'}, status=status.HTTP_200_OK)
     except Exception as e:
         print(f'get task info Error: {e}')
         return Response({'get task Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
