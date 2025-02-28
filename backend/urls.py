@@ -6,6 +6,7 @@ from backend.views.task import *
 from backend.views.students import *
 from backend.views.experience import *
 from backend.views.target import *
+from backend.views.student_tasks import *
 
 urlpatterns = []
 
@@ -20,6 +21,9 @@ API_POST = [
     path('get_task_experience/', get_task_experience, name='get_task_experience'),
     # get Task Target
     path('get_task_target/', get_task_target, name='get_task_target'),
+
+    # init Student Task
+    path('init_student_task/', init_student_task, name='init_student_task'),
 ]
 
 API_GET = [

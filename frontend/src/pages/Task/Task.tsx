@@ -5,6 +5,7 @@ import * as go from "gojs";
 
 // API
 import {API_getTaskDiagram} from "../../utils/API/API_Tasks";
+import {API_initStudentTask} from "../../utils/API/API_StudentTasks";
 
 // components
 import DiagramInitComponent from "../../components/Diagram/DiagramInit";
@@ -15,6 +16,7 @@ interface ITaskProps {
   studentId: string;
   settingAlertLogAndLoading: ISettingAlertLogAndLoading
 }
+
 import {Link, Node} from "../../utils/interface/diagram";
 import {ISettingAlertLogAndLoading} from "../../utils/interface/alertLog";
 
@@ -39,7 +41,9 @@ const Task = (props: ITaskProps) => {
     text: ''
   })
 
+  // 初始進入需做的
   useEffect(() => {
+    // 取得 Task 的 Diagram
     const fetchTaskDiagram = async () => {
       settingAlertLogAndLoading.setLoadingOpen(true)
       API_getTaskDiagram(taskId || '').then(response => {
@@ -48,7 +52,17 @@ const Task = (props: ITaskProps) => {
         settingAlertLogAndLoading.setLoadingOpen(false)
       })
     }
+    // Init Student Task 建置該份 Student Task
+    const initStudentTask = async () => {
+      settingAlertLogAndLoading.setLoadingOpen(true)
+      API_initStudentTask(taskId || '').then(response => {
+        settingAlertLogAndLoading.setLoadingOpen(false)
+        console.log(response.data.status)
+      })
+    }
+
     fetchTaskDiagram()
+    initStudentTask()
   }, []);
 
   return (
