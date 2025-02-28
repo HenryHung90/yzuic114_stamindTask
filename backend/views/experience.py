@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.views.decorators.csrf import ensure_csrf_cookie
 
-from backend.models import Task, Experience
+from backend.models import Task
 
 """
  Response Status List:
@@ -45,7 +45,7 @@ def upload_experience_file(request):
         select_node = int(request.data.get('select_node'))
 
         task_data = Task.objects.get(id=task_id)
-        experience_files = task_data.experience.content.get('experience_files')
+        experience_files = task_data.experience.content.get('experience_files', [])
 
         if len(experience_files) > select_node:
             experience_files[select_node] = file.name
