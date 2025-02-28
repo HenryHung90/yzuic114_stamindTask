@@ -7,26 +7,27 @@ class Target(models.Model):
         verbose_name='目標名稱'
     )
 
-    target = models.CharField(
-        max_length=120,
+    targets = ArrayField(
+        models.CharField(max_length=120),
+        default=list,
         null=True,
         blank=True,
         verbose_name='目標名稱'
     )
 
-    description = models.CharField(
-        max_length=500,
+    descriptions = ArrayField(
+        models.CharField(max_length=500),
+        default=list,
         null=True,
         blank=True,
         verbose_name='目標描述'
     )
 
-    sub_target_list = ArrayField(
-        models.CharField(max_length=500),
-        default=list,
+    sub_target_list = models.JSONField(
         null=True,
         blank=True,
-        verbose_name='子任務'
+        verbose_name='子任務',
+        help_text='包含 title 和 description 的 Array<JSON> 格式資料'
     )
 
     # 時間戳記
@@ -40,4 +41,4 @@ class Target(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"{self.class_name.name} - {self.name}"
+        return f"{self.name}"
