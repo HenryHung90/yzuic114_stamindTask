@@ -1,4 +1,5 @@
 import {Node, Link} from '../interface/diagram'
+import {ITaskSubTarget} from "../interface/Task";
 
 // Request 訊息內容
 interface RequestParams {
@@ -59,6 +60,14 @@ interface Req_experienceInfo extends RequestParams {
   task_id: string | undefined
 }
 
+interface Req_targetInfo extends RequestParams {
+  task_id: string | undefined
+  select_node?: number
+  target_title?: string
+  target_description?: string
+  sub_target_list?: Array<ITaskSubTarget>
+}
+
 // API Response Extension
 // csrf cookie Response
 interface CSRF_cookies extends ResponseData {
@@ -112,6 +121,7 @@ export type{
   Req_studentInfo,
   Req_registerStudentInfo,
   Req_experienceInfo,
+  Req_targetInfo,
   CSRF_cookies,
   Res_login,
   Res_tasksInfo,
