@@ -16,18 +16,23 @@ import {ISettingAlertLogAndLoading} from "../../../../utils/interface/alertLog";
 import {calculateExperienceStep} from "../../../../utils/functions/tasks/experience";
 
 // interface
-interface ITaskContent {
-  taskId: string | undefined
-  selectNode: { key: number, category: string, text: string }
-  settingAlertLogAndLoading: ISettingAlertLogAndLoading
-}
+import {ITaskContentProps} from "../../../../utils/interface/Task";
+import TargetComponent from "./Target";
 
-const TaskContentComponent = (props: ITaskContent) => {
+const TaskContentComponent = (props: ITaskContentProps) => {
   const {taskId, selectNode, settingAlertLogAndLoading} = props;
   const [open, setOpen] = useState(false)
 
-  const handleOpen = () => setOpen(!open)
+  // saving trigger
+  const [savingTrigger, setSavingTrigger] = useState<number>(0)
+  const handleSavingTriggerClick = () => {
+    setSavingTrigger(prevState => prevState + 1)
+    setTimeout(() => {
+      setSavingTrigger(0)
+    }, 500)
+  }
 
+  const handleOpen = () => setOpen(!open)
 
   useEffect(() => {
     if (selectNode.category) {
@@ -43,8 +48,16 @@ const TaskContentComponent = (props: ITaskContent) => {
       <DialogBody placeholder={undefined}>
         {selectNode.category === 'Experience' && <ExperiencePageComponent taskId={taskId} selectNode={selectNode}
                                                                           settingAlertLogAndLoading={settingAlertLogAndLoading}/>}
+        {selectNode.category === 'Target' &&
+            <TargetComponent taskId={taskId} selectNode={selectNode} savingTrigger={savingTrigger}
+                             settingAlertLogAndLoading={settingAlertLogAndLoading}/>}
       </DialogBody>
       <DialogFooter placeholder={undefined} className='gap-x-2'>
+        {selectNode.category === 'Target' &&
+            <Button variant="gradient" color="green" onClick={handleSavingTriggerClick} placeholder={undefined}>
+                <span>Save</span>
+            </Button>
+        }
         <Button variant="gradient" color="red" onClick={handleOpen} placeholder={undefined}>
           <span>Leave</span>
         </Button>

@@ -9,15 +9,9 @@ import {API_getTaskExperience, API_uploadTaskExperienceFile} from "../../../../u
 import AlertMsg from "../../../../components/Alert/Alert"
 
 // interface
-interface IExperiencePageProps {
-  taskId: string | undefined
-  selectNode: { key: number, category: string, text: string }
-  settingAlertLogAndLoading: ISettingAlertLogAndLoading
-}
+import {ITaskExperienceProps} from "../../../../utils/interface/Task";
 
-import {ISettingAlertLogAndLoading} from "../../../../utils/interface/alertLog";
-
-const ExperiencePageComponent = (props: IExperiencePageProps) => {
+const ExperiencePageComponent = (props: ITaskExperienceProps) => {
   const {taskId, selectNode, settingAlertLogAndLoading} = props
 
   const [experienceData, setExperienceData] = useState<string>("")
@@ -70,9 +64,7 @@ const ExperiencePageComponent = (props: IExperiencePageProps) => {
 
   useEffect(() => {
     const fetchTaskExperience = async () => {
-      settingAlertLogAndLoading.setLoadingOpen(true)
       API_getTaskExperience(taskId).then(response => {
-        settingAlertLogAndLoading.setLoadingOpen(false)
         const fileLocation = response.data.experience_info.experience_files[selectNode.key]
         if (fileLocation) {
           setExperienceData(`/files/experience_files/${fileLocation}`)
