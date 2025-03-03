@@ -31,7 +31,7 @@ def init_student_task(request):
         if student_task_data is None:
             with transaction.atomic():
                 student = User.objects.get(student_id=request.user.student_id)
-                class_name = ClassName.objects.get(name=request.user.class_name)
+                class_name = task_data.class_name
 
                 plan = StudentTaskPlan.objects.create()
                 process_code = StudentTaskProcessCode.objects.create()
