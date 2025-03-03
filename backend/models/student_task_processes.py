@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class StudentTaskProcess(models.Model):
     process_code = models.OneToOneField(
         'StudentTaskProcessCode',
@@ -21,6 +22,8 @@ class StudentTaskProcess(models.Model):
 
     content = models.JSONField(
         default=dict,
+        null=True,
+        blank=True,
         verbose_name='任務執行設定內容'
     )
 

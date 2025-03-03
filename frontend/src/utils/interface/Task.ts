@@ -1,4 +1,5 @@
 import {ISettingAlertLogAndLoading} from "./alertLog";
+import React from "react";
 
 interface ITaskContentProps {
   taskId: string | undefined
@@ -25,4 +26,39 @@ interface ITaskSubTargetProps extends ITaskSubTarget {
   handleDeleteSubTargetTitle: (index: number) => void
 }
 
-export type {ITaskContentProps, ITaskExperienceProps, ITaskTargetProps, ITaskSubTarget, ITaskSubTargetProps}
+//Plan
+interface ITaskPlanProps extends ITaskContentProps {
+  savingTrigger: number
+}
+
+interface ITaskPlan {
+  strategy: 'environment' | 'learning_strategy' | 'time_management' | 'finding_help' | 'self_assessment'
+  description: string
+  time?: string
+}
+
+interface ITaskPlanContentProps {
+  plan: ITaskPlan
+  handleChangePlanList: (field: 'strategy' | 'description' | 'time', value: string, subTargetIndex: number, planIndex: number) => void
+  handleDeletePlanList: (subTargetIndex: number, planIndex: number) => void
+  subTargetIndex: number
+  planIndex: number
+}
+
+interface ITaskSubTargetLisProps {
+  subTargetList: Array<ITaskSubTarget>
+  selectSubList: Array<boolean>
+  setSelectSubList: React.Dispatch<React.SetStateAction<Array<boolean>>>
+}
+
+export type {
+  ITaskContentProps,
+  ITaskExperienceProps,
+  ITaskTargetProps,
+  ITaskSubTarget,
+  ITaskSubTargetProps,
+  ITaskPlanProps,
+  ITaskPlan,
+  ITaskPlanContentProps,
+  ITaskSubTargetLisProps,
+}
