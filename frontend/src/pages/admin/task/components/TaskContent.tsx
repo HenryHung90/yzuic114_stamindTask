@@ -12,12 +12,12 @@ import {
 
 // components
 import ExperiencePageComponent from "./Experience";
-import {ISettingAlertLogAndLoading} from "../../../../utils/interface/alertLog";
+import TargetComponent from "./Target";
+import ProcessComponent from "./Process";
 import {calculateExperienceStep} from "../../../../utils/functions/tasks/experience";
 
 // interface
 import {ITaskContentProps} from "../../../../utils/interface/Task";
-import TargetComponent from "./Target";
 
 const TaskContentComponent = (props: ITaskContentProps) => {
   const {taskId, selectNode, settingAlertLogAndLoading} = props;
@@ -51,6 +51,10 @@ const TaskContentComponent = (props: ITaskContentProps) => {
         {selectNode.category === 'Target' &&
             <TargetComponent taskId={taskId} selectNode={selectNode} savingTrigger={savingTrigger}
                              settingAlertLogAndLoading={settingAlertLogAndLoading}/>}
+        {selectNode.category === 'Process' &&
+            <ProcessComponent taskId={taskId} selectNode={selectNode}
+                              settingAlertLogAndLoading={settingAlertLogAndLoading}/>
+        }
       </DialogBody>
       <DialogFooter placeholder={undefined} className='gap-x-2'>
         {selectNode.category === 'Target' &&
