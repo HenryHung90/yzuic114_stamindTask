@@ -27,12 +27,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$pao9ipcgej-wsuo4ykd*08cwe*f+q$jl=z$wv$h+h%3eweu0y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-# Marked up when publish------------------------------------
-ALLOWED_HOSTS = ["localhost", '127.0.0.1']
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_ALL_ORIGINS = True
 
 DATABASES = {
     'default': {
@@ -40,7 +34,7 @@ DATABASES = {
         'NAME': os.getenv('DB_NAME'),
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'HOST': os.getenv('DB_HOST', 'db'),
         'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
@@ -71,7 +65,6 @@ CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://localhost:8000',
 ]
-# ---------------------------------------------------------
 
 # Application definition
 
@@ -131,10 +124,6 @@ TEMPLATES = [
     },
 ]
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "frontend/dist/static"),
-]
-
 WSGI_APPLICATION = 'yzuic114_webstudy.wsgi.application'
 
 # Password validation
@@ -167,8 +156,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "frontend/dist/static")
+]
 STATIC_URL = "/static/"
-MEDIA_URL = '/files/'
+MEDIA_URL = "/files/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'frontend/dist/files')
 
 AUTH_USER_MODEL = 'backend.User'
@@ -177,6 +170,8 @@ AUTH_USER_MODEL = 'backend.User'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 # Security Setting
 """
@@ -191,10 +186,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 """
 SESSION_COOKIE_AGE = 86400  # 24小時
 # SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # 瀏覽器關閉時session過期
-# CSRF_COOKIE_SAMESITE = 'Strict'
-# SESSION_COOKIE_SAMESITE = 'Strict'
+
+# production Setting
+
+# Marked up when publish------------------------------------
+DEBUG = True
+ALLOWED_HOSTS = ["localhost", '127.0.0.1']
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
 CSRF_COOKIE_HTTPONLY = False
 SESSION_COOKIE_HTTPONLY = True
-# production Setting
+# Showed up when publish---------------------------------------------------------
+# X_FRAME_OPTIONS = 'SAMEORIGIN'
 # CSRF_COOKIE_HTTPONLY = True
 # SESSION_COOKIE_HTTPONLY = True

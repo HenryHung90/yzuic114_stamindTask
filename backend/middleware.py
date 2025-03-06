@@ -8,7 +8,7 @@ class AuthenticationMiddleware:
 
     def __call__(self, request):
         # 排除不需要認證的路徑
-        exempt_paths = ['/api/login/', '/api/register/']
+        exempt_paths = ['/api/login/', '/api/register/', '/']
 
         if request.path not in exempt_paths and not request.user.is_authenticated:
             return JsonResponse(
