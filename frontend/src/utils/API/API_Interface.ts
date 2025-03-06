@@ -75,6 +75,10 @@ interface Req_planInfo extends RequestParams {
   plan_list?: Array<Array<ITaskPlan>>
 }
 
+interface Req_textBookInfo extends RequestParams {
+  task_id: string | undefined
+}
+
 // API Response Extension
 // csrf cookie Response
 interface CSRF_cookies extends ResponseData {
@@ -130,6 +134,7 @@ export type{
   Req_experienceInfo,
   Req_targetInfo,
   Req_planInfo,
+  Req_textBookInfo,
   CSRF_cookies,
   Res_login,
   Res_tasksInfo,

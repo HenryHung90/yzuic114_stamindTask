@@ -51,6 +51,10 @@ interface ITaskSubTargetLisProps {
   setSelectSubList: React.Dispatch<React.SetStateAction<Array<boolean>>>
 }
 
+//Process
+interface ITaskProcessProps extends ITaskContentProps {
+}
+
 export type {
   ITaskContentProps,
   ITaskExperienceProps,
@@ -61,4 +65,5 @@ export type {
   ITaskPlan,
   ITaskPlanContentProps,
   ITaskSubTargetLisProps,
+  ITaskProcessProps
 }
