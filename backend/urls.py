@@ -8,6 +8,7 @@ from backend.views.experience import *
 from backend.views.target import *
 from backend.views.student_tasks import *
 from backend.views.student_task_plans import *
+from backend.views.text_books import *
 
 urlpatterns = []
 
@@ -22,6 +23,8 @@ API_POST = [
     path('get_task_experience/', get_task_experience, name='get_task_experience'),
     # get Task Target
     path('get_task_target/', get_task_target, name='get_task_target'),
+    # get Text Book
+    path('get_text_book/', get_text_book, name='get_text_book'),
 
     # init Student Task
     path('init_student_task/', init_student_task, name='init_student_task'),
@@ -57,6 +60,8 @@ API_ADMIN_POST = [
     path('admin/upload_experience_file/', upload_experience_file, name='upload_experience_file'),
     # upload Task Target
     path('admin/upload_task_target/', upload_task_target, name='upload_task_target'),
+    # upload Task TextBook file
+    path('admin/upload_text_book_file/', upload_text_book_file, name='upload_text_book_file'),
 
     # switch student active
     path('admin/switch_student_active/', switch_student_active, name='switch_student_active'),
