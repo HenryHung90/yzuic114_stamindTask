@@ -1,3 +1,5 @@
 .env
 frontend/.env
 frontend/node_modules
+frontend/public/files/experience_files
+frontend/public/files/text_book
