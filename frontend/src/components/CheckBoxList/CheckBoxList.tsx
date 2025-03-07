@@ -26,7 +26,6 @@ const CheckBoxListComponent = (props: CheckBoxListProps) => {
       return newList;
     });
   };
-  console.log(selectSubList)
   return (
     <Checkbox
       checked={selectSubList}
