@@ -10,19 +10,16 @@ import {API_initStudentTask} from "../../utils/API/API_StudentTasks";
 // components
 import DiagramInitComponent from "../../components/Diagram/DiagramInit";
 import TaskContentComponent from "./components/TaskContent";
+import SpeedDialComponent from "../../components/SpeedDial/SpeedDial";
 
 // interface
-interface ITaskProps {
-  studentId: string;
-  settingAlertLogAndLoading: ISettingAlertLogAndLoading
-}
+import {ITaskProps} from "../../utils/interface/Task";
 
 import {Link, Node} from "../../utils/interface/diagram";
-import {ISettingAlertLogAndLoading} from "../../utils/interface/alertLog";
 
 
 const Task = (props: ITaskProps) => {
-  const {studentId, settingAlertLogAndLoading} = props;
+  const {name, studentId, settingAlertLogAndLoading} = props;
   const {taskId} = useParams();
 
   const divRef = useRef<HTMLDivElement>(null)
@@ -67,6 +64,7 @@ const Task = (props: ITaskProps) => {
 
   return (
     <div>
+      <SpeedDialComponent name={name || ''} studentId={studentId} selectNode={selectNode}/>
       <TaskContentComponent
         taskId={taskId}
         selectNode={selectNode}
