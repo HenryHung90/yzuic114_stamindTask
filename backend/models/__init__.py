@@ -6,6 +6,7 @@ from .feedbacks import Feedback
 from .reflection_questions import ReflectionQuestion
 from .student_exams import StudentExam
 from .student_groups import StudentGroup
+from .student_notes import StudentNote
 from .student_record import StudentRecord
 from .student_task_plans import StudentTaskPlan
 from .student_task_process_code import StudentTaskProcessCode
@@ -27,6 +28,7 @@ __all__ = [
     'ReflectionQuestion',
     'StudentExam',
     'StudentGroup',
+    'StudentNote',
     'StudentRecord',
     'StudentTaskPlan',
     'StudentTaskProcessCode',

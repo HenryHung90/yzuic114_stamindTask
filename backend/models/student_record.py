@@ -12,18 +12,22 @@ class StudentRecord(models.Model):
         verbose_name="班級"
     )
 
+    # 'action_name': '',
+    # 'action_id': '',
+    # 'verb': '',
+    # 'object_type': '',
+    # 'object_id': '',
+    # 'object_name': '',
+    # 'context': ''
     action_record = ArrayField(
         models.JSONField(
-            default={
-                'action_name': '',
-                'action_id': '',
-                'verb': '',
-                'object_type': '',
-                'object_id': '',
-                'object_name': '',
-                'context': ''
-            }
-        )
+            default=dict,
+            null=True,
+            blank=True
+        ),
+        null=True,
+        blank=True,
+        verbose_name="記錄內容"
     )
 
     # 時間戳記
