@@ -81,7 +81,8 @@ export default withMT({
             animation: {
                 fadeIn: 'fadeIn 0.5s ease forwards',
                 loginSlideIn: 'SlideUpToIn 0.8s ease forwards',
-                messageSlideIn: 'SlideUpAndScale 0.4s ease forwards'
+                messageSlideIn: 'SlideUpAndScale 0.4s ease forwards',
+                tooltipSlideIn: 'SlideUpAndScale 0.4s ease forwards',
             },
         },
     },
