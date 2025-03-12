@@ -76,7 +76,7 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
 
   return (
     <div
-      className="overflow-hidden flex flex-col justify-between min-w-[24rem] min-h-[40rem] bg-stamindTask-white-200 rounded-xl shadow-lg shadow-stamindTask-primary-blue-600 animate-loginSlideIn">
+      className="overflow-hidden flex flex-col justify-between min-w-[24rem] min-h-[40rem] bg-stamindTask-white-200 rounded-xl shadow-lg shadow-stamindTask-primary-blue-600 animate-tooltipSlideIn">
       <div className='flex justify-between bg-stamindTask-black-850 p-3 gap-x-2'>
         <div className='flex items-center gap-x-2'>
           <img src='/files/img/logo.PNG' width='36'/>
