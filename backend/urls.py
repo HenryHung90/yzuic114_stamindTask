@@ -2,12 +2,13 @@ from django.urls import path
 
 from backend.views.class_name import get_all_class_names
 from backend.views.core import *
-from backend.views.task import *
-from backend.views.students import *
 from backend.views.experience import *
-from backend.views.target import *
-from backend.views.student_tasks import *
+from backend.views.student_notes import *
 from backend.views.student_task_plans import *
+from backend.views.student_tasks import *
+from backend.views.students import *
+from backend.views.target import *
+from backend.views.task import *
 from backend.views.text_books import *
 
 urlpatterns = []
@@ -33,6 +34,9 @@ API_POST = [
     path('get_task_plan/', get_task_plan, name='get_task_plan'),
     # upload Student Task Plan
     path('upload_task_plan/', upload_task_plan, name='upload_task_plan'),
+
+    # save student note
+    path('save_student_note/', save_student_note, name='save_student_note'),
 ]
 
 API_GET = [
@@ -44,6 +48,9 @@ API_GET = [
 
     # User tasksinfo 相關
     path('get_tasks_info/', get_tasks_info, name='taskinfo_view'),
+
+    # User Note 相關
+    path('get_student_note/', get_student_note, name='get_student_note'),
 ]
 
 API_ADMIN_POST = [
