@@ -11,15 +11,6 @@ class StudentTaskProcess(models.Model):
         related_name='task_process',
     )
 
-    process_note = models.OneToOneField(
-        'StudentTaskProcessNote',
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        verbose_name='計劃執行筆記',
-        related_name='task_process',
-    )
-
     content = models.JSONField(
         default=dict,
         null=True,

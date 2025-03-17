@@ -10,7 +10,6 @@ from .student_notes import StudentNote
 from .student_record import StudentRecord
 from .student_task_plans import StudentTaskPlan
 from .student_task_process_code import StudentTaskProcessCode
-from .student_task_process_note import StudentTaskProcessNote
 from .student_task_processes import StudentTaskProcess
 from .student_task_reflections import StudentTaskReflection
 from .student_tasks import StudentTask
@@ -32,7 +31,6 @@ __all__ = [
     'StudentRecord',
     'StudentTaskPlan',
     'StudentTaskProcessCode',
-    'StudentTaskProcessNote',
     'StudentTaskProcess',
     'StudentTaskReflection',
     'StudentTask',
