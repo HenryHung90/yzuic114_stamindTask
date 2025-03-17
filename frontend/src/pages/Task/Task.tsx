@@ -43,7 +43,7 @@ const Task = (props: ITaskProps) => {
     // 取得 Task 的 Diagram
     const fetchTaskDiagram = async () => {
       settingAlertLogAndLoading.setLoadingOpen(true)
-      API_getTaskDiagram(taskId || '').then(response => {
+      await API_getTaskDiagram(taskId || '').then(response => {
         setNodes(response.data.nodes_data)
         setLinks(response.data.links_data)
         settingAlertLogAndLoading.setLoadingOpen(false)
@@ -52,7 +52,7 @@ const Task = (props: ITaskProps) => {
     // Init Student Task 建置該份 Student Task
     const initStudentTask = async () => {
       settingAlertLogAndLoading.setLoadingOpen(true)
-      API_initStudentTask(taskId || '').then(response => {
+      await API_initStudentTask(taskId || '').then(response => {
         settingAlertLogAndLoading.setLoadingOpen(false)
         console.log(response.data.status)
       })
@@ -64,12 +64,12 @@ const Task = (props: ITaskProps) => {
 
   return (
     <div>
-      <SpeedDialComponent name={name || ''} studentId={studentId} selectNode={selectNode}/>
       <TaskContentComponent
         taskId={taskId}
         selectNode={selectNode}
         settingAlertLogAndLoading={settingAlertLogAndLoading}
       />
+      <SpeedDialComponent taskId={taskId || '0'} name={name || ''} studentId={studentId} selectNode={selectNode}/>
       <DiagramInitComponent
         divRef={divRef}
         diagramRef={diagramRef}
