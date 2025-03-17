@@ -1,6 +1,8 @@
 import {useState, useEffect, useRef} from 'react';
 // style
+
 // API
+import {API_getTextBookFile, API_uploadTextBookFile} from "../../../../utils/API/API_TextBooks";
 
 // components
 import AlertMsg from "../../../../components/Alert/Alert";
@@ -9,7 +11,6 @@ import CarouselComponent from "../../../../components/Carousel/Carousel";
 
 // interface
 import {ITaskProcessProps} from "../../../../utils/interface/Task";
-import {API_getTextBookFile, API_uploadTextBookFile} from "../../../../utils/API/API_TextBooks";
 
 const ProcessComponent = (props: ITaskProcessProps) => {
   const {taskId, selectNode} = props
