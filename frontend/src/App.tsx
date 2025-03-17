@@ -86,7 +86,7 @@ export default function App() {
     },
     {
       path: '/task/:taskId',
-      element: <Task studentId={studentId} settingAlertLogAndLoading={settingAlertLogAndLoading}/>
+      element: <Task name={name} studentId={studentId} settingAlertLogAndLoading={settingAlertLogAndLoading}/>
     }
   ]
 

@@ -54,7 +54,7 @@ def upload_task_plan(request):
         data_plan_list = plan_data.plan_list if plan_data.plan_list else []
 
         if len(data_select_sub_list) > select_node:
-            data_select_sub_list[select_node] = []
+            data_select_sub_list[select_node] = select_sub_list
             data_plan_list[select_node] = plan_list
         else:
             for i in range(len(data_select_sub_list), select_node + 1):

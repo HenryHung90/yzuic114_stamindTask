@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.db import transaction
 
-from backend.models import Task, StudentTask, User, ClassName, StudentTaskPlan, StudentTaskProcess, \
-    StudentTaskProcessCode, StudentTaskProcessNote, StudentTaskReflection, Feedback
+from backend.models import Task, StudentTask, User, StudentTaskPlan, StudentTaskProcess, \
+    StudentTaskProcessCode, StudentTaskReflection, Feedback
 
 """
  Response Status List:

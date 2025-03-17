@@ -79,6 +79,17 @@ interface Req_textBookInfo extends RequestParams {
   task_id: string | undefined
 }
 
+interface Req_studentNoteInfo extends RequestParams {
+  student_notes: { [key: string]: any[] }
+}
+
+interface Req_StudentTaskProcessCodeInfo extends RequestParams {
+  task_id: string | undefined
+  html_code?: string
+  css_code?: string
+  js_code?: string
+}
+
 // API Response Extension
 // csrf cookie Response
 interface CSRF_cookies extends ResponseData {
@@ -135,6 +146,8 @@ export type{
   Req_targetInfo,
   Req_planInfo,
   Req_textBookInfo,
+  Req_studentNoteInfo,
+  Req_StudentTaskProcessCodeInfo,
   CSRF_cookies,
   Res_login,
   Res_tasksInfo,

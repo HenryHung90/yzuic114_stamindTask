@@ -10,7 +10,6 @@ from backend.models.student_groups import StudentGroup
 from backend.models.student_record import StudentRecord
 from backend.models.student_task_plans import StudentTaskPlan
 from backend.models.student_task_process_code import StudentTaskProcessCode
-from backend.models.student_task_process_note import StudentTaskProcessNote
 from backend.models.student_task_processes import StudentTaskProcess
 from backend.models.student_task_reflections import StudentTaskReflection
 from backend.models.student_tasks import StudentTask

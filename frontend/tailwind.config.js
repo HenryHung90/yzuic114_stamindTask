@@ -72,10 +72,17 @@ export default withMT({
                     '0%': {opacity: 0},
                     '100%': {opacity: 1},
                 },
+                SlideUpAndScale: {
+                    '0%': {
+                        transform: 'translateY(50px) scale(0.8)', opacity: 0},
+                    '100%': {transform: 'translateY(0) scale(1)', opacity: 1},
+                }
             },
             animation: {
                 fadeIn: 'fadeIn 0.5s ease forwards',
-                loginSlideIn: 'SlideUpToIn 0.8s ease forwards'
+                loginSlideIn: 'SlideUpToIn 0.8s ease forwards',
+                messageSlideIn: 'SlideUpAndScale 0.4s ease forwards',
+                tooltipSlideIn: 'SlideUpAndScale 0.4s ease forwards',
             },
         },
     },
