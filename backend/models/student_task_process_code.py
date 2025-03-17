@@ -8,13 +8,13 @@ class StudentTaskProcessCode(models.Model):
     )
 
     js_code = models.TextField(
-        default='//Write your JavaScript Code here',
+        default='// Write your JavaScript Code here',
         blank=True,
         verbose_name='JavaScript 程式'
     )
 
     css_code = models.TextField(
-        default='//Write your CSS Code here',
+        default='/* Write you css code here */',
         blank=True,
         verbose_name='CSS 程式'
     )
