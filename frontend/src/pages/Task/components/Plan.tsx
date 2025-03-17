@@ -27,7 +27,7 @@ import {
 
 // API
 import {API_getTaskTarget} from "../../../utils/API/API_Targets";
-import {API_getTaskPlan} from "../../../utils/API/API_Plans";
+import {API_getTaskPlan} from "../../../utils/API/API_StudentTaskPlans";
 
 // components
 import AlertMsg from "../../../components/Alert/Alert";
@@ -41,7 +41,7 @@ import {
   ITaskPlanContentProps,
   ITaskSubTargetLisProps
 } from "../../../utils/interface/Task"
-import {API_uploadTaskPlan} from "../../../utils/API/API_Plans";
+import {API_uploadTaskPlan} from "../../../utils/API/API_StudentTaskPlans";
 
 const STRATEGY = [
   {value: 'environment', name: '環境制定'},
