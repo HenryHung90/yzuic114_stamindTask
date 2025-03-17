@@ -26,10 +26,10 @@ def get_student_task_process_code(request):
         process_code_data = StudentTask.objects.get(student_id=request.user.student_id,
                                                     task_id=task_id).process.process_code
 
-        print(process_code_data)
-
         return Response({
-            'message': 'success',
+            'html_code': process_code_data.html_code,
+            'css_code': process_code_data.css_code,
+            'js_code': process_code_data.js_code,
         }, status=status.HTTP_200_OK)
     except Exception as e:
         print(f'get tasks experience Error: {e}')
@@ -51,6 +51,8 @@ def save_student_task_process_code(request):
         process_code_data.html_code = html_code_data
         process_code_data.css_code = css_code_data
         process_code_data.js_code = js_code_data
+
+        process_code_data.save()
 
         return Response({'message': 'success'}, status=status.HTTP_200_OK)
     except Exception as e:
