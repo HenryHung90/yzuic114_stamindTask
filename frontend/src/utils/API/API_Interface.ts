@@ -1,5 +1,5 @@
 import {Node, Link} from '../interface/diagram'
-import {ITaskPlan, ITaskSubTarget} from "../interface/Task";
+import {IReflection, ITaskPlan, ITaskSubTarget} from "../interface/Task";
 
 // Request 訊息內容
 interface RequestParams {
@@ -90,6 +90,12 @@ interface Req_StudentTaskProcessCodeInfo extends RequestParams {
   js_code?: string
 }
 
+interface Req_ReflectionQuestionInfo extends RequestParams {
+  task_id: string | undefined
+  select_node?: number
+  questions?: Array<IReflection>
+}
+
 // API Response Extension
 // csrf cookie Response
 interface CSRF_cookies extends ResponseData {
@@ -148,6 +154,7 @@ export type{
   Req_textBookInfo,
   Req_studentNoteInfo,
   Req_StudentTaskProcessCodeInfo,
+  Req_ReflectionQuestionInfo,
   CSRF_cookies,
   Res_login,
   Res_tasksInfo,
