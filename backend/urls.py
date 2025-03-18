@@ -11,6 +11,7 @@ from backend.views.target import *
 from backend.views.task import *
 from backend.views.text_books import *
 from backend.views.student_task_process_code import *
+from backend.views.reflection_questions import *
 
 urlpatterns = []
 
@@ -40,6 +41,9 @@ API_POST = [
     path('get_student_task_process_code/', get_student_task_process_code, name='get_student_task_process_code'),
     # save Process Code
     path('save_student_task_process_code/', save_student_task_process_code, name='save_student_task_process_code'),
+
+    # get Reflection Questions
+    path('get_reflection_questions/', get_reflection_questions, name='get_reflection_questions'),
 
     # save student note
     path('save_student_note/', save_student_note, name='save_student_note'),
@@ -75,6 +79,8 @@ API_ADMIN_POST = [
     path('admin/upload_task_target/', upload_task_target, name='upload_task_target'),
     # upload Task TextBook file
     path('admin/upload_text_book_file/', upload_text_book_file, name='upload_text_book_file'),
+    # save Reflection Questions
+    path('admin/save_reflection_questions/', save_reflection_questions, name='save_reflection_questions'),
 
     # switch student active
     path('admin/switch_student_active/', switch_student_active, name='switch_student_active'),
