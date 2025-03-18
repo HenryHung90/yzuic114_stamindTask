@@ -33,8 +33,8 @@ def get_task_plan(request):
             'plan_list': plan_list,
         }, status=status.HTTP_200_OK)
     except Exception as e:
-        print(f'get tasks experience Error: {e}')
-        return Response({'get tasks experience Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        print(f'get tasks plan Error: {e}')
+        return Response({'get tasks plan Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
 # Upload Task Target

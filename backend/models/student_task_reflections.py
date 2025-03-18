@@ -3,18 +3,18 @@ from django.db import models
 
 
 class StudentTaskReflection(models.Model):
-    score = models.IntegerField(
-        null=True,
-        blank=True,
-        verbose_name="自我評分",
-    )
-
-    reflects = ArrayField(
-        models.CharField(max_length=500),
+    score= ArrayField(
+        models.IntegerField(),
         null=True,
         blank=True,
         default=list,
-        verbose_name='反思回饋列表'
+        verbose_name="自我評分列表"
+    )
+
+    reflects = models.JSONField(
+        null=True,
+        blank=True,
+        verbose_name="反思回饋 JSON 格式"
     )
 
     # 時間戳記
