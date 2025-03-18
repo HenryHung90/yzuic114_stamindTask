@@ -32,8 +32,8 @@ def get_student_task_process_code(request):
             'js_code': process_code_data.js_code,
         }, status=status.HTTP_200_OK)
     except Exception as e:
-        print(f'get tasks experience Error: {e}')
-        return Response({'get tasks experience Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        print(f'get tasks process code Error: {e}')
+        return Response({'get tasks process code Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 # Save Student Task Process Code
 @ensure_csrf_cookie
@@ -56,5 +56,5 @@ def save_student_task_process_code(request):
 
         return Response({'message': 'success'}, status=status.HTTP_200_OK)
     except Exception as e:
-        print(f'get tasks experience Error: {e}')
-        return Response({'get tasks experience Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        print(f'get tasks process code Error: {e}')
+        return Response({'get tasks process code Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
