@@ -10,8 +10,6 @@ import AlertMsg from "../../../../components/Alert/Alert";
 import {ITaskReflectionProps, IReflection} from "../../../../utils/interface/Task";
 import {Button, Input} from "@material-tailwind/react";
 import {API_getReflectionQuestions, API_saveReflectionQuestions} from "../../../../utils/API/API_ReflectionQuestions";
-import {API_uploadTaskTarget} from "../../../../utils/API/API_Targets";
-
 
 const ReflectionComponent = (props: ITaskReflectionProps) => {
   const {taskId, selectNode, savingTrigger} = props
