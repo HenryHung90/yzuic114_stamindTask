@@ -10,8 +10,6 @@ import AlertMsg from "../../../../components/Alert/Alert";
 import {ITaskReflectionProps, IReflection} from "../../../../utils/interface/Task";
 import {Button, Input} from "@material-tailwind/react";
 import {API_getReflectionQuestions, API_saveReflectionQuestions} from "../../../../utils/API/API_ReflectionQuestions";
-import {API_uploadTaskTarget} from "../../../../utils/API/API_Targets";
-
 
 const ReflectionComponent = (props: ITaskReflectionProps) => {
   const {taskId, selectNode, savingTrigger} = props
@@ -48,7 +46,7 @@ const ReflectionComponent = (props: ITaskReflectionProps) => {
   useEffect(() => {
     const fetchReflectionQuestions = async () => {
       API_getReflectionQuestions(taskId || '').then(response => {
-        setReflectionQuestions(response.data.reflection_question_list[selectNode.key])
+        setReflectionQuestions(response.data.reflection_question_list[selectNode.key] ?? [])
       })
     }
     fetchReflectionQuestions()
@@ -69,7 +67,7 @@ const ReflectionComponent = (props: ITaskReflectionProps) => {
     <div className='flex flex-col items-center'>
       <AlertMsg content={alertContent} open={alertOpen} setOpen={setAlertOpen}/>
       <div className='overflow-scroll flex flex-col gap-y-5 mt-5 pt-4 w-[80%] h-96 border-stamindTask-black-850'>
-        {reflectionQuestions.map(({title}, index) => (
+        {reflectionQuestions.length > 0 && reflectionQuestions.map(({title}, index) => (
             <div className='flex p-4 gap-y-3 border-[1px] border-stamindTask-black-600 rounded-md'>
               <Input
                 variant="standard"

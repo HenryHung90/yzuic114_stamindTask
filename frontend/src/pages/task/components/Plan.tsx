@@ -54,6 +54,7 @@ const STRATEGY = [
 // 子目標列舉
 const SubTargetListComponent = (props: ITaskSubTargetLisProps) => {
   const {subTargetList, selectSubList, setSelectSubList} = props
+
   return (
     <Card className="w-full max-w-[35rem]" placeholder={undefined}>
       <List className="flex-row" placeholder={undefined}>
@@ -243,9 +244,8 @@ const PlanComponent = (props: ITaskPlanProps) => {
       setAlertOpen(true)
       setAlertContent("🟠取得計畫設定內容...")
       API_getTaskPlan(taskId || '').then(response => {
-        console.log(response.data)
-        setSelectSubList(response.data.select_sub_list[selectNode.key])
-        setPlanList(response.data.plan_list[selectNode.key])
+        if (response.data.select_sub_list[selectNode.key] !== 'empty') setSelectSubList(response.data.select_sub_list[selectNode.key] ?? [])
+        if (response.data.plan_list[selectNode.key] !== 'empty') setPlanList(response.data.plan_list[selectNode.key] ?? [])
         setAlertContent("🟢取得計畫設定內容成功")
       })
     }
@@ -253,14 +253,13 @@ const PlanComponent = (props: ITaskPlanProps) => {
       setAlertOpen(true)
       setAlertContent("🟠取得子目標中...")
       await API_getTaskTarget(taskId || '').then(response => {
-        setSubTargetList(response.data.sub_target_list[selectNode.key])
+        setSubTargetList(response.data.sub_target_list[selectNode.key] ?? [])
         setSelectSubList(new Array(response.data.sub_target_list.length).fill(false))
         setPlanList(new Array(response.data.sub_target_list.length).fill([{strategy: 'environment', description: ''}]))
         setAlertContent("🟢取得子目標成功")
       })
       fetchTaskPlan()
     }
-
     fetchSubTarget()
   }, []);
 

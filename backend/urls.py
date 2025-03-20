@@ -12,6 +12,7 @@ from backend.views.task import *
 from backend.views.text_books import *
 from backend.views.student_task_process_code import *
 from backend.views.reflection_questions import *
+from backend.views.student_task_reflections import *
 
 urlpatterns = []
 
@@ -44,6 +45,11 @@ API_POST = [
 
     # get Reflection Questions
     path('get_reflection_questions/', get_reflection_questions, name='get_reflection_questions'),
+
+    # get Student Task Reflection
+    path('get_student_task_reflections/', get_student_task_reflections, name='get_student_task_reflections'),
+    # save Student Task Reflection
+    path('save_student_task_reflections/', save_student_task_reflections, name='save_student_task_reflections'),
 
     # save student note
     path('save_student_note/', save_student_note, name='save_student_note'),

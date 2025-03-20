@@ -5,7 +5,7 @@ class StudentTask(models.Model):
     student = models.ForeignKey(
         'User',
         on_delete=models.CASCADE,
-        related_name='exams',
+        related_name='student_task',
         verbose_name='歸屬學生'
     )
 
