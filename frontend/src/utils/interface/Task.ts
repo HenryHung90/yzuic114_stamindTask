@@ -69,6 +69,10 @@ interface IReflection {
   title: string
 }
 
+interface IStudentReflection {
+  reflect: string
+}
+
 export type {
   ITaskProps,
   ITaskContentProps,
@@ -82,5 +86,6 @@ export type {
   ITaskSubTargetLisProps,
   ITaskProcessProps,
   ITaskReflectionProps,
-  IReflection
+  IReflection,
+  IStudentReflection
 }

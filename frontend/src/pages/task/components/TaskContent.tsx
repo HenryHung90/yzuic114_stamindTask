@@ -15,6 +15,7 @@ import ExperiencePageComponent from "./Experience";
 import TargetComponent from "./Target";
 import PlanComponent from "./Plan";
 import ProcessComponent from "./Process";
+import ReflectionComponent from "./Reflection";
 import {calculateExperienceStep} from "../../../utils/functions/tasks/experience";
 
 // interface
@@ -72,6 +73,11 @@ const TaskContentComponent = (props: ITaskContentProps) => {
             <ProcessComponent taskId={taskId} selectNode={selectNode}
                               settingAlertLogAndLoading={settingAlertLogAndLoading}/>
         }
+        {
+          selectNode.category === 'Reflection' &&
+            <ReflectionComponent savingTrigger={savingTrigger} taskId={taskId} selectNode={selectNode}
+                                 settingAlertLogAndLoading={settingAlertLogAndLoading}/>
+        }
       </DialogBody>
       <DialogFooter placeholder={undefined} className='gap-x-2'>
         {selectNode.category === 'Experience' &&
@@ -80,6 +86,11 @@ const TaskContentComponent = (props: ITaskContentProps) => {
             </Button>
         }
         {selectNode.category === 'Plan' &&
+            <Button variant="gradient" color="green" onClick={handleSavingTriggerClick} placeholder={undefined}>
+                <span>Save</span>
+            </Button>
+        }
+        {selectNode.category === 'Reflection' &&
             <Button variant="gradient" color="green" onClick={handleSavingTriggerClick} placeholder={undefined}>
                 <span>Save</span>
             </Button>
