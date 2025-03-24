@@ -74,13 +74,13 @@ const NoteBookComponent = (props: NoteBookProps) => {
           x: window.innerWidth * 0.5,
           y: 0,
           width: window.innerWidth * 0.3,
-          height: window.innerHeight * 0.5,
+          height: 'auto',
         }}
         bounds="parent"
         className='pointer-events-auto'
       >
         <div ref={savingAreaRef}
-             className='max-h-[70vh] overflow-scroll rounded-xl text-stamindTask-white-000 bg-[#191C1C]'>
+             className='overflow-scroll rounded-xl text-stamindTask-white-000 bg-[#191C1C]'>
           <NotesComponent noteContent={noteContent} setNoteContent={setNoteContent}/>
           <div className='absolute flex gap-x-5 items-center right-1 top-1'>
             <SavingStatusComponent status={noteStatus}/>
