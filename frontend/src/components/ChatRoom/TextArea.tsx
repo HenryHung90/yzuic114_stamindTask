@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useState} from "react";
 // style
 import {
   IconButton,
@@ -18,12 +18,14 @@ interface ITextAreaProps {
 const TextAreaComponent = (props: ITextAreaProps) => {
   const {messageInput, setMessageInput, setIsSubmitMessage} = props
 
+  const [isComposing, setIsComposing] = React.useState<boolean>(false)
+
   const handleSumbitMessage = () => {
     console.log(messageInput)
     setIsSubmitMessage(true)
   }
   const handleEnterKeyDown = (e: any) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === 'Enter' && !e.shiftKey && !isComposing) {
       e.preventDefault()
       handleSumbitMessage()
     }
@@ -36,6 +38,8 @@ const TextAreaComponent = (props: ITextAreaProps) => {
         resize={true}
         placeholder="請輸入訊息..."
         className="min-h-full !border-0 focus:border-transparent"
+        onCompositionStart={() => setIsComposing(true)}
+        onCompositionEnd={() => setIsComposing(false)}
         containerProps={{
           className: "grid h-full",
         }}
