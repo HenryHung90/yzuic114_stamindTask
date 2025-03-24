@@ -17,11 +17,12 @@ import {API_getChatHistories} from "../../utils/API/API_ChatHistories";
 interface IChatRoomProps {
   name: string
   userStudentId: string | undefined
+  openChatRoom: boolean
   setOpenChatRoom: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ChatRoomComponent = (props: IChatRoomProps) => {
-  const {name, userStudentId, setOpenChatRoom} = props
+  const {name, userStudentId, openChatRoom, setOpenChatRoom} = props
 
   const messageOffsetRef = useRef<number>(0);
   const isMessageTopRef = useRef<boolean>(false);
@@ -106,7 +107,7 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
     if (messageBottomRef.current) {
       messageBottomRef.current.scrollIntoView({behavior: "smooth"});
     }
-  }, [isSubmitMessage]);
+  }, [isSubmitMessage, openChatRoom]);
 
 
   return (
