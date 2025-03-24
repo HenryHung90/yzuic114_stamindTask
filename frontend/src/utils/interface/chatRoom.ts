@@ -3,7 +3,7 @@ interface IMessages {
   message: string
   studentId: string
   name: string
-  type?: 'User' | 'Other'
+  type?: 'User' | 'Other' | 'Waiting'
 }
 
 export type { IMessages }
