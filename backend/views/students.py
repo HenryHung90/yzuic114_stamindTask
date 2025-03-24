@@ -120,7 +120,7 @@ def change_student_class_name(request):
         student_info = User.objects.get(student_id=request.data.get('student_id'))
         new_class_info = ClassName.objects.get(name=request.data.get('exchange_class_name'))
         new_student_group = StudentGroup.objects.get(class_name=new_class_info,
-                                                     group_type=student_info.student_group.group_type)
+                                                     group_type='CONTROL')
 
         student_info.class_name = new_class_info
         student_info.student_group = new_student_group

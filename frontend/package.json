@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "hosting": "vite --host",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
