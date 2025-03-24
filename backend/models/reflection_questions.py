@@ -8,12 +8,10 @@ class ReflectionQuestion(models.Model):
         verbose_name='反思題目名稱'
     )
 
-    questions = ArrayField(
-        models.CharField(max_length=500),
-        default=list,
+    questions = models.JSONField(
         null=True,
         blank=True,
-        verbose_name='反思問題列表'
+        verbose_name="反思回饋 JSON 格式"
     )
 
     # 時間戳記

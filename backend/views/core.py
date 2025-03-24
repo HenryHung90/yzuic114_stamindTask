@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from torch.distributed import group
 
 # User model
-from backend.models import User, ClassName, StudentGroup
+from backend.models import User, ClassName, StudentGroup, ChatHistory, StudentRecord
 
 """
  Response Status List:
@@ -56,12 +56,17 @@ def register(request):
                 return Response({'message': 'Class name does not exist', 'status': 404},
                                 status=status.HTTP_404_NOT_FOUND)
 
+        chat_history = ChatHistory.objects.create()
+        student_record = StudentRecord.objects.create(class_name=class_name)
+
         # 創建新用戶
         user = User.objects.create_user(
             student_id=data.get('student_id'),
             password=data.get('password'),
             name=data.get('name'),
             user_type=user_type,
+            chat_history=chat_history,
+            student_record=student_record
         )
 
         # 如果是學生，設置 class_name

@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.db import transaction
 
-from backend.models import Task, StudentTask, User, ClassName, StudentTaskPlan, StudentTaskProcess, \
-    StudentTaskProcessCode, StudentTaskProcessNote, StudentTaskReflection, Feedback
+from backend.models import Task, StudentTask, User, StudentTaskPlan, StudentTaskProcess, \
+    StudentTaskProcessCode, StudentTaskReflection, Feedback
 
 """
  Response Status List:
@@ -35,10 +35,8 @@ def init_student_task(request):
 
                 plan = StudentTaskPlan.objects.create()
                 process_code = StudentTaskProcessCode.objects.create()
-                process_note = StudentTaskProcessNote.objects.create()
                 process = StudentTaskProcess.objects.create(
                     process_code=process_code,
-                    process_note=process_note,
                 )
                 reflection = StudentTaskReflection.objects.create()
                 feedback = Feedback.objects.create()
@@ -56,5 +54,5 @@ def init_student_task(request):
         else:
             return Response({'status': 'Created'}, status=status.HTTP_200_OK)
     except Exception as e:
-        print(f'get tasks experience Error: {e}')
-        return Response({'get tasks experience Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        print(f'init student task Error: {e}')
+        return Response({'init student task Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

@@ -13,14 +13,16 @@ import {
 // components
 import ExperiencePageComponent from "./Experience";
 import TargetComponent from "./Target";
+import PlanComponent from "./Plan";
+import ProcessComponent from "./Process";
+import ReflectionComponent from "./Reflection";
 import {calculateExperienceStep} from "../../../utils/functions/tasks/experience";
 
 // interface
 import {ITaskContentProps} from "../../../utils/interface/Task";
-import PlanComponent from "./Plan";
 
 const TaskContentComponent = (props: ITaskContentProps) => {
-  const {taskId, selectNode, settingAlertLogAndLoading} = props;
+  const {taskId, studentId, selectNode, settingAlertLogAndLoading} = props;
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(!open)
 
@@ -45,12 +47,12 @@ const TaskContentComponent = (props: ITaskContentProps) => {
       handleOpen()
       // 總共有 6 步驟，計算是第幾個
       selectNode.key = calculateExperienceStep(selectNode.key)
-      console.log(selectNode)
     }
   }, [selectNode]);
 
   return (
-    <Dialog open={open} handler={handleOpen} placeholder={undefined} size='xl'>
+    <Dialog open={open} handler={() => {
+    }} placeholder={undefined} size='xl'>
       <DialogHeader placeholder={undefined}>{selectNode.text}</DialogHeader>
       <DialogBody placeholder={undefined}>
         {selectNode.category === 'Experience' &&
@@ -67,6 +69,15 @@ const TaskContentComponent = (props: ITaskContentProps) => {
                            savingTrigger={savingTrigger}
                            settingAlertLogAndLoading={settingAlertLogAndLoading}/>
         }
+        {selectNode.category === 'Process' &&
+            <ProcessComponent taskId={taskId} selectNode={selectNode}
+                              settingAlertLogAndLoading={settingAlertLogAndLoading}/>
+        }
+        {
+          selectNode.category === 'Reflection' &&
+            <ReflectionComponent savingTrigger={savingTrigger} taskId={taskId} selectNode={selectNode}
+                                 settingAlertLogAndLoading={settingAlertLogAndLoading}/>
+        }
       </DialogBody>
       <DialogFooter placeholder={undefined} className='gap-x-2'>
         {selectNode.category === 'Experience' &&
@@ -75,6 +86,11 @@ const TaskContentComponent = (props: ITaskContentProps) => {
             </Button>
         }
         {selectNode.category === 'Plan' &&
+            <Button variant="gradient" color="green" onClick={handleSavingTriggerClick} placeholder={undefined}>
+                <span>Save</span>
+            </Button>
+        }
+        {selectNode.category === 'Reflection' &&
             <Button variant="gradient" color="green" onClick={handleSavingTriggerClick} placeholder={undefined}>
                 <span>Save</span>
             </Button>

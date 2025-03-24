@@ -22,7 +22,7 @@ function handleAddNewStudent(loading: ISettingAlertLogAndLoading) {
 
   if (userType === 'STUDENT' || userType === 'TEACHER') {
     API_addStudent(className, studentId, name, password, userType).then(response => {
-      const messageInfo = "建立成功"
+      const messageInfo = response.status === 200 ? "建立成功" : "建立失敗"
       handlePromise(response.message, messageInfo, loading)
       setTimeout(() => {
         window.location.reload()
@@ -31,8 +31,6 @@ function handleAddNewStudent(loading: ISettingAlertLogAndLoading) {
   } else {
     loading.setAlertLog("錯誤", "user Type 只能是 STUDENT or TEACHER")
   }
-
-
 }
 
 function handleDownloadStudentList(loading: ISettingAlertLogAndLoading) {

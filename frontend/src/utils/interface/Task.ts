@@ -1,10 +1,15 @@
 import {ISettingAlertLogAndLoading} from "./alertLog";
 import React from "react";
 
-interface ITaskContentProps {
+interface ITaskProps {
+  studentId?: string;
+  name?: string;
+  settingAlertLogAndLoading: ISettingAlertLogAndLoading
+}
+
+interface ITaskContentProps extends ITaskProps {
   taskId: string | undefined
   selectNode: { key: number, category: string, text: string }
-  settingAlertLogAndLoading: ISettingAlertLogAndLoading
 }
 
 interface ITaskExperienceProps extends ITaskContentProps {
@@ -51,7 +56,25 @@ interface ITaskSubTargetLisProps {
   setSelectSubList: React.Dispatch<React.SetStateAction<Array<boolean>>>
 }
 
+// Process
+interface ITaskProcessProps extends ITaskContentProps {
+}
+
+// Reflection
+interface ITaskReflectionProps extends ITaskContentProps {
+  savingTrigger: number
+}
+
+interface IReflection {
+  title: string
+}
+
+interface IStudentReflection {
+  reflect: string
+}
+
 export type {
+  ITaskProps,
   ITaskContentProps,
   ITaskExperienceProps,
   ITaskTargetProps,
@@ -61,4 +84,8 @@ export type {
   ITaskPlan,
   ITaskPlanContentProps,
   ITaskSubTargetLisProps,
+  ITaskProcessProps,
+  ITaskReflectionProps,
+  IReflection,
+  IStudentReflection
 }

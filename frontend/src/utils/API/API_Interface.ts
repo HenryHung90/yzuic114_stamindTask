@@ -1,5 +1,5 @@
 import {Node, Link} from '../interface/diagram'
-import {ITaskPlan, ITaskSubTarget} from "../interface/Task";
+import {IReflection, IStudentReflection, ITaskPlan, ITaskSubTarget} from "../interface/Task";
 
 // Request 訊息內容
 interface RequestParams {
@@ -75,6 +75,41 @@ interface Req_planInfo extends RequestParams {
   plan_list?: Array<Array<ITaskPlan>>
 }
 
+interface Req_textBookInfo extends RequestParams {
+  task_id: string | undefined
+}
+
+interface Req_studentNoteInfo extends RequestParams {
+  student_notes: { [key: string]: any[] }
+}
+
+interface Req_StudentTaskProcessCodeInfo extends RequestParams {
+  task_id: string | undefined
+  html_code?: string
+  css_code?: string
+  js_code?: string
+}
+
+interface Req_ReflectionQuestionInfo extends RequestParams {
+  task_id: string | undefined
+  select_node?: number
+  questions?: Array<IReflection>
+}
+
+interface Req_StudentReflectionInfo extends RequestParams {
+  task_id: string | undefined
+  select_node?: number
+  reflects?: Array<IStudentReflection>
+}
+
+interface Req_StudentChatHistory extends RequestParams {
+  offset: number
+}
+
+interface Req_ChatWithAmumAmum extends RequestParams {
+  message: string
+}
+
 // API Response Extension
 // csrf cookie Response
 interface CSRF_cookies extends ResponseData {
@@ -130,6 +165,13 @@ export type{
   Req_experienceInfo,
   Req_targetInfo,
   Req_planInfo,
+  Req_textBookInfo,
+  Req_studentNoteInfo,
+  Req_StudentTaskProcessCodeInfo,
+  Req_ReflectionQuestionInfo,
+  Req_StudentReflectionInfo,
+  Req_StudentChatHistory,
+  Req_ChatWithAmumAmum,
   CSRF_cookies,
   Res_login,
   Res_tasksInfo,

@@ -1,19 +1,22 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
-from datetime import datetime
-
 
 class ChatHistory(models.Model):
+    # 'time': '%Y-%m-%d %H:%M:%S',
+    # 'name': '',
+    # 'student_id': '',
+    # 'message': '',
     chat_history = ArrayField(
         models.JSONField(
-            default={
-                'time':'%Y-%m-%d %H:%M:%S',
-                'sender': '',
-                'content': '',
-            }
+            default=dict,
+            null=True,
+            blank=True
         ),
-        default=list
+        null=True,
+        blank=True,
+        default=list,
+        verbose_name="聊天訊息紀錄"
     )
 
     # 時間戳記

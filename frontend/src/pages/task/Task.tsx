@@ -10,19 +10,16 @@ import {API_initStudentTask} from "../../utils/API/API_StudentTasks";
 // components
 import DiagramInitComponent from "../../components/Diagram/DiagramInit";
 import TaskContentComponent from "./components/TaskContent";
+import SpeedDialComponent from "../../components/SpeedDial/SpeedDial";
 
 // interface
-interface ITaskProps {
-  studentId: string;
-  settingAlertLogAndLoading: ISettingAlertLogAndLoading
-}
+import {ITaskProps} from "../../utils/interface/Task";
 
 import {Link, Node} from "../../utils/interface/diagram";
-import {ISettingAlertLogAndLoading} from "../../utils/interface/alertLog";
 
 
 const Task = (props: ITaskProps) => {
-  const {studentId, settingAlertLogAndLoading} = props;
+  const {name, studentId, settingAlertLogAndLoading} = props;
   const {taskId} = useParams();
 
   const divRef = useRef<HTMLDivElement>(null)
@@ -46,7 +43,7 @@ const Task = (props: ITaskProps) => {
     // 取得 Task 的 Diagram
     const fetchTaskDiagram = async () => {
       settingAlertLogAndLoading.setLoadingOpen(true)
-      API_getTaskDiagram(taskId || '').then(response => {
+      await API_getTaskDiagram(taskId || '').then(response => {
         setNodes(response.data.nodes_data)
         setLinks(response.data.links_data)
         settingAlertLogAndLoading.setLoadingOpen(false)
@@ -55,7 +52,7 @@ const Task = (props: ITaskProps) => {
     // Init Student Task 建置該份 Student Task
     const initStudentTask = async () => {
       settingAlertLogAndLoading.setLoadingOpen(true)
-      API_initStudentTask(taskId || '').then(response => {
+      await API_initStudentTask(taskId || '').then(response => {
         settingAlertLogAndLoading.setLoadingOpen(false)
         console.log(response.data.status)
       })
@@ -72,6 +69,7 @@ const Task = (props: ITaskProps) => {
         selectNode={selectNode}
         settingAlertLogAndLoading={settingAlertLogAndLoading}
       />
+      <SpeedDialComponent taskId={taskId || '0'} name={name || ''} studentId={studentId} selectNode={selectNode}/>
       <DiagramInitComponent
         divRef={divRef}
         diagramRef={diagramRef}
