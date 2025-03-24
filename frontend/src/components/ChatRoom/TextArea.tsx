@@ -21,7 +21,6 @@ const TextAreaComponent = (props: ITextAreaProps) => {
   const [isComposing, setIsComposing] = React.useState<boolean>(false)
 
   const handleSumbitMessage = () => {
-    console.log(messageInput)
     setIsSubmitMessage(true)
   }
   const handleEnterKeyDown = (e: any) => {
