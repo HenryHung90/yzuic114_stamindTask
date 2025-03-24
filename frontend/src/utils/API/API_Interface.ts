@@ -102,6 +102,13 @@ interface Req_StudentReflectionInfo extends RequestParams {
   reflects?: Array<IStudentReflection>
 }
 
+interface Req_StudentChatHistory extends RequestParams {
+  offset: number
+}
+
+interface Req_ChatWithAmumAmum extends RequestParams {
+  message: string
+}
 
 // API Response Extension
 // csrf cookie Response
@@ -163,6 +170,8 @@ export type{
   Req_StudentTaskProcessCodeInfo,
   Req_ReflectionQuestionInfo,
   Req_StudentReflectionInfo,
+  Req_StudentChatHistory,
+  Req_ChatWithAmumAmum,
   CSRF_cookies,
   Res_login,
   Res_tasksInfo,
