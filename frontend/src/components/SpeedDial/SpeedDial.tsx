@@ -20,7 +20,6 @@ import {
 import ChatRoomComponent from '../ChatRoom/ChatRoom'
 import TextBookComponent from "../TextBook/TextBook"
 import NoteBookComponent from "../NoteBook/NoteBook"
-import {API_getStudentNotes} from "../../utils/API/API_StudentNotes";
 
 // interface
 interface SpeedDialProps {
@@ -36,18 +35,6 @@ const SpeedDialComponent = (props: SpeedDialProps) => {
   const [openChatRoom, setOpenChatRoom] = useState<boolean>(false)
   const [openTextBook, setOpenTextBook] = useState<boolean>(false)
   const [openNoteBook, setOpenNoteBook] = useState<boolean>(false)
-
-  const [noteContent, setNoteContent] = useState<Array<any>>([])
-
-  useEffect(() => {
-    const fetchNoteContent = async () => {
-      API_getStudentNotes().then(response => {
-        if (response.data.student_note !== 'empty') setNoteContent(response.data.student_note[0])
-      })
-    }
-    fetchNoteContent()
-  }, []);
-
 
   return (
     <div className="flex items-end justify-end fixed w-screen h-screen z-[10001] pointer-events-none">
@@ -110,7 +97,7 @@ const SpeedDialComponent = (props: SpeedDialProps) => {
       </div>
       <div
         className={`opacity-50 hover:opacity-100 duration-500 absolute bottom-5 right-20 pointer-events-auto ${!openChatRoom && 'hidden'}`}>
-        <ChatRoomComponent name={name} userStudentId={studentId} setOpenChatRoom={setOpenChatRoom}/>
+        <ChatRoomComponent name={name} userStudentId={studentId} openChatRoom={openChatRoom} setOpenChatRoom={setOpenChatRoom}/>
       </div>
       <div
         className={`absolute top-0 left-0 duration-500  ${!openTextBook && 'hidden'}`}>
@@ -118,8 +105,7 @@ const SpeedDialComponent = (props: SpeedDialProps) => {
       </div>
       <div
         className={`absolute top-0 left-0 duration-500  ${!openNoteBook && 'hidden'}`}>
-        <NoteBookComponent noteContent={noteContent} setNoteContent={setNoteContent}
-                           setOpenNoteBook={setOpenNoteBook}/>
+        <NoteBookComponent setOpenNoteBook={setOpenNoteBook}/>
       </div>
     </div>
   )
