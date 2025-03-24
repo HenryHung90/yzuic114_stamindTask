@@ -108,17 +108,18 @@ const SpeedDialComponent = (props: SpeedDialProps) => {
           </SpeedDialContent>
         </SpeedDial>
       </div>
-      <div className="absolute bottom-5 right-20 pointer-events-auto">
-        {openChatRoom && <ChatRoomComponent name={name} userStudentId={studentId} setOpenChatRoom={setOpenChatRoom}/>}
+      <div
+        className={`opacity-50 hover:opacity-100 duration-500 absolute bottom-5 right-20 pointer-events-auto ${!openChatRoom && 'hidden'}`}>
+        <ChatRoomComponent name={name} userStudentId={studentId} setOpenChatRoom={setOpenChatRoom}/>
       </div>
       <div
-        className="absolute top-0 left-0 duration-500">
-        {openTextBook && <TextBookComponent taskId={taskId} selectNode={selectNode} setOpenTextBook={setOpenTextBook}/>}
+        className={`absolute top-0 left-0 duration-500  ${!openTextBook && 'hidden'}`}>
+        <TextBookComponent taskId={taskId} selectNode={selectNode} setOpenTextBook={setOpenTextBook}/>
       </div>
       <div
-        className="absolute top-0 left-0 duration-500">
-        {openNoteBook && <NoteBookComponent noteContent={noteContent} setNoteContent={setNoteContent}
-                                            setOpenNoteBook={setOpenNoteBook}/>}
+        className={`absolute top-0 left-0 duration-500  ${!openNoteBook && 'hidden'}`}>
+        <NoteBookComponent noteContent={noteContent} setNoteContent={setNoteContent}
+                           setOpenNoteBook={setOpenNoteBook}/>
       </div>
     </div>
   )
