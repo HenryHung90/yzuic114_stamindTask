@@ -44,7 +44,6 @@ const ProcessComponent = (props: ITaskProcessProps) => {
   // 程式儲存
   const handleSaveStudentCode = () => {
     setCodeStatus(CODE_STATUS.UPLOADING)
-    console.log(htmlCode, cssCode, jsCode)
     API_saveStudentTaskProcessCode(taskId || '', htmlCode, cssCode, jsCode).then(response => {
       response.message === 'success' ? setCodeStatus(CODE_STATUS.SYNC) : setCodeStatus(CODE_STATUS.BAD)
     })

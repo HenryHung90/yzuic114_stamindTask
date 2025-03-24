@@ -23,7 +23,7 @@ def serialized_students_info(students_info):
         if not student.is_superuser:
             students_data.append({
                 'is_active': student.is_active,
-                'class_name': student.class_name.name,
+                'class_name': student.class_name.name if student.class_name else "尚未分配",
                 'group_type': student.student_group.group_type if student.student_group else "尚未分配",
                 'student_id': student.student_id,
                 'name': student.name,

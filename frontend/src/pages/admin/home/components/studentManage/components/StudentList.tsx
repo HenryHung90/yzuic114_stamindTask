@@ -16,13 +16,13 @@ import {
   handleDonwloadFeedback,
   handleDonwloadStudentRecord
 } from "../../../../../../utils/functions/admin/home/components/studentList";
+import {API_getAllStudents, API_getStudentsByClassName} from "../../../../../../utils/API/API_Students";
 // components
 import MenuComponent from "../../../../../../components/menu/Menu";
 import MultipleMenuComponent from "../../../../../../components/menu/MultipleMenu";
 
 // interface
 import {IMenuItems} from "../../../../../../components/menu/Menu";
-import {API_getAllStudents, API_getStudentsByClassName} from "../../../../../../utils/API/API_Students";
 import {Res_classNamesInfo, Res_studentsInfo} from "../../../../../../utils/API/API_Interface";
 import {ISettingAlertLogAndLoading} from "../../../../../../utils/interface/alertLog";
 

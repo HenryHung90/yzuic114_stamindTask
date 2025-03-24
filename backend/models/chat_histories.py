@@ -4,8 +4,9 @@ from django.db import models
 
 class ChatHistory(models.Model):
     # 'time': '%Y-%m-%d %H:%M:%S',
-    # 'sender': '',
-    # 'content': '',
+    # 'name': '',
+    # 'student_id': '',
+    # 'message': '',
     chat_history = ArrayField(
         models.JSONField(
             default=dict,
@@ -14,6 +15,7 @@ class ChatHistory(models.Model):
         ),
         null=True,
         blank=True,
+        default=list,
         verbose_name="聊天訊息紀錄"
     )
 

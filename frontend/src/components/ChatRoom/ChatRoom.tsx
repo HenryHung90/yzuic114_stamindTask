@@ -11,45 +11,70 @@ import MessageContentComponent from "./MessageContent";
 
 // interface
 import {IMessages} from "../../utils/interface/chatRoom";
+import {API_chatWithAmumAmum} from "../../utils/API/API_ChatGPT";
+import {API_getChatHistories} from "../../utils/API/API_ChatHistories";
 
 interface IChatRoomProps {
   name: string
   userStudentId: string | undefined
+  openChatRoom: boolean
   setOpenChatRoom: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ChatRoomComponent = (props: IChatRoomProps) => {
-  const {name, userStudentId, setOpenChatRoom} = props
+  const {name, userStudentId, openChatRoom, setOpenChatRoom} = props
 
+  const messageOffsetRef = useRef<number>(0);
+  const isMessageTopRef = useRef<boolean>(false);
   const [messageInput, setMessageInput] = useState<string>("")
   const [isSubmitMessage, setIsSubmitMessage] = useState<boolean>(false)
 
   const messageBottomRef = useRef<HTMLDivElement>(null)
+  const chatContainerRef = useRef<HTMLDivElement>(null)
 
-  const [messages, setMessages] = useState<Array<IMessages>>([
-    {
-      time: '2025-3-7 15:30',
-      name: 'Henry',
-      studentId: '1082020',
-      message: '今天天氣真好！'
-    },
-    {
-      time: '2025-3-7 15:30',
-      name: 'ccj',
-      studentId: 'ccj',
-      message: '今天天氣真好！出去玩吃壽寺好讚妳好'
-    },
-    {
-      time: '2025-3-7 15:30',
-      name: 'Henry',
-      studentId: '1082020',
-      message: '今天天氣真好！今天天氣真好今天天氣真好今天天氣真好'
-    },
-  ]);
+  const [messages, setMessages] = useState<Array<IMessages>>([])
+
+  const fetchMessageHistory = () => {
+    if (!isMessageTopRef.current) {
+      API_getChatHistories(messageOffsetRef.current).then(response => {
+        if (response.data.messages == 'empty') return isMessageTopRef.current = true
+
+        const history_list: Array<IMessages> = response.data.messages
+        setMessages(prevState => {
+          return [...history_list, ...prevState]
+        })
+        messageOffsetRef.current += 10
+      })
+    }
+  }
+  const handleScrollToChatContainerTop = () => {
+    if (chatContainerRef.current) {
+      const scrollTop = chatContainerRef.current.scrollTop;
+      if (scrollTop === 0) {
+        fetchMessageHistory()
+      }
+    }
+  };
+
+  // 取得訊息歷史
+  useEffect(() => {
+    fetchMessageHistory()
+    const chatContainer = chatContainerRef.current;
+    if (chatContainer) {
+      chatContainer.addEventListener('scroll', handleScrollToChatContainerTop);
+    }
+    // 清除事件監聽器
+    return () => {
+      if (chatContainer) {
+        chatContainer.removeEventListener('scroll', handleScrollToChatContainerTop);
+      }
+    };
+  }, []);
 
   // 送出訊息
   useEffect(() => {
     if (isSubmitMessage && userStudentId && messageInput != '') {
+      // 新增自己送出的訊息
       setMessages(prevState => {
         const newMessage: IMessages = {
           time: new Date().toLocaleTimeString(),
@@ -59,9 +84,20 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
         }
         return [...prevState, newMessage]
       })
-
-
-      setIsSubmitMessage(false)
+      // 將訊息送出給 Chat
+      API_chatWithAmumAmum(messageInput).then(response => {
+        const assistant = response.data.assistant
+        setMessages(prevState => {
+          const newMessage: IMessages = {
+            time: assistant.time,
+            name: assistant.name,
+            studentId: assistant.student_id,
+            message: assistant.message,
+          }
+          return [...prevState, newMessage]
+        })
+        setIsSubmitMessage(false)
+      })
       setMessageInput("")
     }
   }, [isSubmitMessage])
@@ -71,7 +107,7 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
     if (messageBottomRef.current) {
       messageBottomRef.current.scrollIntoView({behavior: "smooth"});
     }
-  }, [messages]);
+  }, [isSubmitMessage, openChatRoom]);
 
 
   return (
@@ -91,12 +127,22 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
           <XMarkIcon className='h-5 w-5 color-white'/>
         </IconButton>
       </div>
-      <div className='h-[32rem] overflow-scroll'>
+      <div ref={chatContainerRef} className='h-[32rem] overflow-scroll'>
         <div className='flex flex-col h-full px-3'>
+          {
+            isMessageTopRef.current &&
+              <Typography
+                  color='blue-gray'
+                  textGradient
+                  placeholder={undefined}
+                  className='text-center text-sm my-2'
+              >
+                  已經到底了！
+              </Typography>
+          }
           {messages.length > 0 ?
             messages.map(({message, studentId, time, name}, i) => {
               const isUserOrOther = userStudentId === studentId
-
               return (
                 <div className={isUserOrOther ? 'self-end text-right' : 'self-start text-left'}>
                   <MessageContentComponent
@@ -109,9 +155,10 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
                   />
                 </div>
               )
-            }) :
+            })
+            :
             <Typography
-              variant="paragraph"
+              variant="h5"
               color='blue'
               textGradient
               placeholder={undefined}
@@ -119,6 +166,16 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
             >
               開始聊天！
             </Typography>
+          }
+          {
+            isSubmitMessage &&
+              <MessageContentComponent
+                  type={'Waiting'}
+                  message={'Amum Amum 正在思考中...'}
+                  studentId={''}
+                  time={''}
+                  name={''}
+              />
           }
           <div ref={messageBottomRef}></div>
         </div>
