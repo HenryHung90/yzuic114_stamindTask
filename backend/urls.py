@@ -13,6 +13,8 @@ from backend.views.text_books import *
 from backend.views.student_task_process_code import *
 from backend.views.reflection_questions import *
 from backend.views.student_task_reflections import *
+from backend.views.chat_histories import *
+from backend.views.chatgpt import *
 
 urlpatterns = []
 
@@ -50,6 +52,11 @@ API_POST = [
     path('get_student_task_reflections/', get_student_task_reflections, name='get_student_task_reflections'),
     # save Student Task Reflection
     path('save_student_task_reflections/', save_student_task_reflections, name='save_student_task_reflections'),
+
+    # chat with AmumAmum
+    path('chat_with_amumamum/', chat_with_amumamum, name='chat_with_amumamum'),
+    # get Chat History
+    path('get_chat_histories/', get_chat_histories, name='get_chat_histories'),
 
     # save student note
     path('save_student_note/', save_student_note, name='save_student_note'),
