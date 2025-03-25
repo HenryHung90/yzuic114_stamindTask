@@ -1,0 +1,41 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py create_default_user &&
+             python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    environment:
+      DB_NAME: yzuic114_stamindtask
+      DB_USER: henry
+      DB_PASSWORD: henry_yzuic
+      DB_HOST: db
+      DB_PORT: 5432
+
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: yzuic114_stamindtask         # 自動創建的資料庫名稱
+      POSTGRES_USER: henry                      # 自動創建的用戶名稱
+      POSTGRES_PASSWORD: henry_yzuic            # 用戶的密碼
+      DJANGO_SUPERUSER_ID:
+      DJANGO_SUPERUSER_PASSWORD:
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

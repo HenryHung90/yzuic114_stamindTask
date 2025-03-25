@@ -15,19 +15,11 @@ class Migration(migrations.Migration):
                     ALTER TABLE student_task_reflections
                     ALTER COLUMN score TYPE integer[]
                     USING ARRAY[score];
-                    ALTER TABLE reflection_questions
-                    DROP COLUMN questions_json;
-                    ALTER TABLE student_task_reflections
-                    DROP COLUMN reflects_json;
                 """,
             reverse_sql="""
                     ALTER TABLE student_task_reflections
                     ALTER COLUMN score TYPE integer
                     USING score[1];
-                    ALTER TABLE reflection_questions
-                    ADD COLUMN questions_json JSON NULL;
-                    ALTER TABLE student_task_reflections
-                    ADD COLUMN reflects_json JSON NULL;
                 """,
         ),
         migrations.AlterField(
