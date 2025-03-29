@@ -15,6 +15,7 @@ from backend.views.reflection_questions import *
 from backend.views.student_task_reflections import *
 from backend.views.chat_histories import *
 from backend.views.chatgpt import *
+from backend.views.student_records import *
 
 urlpatterns = []
 
@@ -60,6 +61,9 @@ API_POST = [
 
     # save student note
     path('save_student_note/', save_student_note, name='save_student_note'),
+
+    # save student record
+    path('save_student_records/', save_student_records, name='save_student_records'),
 ]
 
 API_GET = [
