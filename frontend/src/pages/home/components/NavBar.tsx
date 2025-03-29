@@ -36,7 +36,7 @@ const NavBarComponent = (props: INavBarProps) => {
     })
   }
 
-  function switchTeacherSide(){
+  function switchTeacherSide() {
     NavLocation('/admin')
   }
 
@@ -49,6 +49,10 @@ const NavBarComponent = (props: INavBarProps) => {
         variant="text"
         color="blue-gray"
         placeholder={undefined}
+        data-action='navigate'
+        data-type='button'
+        data-object='task'
+        data-id='home_task'
       >
         任務
       </Button>
@@ -56,6 +60,10 @@ const NavBarComponent = (props: INavBarProps) => {
         variant="text"
         color="blue-gray"
         placeholder={undefined}
+        data-action='navigate'
+        data-type='button'
+        data-object='personData'
+        data-id='home_personData'
       >
         個人數據
       </Button>
@@ -93,6 +101,10 @@ const NavBarComponent = (props: INavBarProps) => {
               className="hidden lg:inline-block"
               placeholder={undefined}
               onClick={logout}
+              data-action='click'
+              data-type='button'
+              data-object='logout'
+              data-id='home_logout'
             >
               <span>登出</span>
             </Button>
@@ -140,7 +152,18 @@ const NavBarComponent = (props: INavBarProps) => {
       <Collapse open={openNav}>
         {navList}
         <div className="flex items-center gap-x-1">
-          <Button fullWidth variant="text" size="sm" className="" onClick={logout} placeholder={undefined}>
+          <Button
+            fullWidth
+            variant="text"
+            size="sm"
+            className=""
+            onClick={logout}
+            placeholder={undefined}
+            data-action='click'
+            data-type='button'
+            data-object='logout'
+            data-id='home_logout'
+          >
             <span>登出</span>
           </Button>
         </div>

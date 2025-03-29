@@ -30,12 +30,12 @@ export enum CODE_STATUS {
 
 
 const ProcessComponent = (props: ITaskProcessProps) => {
-  const {taskId, studentId, selectNode, settingAlertLogAndLoading} = props
+  const {taskId, studentId, setTempStudentRecords} = props
 
   const [activeTab, setActiveTab] = useState<LANGUAGE_TYPE>(LANGUAGE_TYPE.HTML)
-  const [htmlCode, setHtmlCode] = useState<string>("21")
-  const [cssCode, setCssCode] = useState<string>("312")
-  const [jsCode, setJsCode] = useState<string>("41241")
+  const [htmlCode, setHtmlCode] = useState<string>("")
+  const [cssCode, setCssCode] = useState<string>("")
+  const [jsCode, setJsCode] = useState<string>("")
 
   const [openIframe, setOpenIframe] = useState<boolean>(false)
 
@@ -78,22 +78,6 @@ const ProcessComponent = (props: ITaskProcessProps) => {
     }
   }
 
-
-  const savingAreaRef = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey && e.key === 's') || (e.ctrlKey && e.key === 's')) {
-        e.preventDefault()
-        handleSaveStudentCode()
-      }
-    }
-    savingAreaRef.current?.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      savingAreaRef.current?.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [codeStatus]);
-
   // 取得已儲存內容
   useEffect(() => {
     const fetchProcessCode = async () => {
@@ -116,7 +100,7 @@ const ProcessComponent = (props: ITaskProcessProps) => {
               <IframeShowerComponent htmlCode={htmlCode} cssCode={cssCode} jsCode={jsCode} setOpenIframe={setOpenIframe}/>
           </div>
       }
-      <div ref={savingAreaRef} className='relative h-[75vh] rounded-xl overflow-hidden'>
+      <div className='relative h-[75vh] rounded-xl overflow-hidden'>
         <TabSelectorComponent tabData={LANGUAGE_TYPE} activeTab={activeTab} setActiveTab={setActiveTab}/>
         <CodeEditorComponent
           codeStatus={codeStatus}
@@ -126,6 +110,8 @@ const ProcessComponent = (props: ITaskProcessProps) => {
           handleSaveStudentCode={handleSaveStudentCode}
           openIframe={openIframe}
           setOpenIframe={setOpenIframe}
+          studentId={studentId}
+          setTempStudentRecords={setTempStudentRecords}
         />
       </div>
     </>

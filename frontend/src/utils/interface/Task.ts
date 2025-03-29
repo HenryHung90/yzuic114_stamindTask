@@ -1,15 +1,18 @@
 import {ISettingAlertLogAndLoading} from "./alertLog";
 import React from "react";
+import {IStudentRecords} from "../listener/action";
 
 interface ITaskProps {
   studentId?: string;
   name?: string;
+  setTempStudentRecords?: React.Dispatch<React.SetStateAction<Array<IStudentRecords>>>;
   settingAlertLogAndLoading: ISettingAlertLogAndLoading
 }
 
 interface ITaskContentProps extends ITaskProps {
   taskId: string | undefined
   selectNode: { key: number, category: string, text: string }
+  setSelectNode?: React.Dispatch<React.SetStateAction<{ key: number, category: string, text: string }>>
 }
 
 interface ITaskExperienceProps extends ITaskContentProps {

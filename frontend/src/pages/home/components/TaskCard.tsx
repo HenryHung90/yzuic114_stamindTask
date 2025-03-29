@@ -46,7 +46,15 @@ const TaskCardComponent = (props: ITaskCardProps) => {
         </Typography>
       </CardBody>
       <CardFooter placeholder={undefined}>
-        <Button variant="gradient" placeholder={undefined} onClick={handleEnterClass}>進入課程</Button>
+        <Button
+          variant="gradient"
+          placeholder={undefined}
+          onClick={handleEnterClass}
+          data-action='navigate'
+          data-type='button'
+          data-object={`enterClass_${name}`}
+          data-id='home_enterClass'
+        >進入課程</Button>
       </CardFooter>
     </Card>
   )
