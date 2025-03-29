@@ -26,6 +26,10 @@ const CarouselComponent = (props: ICarouselProps) => {
               onClick={handlePrev}
               className="!absolute top-2/4 left-4 -translate-y-2/4"
               placeholder={undefined}
+              data-action='click'
+              data-type='interact'
+              data-object='prevPage'
+              data-id='carousel_prevPage'
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -34,11 +38,19 @@ const CarouselComponent = (props: ICarouselProps) => {
                 strokeWidth={2}
                 stroke="black"
                 className="h-8 w-8"
+                data-action='click'
+                data-type='interact'
+                data-object='prevPage'
+                data-id='carousel_prevPage'
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+                  data-action='click'
+                  data-type='interact'
+                  data-object='prevPage'
+                  data-id='carousel_prevPage'
                 />
               </svg>
             </IconButton>
@@ -51,6 +63,10 @@ const CarouselComponent = (props: ICarouselProps) => {
               onClick={handleNext}
               className="!absolute top-2/4 !right-4 -translate-y-2/4"
               placeholder={undefined}
+              data-action='click'
+              data-type='interact'
+              data-object='nextPage'
+              data-id='carousel_nextPage'
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -59,11 +75,19 @@ const CarouselComponent = (props: ICarouselProps) => {
                 strokeWidth={2}
                 stroke="black"
                 className="h-8 w-8"
+                data-action='click'
+                data-type='interact'
+                data-object='nextPage'
+                data-id='carousel_nextPage'
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                  data-action='click'
+                  data-type='interact'
+                  data-object='nextPage'
+                  data-id='carousel_nextPage'
                 />
               </svg>
             </IconButton>
@@ -74,7 +98,12 @@ const CarouselComponent = (props: ICarouselProps) => {
                 <span
                   key={i}
                   className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] shadow-md ${activeIndex === i ? "w-8 bg-white shadow-black" : "w-4 bg-white/50 shadow-black/50"}`}
-                  onClick={() => setActiveIndex(i)}/>
+                  onClick={() => setActiveIndex(i)}
+                  data-action='click'
+                  data-type='interact'
+                  data-object={`jumpPage_第${i+1}頁`}
+                  data-id='carousel_jumpPage'
+                />
               ))}
             </div>
           )} placeholder={undefined}>

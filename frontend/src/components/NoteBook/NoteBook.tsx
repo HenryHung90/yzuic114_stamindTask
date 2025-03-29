@@ -7,13 +7,16 @@ import {XMarkIcon} from "@heroicons/react/24/solid";
 
 // API
 import {API_getStudentNotes, API_saveStudentNotes} from "../../utils/API/API_StudentNotes";
+import {handleCustomRecord, IStudentRecords} from "../../utils/listener/action";
 
 // components
 import NotesComponent from "../Notes/Notes";
 
 // interface
 interface NoteBookProps {
-  setOpenNoteBook: React.Dispatch<React.SetStateAction<boolean>>;
+  studentId: string
+  setOpenNoteBook: React.Dispatch<React.SetStateAction<boolean>>
+  setTempStudentRecords?: React.Dispatch<React.SetStateAction<Array<IStudentRecords>>>
 }
 
 const SavingStatusComponent = (props: { status: 'sync' | 'uploading' | 'bad' | 'async' }) => {
@@ -31,16 +34,16 @@ const SavingStatusComponent = (props: { status: 'sync' | 'uploading' | 'bad' | '
 }
 
 const NoteBookComponent = (props: NoteBookProps) => {
-  const {setOpenNoteBook} = props
+  const {studentId, setOpenNoteBook, setTempStudentRecords} = props
 
   const [noteStatus, setNoteStatus] = useState<'sync' | 'uploading' | 'bad' | 'async'>('sync')
   const [noteContent, setNoteContent] = useState<Array<any>>([])
 
-  // 取的筆記紀錄
+  // 取得筆記紀錄
   useEffect(() => {
-    const fetchNoteContent =  () => {
+    const fetchNoteContent = () => {
       API_getStudentNotes().then(response => {
-        if (response.data.student_note !== 'empty') setNoteContent(response.data.student_note[0])
+        if (response.data.student_note !== 'empty') setNoteContent(response.data.student_note[0] ?? [{}])
       })
     }
     fetchNoteContent()
@@ -51,28 +54,26 @@ const NoteBookComponent = (props: NoteBookProps) => {
     API_saveStudentNotes(noteContent).then(response => {
       response.message === 'success' ? setNoteStatus('sync') : setNoteStatus('bad')
     })
+    handleCustomRecord({
+      action: 'click',
+      type: 'button',
+      object: 'saveNoteBook',
+      id: 'speedDial_saveNoteBook',
+    }, false, studentId, setTempStudentRecords)
   }
 
-  const handleSaveStudentNote = () => saveStudentNote()
 
   useEffect(() => {
     setNoteStatus('async')
   }, [noteContent]);
 
-  // 標記 saving 區域必且對該區域下達 keydown 監聽指令
-  const savingAreaRef = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey && e.key === 's') || (e.ctrlKey && e.key === 's')) {
-        e.preventDefault()
-        saveStudentNote()
-      }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if ((e.metaKey && e.key === 's') || (e.ctrlKey && e.key === 's')) {
+      e.preventDefault()
+      saveStudentNote()
     }
-    savingAreaRef.current?.addEventListener('keydown', handleKeyDown)
-    return () => {
-      savingAreaRef.current?.removeEventListener('keydown', handleKeyDown)
-    }
-  })
+  }
 
 
   return (
@@ -88,7 +89,7 @@ const NoteBookComponent = (props: NoteBookProps) => {
         bounds="parent"
         className='pointer-events-auto overflow-hidden'
       >
-        <div ref={savingAreaRef}
+        <div onKeyDown={handleKeyDown}
              className='h-full pointer-events-auto overflow-scroll rounded-xl text-stamindTask-white-000 bg-[#191C1C]'>
           <NotesComponent noteContent={noteContent} setNoteContent={setNoteContent}/>
           <div className='absolute flex gap-x-5 items-center right-1 top-1'>
@@ -97,7 +98,7 @@ const NoteBookComponent = (props: NoteBookProps) => {
               <Button
                 color='green'
                 placeholder={undefined}
-                onClick={handleSaveStudentNote}
+                onClick={saveStudentNote}
               >
                 💾
               </Button>
@@ -106,8 +107,12 @@ const NoteBookComponent = (props: NoteBookProps) => {
                 placeholder={undefined}
                 color='white'
                 onClick={() => setOpenNoteBook(false)}
+                data-action='click'
+                data-type='button'
+                data-object='closeNoteBook'
+                data-id='speedDial_closeNoteBook'
               >
-                <XMarkIcon className='h-5 w-5 color-white'/>
+                <XMarkIcon className='h-5 w-5 color-white pointer-events-none'/>
               </IconButton>
             </div>
           </div>

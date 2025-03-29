@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 // style
 import {Checkbox, Typography} from "@material-tailwind/react";
 import {ITaskSubTarget} from "../../utils/interface/Task";
@@ -8,10 +8,10 @@ import {ITaskSubTarget} from "../../utils/interface/Task";
 
 // interface
 interface CheckBoxListProps {
-  value: ITaskSubTarget
+  value: ITaskSubTarget[]
   title: string
   description?: string
-  selectSubList: boolean
+  selectSubList: boolean[]
   setSelectSubList: React.Dispatch<React.SetStateAction<Array<boolean>>>
   index: number
 }
@@ -28,8 +28,8 @@ const CheckBoxListComponent = (props: CheckBoxListProps) => {
   };
   return (
     <Checkbox
-      checked={selectSubList}
-      onClick={handleChange}
+      checked={selectSubList[index]}
+      onChange={handleChange}
       label={
         <div>
           <Typography color="blue-gray" className="font-medium !min-w-[8rem]" placeholder={undefined}>
@@ -43,8 +43,12 @@ const CheckBoxListComponent = (props: CheckBoxListProps) => {
       containerProps={{
         className: "-mt-5",
       }}
-      value={value.title}
+      value={value[index].title}
       crossOrigin={undefined}
+      data-action='click'
+      data-type='checkbox'
+      data-object={`plan_${selectSubList[index] ? `取消選擇子任務 ${title}` : `選擇子任務 ${title}`}`}
+      data-id='task_planSelectCheckBox'
     />
   )
 }

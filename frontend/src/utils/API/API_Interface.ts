@@ -1,5 +1,6 @@
 import {Node, Link} from '../interface/diagram'
 import {IReflection, IStudentReflection, ITaskPlan, ITaskSubTarget} from "../interface/Task";
+import {IStudentRecords} from "../listener/action";
 
 // Request 訊息內容
 interface RequestParams {
@@ -110,6 +111,10 @@ interface Req_ChatWithAmumAmum extends RequestParams {
   message: string
 }
 
+interface Req_StudentRecordInfo extends RequestParams {
+  student_records: Array<IStudentRecords>
+}
+
 // API Response Extension
 // csrf cookie Response
 interface CSRF_cookies extends ResponseData {
@@ -172,6 +177,7 @@ export type{
   Req_StudentReflectionInfo,
   Req_StudentChatHistory,
   Req_ChatWithAmumAmum,
+  Req_StudentRecordInfo,
   CSRF_cookies,
   Res_login,
   Res_tasksInfo,

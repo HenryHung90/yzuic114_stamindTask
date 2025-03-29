@@ -6,6 +6,7 @@ import * as go from "gojs";
 // API
 import {API_getTaskDiagram} from "../../utils/API/API_Tasks";
 import {API_initStudentTask} from "../../utils/API/API_StudentTasks";
+import {handleCustomRecord} from "../../utils/listener/action";
 
 // components
 import DiagramInitComponent from "../../components/Diagram/DiagramInit";
@@ -19,7 +20,7 @@ import {Link, Node} from "../../utils/interface/diagram";
 
 
 const Task = (props: ITaskProps) => {
-  const {name, studentId, settingAlertLogAndLoading} = props;
+  const {name, studentId, setTempStudentRecords, settingAlertLogAndLoading} = props;
   const {taskId} = useParams();
 
   const divRef = useRef<HTMLDivElement>(null)
@@ -62,11 +63,41 @@ const Task = (props: ITaskProps) => {
     initStudentTask()
   }, []);
 
+  // 檢測進入各階段 紀錄時間行為（特殊處理）
+  const [startTime, setStartTime] = useState<number>(0)
+  const [recordCategory, setRecordCategory] = useState<string>("")
+  useEffect(() => {
+    if (selectNode.category) {
+      setStartTime(Date.now())
+      setRecordCategory(selectNode.category)
+      handleCustomRecord({
+        action: 'click',
+        type: 'taskNode',
+        object: `enter${selectNode.category}_階段${selectNode.key}`,
+        id: `task_enter${selectNode.category}`
+      }, false, studentId || '', setTempStudentRecords)
+    } else if (recordCategory) {
+      const timer = Math.floor((Date.now() - startTime) / 1000).toString()
+      handleCustomRecord({
+        action: 'click',
+        type: 'button',
+        timer: timer,
+        object: `leave${recordCategory}_階段${selectNode.key}`,
+        id: `task_leave${recordCategory}`
+      }, false, studentId || '', setTempStudentRecords)
+      setStartTime(0)
+      setRecordCategory("")
+    }
+  }, [selectNode]);
+
   return (
     <div>
       <TaskContentComponent
         taskId={taskId}
+        studentId={studentId}
         selectNode={selectNode}
+        setSelectNode={setSelectNode}
+        setTempStudentRecords={setTempStudentRecords}
         settingAlertLogAndLoading={settingAlertLogAndLoading}
       />
       <SpeedDialComponent taskId={taskId || '0'} name={name || ''} studentId={studentId} selectNode={selectNode}/>

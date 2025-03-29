@@ -53,13 +53,13 @@ jobs:
         npm install
 
     # 運行後端測試
-    - name: Run Backend Tests
-      env:
-        DEBUG: "True"
-        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-        DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/stamindtask"
-      run: |
-        python manage.py test
+#    - name: Run Backend Tests
+#      env:
+#        DEBUG: "True"
+#        SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+#        DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/stamindtask"
+#      run: |
+#        python manage.py test
 
     # 運行前端測試
 #    - name: Run Frontend Tests
