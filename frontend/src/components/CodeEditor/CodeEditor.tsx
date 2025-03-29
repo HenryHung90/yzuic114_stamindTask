@@ -10,6 +10,7 @@ import FontSizeAdjustButtonComponent from "./FontSizeAdjustButton";
 import SavingStatusButtonComponent from "./SavingStatusButton";
 import {CODE_STATUS, LANGUAGE_TYPE} from "../../pages/task/components/Process";
 import OpenIframeButtonComponent from "./OpenIframeButton";
+import {handleCustomRecord, IStudentRecords} from "../../utils/listener/action";
 
 
 // interface
@@ -21,10 +22,22 @@ interface ICodeEditorProps {
   handleSaveStudentCode: () => void
   openIframe: boolean
   setOpenIframe: React.Dispatch<React.SetStateAction<boolean>>
+  studentId?: string
+  setTempStudentRecords?: React.Dispatch<React.SetStateAction<Array<IStudentRecords>>>;
 }
 
 const CodeEditorComponent = (props: ICodeEditorProps) => {
-  const {codeStatus, language, value, onChangeFunction, handleSaveStudentCode, openIframe, setOpenIframe} = props
+  const {
+    codeStatus,
+    language,
+    value,
+    onChangeFunction,
+    handleSaveStudentCode,
+    openIframe,
+    setOpenIframe,
+    studentId,
+    setTempStudentRecords
+  } = props
 
   // 調整字體大小
   const [fontSize, setFontSize] = useState<number>(14)
@@ -39,9 +52,29 @@ const CodeEditorComponent = (props: ICodeEditorProps) => {
     emmetJSX((window as any).monaco);
   }
 
+  // 偵測 Keydown 事件同時紀錄
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (!studentId) return
+    if ((e.metaKey && e.key === 's') || (e.ctrlKey && e.key === 's')) {
+      e.preventDefault()
+      handleSaveStudentCode()
+      // 紀錄儲存 Code
+      handleCustomRecord({
+          action: 'click',
+          type: 'button',
+          object: 'processSave',
+          id: 'task_processSave'
+        },
+        false,
+        studentId,
+        setTempStudentRecords
+      )
+    }
+  }
+
 
   return (
-    <div className='relative h-[100%]'>
+    <div className='relative h-[100%]' onKeyDown={handleKeyDown}>
       <Editor
         height='100%'
         theme='vs-dark'
@@ -55,6 +88,10 @@ const CodeEditorComponent = (props: ICodeEditorProps) => {
             enabled: false,
           },
         }}
+        data-action='interact'
+        data-type='inputField'
+        data-object='processCodeEditor'
+        data-id='task_processCodeEditor'
       />
       <div
         className='absolute flex flex-col right-5 top-3 z-50 gap-y-4 text-right duration-500 opacity-50 hover:opacity-100'>

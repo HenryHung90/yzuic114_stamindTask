@@ -14,10 +14,11 @@ import AlertMsg from "../../../components/Alert/Alert";
 
 // interface
 import {IReflection, IStudentReflection, ITaskReflectionProps} from "../../../utils/interface/Task";
+import {handleCustomRecord} from "../../../utils/listener/action";
 
 
 const ReflectionComponent = (props: ITaskReflectionProps) => {
-  const {taskId, selectNode, savingTrigger} = props
+  const {taskId, selectNode, savingTrigger, studentId, setTempStudentRecords} = props
 
   // 反思題目
   const [reflectionQuestions, setReflectionQuestions] = useState<Array<IReflection>>([])
@@ -38,6 +39,12 @@ const ReflectionComponent = (props: ITaskReflectionProps) => {
       }
       return updateList
     })
+    handleCustomRecord({
+      action: 'input',
+      type: 'inputField',
+      object: `changeReflection_${reflectionQuestions[index].title}反思內容更改為${value}`,
+      id: 'task_changeReflection'
+    }, true, studentId || '', setTempStudentRecords)
   }
 
   useEffect(() => {
@@ -64,6 +71,13 @@ const ReflectionComponent = (props: ITaskReflectionProps) => {
       API_saveStudentTaskReflections(taskId || '', selectNode.key, reflectionResponses).then(response => {
         setAlertContent(`🟢更新成功:${response.message}`)
       })
+      // 紀錄儲存
+      handleCustomRecord({
+        action: 'click',
+        type: 'button',
+        object: 'saveReflection',
+        id: 'task_saveReflection'
+      }, false, studentId || '', setTempStudentRecords)
     }
     if (savingTrigger > 0) saveStudentReflection()
   }, [savingTrigger])

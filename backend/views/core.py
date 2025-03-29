@@ -57,7 +57,6 @@ def register(request):
                                 status=status.HTTP_404_NOT_FOUND)
 
         chat_history = ChatHistory.objects.create()
-        student_record = StudentRecord.objects.create(class_name=class_name)
 
         # 創建新用戶
         user = User.objects.create_user(
@@ -66,7 +65,6 @@ def register(request):
             name=data.get('name'),
             user_type=user_type,
             chat_history=chat_history,
-            student_record=student_record
         )
 
         # 如果是學生，設置 class_name

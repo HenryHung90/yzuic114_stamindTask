@@ -1,9 +1,11 @@
-import {useNavigate, useRoutes} from "react-router-dom";
+import {useRoutes} from "react-router-dom";
 import React, {useState, useEffect} from "react";
 // style
 
 // API
 import {API_getUserInfo} from "./utils/API/API_LoginSystem";
+import {handleTranslateAction, IStudentRecords} from "./utils/listener/action";
+
 // components
 import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
@@ -11,11 +13,11 @@ import AlertLog from "./components/alertLogAndLoadingPage/AlertLog";
 import Loading from "./components/alertLogAndLoadingPage/Loading";
 import Task from "./pages/task/Task";
 
-import AdminHome from "./pages/admin/home/AdminHome";
+import AdminHome from "./pages/admin/home/AdminHome"
 import AdminTask from "./pages/admin/task/Task"
 // interface
 import {CSRF_cookies, ResponseData} from "./utils/API/API_Interface";
-
+import {API_saveStudentRecords} from "./utils/API/API_StudentRecords";
 
 export default function App() {
   const [auth, setAuth] = useState<false | 'STUDENT' | 'TEACHER'>(false)
@@ -29,6 +31,8 @@ export default function App() {
   const [alertTitle, setAlertTitle] = useState<string>("")
   const [alertMsg, setAlertMsg] = useState<string>("")
   const [loadingOpen, setLoadingOpen] = useState<boolean>(false)
+
+  const [tempStudentRecords, setTempStudentRecords] = useState<Array<IStudentRecords>>([])
 
   const settingAlertLogAndLoading = {
     setAlertLog: (title: string, msg: string) => {
@@ -65,6 +69,37 @@ export default function App() {
     }
   }, [auth]);
 
+  // 點擊事件偵測
+  const handleClickEventToListenStudentHabit = (e: React.MouseEvent<HTMLDivElement>) => {
+    // 不是學生或還沒有 studentId 時不做紀錄
+    if (auth !== 'STUDENT' || !studentId) return
+
+    const target = e.target as HTMLDivElement
+    const dataset = target.dataset
+    // 沒有打標記的都要跳掉
+    if (!Object.values(dataset).length) return
+
+    const recordData = handleTranslateAction(dataset, studentId)
+    if (recordData) setTempStudentRecords(prevState => [...prevState, recordData])
+  }
+  // 每 5 秒檢測是否有紀錄未上傳，有就上傳
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     if(tempStudentRecords.length > 0){
+  //
+  //     }
+  //   }, 5000)
+  // }, []);
+  useEffect(() => {
+    console.log(tempStudentRecords)
+    if (tempStudentRecords.length > 50) {
+      API_saveStudentRecords(tempStudentRecords).then(response => {
+        console.log(response.data)
+        setTempStudentRecords([])
+      })
+    }
+  }, [tempStudentRecords]);
+
   const unauth_routes = [
     {
       path: '*',
@@ -86,7 +121,8 @@ export default function App() {
     },
     {
       path: '/task/:taskId',
-      element: <Task name={name} studentId={studentId} settingAlertLogAndLoading={settingAlertLogAndLoading}/>
+      element: <Task name={name} studentId={studentId} settingAlertLogAndLoading={settingAlertLogAndLoading}
+                     setTempStudentRecords={setTempStudentRecords}/>
     }
   ]
 
@@ -106,11 +142,11 @@ export default function App() {
   ]
 
   return (
-    <>
+    <div onClick={handleClickEventToListenStudentHabit}>
       <Loading loadingOpen={loadingOpen}/>
       <AlertLog AlertOpen={alertOpen} AlertTitle={alertTitle} AlertMsg={alertMsg}
                 AlertLogClose={() => settingAlertLogAndLoading.handleAlertClose()}/>
       {useRoutes(routes)}
-    </>
+    </div>
   )
 }

@@ -34,14 +34,14 @@ const TextBookComponent = (props: ITextBookProps) => {
       })
     }
     fetchTextBookFiles()
-  }, []);
+  }, [])
 
   useEffect(() => {
     const newCarouselImgList = Array.from({length: textBookAmount}).map(
       (_, i) => `${textBookDir}/page_${i + 1}.jpg?ts=${Date.now()}`
     )
     setCarouselImgList(newCarouselImgList)
-  }, [textBookAmount]);
+  }, [textBookAmount])
 
   return (
     <div

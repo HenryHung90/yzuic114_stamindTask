@@ -100,15 +100,6 @@ class User(AbstractUser):
         verbose_name="學生組別"
     )
 
-    student_record = models.OneToOneField(
-        'StudentRecord',
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name='user',
-        verbose_name='學生操作記錄'
-    )
-
     student_note = models.OneToOneField(
         'StudentNote',
         on_delete=models.SET_NULL,

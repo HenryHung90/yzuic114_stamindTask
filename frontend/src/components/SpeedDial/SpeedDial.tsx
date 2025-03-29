@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 // style
 import {
   IconButton,
@@ -20,6 +20,7 @@ import {
 import ChatRoomComponent from '../ChatRoom/ChatRoom'
 import TextBookComponent from "../TextBook/TextBook"
 import NoteBookComponent from "../NoteBook/NoteBook"
+import {handleCustomRecord, IStudentRecords} from "../../utils/listener/action";
 
 // interface
 interface SpeedDialProps {
@@ -27,14 +28,39 @@ interface SpeedDialProps {
   studentId: string | undefined
   taskId: string
   selectNode: { key: number, category: string, text: string }
+  setTempStudentRecords?: React.Dispatch<React.SetStateAction<Array<IStudentRecords>>>;
 }
 
 const SpeedDialComponent = (props: SpeedDialProps) => {
-  const {name, studentId, taskId, selectNode} = props
+  const {name, studentId, taskId, selectNode, setTempStudentRecords} = props
 
   const [openChatRoom, setOpenChatRoom] = useState<boolean>(false)
   const [openTextBook, setOpenTextBook] = useState<boolean>(false)
   const [openNoteBook, setOpenNoteBook] = useState<boolean>(false)
+
+  // 檢測進入各階段 紀錄時間行為（特殊處理）
+  const [startTime, setStartTime] = useState<number>(0)
+  useEffect(() => {
+    if (openTextBook) {
+      setStartTime(Date.now())
+      handleCustomRecord({
+        action: 'click',
+        type: 'button',
+        object: 'openTextBook',
+        id: 'speedDial_openTextBook'
+      }, false, studentId || '', setTempStudentRecords)
+    } else if(!openTextBook && startTime) {
+      const timer = Math.floor((Date.now() - startTime) / 1000).toString()
+      handleCustomRecord({
+        action: 'click',
+        type: 'button',
+        timer: timer,
+        object: 'closeTextBook',
+        id: 'speedDial_closeTextBook'
+      }, false, studentId || '', setTempStudentRecords)
+      setStartTime(0)
+    }
+  }, [openTextBook]);
 
   return (
     <div className="flex items-end justify-end fixed w-screen h-screen z-[10001] pointer-events-none">
@@ -51,7 +77,7 @@ const SpeedDialComponent = (props: SpeedDialProps) => {
               onClick={() => setOpenTextBook(!openTextBook)}
               placeholder={undefined}
             >
-              <DocumentTextIcon className='h-5 w-5'/>
+              <DocumentTextIcon className='h-5 w-5 pointer-events-none'/>
               <Typography
                 className="absolute top-2/4 -left-2/4 -translate-y-2/4 -translate-x-3/4 font-normal"
                 variant='small'
@@ -65,8 +91,12 @@ const SpeedDialComponent = (props: SpeedDialProps) => {
               className={openNoteBook ? 'bg-stamindTask-decoration-primary-1' : ''}
               onClick={() => setOpenNoteBook(!openNoteBook)}
               placeholder={undefined}
+              data-action='click'
+              data-type='button'
+              data-object={openNoteBook ? 'closeNoteBook' : 'openNoteBook'}
+              data-id={openNoteBook ? 'speedDial_closeNoteBook' : 'speedDial_openNoteBook'}
             >
-              <PencilSquareIcon className='h-5 w-5'/>
+              <PencilSquareIcon className='h-5 w-5 pointer-events-none'/>
               <Typography
                 className="absolute top-2/4 -left-2/4 -translate-y-2/4 -translate-x-3/4 font-normal"
                 variant='small'
@@ -80,8 +110,12 @@ const SpeedDialComponent = (props: SpeedDialProps) => {
               className={openChatRoom ? 'bg-stamindTask-decoration-primary-1' : ''}
               onClick={() => setOpenChatRoom(!openChatRoom)}
               placeholder={undefined}
+              data-action='click'
+              data-type='button'
+              data-object={openChatRoom ? 'closeChatRoom' : 'openChatRoom'}
+              data-id={openChatRoom ? 'speedDial_closeChatRoom' : 'speedDial_openChatRoom'}
             >
-              <img src='/files/img/logo.PNG' height='24px' width='24px'/>
+              <img src='/files/img/logo.PNG' height='24px' width='24px' className='pointer-events-none'/>
               <Typography
                 className="absolute top-2/4 -left-2/4 -translate-y-2/4 -translate-x-3/4 font-normal"
                 variant='small'
@@ -97,15 +131,18 @@ const SpeedDialComponent = (props: SpeedDialProps) => {
       </div>
       <div
         className={`opacity-50 hover:opacity-100 duration-500 absolute bottom-5 right-20 pointer-events-auto ${!openChatRoom && 'hidden'}`}>
-        <ChatRoomComponent name={name} userStudentId={studentId} openChatRoom={openChatRoom} setOpenChatRoom={setOpenChatRoom}/>
+        <ChatRoomComponent name={name} userStudentId={studentId} openChatRoom={openChatRoom}
+                           setTempStudentRecords={setTempStudentRecords}
+                           setOpenChatRoom={setOpenChatRoom}/>
       </div>
       <div
-        className={`absolute top-0 left-0 duration-500  ${!openTextBook && 'hidden'}`}>
-        <TextBookComponent taskId={taskId} selectNode={selectNode} setOpenTextBook={setOpenTextBook}/>
+        className="absolute top-0 left-0 duration-500">
+        {openTextBook && <TextBookComponent taskId={taskId} selectNode={selectNode} setOpenTextBook={setOpenTextBook}/>}
       </div>
       <div
         className={`absolute top-0 left-0 duration-500  ${!openNoteBook && 'hidden'}`}>
-        <NoteBookComponent setOpenNoteBook={setOpenNoteBook}/>
+        <NoteBookComponent studentId={studentId || ''} setOpenNoteBook={setOpenNoteBook}
+                           setTempStudentRecords={setTempStudentRecords}/>
       </div>
     </div>
   )

@@ -28,6 +28,7 @@ import {
 // API
 import {API_getTaskTarget} from "../../../utils/API/API_Targets";
 import {API_getTaskPlan} from "../../../utils/API/API_StudentTaskPlans";
+import {handleCustomRecord} from "../../../utils/listener/action";
 
 // components
 import AlertMsg from "../../../components/Alert/Alert";
@@ -61,11 +62,11 @@ const SubTargetListComponent = (props: ITaskSubTargetLisProps) => {
         {
           subTargetList.map(({title, description}, index) => {
             return (
-              <ListItem className="" key={index} placeholder={undefined}>
+              <ListItem className="" key={index} ripple={false} placeholder={undefined}>
                 <CheckBoxListComponent
-                  selectSubList={selectSubList[index]}
+                  selectSubList={selectSubList}
                   setSelectSubList={setSelectSubList}
-                  value={subTargetList[index]}
+                  value={subTargetList}
                   index={index}
                   title={title}
                   description={description}
@@ -122,12 +123,25 @@ const PlanContentComponent = (props: ITaskPlanContentProps) => {
             color='red'
             size='sm'
             className='flex items-center text-center w-14'
-            onClick={(e) => handleDeletePlanList(subTargetIndex, planIndex)}
+            onClick={() => handleDeletePlanList(subTargetIndex, planIndex)}
+            data-action='click'
+            data-type='button'
+            data-object={`removePlan_策略${planIndex}`}
+            data-id='task_removePlan'
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                  stroke="currentColor"
-                 className="size-5">
+                 className="size-5"
+                 data-action='click'
+                 data-type='button'
+                 data-object={`removePlan_策略${planIndex}`}
+                 data-id='task_removePlan'
+            >
               <path stroke-linecap="round" stroke-linejoin="round"
+                    data-action='click'
+                    data-type='button'
+                    data-object={`removePlan_策略${planIndex}`}
+                    data-id='task_removePlan'
                     d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/>
             </svg>
           </Button>
@@ -155,7 +169,7 @@ const PlanContentComponent = (props: ITaskPlanContentProps) => {
 
 
 const PlanComponent = (props: ITaskPlanProps) => {
-  const {taskId, selectNode, savingTrigger, settingAlertLogAndLoading} = props
+  const {taskId, studentId, selectNode, savingTrigger, setTempStudentRecords} = props
 
   // Target 相關資訊
   const [subTargetList, setSubTargetList] = useState<Array<ITaskSubTarget>>([])
@@ -188,7 +202,20 @@ const PlanComponent = (props: ITaskPlanProps) => {
       }
       return updatedList
     })
+    // 紀錄策略的操作
+    handleCustomRecord({
+        action: field == 'description' ? 'input' : 'click',
+        type: field == 'description' ? 'inputField' : 'button',
+        object: `changePlan${field}_${subTargetList[subTargetIndex].title}策略${planIndex}的${field}更改為${value}`,
+        id: `task_changePlan${field}`
+      },
+      field === 'description',
+      studentId || '',
+      setTempStudentRecords
+    )
   }
+
+
   const handleAddNewPlan = (subTargetIndex: number) => {
     setPlanList((prevState) => {
       const updatedList = [...prevState]
@@ -244,9 +271,9 @@ const PlanComponent = (props: ITaskPlanProps) => {
       setAlertOpen(true)
       setAlertContent("🟠取得計畫設定內容...")
       API_getTaskPlan(taskId || '').then(response => {
-        if (response.data.select_sub_list[selectNode.key] !== 'empty') setSelectSubList(response.data.select_sub_list[selectNode.key] ?? [])
-        if (response.data.plan_list[selectNode.key] !== 'empty') setPlanList(response.data.plan_list[selectNode.key] ?? [])
         setAlertContent("🟢取得計畫設定內容成功")
+        if (response.data.select_sub_list[selectNode.key] !== 'empty') setSelectSubList(response.data.select_sub_list[selectNode.key] ?? [])
+        if (response.data.plan_list[selectNode.key] !== 'empty' && (planList[selectNode.key] == undefined || planList[selectNode.key].length == 0)) setPlanList(response.data.plan_list[selectNode.key] ?? [])
       })
     }
     const fetchSubTarget = async () => {
@@ -255,7 +282,7 @@ const PlanComponent = (props: ITaskPlanProps) => {
       await API_getTaskTarget(taskId || '').then(response => {
         setSubTargetList(response.data.sub_target_list[selectNode.key] ?? [])
         setSelectSubList(new Array(response.data.sub_target_list.length).fill(false))
-        setPlanList(new Array(response.data.sub_target_list.length).fill([{strategy: 'environment', description: ''}]))
+        setPlanList(new Array(response.data.sub_target_list.length).fill([]))
         setAlertContent("🟢取得子目標成功")
       })
       fetchTaskPlan()
@@ -297,6 +324,10 @@ const PlanComponent = (props: ITaskPlanProps) => {
                     placeholder={undefined}
                     onClick={() => handleAddNewPlan(subTargetIndex)}
                     className='min-h-11'
+                    data-action='click'
+                    data-type='button'
+                    data-object='addPlan'
+                    data-id='task_addPlan'
                   >
                     新增策略
                   </Button>

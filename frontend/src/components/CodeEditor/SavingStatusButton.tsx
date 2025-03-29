@@ -38,6 +38,10 @@ const SavingStatusButtonComponent = (props: ISavingStatusProps) => {
         className='flex items-center justify-center h-6 w-6'
         placeholder={undefined}
         onClick={handleClickSave}
+        data-action='click'
+        data-type='button'
+        data-object='processSave'
+        data-id='task_processSave'
       >
         💾
       </Button>

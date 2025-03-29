@@ -22,9 +22,20 @@ import {calculateExperienceStep} from "../../../utils/functions/tasks/experience
 import {ITaskContentProps} from "../../../utils/interface/Task";
 
 const TaskContentComponent = (props: ITaskContentProps) => {
-  const {taskId, studentId, selectNode, settingAlertLogAndLoading} = props;
+  const {taskId, studentId, selectNode, setSelectNode, setTempStudentRecords, settingAlertLogAndLoading} = props;
   const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(!open)
+
+  const handleOpen = () => {
+    setOpen(!open)
+    if (open) {
+      setSelectNode?.(prevState => {
+        const newState = {...prevState}
+        newState.category = ''
+        newState.text = ''
+        return newState
+      })
+    }
+  }
 
   // 用於重整 iframe 的 key
   const [iframeKey, setIframeKey] = useState<number>(0);
@@ -66,16 +77,22 @@ const TaskContentComponent = (props: ITaskContentProps) => {
         }
         {selectNode.category === 'Plan' &&
             <PlanComponent taskId={taskId} selectNode={selectNode}
+                           studentId={studentId}
+                           setTempStudentRecords={setTempStudentRecords}
                            savingTrigger={savingTrigger}
                            settingAlertLogAndLoading={settingAlertLogAndLoading}/>
         }
         {selectNode.category === 'Process' &&
             <ProcessComponent taskId={taskId} selectNode={selectNode}
+                              studentId={studentId}
+                              setTempStudentRecords={setTempStudentRecords}
                               settingAlertLogAndLoading={settingAlertLogAndLoading}/>
         }
         {
           selectNode.category === 'Reflection' &&
             <ReflectionComponent savingTrigger={savingTrigger} taskId={taskId} selectNode={selectNode}
+                                 studentId={studentId}
+                                 setTempStudentRecords={setTempStudentRecords}
                                  settingAlertLogAndLoading={settingAlertLogAndLoading}/>
         }
       </DialogBody>

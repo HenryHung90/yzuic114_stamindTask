@@ -29,6 +29,10 @@ const OpenIframeButtonComponent = (props: IOpenIframeButtonProps) => {
         className='flex items-center justify-center h-6 w-6'
         placeholder={undefined}
         onClick={handleClickOpenIframe}
+        data-action='click'
+        data-type='button'
+        data-object={openIframe ? "processCloseIframe" : "processOpenIframe"}
+        data-id={openIframe ? "task_processCloseIframe" : "task_processOpenIframe"}
       >
         🖥️
       </Button>
