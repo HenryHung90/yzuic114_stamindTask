@@ -55,9 +55,9 @@ def chat_with_amumamum(request):
                                                       max_tokens=2048,
                                                       messages=[
                                                           {"role": "system",
-                                                           "content": SYSTEM_PROMPT},
+                                                           "content": SYSTEM_PROMPT + user_history_stringify},
                                                           {"role": "user",
-                                                           "content": user_history_stringify + user_question}]
+                                                           "content": user_question}]
                                                       )
 
         gpt_response = sending_data.choices[0].message.content
