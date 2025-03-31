@@ -5,6 +5,7 @@ import React, {useState, useEffect} from "react";
 // API
 import {API_getUserInfo} from "./utils/API/API_LoginSystem";
 import {handleTranslateAction, IStudentRecords} from "./utils/listener/action";
+import {API_saveStudentRecords, API_saveStudentRecordsBeforeUnload} from "./utils/API/API_StudentRecords";
 
 // components
 import Login from "./pages/login/Login";
@@ -17,7 +18,6 @@ import AdminHome from "./pages/admin/home/AdminHome"
 import AdminTask from "./pages/admin/task/Task"
 // interface
 import {CSRF_cookies, ResponseData} from "./utils/API/API_Interface";
-import {API_saveStudentRecords} from "./utils/API/API_StudentRecords";
 
 export default function App() {
   const [auth, setAuth] = useState<false | 'STUDENT' | 'TEACHER'>(false)
@@ -82,22 +82,34 @@ export default function App() {
     const recordData = handleTranslateAction(dataset, studentId)
     if (recordData) setTempStudentRecords(prevState => [...prevState, recordData])
   }
-  // 每 5 秒檢測是否有紀錄未上傳，有就上傳
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     if(tempStudentRecords.length > 0){
-  //
-  //     }
-  //   }, 5000)
-  // }, []);
+
   useEffect(() => {
-    console.log(tempStudentRecords)
     if (tempStudentRecords.length > 50) {
       API_saveStudentRecords(tempStudentRecords).then(response => {
         console.log(response.data)
         setTempStudentRecords([])
       })
     }
+  }, [tempStudentRecords]);
+
+  // 新增：處理頁面關閉事件
+  useEffect(() => {
+    const handleBeforeUnload = (event: any) => {
+      // 創建 FormData 對象 (Django 更容易處理)
+      const formData = new FormData()
+      const csrfToken = document.cookie.split('; ').find(row => row.startsWith('csrftoken='))?.split('=')[1] ?? ""
+      formData.append('student_records', JSON.stringify(tempStudentRecords))
+      formData.append('csrfmiddlewaretoken', csrfToken);
+      // 如果有剩餘記錄
+      API_saveStudentRecordsBeforeUnload(formData, event)
+    };
+
+    // 添加事件監聽器
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    // 清理函數
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
   }, [tempStudentRecords]);
 
   const unauth_routes = [
