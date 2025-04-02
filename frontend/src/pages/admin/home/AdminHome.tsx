@@ -7,12 +7,13 @@ import {API_getAllClassNames} from "../../../utils/API/API_ClassName";
 
 // components
 import StudentManageComponent from "./components/studentManage/StudentMange";
+import TaskManageComponent from "./components/taskManage/TaskManage";
+import GroupManageComponent from "./components/groupManage/GroupManage";
 import NavBarComponent from './components/NavBar'
 
 // interface
 import {Res_classNamesInfo} from "../../../utils/API/API_Interface";
 import {ISettingAlertLogAndLoading} from "../../../utils/interface/alertLog";
-import TaskManageComponent from "./components/taskManage/TaskManage";
 
 interface IAdminHomeProps {
   name: string;
@@ -22,7 +23,7 @@ interface IAdminHomeProps {
 
 const AdminHome = (props: IAdminHomeProps) => {
   const {name, adminId, settingAlertLogAndLoading} = props
-  const {page} = useParams<{ page: 'studentMange' | 'taskManage' | 'classAndGroupManage' }>();
+  const {page} = useParams<{ page: 'studentMange' | 'taskManage' | 'classAndGroupManage' | 'groupManage' }>();
 
   const [classList, setClassList] = useState<Array<Res_classNamesInfo>>([{
     message: 'loading',
@@ -51,8 +52,12 @@ const AdminHome = (props: IAdminHomeProps) => {
       <NavBarComponent name={name} adminId={adminId}/>
       <div
         className='p-10 h-[56rem] bg-gradient-to-tl from-transparent to-stamindTask-decoration-warn-2 mix-blend-soft-light backdrop-blur-sm'>
-        {page === 'studentMange' && <StudentManageComponent classList={classList} settingAlertLogAndLoading={settingAlertLogAndLoading}/>}
-        {page === 'taskManage' && <TaskManageComponent classList={classList} settingAlertLogAndLoading={settingAlertLogAndLoading}/>}
+        {page === 'studentMange' &&
+            <StudentManageComponent classList={classList} settingAlertLogAndLoading={settingAlertLogAndLoading}/>}
+        {page === 'taskManage' &&
+            <TaskManageComponent classList={classList} settingAlertLogAndLoading={settingAlertLogAndLoading}/>}
+        {page === 'groupManage' &&
+            <GroupManageComponent classList={classList} settingAlertLogAndLoading={settingAlertLogAndLoading}/>}
       </div>
     </div>
   )

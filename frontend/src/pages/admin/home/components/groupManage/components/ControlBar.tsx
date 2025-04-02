@@ -2,7 +2,7 @@ import React from "react";
 // style
 import {Button, Option, Select} from "@material-tailwind/react"
 // API
-import {handleAddNewTask} from "../../../../../../utils/functions/admin/home/components/controlBar";
+import {handleAddNewGroup} from "../../../../../../utils/functions/admin/home/components/controlBar";
 // components
 // interface
 import {IControlBarProps} from "../../../../../../utils/interface/adminManage";
@@ -38,8 +38,8 @@ const ControlBarComponent = (props: IControlBarProps) => {
         <Button
           variant="gradient"
           placeholder={undefined}
-          onClick={() => handleAddNewTask(classList, settingAlertLogAndLoading)}>
-          新增課程
+          onClick={() => handleAddNewGroup(classList, settingAlertLogAndLoading)}>
+          新增年級
         </Button>
       </div>
     </div>

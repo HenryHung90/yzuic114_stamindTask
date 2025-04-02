@@ -38,6 +38,10 @@ interface Req_tasksInfo extends RequestParams {
   link_array?: Array<Link>
 }
 
+interface Req_classNameInfo extends RequestParams {
+  class_name: string
+}
+
 interface Req_studentsInfo extends RequestParams {
   class_name: string
 }
@@ -164,6 +168,7 @@ export type{
   Req_login,
   Req_register,
   Req_tasksInfo,
+  Req_classNameInfo,
   Req_studentsInfo,
   Req_studentInfo,
   Req_registerStudentInfo,

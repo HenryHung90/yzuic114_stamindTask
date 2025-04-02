@@ -8,13 +8,8 @@ import StudentListComponent from "./components/StudentList";
 import ControlBarComponent from "./components/ControlBar";
 
 // interface
-import {Res_classNamesInfo} from "../../../../../utils/API/API_Interface";
-import {ISettingAlertLogAndLoading} from "../../../../../utils/interface/alertLog";
+import {IStudentManageProps} from "../../../../../utils/interface/adminManage";
 
-interface IStudentManageProps {
-  classList: Array<Res_classNamesInfo>
-  settingAlertLogAndLoading: ISettingAlertLogAndLoading
-}
 
 const StudentManageComponent = (props: IStudentManageProps) => {
   const {classList, settingAlertLogAndLoading} = props

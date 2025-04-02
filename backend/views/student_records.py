@@ -1,3 +1,5 @@
+import json
+
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -24,12 +26,13 @@ def save_student_records(request):
         student_records = request.data.get('student_records')
         class_name = ClassName.objects.get(name=request.user.class_name)
 
-        print(class_name, request.user.class_name)
-
         user = request.user
         records_to_create = []
         errors = []
-        # 處理每一筆記錄
+        # 處理每一筆記錄(若為 str 表示從 Beacon 寄送，需轉為 json)
+        if type(student_records) == str:
+            student_records = json.loads(student_records)
+
         for idx, record_data in enumerate(student_records):
             try:
                 # 驗證必要欄位
