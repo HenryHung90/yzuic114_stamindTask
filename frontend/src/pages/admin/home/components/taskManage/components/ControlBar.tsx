@@ -5,15 +5,7 @@ import {Button, Option, Select} from "@material-tailwind/react"
 import {handleAddNewTask} from "../../../../../../utils/functions/admin/home/components/controlBar";
 // components
 // interface
-import {Res_classNamesInfo} from "../../../../../../utils/API/API_Interface";
-import {ISettingAlertLogAndLoading} from "../../../../../../utils/interface/alertLog";
-
-interface IControlBarProps {
-  classList: Array<Res_classNamesInfo>
-  className: string
-  setClassName: React.Dispatch<React.SetStateAction<string>>
-  settingAlertLogAndLoading: ISettingAlertLogAndLoading
-}
+import {IControlBarProps} from "../../../../../../utils/interface/adminManage";
 
 const ControlBarComponent = (props: IControlBarProps) => {
   const {classList, className, setClassName, settingAlertLogAndLoading} = props

@@ -4,17 +4,11 @@ import {useState} from "react";
 // API
 
 // components
-
-// interface
-interface ITaskManageProps {
-  classList: Array<Res_classNamesInfo>
-  settingAlertLogAndLoading: ISettingAlertLogAndLoading
-}
-
-import {Res_classNamesInfo} from "../../../../../utils/API/API_Interface";
-import {ISettingAlertLogAndLoading} from "../../../../../utils/interface/alertLog";
 import ControlBarComponent from "./components/ControlBar";
 import TaskListComponent from "./components/TaskList";
+
+// interface
+import {ITaskManageProps} from "../../../../../utils/interface/adminManage";
 
 const TaskManageComponent = (props: ITaskManageProps) => {
   const {classList, settingAlertLogAndLoading} = props

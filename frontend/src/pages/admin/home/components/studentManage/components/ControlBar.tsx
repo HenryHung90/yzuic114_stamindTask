@@ -9,19 +9,9 @@ import {
 } from "../../../../../../utils/functions/admin/home/components/controlBar";
 // components
 // interface
-import {Res_classNamesInfo} from "../../../../../../utils/API/API_Interface";
-import {ISettingAlertLogAndLoading} from "../../../../../../utils/interface/alertLog";
+import {IStudentManageControlBarProps} from "../../../../../../utils/interface/adminManage";
 
-interface IStudentManageProps {
-  classList: Array<Res_classNamesInfo>
-  className: string
-  setClassName: React.Dispatch<React.SetStateAction<string>>
-  searchStudentId: string
-  setSearchStudentId: React.Dispatch<React.SetStateAction<string>>
-  settingAlertLogAndLoading: ISettingAlertLogAndLoading
-}
-
-const ControlBarComponent = (props: IStudentManageProps) => {
+const ControlBarComponent = (props: IStudentManageControlBarProps) => {
   const {classList, className, setClassName, searchStudentId, setSearchStudentId, settingAlertLogAndLoading} = props
   return (
     <div className='flex justify-between my-5 p-5 rounded-2xl bg-stamindTask-black-600 bg-opacity-50'>
@@ -42,7 +32,7 @@ const ControlBarComponent = (props: IStudentManageProps) => {
             className='text-stamindTask-white-000 border-white'
           >
             <Option value={"ALL"}>全部</Option>
-            {classList.map(({name}, index) => (
+            {classList?.map(({name}, index) => (
               <Option key={index} value={name}>{name}</Option>
             ))}
           </Select>
