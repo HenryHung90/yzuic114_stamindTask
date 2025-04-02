@@ -1,0 +1,42 @@
+services:
+  - type: web
+    name: yzuic114-webstudy
+    env: python
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py create_default_user &&
+             python manage.py create_default_class &&
+             gunicorn yzuic114_webstudy.wsgi:application --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: RENDER
+        value: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: yzuic114-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DJANGO_ALLOWED_HOSTS
+        value: yzuic114-webstudy.onrender.com
+      - key: DJANGO_SUPERUSER_ID
+        sync: false  # 手動設定
+      - key: DJANGO_SUPERUSER_PASSWORD
+        sync: false  # 手動設定
+
+  - type: pserv
+    name: yzuic114-db
+    env: docker
+    plan: free
+    disk:
+      name: data
+      mountPath: /var/lib/postgresql/data
+      sizeGB: 1
+    envVars:
+      - key: POSTGRES_DB
+        value: yzuic114_stamindtask
+      - key: POSTGRES_USER
+        value: henry
+      - key: POSTGRES_PASSWORD
+        value: henry_yzuic  # 注意：在實際生產環境中，應使用 Render 的密碼生成功能
