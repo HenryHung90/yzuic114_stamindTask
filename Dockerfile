@@ -32,4 +32,4 @@ ENV PYTHONUNBUFFERED=1
 ENV DJANGO_SETTINGS_MODULE=yzuic114_webstudy.settings
 
 # 運行 Django 應用程式的指令
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["sh", "-c", "gunicorn yzuic114_webstudy.wsgi:application --bind 0.0.0.0:8000"]
