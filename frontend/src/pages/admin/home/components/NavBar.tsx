@@ -13,7 +13,7 @@ interface IAdminNavBarProps {
 }
 
 const NavBarComponent = (props: IAdminNavBarProps) => {
-  const {name, adminId} = props
+  const {name} = props
   const NavLocation = useNavigate()
 
   const [openNav, setOpenNav] = useState(false);
@@ -53,6 +53,7 @@ const NavBarComponent = (props: IAdminNavBarProps) => {
         variant="text"
         color="deep-orange"
         placeholder={undefined}
+        onClick={() => handleSwitchLocation('/admin/groupManage')}
       >
         班級/組別設定
       </Button>
