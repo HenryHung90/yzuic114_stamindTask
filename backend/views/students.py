@@ -20,7 +20,7 @@ from backend.models import ClassName, User, StudentGroup
 def serialized_students_info(students_info):
     students_data = []
     for student in students_info:
-        if not student.is_superuser:
+        if not student.is_superuser and student:
             students_data.append({
                 'is_active': student.is_active,
                 'class_name': student.class_name.name if student.class_name else "尚未分配",
