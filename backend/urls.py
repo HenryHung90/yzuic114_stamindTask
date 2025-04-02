@@ -1,6 +1,6 @@
 from django.urls import path
 
-from backend.views.class_name import get_all_class_names
+from backend.views.class_name import get_all_class_names, add_new_class_name
 from backend.views.core import *
 from backend.views.experience import *
 from backend.views.student_notes import *
@@ -16,6 +16,7 @@ from backend.views.student_task_reflections import *
 from backend.views.chat_histories import *
 from backend.views.chatgpt import *
 from backend.views.student_records import *
+from backend.views.student_group import *
 
 urlpatterns = []
 
@@ -85,7 +86,11 @@ API_ADMIN_POST = [
     path('admin/get_students_by_class_name/', get_students_by_class_name, name='get_students_by_class_name'),
     # get class name by class_name
     path('admin/get_tasks_by_class_name/', get_tasks_by_class_name, name='get_tasks_by_class_name'),
+    # get student group by class_name
+    path('admin/get_student_groups_by_class_name/', get_student_groups_by_class_name, name='get_student_groups_by_class_name'),
 
+    # add new class name
+    path('admin/add_new_class_name/', add_new_class_name, name='add_new_class_name'),
     # add new Task
     path('admin/add_new_task/',add_new_task, name='add_new_task'),
     # save Task
