@@ -85,8 +85,8 @@ export default function App() {
 
   useEffect(() => {
     if (tempStudentRecords.length > 50) {
+      if (auth !== 'STUDENT' || !studentId) return
       API_saveStudentRecords(tempStudentRecords).then(response => {
-        console.log(response.data)
         setTempStudentRecords([])
       })
     }
@@ -95,6 +95,7 @@ export default function App() {
   // 新增：處理頁面關閉事件
   useEffect(() => {
     const handleBeforeUnload = (event: any) => {
+      if (auth !== 'STUDENT' || !studentId) return
       // 創建 FormData 對象 (Django 更容易處理)
       const formData = new FormData()
       const csrfToken = document.cookie.split('; ').find(row => row.startsWith('csrftoken='))?.split('=')[1] ?? ""
@@ -110,7 +111,7 @@ export default function App() {
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [tempStudentRecords]);
+  }, []);
 
   const unauth_routes = [
     {
