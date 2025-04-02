@@ -2,7 +2,15 @@ services:
   - type: web
     name: yzuic114-webstudy
     env: python
-    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    plan: free
+    buildCommand: >
+      curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&
+      apt-get install -y nodejs &&
+      cd frontend &&
+      npm install &&
+      npm run build &&
+      cd .. &&
+      pip install -r requirements.txt
     startCommand: >
       sh -c "python manage.py makemigrations &&
              python manage.py migrate &&
@@ -25,18 +33,8 @@ services:
       - key: DJANGO_SUPERUSER_PASSWORD
         sync: false  # 手動設定
 
-  - type: pserv
-    name: yzuic114-db
-    env: docker
+databases:
+  - name: yzuic114-db
+    databaseName: yzuic114_stamindtask
+    user: henry
     plan: free
-    disk:
-      name: data
-      mountPath: /var/lib/postgresql/data
-      sizeGB: 1
-    envVars:
-      - key: POSTGRES_DB
-        value: yzuic114_stamindtask
-      - key: POSTGRES_USER
-        value: henry
-      - key: POSTGRES_PASSWORD
-        value: henry_yzuic  # 注意：在實際生產環境中，應使用 Render 的密碼生成功能
