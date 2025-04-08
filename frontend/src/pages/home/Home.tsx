@@ -21,8 +21,7 @@ const Home = (props: IHomeProps) => {
 
   return (
     <div className="animate-fadeIn">
-      <NavBarComponent auth={auth} name={name} studentId={studentId}
-                       settingAlertLogAndLoading={settingAlertLogAndLoading}/>
+      <NavBarComponent auth={auth} name={name} studentId={studentId}/>
       <div className='h-[56rem] bg-gradient-to-t from-white to-transparent mix-blend-soft-light'>
         <TaskAreaComponent auth={auth} studentId={studentId} settingAlertLogAndLoading={settingAlertLogAndLoading}/>
       </div>
