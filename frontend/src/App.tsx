@@ -16,6 +16,7 @@ import Task from "./pages/task/Task";
 
 import AdminHome from "./pages/admin/home/AdminHome"
 import AdminTask from "./pages/admin/task/Task"
+import NotFound from "./pages/errorPage/404/NotFound"
 // interface
 import {CSRF_cookies, ResponseData} from "./utils/API/API_Interface";
 
@@ -140,6 +141,10 @@ export default function App() {
       path: '/task/:taskId',
       element: <Task name={name} studentId={studentId} settingAlertLogAndLoading={settingAlertLogAndLoading}
                      setTempStudentRecords={setTempStudentRecords}/>
+    },
+    {
+      path: '*',
+      element: <NotFound/>
     }
   ]
 
