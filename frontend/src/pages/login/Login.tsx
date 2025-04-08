@@ -77,7 +77,7 @@ const Login = (props: ILoginProps) => {
           color="gray"
           className="mb-4 grid h-36 place-items-center"
           placeholder={undefined}>
-          <img src='/files/img/logo.PNG' height='50px' width='70px'/>
+          <img src={`/${import.meta.env.VITE_APP_FILE_ROUTE}/img/logo.PNG`} height='50px' width='70px'/>
           <p className='text-xl '>STAMIND TASK</p>
         </CardHeader>
         <CardBody className="flex flex-col gap-4 animate-loginSlideIn delay-700" placeholder={undefined}>

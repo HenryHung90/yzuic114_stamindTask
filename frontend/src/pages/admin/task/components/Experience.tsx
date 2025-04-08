@@ -48,7 +48,7 @@ const ExperiencePageComponent = (props: ITaskExperienceProps) => {
       API_getTaskExperience(taskId).then(response => {
         const fileLocation = response.data.experience_info.experience_files[selectNode.key]
         if (fileLocation) {
-          setExperienceData(`/files/experience_files/${fileLocation}`)
+          setExperienceData(`/${import.meta.env.VITE_APP_FILE_ROUTE}/experience_files/${fileLocation}`)
         } else {
           setExperienceData("")
         }
