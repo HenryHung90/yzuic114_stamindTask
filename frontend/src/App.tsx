@@ -1,5 +1,5 @@
 import {useRoutes} from "react-router-dom";
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useCallback} from "react";
 // style
 
 // API
@@ -90,28 +90,32 @@ export default function App() {
         setTempStudentRecords([])
       })
     }
-  }, [tempStudentRecords]);
+  }, [tempStudentRecords])
 
-  // 新增：處理頁面關閉事件
-  useEffect(() => {
-    const handleBeforeUnload = (event: any) => {
-      if (auth !== 'STUDENT' || !studentId) return
-      // 創建 FormData 對象 (Django 更容易處理)
-      const formData = new FormData()
-      const csrfToken = document.cookie.split('; ').find(row => row.startsWith('csrftoken='))?.split('=')[1] ?? ""
-      formData.append('student_records', JSON.stringify(tempStudentRecords))
+  const handleBeforeUnload = useCallback(
+    (event: any) => {
+      if (auth !== 'STUDENT' || !studentId) return;
+
+      // 創建 FormData 對象
+      const formData = new FormData();
+      const csrfToken = document.cookie.split('; ').find(row => row.startsWith('csrftoken='))?.split('=')[1] ?? "";
+      formData.append('student_records', JSON.stringify(tempStudentRecords));
       formData.append('csrfmiddlewaretoken', csrfToken);
-      // 如果有剩餘記錄
-      API_saveStudentRecordsBeforeUnload(formData, event)
-    };
 
+      // 如果有剩餘記錄
+      API_saveStudentRecordsBeforeUnload(formData, event);
+    },
+    [tempStudentRecords] // 依賴的值
+  );
+
+  useEffect(() => {
     // 添加事件監聽器
     window.addEventListener('beforeunload', handleBeforeUnload);
     // 清理函數
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, []);
+  }, [handleBeforeUnload])
 
   const unauth_routes = [
     {
