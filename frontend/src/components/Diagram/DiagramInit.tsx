@@ -309,8 +309,6 @@ const DiagramInitComponent = (props: IDiagramInitProps) => {
             // 當一個交易完成時，更新 nodes 和 links
             const updatedNodes = (diagram.model as go.GraphLinksModel).nodeDataArray;
             const updatedLinks = (diagram.model as go.GraphLinksModel).linkDataArray;
-
-            console.log(updatedNodes)
           }
         })
 
