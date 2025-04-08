@@ -42,6 +42,12 @@ interface Req_classNameInfo extends RequestParams {
   class_name: string
 }
 
+interface Req_studentGroupInfo extends RequestParams {
+  class_name: string
+  change_group?: string
+  student_id?: string
+}
+
 interface Req_studentsInfo extends RequestParams {
   class_name: string
 }
@@ -169,6 +175,7 @@ export type{
   Req_register,
   Req_tasksInfo,
   Req_classNameInfo,
+  Req_studentGroupInfo,
   Req_studentsInfo,
   Req_studentInfo,
   Req_registerStudentInfo,
