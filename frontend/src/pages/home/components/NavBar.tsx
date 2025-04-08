@@ -7,17 +7,15 @@ import {useNavigate} from "react-router-dom";
 // components
 
 // interface
-import {ISettingAlertLogAndLoading} from "../../../utils/interface/alertLog";
 
 interface INavBarProps {
   auth: false | 'STUDENT' | 'TEACHER'
   name: string
   studentId: string
-  settingAlertLogAndLoading: ISettingAlertLogAndLoading
 }
 
 const NavBarComponent = (props: INavBarProps) => {
-  const {auth, name, studentId, settingAlertLogAndLoading} = props
+  const {auth, name, studentId} = props
   const NavLocation = useNavigate()
 
   const [openNav, setOpenNav] = useState(false);

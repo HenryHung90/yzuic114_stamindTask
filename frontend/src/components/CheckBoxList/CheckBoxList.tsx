@@ -1,4 +1,4 @@
-import React, {useCallback} from "react";
+import React from "react";
 // style
 import {Checkbox, Typography} from "@material-tailwind/react";
 import {ITaskSubTarget} from "../../utils/interface/Task";

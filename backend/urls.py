@@ -89,6 +89,9 @@ API_ADMIN_POST = [
     # get student group by class_name
     path('admin/get_student_groups_by_class_name/', get_student_groups_by_class_name, name='get_student_groups_by_class_name'),
 
+    # update student group by student_id
+    path('admin/update_student_group_by_student_id/', update_student_group_by_student_id, name='update_student_group_by_student_id'),
+
     # add new class name
     path('admin/add_new_class_name/', add_new_class_name, name='add_new_class_name'),
     # add new Task

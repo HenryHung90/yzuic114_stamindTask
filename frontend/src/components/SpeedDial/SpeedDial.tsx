@@ -11,16 +11,18 @@ import {
 import {
   PlusIcon,
   PencilSquareIcon,
-  DocumentTextIcon
+  DocumentTextIcon,
+  ArrowLeftStartOnRectangleIcon
 } from "@heroicons/react/24/solid";
 
 // API
+import {handleCustomRecord, IStudentRecords} from "../../utils/listener/action";
 
 // components
 import ChatRoomComponent from '../ChatRoom/ChatRoom'
 import TextBookComponent from "../TextBook/TextBook"
 import NoteBookComponent from "../NoteBook/NoteBook"
-import {handleCustomRecord, IStudentRecords} from "../../utils/listener/action";
+import {useNavigate} from "react-router-dom";
 
 // interface
 interface SpeedDialProps {
@@ -33,6 +35,7 @@ interface SpeedDialProps {
 
 const SpeedDialComponent = (props: SpeedDialProps) => {
   const {name, studentId, taskId, selectNode, setTempStudentRecords} = props
+  const NavLocation = useNavigate()
 
   const [openChatRoom, setOpenChatRoom] = useState<boolean>(false)
   const [openTextBook, setOpenTextBook] = useState<boolean>(false)
@@ -49,7 +52,7 @@ const SpeedDialComponent = (props: SpeedDialProps) => {
         object: 'openTextBook',
         id: 'speedDial_openTextBook'
       }, false, studentId || '', setTempStudentRecords)
-    } else if(!openTextBook && startTime) {
+    } else if (!openTextBook && startTime) {
       const timer = Math.floor((Date.now() - startTime) / 1000).toString()
       handleCustomRecord({
         action: 'click',
@@ -124,6 +127,24 @@ const SpeedDialComponent = (props: SpeedDialProps) => {
 
               >
                 ChatAmum
+              </Typography>
+            </SpeedDialAction>
+            <SpeedDialAction
+              onClick={() => NavLocation('/home')}
+              placeholder={undefined}
+              data-action='click'
+              data-type='button'
+              data-object='leaveTask'
+              data-id='speedDial_leaveTask'
+            >
+              <ArrowLeftStartOnRectangleIcon className='h-5 w-5 pointer-events-none'/>
+              <Typography
+                className="absolute top-2/4 -left-2/4 -translate-y-2/4 -translate-x-3/4 font-normal"
+                variant='small'
+                color='white'
+                placeholder={undefined}
+              >
+                離開
               </Typography>
             </SpeedDialAction>
           </SpeedDialContent>
