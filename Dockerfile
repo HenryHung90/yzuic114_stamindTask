@@ -27,6 +27,9 @@ RUN pip install pdf2image
 # 複製專案檔案到容器中
 COPY . .
 
+# 複製前端建構結果到後端容器
+COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
+
 # 設定環境變數
 ENV PYTHONUNBUFFERED=1
 ENV DJANGO_SETTINGS_MODULE=yzuic114_webstudy.settings
