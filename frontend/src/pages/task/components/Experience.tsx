@@ -31,7 +31,7 @@ const ExperiencePageComponent = (props: ITaskExperienceProps) => {
       {experienceData ? (
         <iframe
           key={iframeKey}
-          src={`/files/experience_files/${experienceData}`} // 動態設置 iframe 的 src
+          src={`/${import.meta.env.VITE_APP_FILE_ROUTE}/experience_files/${experienceData}`} // 動態設置 iframe 的 src
           title="Experience File"
           style={{
             width: "100%",

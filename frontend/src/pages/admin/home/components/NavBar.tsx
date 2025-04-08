@@ -85,7 +85,7 @@ const NavBarComponent = (props: IAdminNavBarProps) => {
           className="flex justify-center items-center mr-4 cursor-pointer py-1.5 font-bold"
           placeholder={undefined}
         >
-          <img src='/files/img/logo.PNG' height='24px' width='24px'/>
+          <img src={`/${import.meta.env.VITE_APP_FILE_ROUTE}/img/logo.PNG`} height='24px' width='24px'/>
           Admin Center
         </Typography>
         <div className="flex items-center gap-4">
