@@ -81,6 +81,7 @@ MIDDLEWARE = [
     # coresheaders
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -151,12 +152,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "frontend/dist/static")
+    os.path.join(BASE_DIR, "frontend/dist/static"),
+    os.path.join(BASE_DIR, "frontend/dist/files")
 ]
 STATIC_URL = "/static/"
 MEDIA_URL = "/files/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'frontend/dist/files')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'files')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AUTH_USER_MODEL = 'backend.User'
 
@@ -197,7 +201,7 @@ SESSION_COOKIE_AGE = 86400  # 24小時
 #     'http://localhost:8000',
 # ]
 # Showed up when publish---------------------------------------------------------
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ["localhost", '127.0.0.1', '140.138.56.160']
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 CORS_ALLOW_CREDENTIALS = True  # 允許攜帶憑證（Cookies）
