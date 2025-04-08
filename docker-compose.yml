@@ -4,7 +4,8 @@ services:
       context: .
       dockerfile: Dockerfile
     command: >
-      sh -c "python manage.py makemigrations &&
+      sh -c "python manage.py collectstatic &&
+             python manage.py makemigrations &&
              python manage.py migrate &&
              python manage.py create_default_user &&
              python manage.py create_default_class &&
