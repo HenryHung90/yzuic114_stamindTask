@@ -47,10 +47,12 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
         if (response.data.messages == 'empty') return setIsMessageEnded(true)
 
         const history_list: Array<IMessages> = response.data.messages
-        setMessages(prevState => {
-          return [...history_list, ...prevState]
-        })
-        messageOffsetRef.current += 10
+        if(history_list){
+          setMessages(prevState => {
+            return [...history_list, ...prevState]
+          })
+          messageOffsetRef.current += 10
+        }
       })
     }
   }
