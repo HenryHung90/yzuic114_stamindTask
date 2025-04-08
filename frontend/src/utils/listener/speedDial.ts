@@ -7,7 +7,8 @@ const speedDialTable: Record<string, string> = {
   'closeChatRoom': '關閉聊天室',
   'chatAmumamum': 'AI 聊天輸入框',
   'submitChat': '傳送訊息',
-  'saveNoteBook': '儲存筆記'
+  'saveNoteBook': '儲存筆記',
+  'leaveTask': '離開任務'
 }
 
 export default speedDialTable
