@@ -67,7 +67,6 @@ const ProcessComponent = (props: ITaskProcessProps) => {
       (_, i) => `${textBookDir}/page_${i + 1}.jpg?ts=${Date.now()}`
     )
     setCarouselImgList(newCarouselImgList)
-    console.log(newCarouselImgList, textBookAmount)
   }, [textBookAmount]);
 
   return (

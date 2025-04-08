@@ -9,7 +9,7 @@ class AuthenticationMiddleware:
 
     def __call__(self, request):
         # 排除不需要認證的路徑
-        exempt_paths = ['/api/login/', '/api/register/', '/', '/files/img/logo.PNG', '/vite.svg']
+        exempt_paths = ['/api/login/', '/api/register/', '/', '/taskmind/', '/files/img/logo.PNG', '/vite.svg']
 
         # 如果是靜態文件請求，直接放行
         if request.path.startswith(settings.STATIC_URL):

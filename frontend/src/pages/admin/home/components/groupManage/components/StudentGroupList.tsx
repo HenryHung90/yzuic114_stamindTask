@@ -29,7 +29,6 @@ const StudentGroupListComponent = (props: IGroupManageProps) => {
   const handleUpdateStudentGroupName = (changeStudentId: string, changeGroup: string) => {
     settingAlertLogAndLoading.setLoadingOpen(true)
     API_updateStudentGroupByStudentId(className || '', changeGroup, changeStudentId).then(response => {
-      console.log(response)
       if (response.message === 'success') settingAlertLogAndLoading.setLoadingOpen(false)
     })
   }

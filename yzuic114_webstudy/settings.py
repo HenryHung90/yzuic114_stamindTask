@@ -202,7 +202,7 @@ SESSION_COOKIE_AGE = 86400  # 24小時
 # ]
 # Showed up when publish---------------------------------------------------------
 DEBUG = False
-ALLOWED_HOSTS = ["localhost", '127.0.0.1', '140.138.56.160']
+ALLOWED_HOSTS = ["*"]
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 CORS_ALLOW_CREDENTIALS = True  # 允許攜帶憑證（Cookies）
 CORS_ALLOW_ALL_ORIGINS = False  # 不建議設置為 True，改為允許特定來源

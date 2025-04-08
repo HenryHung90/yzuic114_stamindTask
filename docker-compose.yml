@@ -4,8 +4,10 @@ services:
       context: .
       dockerfile: Dockerfile
     command: >
-      sh -c "python manage.py makemigrations &&
-             python manage.py migrate &&
+      sh -c "rm -rf /app/static &&
+             python manage.py collectstatic --noinput &&
+             python manage.py makemigrations &&
+             python manage.py migrate && 
              python manage.py create_default_user &&
              python manage.py create_default_class &&
              python manage.py runserver 0.0.0.0:8000"
@@ -23,6 +25,7 @@ services:
       DB_PASSWORD: henry_yzuic
       DB_HOST: db
       DB_PORT: 5432
+      PROCESS_ON_PRODUCTION: True
 
     depends_on:
       - db

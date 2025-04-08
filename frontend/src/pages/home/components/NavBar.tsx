@@ -30,7 +30,7 @@ const NavBarComponent = (props: INavBarProps) => {
   // 登出
   function logout() {
     API_logout().then(response => {
-      window.location.href = '/'
+      window.location.href = `${import.meta.env.VITE_APP_BASENAME ?? '/'}`
     })
   }
 

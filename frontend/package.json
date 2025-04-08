@@ -22,6 +22,7 @@
     "emmet-monaco-es": "^5.5.0",
     "gojs": "^3.0.19",
     "jquery": "^3.7.1",
+    "lucide-react": "^0.487.0",
     "react": "18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "18.2.0",

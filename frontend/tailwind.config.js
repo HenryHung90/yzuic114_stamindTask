@@ -81,20 +81,51 @@ export default withMT({
                     '0%': {backgroundPosition: '0% 100%'},
                     '100%': {backgroundPosition: '100% 100%'},
                 },
+                gentleFloat: {
+                    '0%, 100%': {
+                        transform: 'translateY(0) scale(1)',
+                        opacity: 0.05,
+                    },
+                    '50%': {
+                        transform: 'translateY(-10px) scale(1.02)',
+                        opacity: 0.08,
+                    }
+                },
+                gradientMove: {
+                    '0%': {
+                        backgroundPosition: '0% 50%',
+                    },
+                    '50%': {
+                        backgroundPosition: '100% 50%',
+                    },
+                    '100%': {
+                        backgroundPosition: '0% 50%',
+                    }
+                }
             },
             animation: {
                 fadeIn: 'fadeIn 0.5s ease forwards',
-                loginSlideIn: 'SlideUpToIn 0.8s ease forwards',
-                messageSlideIn: 'SlideUpAndScale 0.4s ease forwards',
-                tooltipSlideIn: 'SlideUpAndScale 0.4s ease forwards',
-                marquee: 'marquee 2.5s ease infinite',
-            },
+                loginSlideIn:
+                    'SlideUpToIn 0.8s ease forwards',
+                messageSlideIn:
+                    'SlideUpAndScale 0.4s ease forwards',
+                tooltipSlideIn:
+                    'SlideUpAndScale 0.4s ease forwards',
+                marquee:
+                    'marquee 2.5s ease infinite',
+                gradientMove:
+                    'gradientMove 6s ease infinite'
+            }
+            ,
         },
     },
     variants: {
         extend: {
             backgroundClip: ['text'], // 啟用 bg-clip-text
-        },
-    },
+        }
+        ,
+    }
+    ,
     plugins: [],
-});
+})
+;
