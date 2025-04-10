@@ -118,7 +118,7 @@ const SpeedDialComponent = (props: SpeedDialProps) => {
               data-object={openChatRoom ? 'closeChatRoom' : 'openChatRoom'}
               data-id={openChatRoom ? 'speedDial_closeChatRoom' : 'speedDial_openChatRoom'}
             >
-              <img src='/files/img/logo.PNG' height='24px' width='24px' className='pointer-events-none'/>
+              <img src={`/${import.meta.env.VITE_APP_FILE_ROUTE}/img/logo.PNG`} height='24px' width='24px' className='pointer-events-none'/>
               <Typography
                 className="absolute top-2/4 -left-2/4 -translate-y-2/4 -translate-x-3/4 font-normal"
                 variant='small'
