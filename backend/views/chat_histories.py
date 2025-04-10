@@ -15,7 +15,12 @@ def get_chat_histories(request):
     try:
         offset = request.data.get('offset')
 
-        chat_history_data = User.objects.get(student_id=request.user.student_id).chat_history.chat_history
+        chat_history_data = User.objects.get(student_id=request.user.student_id).chat_history
+
+        if chat_history_data is None or chat_history_data is []:
+            return Response({'messages': 'empty'}, status=status.HTTP_200_OK)
+        else:
+            chat_history_data = chat_history_data.chat_history
 
         if offset > len(chat_history_data):
             return Response({'messages': 'empty'}, status=status.HTTP_200_OK)
