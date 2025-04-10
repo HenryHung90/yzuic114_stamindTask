@@ -1,6 +1,6 @@
 import os
 from django.core.management.base import BaseCommand
-from backend.models import User
+from backend.models import User, ChatHistory
 
 
 class Command(BaseCommand):
@@ -9,12 +9,14 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         # 檢查是否已經存在該用戶
         if not User.objects.filter(student_id="ccj").exists() and os.getenv('DEFAULT_USER') is not None:
+            chat_history = ChatHistory.objects.create()
             # 創建新用戶
             User.objects.create_user(
                 student_id=os.getenv('DEFAULT_USER'),
                 password=os.getenv('DEFAULT_PSW'),
                 name=os.getenv('DEFAULT_USER'),
-                user_type=User.UserType.TEACHER
+                user_type=User.UserType.TEACHER,
+                chat_history=chat_history
             )
             self.stdout.write(self.style.SUCCESS("Successfully created default user."))
         else:
