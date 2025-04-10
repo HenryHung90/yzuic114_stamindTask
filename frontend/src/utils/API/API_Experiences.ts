@@ -13,7 +13,7 @@ const API_uploadTaskExperienceFile = (taskId: string, file: File, selectNode: nu
   const formData = new FormData()
   formData.append('file', file)
   formData.append('task_id', taskId)
-  formData.append('select_node',selectNode.toString())
+  formData.append('select_node', selectNode.toString())
   return new API_POST(import.meta.env.VITE_APP_API_UPLOAD_EXPERIENCE_FILE || '', formData).sendRequest()
 }
 

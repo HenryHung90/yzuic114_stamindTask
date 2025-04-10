@@ -15,7 +15,6 @@ import ExperiencePageComponent from "./Experience";
 import TargetComponent from "./Target";
 import ProcessComponent from "./Process";
 import ReflectionComponent from "./Reflection";
-import {calculateExperienceStep} from "../../../../utils/functions/tasks/experience";
 
 // interface
 import {ITaskContentProps} from "../../../../utils/interface/Task";
@@ -36,11 +35,7 @@ const TaskContentComponent = (props: ITaskContentProps) => {
   const handleOpen = () => setOpen(!open)
 
   useEffect(() => {
-    if (selectNode.category) {
-      handleOpen()
-      // 每一個 part 有 6 步驟，計算是第幾個 part
-      selectNode.key = calculateExperienceStep(selectNode.key)
-    }
+    if (selectNode.category) handleOpen()
   }, [selectNode]);
 
   return (

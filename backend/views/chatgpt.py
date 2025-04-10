@@ -33,7 +33,8 @@ def chat_with_amumamum(request):
         user_question = request.data.get('message')
         user_history_data = User.objects.get(student_id=request.user.student_id).chat_history
 
-        user_history_data.chat_history = user_history_data.chat_history or []
+        if user_history_data.chat_history is None:
+            user_history_data.chat_history = []
 
         # 取前 10 則訊息當作回顧輸入
         user_history_stringify = ""
@@ -73,5 +74,5 @@ def chat_with_amumamum(request):
 
         return Response({'assistant': gpt_content}, status=status.HTTP_200_OK)
     except Exception as e:
-        print(f'get tasks info Error: {e}')
-        return Response({'get tasks info Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        print(f'chat with amumamum Error: {e}')
+        return Response({'chat with amumamum Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
