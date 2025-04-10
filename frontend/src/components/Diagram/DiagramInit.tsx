@@ -5,6 +5,7 @@ import * as go from 'gojs'
 // API
 
 // components
+import {calculateExperienceStep} from "../../utils/functions/tasks/experience";
 
 // interface
 import {Link, Node} from '../../pages/admin/task/Task'
@@ -244,7 +245,7 @@ const DiagramInitComponent = (props: IDiagramInitProps) => {
             setSelectNode({
               category: part.data.category,
               text: part.data.text,
-              key: part.data.key
+              key: calculateExperienceStep(part.data.key)
             });
           }
         }
@@ -286,13 +287,13 @@ const DiagramInitComponent = (props: IDiagramInitProps) => {
               {category: "Plan", text: "計畫設定"},
               {category: "Process", text: "計劃執行"},
               {category: "Reflection", text: "自我反思"},
-              {category: "Feedback", text: "教師回饋"},
+              {category: "Feedback", text: "總體回饋"},
               {category: "Completed-Experience", text: "體驗任務"},
               {category: "Completed-Target", text: "學習目標"},
               {category: "Completed-Plan", text: "計畫設定"},
               {category: "Completed-Process", text: "計劃執行"},
               {category: "Completed-Reflection", text: "自我反思"},
-              {category: "Completed-Feedback", text: "教師回饋"}
+              {category: "Completed-Feedback", text: "總體回饋"}
             ])
           });
 

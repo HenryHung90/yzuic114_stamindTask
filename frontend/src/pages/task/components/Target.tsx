@@ -11,14 +11,14 @@ import {ITaskContentProps, ITaskSubTarget} from "../../../utils/interface/Task";
 
 
 const TargetComponent = (props: ITaskContentProps) => {
-  const {taskId, selectNode, settingAlertLogAndLoading} = props
+  const {taskId, selectNode,} = props
 
   const [targetTitle, setTargetTitle] = useState<string>("")
   const [targetDescription, setTargetDescription] = useState<string>("")
   const [subTargetList, setSubTargetList] = useState<Array<ITaskSubTarget>>([])
 
   useEffect(() => {
-    const fetchTaskTarget = async () => {
+    const fetchTaskTarget = () => {
       API_getTaskTarget(taskId || '').then(response => {
         const title = response.data.target_titles[selectNode.key]
         const description = response.data.target_descriptions[selectNode.key]
@@ -49,7 +49,7 @@ const TargetComponent = (props: ITaskContentProps) => {
           data-id='task_targetDescription'
         >{targetDescription}</p>
       </div>
-      <div className='overflow-scroll flex flex-col gap-y-5 mt-5 pt-4 w-[60%] h-96 border-stamindTask-black-850'>
+      <div className='overflow-scroll flex flex-col gap-y-5 mt-5 pt-4 w-[60%] h-[32rem] border-stamindTask-black-850'>
         {subTargetList.map(({title, description}, index) => (
           <div key={index}
                className='flex flex-col min-h-44 p-4 gap-y-3 border-2 border-stamindTask-black-600 rounded-2xl'>

@@ -57,7 +57,7 @@ const SubTargetListComponent = (props: ITaskSubTargetLisProps) => {
   const {subTargetList, selectSubList, setSelectSubList} = props
 
   return (
-    <Card className="w-full max-w-[35rem]" placeholder={undefined}>
+    <Card className="w-full max-w-[50rem]" placeholder={undefined}>
       <List className="flex-row" placeholder={undefined}>
         {
           subTargetList.map(({title, description}, index) => {
@@ -267,7 +267,7 @@ const PlanComponent = (props: ITaskPlanProps) => {
 
   // init 計畫設定內容
   useEffect(() => {
-    const fetchTaskPlan = async () => {
+    const fetchTaskPlan = () => {
       setAlertOpen(true)
       setAlertContent("🟠取得計畫設定內容...")
       API_getTaskPlan(taskId || '').then(response => {
@@ -276,19 +276,23 @@ const PlanComponent = (props: ITaskPlanProps) => {
         if (response.data.plan_list[selectNode.key] !== 'empty' && (planList[selectNode.key] == undefined || planList[selectNode.key].length == 0)) setPlanList(response.data.plan_list[selectNode.key] ?? [])
       })
     }
-    const fetchSubTarget = async () => {
+    const fetchSubTarget = (fetch: () => void) => {
       setAlertOpen(true)
       setAlertContent("🟠取得子目標中...")
-      await API_getTaskTarget(taskId || '').then(response => {
+      API_getTaskTarget(taskId || '').then(response => {
         setSubTargetList(response.data.sub_target_list[selectNode.key] ?? [])
-        setSelectSubList(new Array(response.data.sub_target_list.length).fill(false))
-        setPlanList(new Array(response.data.sub_target_list.length).fill([]))
+        setSelectSubList(new Array(response.data.sub_target_list[selectNode.key].length).fill(false))
+        setPlanList(new Array(response.data.sub_target_list[selectNode.key].length).fill([]))
         setAlertContent("🟢取得子目標成功")
+        fetch()
       })
-      fetchTaskPlan()
     }
-    fetchSubTarget()
+    fetchSubTarget(fetchTaskPlan)
   }, []);
+
+  useEffect(() => {
+    console.log(planList)
+  }, [planList]);
 
   return (
     <div>
@@ -298,7 +302,7 @@ const PlanComponent = (props: ITaskPlanProps) => {
         <SubTargetListComponent subTargetList={subTargetList} selectSubList={selectSubList}
                                 setSelectSubList={setSelectSubList}/>
       </div>
-      <div className='max-h-[55vh] overflow-scroll flex flex-col mt-5 gap-y-2'>
+      <div className='max-h-[40vh] overflow-scroll flex flex-col mt-5 gap-y-2'>
         {
           selectSubList.map((selected, subTargetIndex) => {
             if (selected) {
@@ -309,7 +313,7 @@ const PlanComponent = (props: ITaskPlanProps) => {
                   </Typography>
                   <div className='w-[95%] m-auto'>
                     <Timeline>
-                      {planList[subTargetIndex].map((plan, planIndex) => {
+                      {planList[subTargetIndex]?.map((plan, planIndex) => {
                         return (
                           <PlanContentComponent plan={plan} subTargetIndex={subTargetIndex} planIndex={planIndex}
                                                 handleChangePlanList={handleChangePlanList}
