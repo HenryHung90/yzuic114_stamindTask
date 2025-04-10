@@ -1,14 +1,21 @@
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 
 class Feedback(models.Model):
-    teacher_feedback = models.TextField(
+    teacher_feedback = ArrayField(
+        models.TextField(),
+        null=True,
         blank=True,
+        default=list,
         verbose_name='老師回饋'
     )
 
-    student_feedback = models.TextField(
+    student_feedback = ArrayField(
+        models.TextField(),
+        null=True,
         blank=True,
+        default=list,
         verbose_name='學生回饋'
     )
 
