@@ -87,15 +87,17 @@ API_ADMIN_POST = [
     # get class name by class_name
     path('admin/get_tasks_by_class_name/', get_tasks_by_class_name, name='get_tasks_by_class_name'),
     # get student group by class_name
-    path('admin/get_student_groups_by_class_name/', get_student_groups_by_class_name, name='get_student_groups_by_class_name'),
+    path('admin/get_student_groups_by_class_name/', get_student_groups_by_class_name,
+         name='get_student_groups_by_class_name'),
 
     # update student group by student_id
-    path('admin/update_student_group_by_student_id/', update_student_group_by_student_id, name='update_student_group_by_student_id'),
+    path('admin/update_student_group_by_student_id/', update_student_group_by_student_id,
+         name='update_student_group_by_student_id'),
 
     # add new class name
     path('admin/add_new_class_name/', add_new_class_name, name='add_new_class_name'),
     # add new Task
-    path('admin/add_new_task/',add_new_task, name='add_new_task'),
+    path('admin/add_new_task/', add_new_task, name='add_new_task'),
     # save Task
     path('admin/save_task_diagram/', save_task_diagram, name='save_task_diagram'),
     # upload Experience file
@@ -117,6 +119,8 @@ API_ADMIN_POST = [
     path('admin/change_student_name/', change_student_name, name='change_student_name'),
     # change student password
     path('admin/change_student_password/', change_student_password, name='change_student_password'),
+    # multi students upload
+    path('admin/multi_students_upload/', multi_students_upload, name='multi_students_upload'),
 ]
 API_ADMIN_GET = [
     # get all students
