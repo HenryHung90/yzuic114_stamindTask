@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 // style
 import {Button, Input, Option, Select} from "@material-tailwind/react"
 // API
@@ -13,6 +13,19 @@ import {IStudentManageControlBarProps} from "../../../../../../utils/interface/a
 
 const ControlBarComponent = (props: IStudentManageControlBarProps) => {
   const {classList, className, setClassName, searchStudentId, setSearchStudentId, settingAlertLogAndLoading} = props
+
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  // 處理文件選擇並自動上傳
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    handleUploadStudentList(event, fileInputRef, settingAlertLogAndLoading)
+  }
+  // 按下按鈕時觸發文件選擇框
+  const handleButtonClick = () => {
+    fileInputRef.current?.click();
+  };
+
+
   return (
     <div className='flex justify-between my-5 p-5 rounded-2xl bg-stamindTask-black-600 bg-opacity-50'>
       <div className='flex gap-6'>
@@ -64,10 +77,17 @@ const ControlBarComponent = (props: IStudentManageControlBarProps) => {
           onClick={() => handleDownloadStudentList(settingAlertLogAndLoading)}>
           下載學生名單
         </Button>
+        <input
+          type="file"
+          accept=".xlsx, .xls"
+          ref={fileInputRef}
+          style={{display: "none"}}
+          onChange={handleFileChange}
+        />
         <Button
           variant="gradient"
           placeholder={undefined}
-          onClick={() => handleUploadStudentList(settingAlertLogAndLoading)}>
+          onClick={handleButtonClick}>
           批量上傳學生
         </Button>
       </div>

@@ -61,6 +61,13 @@ const API_addStudent = (className: string, studentId: string, name: string, pass
   return new API_POST(import.meta.env.VITE_APP_API_REGISTER || '', studentData).sendRequest()
 }
 
+// 批量上傳學生
+const API_multiStudentUpload = (studentList: File) => {
+  const formData = new FormData()
+  formData.append('student_list', studentList)
+  return new API_POST(import.meta.env.VITE_APP_API_MULTI_STUDENTS_UPLOAD || '', formData).sendRequest()
+}
+
 export {
   API_getStudentsByClassName,
   API_getAllStudents,
@@ -69,5 +76,6 @@ export {
   API_changeStudentClassName,
   API_changeStudentName,
   API_changeStudentPassword,
-  API_addStudent
+  API_addStudent,
+  API_multiStudentUpload,
 }

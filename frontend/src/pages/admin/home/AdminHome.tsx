@@ -52,7 +52,7 @@ const AdminHome = (props: IAdminHomeProps) => {
       <NavBarComponent name={name} adminId={adminId}/>
       <div
         className='p-10 h-[56rem] bg-gradient-to-tl from-transparent to-stamindTask-decoration-warn-2 mix-blend-soft-light backdrop-blur-sm'>
-        {page === 'studentMange' &&
+        {(page === 'studentMange' || page === undefined) &&
             <StudentManageComponent classList={classList} settingAlertLogAndLoading={settingAlertLogAndLoading}/>}
         {page === 'taskManage' &&
             <TaskManageComponent classList={classList} settingAlertLogAndLoading={settingAlertLogAndLoading}/>}

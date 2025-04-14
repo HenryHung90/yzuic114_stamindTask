@@ -1,8 +1,18 @@
-import {ISettingAlertLogAndLoading} from "../../../../interface/alertLog";
-import {API_addStudent} from "../../../../API/API_Students";
+import React from "react"
+import * as XLSX from 'xlsx'
+// style
+// API
 import {API_addNewTask} from "../../../../API/API_Tasks";
 import {Res_classNamesInfo} from "../../../../API/API_Interface";
 import {API_addNewClassName} from "../../../../API/API_ClassName";
+import {
+  API_addStudent,
+  API_getAllStudents,
+  API_multiStudentUpload
+} from "../../../../API/API_Students";
+// components
+// interface
+import {ISettingAlertLogAndLoading} from "../../../../interface/alertLog";
 
 function handlePromise(messageTitle: string, messageInfo: string, loading: ISettingAlertLogAndLoading) {
   loading.setAlertLog(messageTitle, messageInfo)
@@ -35,11 +45,48 @@ function handleAddNewStudent(loading: ISettingAlertLogAndLoading) {
 }
 
 function handleDownloadStudentList(loading: ISettingAlertLogAndLoading) {
-  loading.setAlertLog("錯誤", "暫不支援")
+  loading.setLoadingOpen(true)
+  API_getAllStudents().then(response => {
+    const studentData = response.data.students_data
+    // 將數據轉換為工作表
+    const worksheet = XLSX.utils.json_to_sheet(studentData);
+
+    // 創建工作簿並添加工作表
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Students');
+
+    // 將工作簿轉換為二進制數據
+    const workbookBinary = XLSX.write(workbook, {bookType: 'xlsx', type: 'array'});
+
+    // 創建 Blob 對象
+    const blob = new Blob([workbookBinary], {type: 'application/octet-stream'});
+
+    // 創建下載鏈接並觸發下載
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'students_data.xlsx';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    loading.setLoadingOpen(false)
+  })
 }
 
-function handleUploadStudentList(loading: ISettingAlertLogAndLoading) {
-  loading.setAlertLog("錯誤", "暫不支援")
+function handleUploadStudentList(event: React.ChangeEvent<HTMLInputElement>, fileInputRef: React.RefObject<HTMLInputElement>, loading: ISettingAlertLogAndLoading) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+
+  loading.setLoadingOpen(true);
+  API_multiStudentUpload(file).then(response => {
+    if (response.status == 200) loading.setAlertLog('success', '成功')
+    // 清空文件選擇框的值
+    if (fileInputRef.current) fileInputRef.current.value = "";
+    loading.setLoadingOpen(false);
+    setTimeout(() => {
+      window.location.reload()
+    }, 1000)
+  })
 }
 
 // For classManagement
