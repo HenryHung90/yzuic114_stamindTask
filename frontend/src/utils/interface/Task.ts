@@ -76,6 +76,10 @@ interface IStudentReflection {
   reflect: string
 }
 
+// Feedback
+interface ITaskFeedbackProps extends ITaskContentProps {
+}
+
 export type {
   ITaskProps,
   ITaskContentProps,
@@ -90,5 +94,6 @@ export type {
   ITaskProcessProps,
   ITaskReflectionProps,
   IReflection,
-  IStudentReflection
+  IStudentReflection,
+  ITaskFeedbackProps
 }

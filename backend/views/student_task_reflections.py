@@ -29,7 +29,7 @@ def get_student_task_reflections(request):
             'reflect_list': task_reflection_data.reflects
         }, status=status.HTTP_200_OK)
     except Exception as e:
-        print(f'get student Error: {e}')
+        print(f'get reflection questions Error: {e}')
         return Response({'get reflection questions Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
