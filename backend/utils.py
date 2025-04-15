@@ -10,6 +10,7 @@ def read_xlsx_and_xls_file(expected_headers, headers, file_extension, sheet):
     if file_extension == 'xls':
         for index in range(1, sheet.nrows):  # 跳過標題行
             filtered_values = [value for value in sheet.row_values(index) if value]  # 閱覽整個 row, if 有 value 才放 value
+            if not filtered_values: continue
             row_data.append({
                 'class_name': str(filtered_values[0]),
                 'student_id':str(filtered_values[1]),
@@ -20,6 +21,7 @@ def read_xlsx_and_xls_file(expected_headers, headers, file_extension, sheet):
     elif file_extension == 'xlsx':
         for index, row in enumerate(sheet.iter_rows(min_row=2), start=1):  # 跳過標題行
             filtered_values = [cell.value for cell in row if cell.value]
+            if not filtered_values: continue
             row_data.append({
                 'class_name': str(filtered_values[0]),
                 'student_id': str(filtered_values[1]),
