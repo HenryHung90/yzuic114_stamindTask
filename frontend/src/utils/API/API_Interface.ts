@@ -125,6 +125,11 @@ interface Req_StudentRecordInfo extends RequestParams {
   student_records: Array<IStudentRecords>
 }
 
+interface Req_feedbackInfo extends RequestParams {
+  task_id: string | undefined
+  select_node: number
+}
+
 // API Response Extension
 // csrf cookie Response
 interface CSRF_cookies extends ResponseData {
@@ -190,6 +195,7 @@ export type{
   Req_StudentChatHistory,
   Req_ChatWithAmumAmum,
   Req_StudentRecordInfo,
+  Req_feedbackInfo,
   CSRF_cookies,
   Res_login,
   Res_tasksInfo,
