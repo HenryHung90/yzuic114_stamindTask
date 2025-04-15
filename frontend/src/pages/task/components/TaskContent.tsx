@@ -16,7 +16,7 @@ import TargetComponent from "./Target";
 import PlanComponent from "./Plan";
 import ProcessComponent from "./Process";
 import ReflectionComponent from "./Reflection";
-import {calculateExperienceStep} from "../../../utils/functions/tasks/experience";
+import FeedbackComponent from "./Feedback";
 
 // interface
 import {ITaskContentProps} from "../../../utils/interface/Task";
@@ -54,11 +54,7 @@ const TaskContentComponent = (props: ITaskContentProps) => {
   }
 
   useEffect(() => {
-    if (selectNode.category) {
-      handleOpen()
-      // 總共有 6 步驟，計算是第幾個
-      selectNode.key = calculateExperienceStep(selectNode.key)
-    }
+    if (selectNode.category) handleOpen()
   }, [selectNode]);
 
   return (
@@ -94,6 +90,13 @@ const TaskContentComponent = (props: ITaskContentProps) => {
                                  studentId={studentId}
                                  setTempStudentRecords={setTempStudentRecords}
                                  settingAlertLogAndLoading={settingAlertLogAndLoading}/>
+        }
+        {
+          selectNode.category === 'Feedback' &&
+            <FeedbackComponent taskId={taskId} selectNode={selectNode}
+                               studentId={studentId}
+                               setTempStudentRecords={setTempStudentRecords}
+                               settingAlertLogAndLoading={settingAlertLogAndLoading}/>
         }
       </DialogBody>
       <DialogFooter placeholder={undefined} className='gap-x-2'>

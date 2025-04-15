@@ -1,12 +1,20 @@
+import os
+import openpyxl
+import xlrd
+from io import BytesIO
+
 from django.contrib.auth.hashers import make_password
+from django.db import transaction, IntegrityError
+from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from django.views.decorators.csrf import ensure_csrf_cookie
+
+from ..utils import read_xlsx_and_xls_file
 
 # model
-from backend.models import ClassName, User, StudentGroup
+from backend.models import ClassName, User, StudentGroup, ChatHistory
 
 """
  Response Status List:
@@ -152,6 +160,7 @@ def change_student_name(request):
         print(f'change student class name Error: {e}')
         return Response({'change student class name Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
+
 # change student password
 @ensure_csrf_cookie
 @permission_classes([IsAuthenticated])
@@ -167,3 +176,72 @@ def change_student_password(request):
     except Exception as e:
         print(f'change student class name Error: {e}')
         return Response({'change student class name Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# multi students upload
+@ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
+@api_view(['POST'])
+def multi_students_upload(request):
+    try:
+        students_data = request.data.get('student_list')
+        if not students_data:
+            return Response({"error": "未收到文件"}, status=status.HTTP_400_BAD_REQUEST)
+
+        file_extension = students_data.name.split('.')[-1].lower()
+        expected_headers = ['班級', '學號', '密碼', '姓名', '使用者類別']
+
+        if file_extension == 'xls':
+            # 使用 xlrd 讀取 .xls 文件
+            workbook = xlrd.open_workbook(file_contents=students_data.read())
+            sheet = workbook.sheet_by_index(0)
+            # 取得標頭，用於確認是否符合資料格式
+            headers = sheet.row_values(0)[:5]
+            student_list = read_xlsx_and_xls_file(expected_headers, headers, file_extension, sheet)
+        elif file_extension == 'xlsx':
+            # 使用 openpyxl 讀取 .xlsx 文件
+            wb = openpyxl.load_workbook(filename=BytesIO(students_data.read()))
+            sheet = wb.active
+            # 取得標頭，用於確認是否符合資料格式
+            headers = [cell for cell in next(sheet.iter_rows(min_row=1, max_row=1, values_only=True))][:5]
+            student_list = read_xlsx_and_xls_file(expected_headers, headers, file_extension, sheet)
+        else:
+            return Response({'message': '不支援的格式'}, status=status.HTTP_400_BAD_REQUEST)
+
+        with transaction.atomic():
+            for student in student_list:
+                # 驗證 user_type 是否正確
+                user_type = student.get('user_type')
+                if user_type not in [User.UserType.TEACHER, User.UserType.STUDENT]:
+                    return Response({'message': f'Invalid user type\n DATA:{student}', 'status': 400},
+                                    status=status.HTTP_400_BAD_REQUEST)
+                try:
+                    # 嘗試從資料庫中獲取對應的 ClassName 實例
+                    class_name = ClassName.objects.get(name=student.get('class_name'))
+                    student_group = StudentGroup.objects.get(group_type="CONTROL", class_name=class_name)
+                except ClassName.DoesNotExist:
+                    return Response({'message': f'Class name does not exist\n DATA:{student}', 'status': 404},
+                                    status=status.HTTP_404_NOT_FOUND)
+                chat_history = ChatHistory.objects.create()
+
+                print('student create process:', student)
+                try:
+                    # 創建新用戶
+                    User.objects.create_user(
+                        student_id=student.get('student_id'),
+                        password=student.get('password'),
+                        name=student.get('name'),
+                        user_type=user_type,
+                        chat_history=chat_history,
+                        class_name=class_name,
+                        student_group=student_group,
+                    )
+                except IntegrityError:
+                    return Response({'message': f'User is already exist\n DATA:{student}', 'status': 404},
+                                    status=status.HTTP_404_NOT_FOUND)
+
+
+        return Response({'message': 'success'}, status=status.HTTP_200_OK)
+    except Exception as e:
+        print(f'multi student upload Error: {e}')
+        return Response({'multi student upload Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

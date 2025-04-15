@@ -75,7 +75,7 @@ const StudentGroupListComponent = (props: IGroupManageProps) => {
   }
 
   return (
-    <Card className="h-full w-full overflow-auto p-4" placeholder={undefined}>
+    <Card className="h-[70vh] w-full overflow-auto p-4" placeholder={undefined}>
       <h1 className="text-lg font-bold mb-4">學生組別管理</h1>
       <div className="w-full flex mb-4 gap-x-4">
         <Button onClick={handleAddNewGroup} size="sm" variant='gradient' placeholder={undefined}>
@@ -95,7 +95,7 @@ const StudentGroupListComponent = (props: IGroupManageProps) => {
                     <div
                       ref={provided.innerRef}
                       {...provided.droppableProps}
-                      className={`min-h-24 p-2 rounded duration-500 ${
+                      className={`max-h-96 overflow-auto p-2 rounded duration-500 ${
                         snapshot.isDraggingOver ? "bg-blue-50" : "bg-gray-50"
                       }`}
                     >

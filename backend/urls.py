@@ -13,6 +13,7 @@ from backend.views.text_books import *
 from backend.views.student_task_process_code import *
 from backend.views.reflection_questions import *
 from backend.views.student_task_reflections import *
+from backend.views.feedbacks import *
 from backend.views.chat_histories import *
 from backend.views.chatgpt import *
 from backend.views.student_records import *
@@ -55,6 +56,11 @@ API_POST = [
     # save Student Task Reflection
     path('save_student_task_reflections/', save_student_task_reflections, name='save_student_task_reflections'),
 
+    # get teacher feedback
+    path('get_teacher_feedback/', get_teacher_feedback, name='get_teacher_feedback'),
+    # generate teacher feedback
+    path('generate_teacher_feedback/', generate_teacher_feedback, name='generate_teacher_feedback'),
+
     # chat with AmumAmum
     path('chat_with_amumamum/', chat_with_amumamum, name='chat_with_amumamum'),
     # get Chat History
@@ -87,15 +93,17 @@ API_ADMIN_POST = [
     # get class name by class_name
     path('admin/get_tasks_by_class_name/', get_tasks_by_class_name, name='get_tasks_by_class_name'),
     # get student group by class_name
-    path('admin/get_student_groups_by_class_name/', get_student_groups_by_class_name, name='get_student_groups_by_class_name'),
+    path('admin/get_student_groups_by_class_name/', get_student_groups_by_class_name,
+         name='get_student_groups_by_class_name'),
 
     # update student group by student_id
-    path('admin/update_student_group_by_student_id/', update_student_group_by_student_id, name='update_student_group_by_student_id'),
+    path('admin/update_student_group_by_student_id/', update_student_group_by_student_id,
+         name='update_student_group_by_student_id'),
 
     # add new class name
     path('admin/add_new_class_name/', add_new_class_name, name='add_new_class_name'),
     # add new Task
-    path('admin/add_new_task/',add_new_task, name='add_new_task'),
+    path('admin/add_new_task/', add_new_task, name='add_new_task'),
     # save Task
     path('admin/save_task_diagram/', save_task_diagram, name='save_task_diagram'),
     # upload Experience file
@@ -117,6 +125,8 @@ API_ADMIN_POST = [
     path('admin/change_student_name/', change_student_name, name='change_student_name'),
     # change student password
     path('admin/change_student_password/', change_student_password, name='change_student_password'),
+    # multi students upload
+    path('admin/multi_students_upload/', multi_students_upload, name='multi_students_upload'),
 ]
 API_ADMIN_GET = [
     # get all students
