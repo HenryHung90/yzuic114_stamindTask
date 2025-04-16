@@ -1,6 +1,7 @@
 import {Node, Link} from '../interface/diagram'
 import {IReflection, IStudentReflection, ITaskPlan, ITaskSubTarget} from "../interface/Task";
 import {IStudentRecords} from "../listener/action";
+import {EGroupType} from "../functions/common";
 
 // Request 訊息內容
 interface RequestParams {
@@ -137,6 +138,7 @@ interface Req_feedbackInfo extends RequestParams {
 interface CSRF_cookies extends ResponseData {
   isAuthenticated: false | 'STUDENT' | 'TEACHER'
   user_type: false | 'STUDENT' | 'TEACHER'
+  group_type: EGroupType
   name: string
   student_id: string
 }

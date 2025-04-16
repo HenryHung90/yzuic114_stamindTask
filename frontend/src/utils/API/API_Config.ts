@@ -1,6 +1,7 @@
 import Cookies from "universal-cookie"
 import axios, {AxiosError} from "axios"
-import {RequestParams, ResponseData, CSRF_cookies, Res_login} from "./API_Interface"
+import {CSRF_cookies, RequestParams, Res_login, ResponseData} from "./API_Interface"
+import {EGroupType} from "../functions/common";
 
 class APIController {
   // 设置后端 API 地址
@@ -63,6 +64,7 @@ class APIController {
       status: error.response ? error.response.status : 500,
       isAuthenticated: false,
       user_type: false,
+      group_type: EGroupType.NONE,
       data: JSON,
       name: 'nobody',
       student_id: ''
@@ -120,12 +122,13 @@ class API_GET extends APIController {
         "Content-Type": "application/json",
         "X-CSRFToken": this.cookies.get("csrftoken")
       }
-    }).then((response: { data: { isAuthenticated: any; name: string; student_id: string } }) => {
+    }).then((response: { data: { isAuthenticated: any; name: string; student_id: string; group_type: EGroupType } }) => {
       const resData: CSRF_cookies = {
         message: "",
         status: 200,
         isAuthenticated: response.data.isAuthenticated,
         user_type: response.data.isAuthenticated,
+        group_type: response.data.group_type,
         name: response.data.name || '',
         student_id: response.data.student_id || '',
         data: JSON
