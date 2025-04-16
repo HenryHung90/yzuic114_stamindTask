@@ -44,11 +44,12 @@ def serialize_reflections(task_reflections, student_reflections, select_node):
         # 獲取學生的回答，根據階段和問題索引
         question_title = question.get('title')
         try:
-            answer = student_reflections[select_node][question_index].get('reflect')
+            answer = student_reflections.reflects[select_node][question_index].get('reflect')
         except IndexError:
             answer = "尚未回答"
         # 合併問題與回答成文字
         result.append(f"老師問的問題：{question_title}, 學生的回答：{answer}")
+    result.append(f"學生給予自己的評分為：{student_reflections.self_scoring[select_node]}")
     # 將所有文字合併成一個完整的字串，並用換行符分隔
     return "\n".join(result)
 
@@ -64,14 +65,58 @@ def serialize_chat_history(student_chat_history):
 
 def serialize_description_of_student(target, student_plan, student_code, task_reflections, student_reflections,
                                      student_chat_history, select_node):
-    description_of_student = "本次學習目標:\n" + target.targets[select_node] + target.descriptions[select_node] + '\n'
-    description_of_student += "學生的學習計劃:\n" + str(student_plan.plan_list) + '\n'
-    description_of_student += "學生的程式碼:\n" + 'HTML程式:' + student_code.html_code + '\nCSS程式:\n' + student_code.css_code + '\nJS程式:\n' + student_code.js_code + '\n'
-    description_of_student += "本次的所有反思問題以及回答如下：\n" + serialize_reflections(task_reflections,
-                                                                                          student_reflections,
-                                                                                          select_node) + '\n'
-    description_of_student += "本次學生問過的問題如下：\n" + serialize_chat_history(student_chat_history)
-    return description_of_student
+    """
+       將學生的學習資料序列化為文字描述
+
+       參數:
+           target: 學習目標物件
+           student_plan: 學生計劃物件
+           student_code: 學生代碼物件
+           task_reflections: 任務反思列表
+           student_reflections: 學生反思列表
+           student_chat_history: 學生聊天歷史
+           select_node: 選擇的節點索引
+
+       回傳:
+           str: 格式化的學生描述文字
+       """
+    # 使用列表和join而非字串連接，提高效率
+    sections = []
+
+    # 學習目標部分
+    target_text = f"本次學習目標:\n{target.targets[select_node]}{target.descriptions[select_node]}"
+    sections.append(target_text)
+
+    # 學習計劃部分 - 確保計劃存在且可序列化
+    plan_text = "學生的學習計劃:\n"
+    plan_content = str(getattr(student_plan, 'plan_list', '無計劃資料'))
+    sections.append(plan_text + plan_content)
+
+    # 程式碼部分 - 處理可能的空值
+    code_sections = ["學生的程式碼:"]
+
+    html_code = getattr(student_code, 'html_code', '無HTML程式碼')
+    css_code = getattr(student_code, 'css_code', '無CSS程式碼')
+    js_code = getattr(student_code, 'js_code', '無JS程式碼')
+
+    code_sections.append(f"HTML程式:\n{html_code}")
+    code_sections.append(f"CSS程式:\n{css_code}")
+    code_sections.append(f"JS程式:\n{js_code}")
+
+    sections.append('\n'.join(code_sections))
+
+    # 反思部分
+    reflection_text = "本次的所有反思問題以及回答如下："
+    reflection_content = serialize_reflections(task_reflections, student_reflections, select_node)
+    sections.append(f"{reflection_text}\n{reflection_content}")
+
+    # 聊天歷史部分
+    chat_text = "本次學生問過的問題如下："
+    chat_content = serialize_chat_history(student_chat_history)
+    sections.append(f"{chat_text}\n{chat_content}")
+
+    # 使用換行符連接所有部分
+    return '\n\n'.join(sections)
 
 
 # get Teacher feedback
@@ -126,7 +171,7 @@ def generate_teacher_feedback(request):
             student_code = student_task_data.process.process_code
             # get reflection questions of task & student response
             task_reflection_questions = task_data.reflection_question.questions
-            student_reflections = student_task_data.reflection.reflects
+            student_reflections = student_task_data.reflection
             # get student chat history
             student_chat_history = User.objects.get(student_id=request.user.student_id).chat_history
 
@@ -135,9 +180,12 @@ def generate_teacher_feedback(request):
             student_summarize = serialize_description_of_student(task_target, student_plan, student_code,
                                                                  task_reflection_questions,
                                                                  student_reflections, student_chat_history, select_node)
+            # 確保 exports 資料夾存在
+            exports_dir = os.path.join(BASE_DIR, 'exports')
+            os.makedirs(exports_dir, exist_ok=True)
 
             file_path = os.path.join(BASE_DIR, 'exports',
-                                     f"任務_{task_data.name}_{request.user.student_id}學生總結.txt")
+                                     f"任務{task_data.name}_階段{select_node}_{request.user.student_id}學生總結.txt")
 
             sending_data = client.chat.completions.create(model="gpt-3.5-turbo",
                                                           temperature=0.3,
