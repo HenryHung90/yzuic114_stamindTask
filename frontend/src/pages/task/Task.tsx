@@ -17,10 +17,11 @@ import SpeedDialComponent from "../../components/SpeedDial/SpeedDial";
 import {ITaskProps} from "../../utils/interface/Task";
 
 import {Link, Node} from "../../utils/interface/diagram";
+import {calculateTimer} from "../../utils/functions/common";
 
 
 const Task = (props: ITaskProps) => {
-  const {name, studentId, setTempStudentRecords, settingAlertLogAndLoading} = props;
+  const {name, studentId, groupType, setTempStudentRecords, settingAlertLogAndLoading} = props;
   const {taskId} = useParams();
 
   const divRef = useRef<HTMLDivElement>(null)
@@ -42,18 +43,18 @@ const Task = (props: ITaskProps) => {
   // 初始進入需做的
   useEffect(() => {
     // 取得 Task 的 Diagram
-    const fetchTaskDiagram = async () => {
+    const fetchTaskDiagram = () => {
       settingAlertLogAndLoading.setLoadingOpen(true)
-      await API_getTaskDiagram(taskId || '').then(response => {
+      API_getTaskDiagram(taskId || '').then(response => {
         setNodes(response.data.nodes_data)
         setLinks(response.data.links_data)
         settingAlertLogAndLoading.setLoadingOpen(false)
       })
     }
     // Init Student Task 建置該份 Student Task
-    const initStudentTask = async () => {
+    const initStudentTask = () => {
       settingAlertLogAndLoading.setLoadingOpen(true)
-      await API_initStudentTask(taskId || '').then(response => {
+      API_initStudentTask(taskId || '').then(response => {
         settingAlertLogAndLoading.setLoadingOpen(false)
         console.log(response.data.status)
       })
@@ -77,7 +78,7 @@ const Task = (props: ITaskProps) => {
         id: `task_enter${selectNode.category}`
       }, false, studentId || '', setTempStudentRecords)
     } else if (recordCategory) {
-      const timer = Math.floor((Date.now() - startTime) / 1000).toString()
+      const timer = calculateTimer(startTime)
       handleCustomRecord({
         action: 'click',
         type: 'button',
@@ -95,6 +96,7 @@ const Task = (props: ITaskProps) => {
       <TaskContentComponent
         taskId={taskId}
         studentId={studentId}
+        groupType={groupType}
         selectNode={selectNode}
         setSelectNode={setSelectNode}
         setTempStudentRecords={setTempStudentRecords}
@@ -104,6 +106,7 @@ const Task = (props: ITaskProps) => {
       <DiagramInitComponent
         divRef={divRef}
         diagramRef={diagramRef}
+        groupType={groupType}
         setDiagramRef={setDiagramRef}
         setSelectNode={setSelectNode}
         nodeDataArray={nodes}

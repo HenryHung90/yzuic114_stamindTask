@@ -1,11 +1,13 @@
 import {ISettingAlertLogAndLoading} from "./alertLog";
 import React from "react";
 import {IStudentRecords} from "../listener/action";
+import {EGroupType} from "../functions/common";
 
 interface ITaskProps {
   studentId?: string;
   name?: string;
   setTempStudentRecords?: React.Dispatch<React.SetStateAction<Array<IStudentRecords>>>;
+  groupType?: EGroupType
   settingAlertLogAndLoading: ISettingAlertLogAndLoading
 }
 

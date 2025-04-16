@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.views.decorators.csrf import ensure_csrf_cookie
 
-from backend.models import User, Task, StudentTask
+from backend.models import User, Task, StudentTask, StudentGroup
 from yzuic114_webstudy.settings import BASE_DIR
 
 """
@@ -21,16 +21,28 @@ from yzuic114_webstudy.settings import BASE_DIR
 
 client = OpenAI(api_key=os.getenv('OPENAI_KEY'))
 
-SYSTEM_PROMPT = """
+SYSTEM_PROMPT_FOR_EXPERIMENTAL = """
 #zh-tw
 你是一位善良且幽默的評量老師，專注於幫助學生成長。
-請根據以下四個方面，一步一步分析學生的學習內容，提供建設性且幽默的回饋，並可以以條列式進行分析：
+請根據以下方向，一步一步分析學生的學習內容，提供建設性且幽默的回饋，並可以以條列式進行分析：
 
 #方向
 - 程式內容：評估學生程式碼的邏輯性、創意性和可讀性，指出亮點與改進建議。
 - 計畫設定：分析學生的目標與計畫是否合理，給予正面回饋和實際建議。
 - 輔助機器人的問答：評估學生的提問清晰度，提供更好利用輔助工具的建議。
 - 最後的反思：評估學生對學習過程的理解與自我檢討能力，給予鼓勵。
+- 總評：給予整體的評估，並從 0 ~ 100 分給予學生分數。
+
+請保持輕鬆幽默的語氣，讓學生感到被尊重與激勵，同時指出不足之處。
+"""
+SYSTEM_PROMPT_FOR_CONTROL = """
+#zh-tw
+你是一位善良且幽默的評量老師，專注於幫助學生成長。
+請根據以下方向，一步一步分析學生的學習內容，提供建設性且幽默的回饋，並可以以條列式進行分析：
+
+#方向
+- 程式內容：評估學生程式碼的邏輯性、創意性和可讀性，指出亮點與改進建議。
+- 輔助機器人的問答：評估學生的提問清晰度，提供更好利用輔助工具的建議。
 - 總評：給予整體的評估，並從 0 ~ 100 分給予學生分數。
 
 請保持輕鬆幽默的語氣，讓學生感到被尊重與激勵，同時指出不足之處。
@@ -64,7 +76,7 @@ def serialize_chat_history(student_chat_history):
 
 
 def serialize_description_of_student(target, student_plan, student_code, task_reflections, student_reflections,
-                                     student_chat_history, select_node):
+                                     student_chat_history, select_node, group_type):
     """
        將學生的學習資料序列化為文字描述
 
@@ -87,11 +99,6 @@ def serialize_description_of_student(target, student_plan, student_code, task_re
     target_text = f"本次學習目標:\n{target.targets[select_node]}{target.descriptions[select_node]}"
     sections.append(target_text)
 
-    # 學習計劃部分 - 確保計劃存在且可序列化
-    plan_text = "學生的學習計劃:\n"
-    plan_content = str(getattr(student_plan, 'plan_list', '無計劃資料'))
-    sections.append(plan_text + plan_content)
-
     # 程式碼部分 - 處理可能的空值
     code_sections = ["學生的程式碼:"]
 
@@ -105,16 +112,21 @@ def serialize_description_of_student(target, student_plan, student_code, task_re
 
     sections.append('\n'.join(code_sections))
 
-    # 反思部分
-    reflection_text = "本次的所有反思問題以及回答如下："
-    reflection_content = serialize_reflections(task_reflections, student_reflections, select_node)
-    sections.append(f"{reflection_text}\n{reflection_content}")
-
     # 聊天歷史部分
     chat_text = "本次學生問過的問題如下："
     chat_content = serialize_chat_history(student_chat_history)
     sections.append(f"{chat_text}\n{chat_content}")
 
+    # 學習計劃部分 - 確保計劃存在且可序列化
+    if group_type == StudentGroup.GroupType.EXPERIMENTAL:
+        plan_text = "學生的學習計劃:\n"
+        plan_content = str(getattr(student_plan, 'plan_list', '無計劃資料'))
+        sections.append(plan_text + plan_content)
+
+        # 反思部分
+        reflection_text = "本次的所有反思問題以及回答如下："
+        reflection_content = serialize_reflections(task_reflections, student_reflections, select_node)
+        sections.append(f"{reflection_text}\n{reflection_content}")
     # 使用換行符連接所有部分
     return '\n\n'.join(sections)
 
@@ -131,9 +143,7 @@ def get_teacher_feedback(request):
         feedback_data = StudentTask.objects.get(id=task_id).feedback.teacher_feedback
 
         if not feedback_data:
-            return Response({
-                'feedback': 'empty'
-            }, status=status.HTTP_200_OK)
+            return Response({'feedback': 'empty'}, status=status.HTTP_200_OK)
 
         if select_node < len(feedback_data):
             feedback_data = feedback_data[select_node]
@@ -157,6 +167,7 @@ def generate_teacher_feedback(request):
     try:
         task_id = request.data.get('task_id')
         select_node = request.data.get('select_node')
+        group_type = request.user.student_group.group_type
 
         with transaction.atomic():
             task_data = Task.objects.get(id=task_id)
@@ -174,25 +185,26 @@ def generate_teacher_feedback(request):
             student_reflections = student_task_data.reflection
             # get student chat history
             student_chat_history = User.objects.get(student_id=request.user.student_id).chat_history
-
             student_chat_history = [] if student_chat_history is None else student_chat_history.chat_history
-
             student_summarize = serialize_description_of_student(task_target, student_plan, student_code,
                                                                  task_reflection_questions,
-                                                                 student_reflections, student_chat_history, select_node)
+                                                                 student_reflections, student_chat_history, select_node,
+                                                                 group_type)
+
             # 確保 exports 資料夾存在
             exports_dir = os.path.join(BASE_DIR, 'exports')
             os.makedirs(exports_dir, exist_ok=True)
 
             file_path = os.path.join(BASE_DIR, 'exports',
                                      f"任務{task_data.name}_階段{select_node}_{request.user.student_id}學生總結.txt")
+            system_prompt = SYSTEM_PROMPT_FOR_EXPERIMENTAL if group_type == StudentGroup.GroupType.EXPERIMENTAL else SYSTEM_PROMPT_FOR_CONTROL
 
             sending_data = client.chat.completions.create(model="gpt-3.5-turbo",
                                                           temperature=0.3,
                                                           max_tokens=3000,
                                                           messages=[
                                                               {"role": "system",
-                                                               "content": SYSTEM_PROMPT},
+                                                               "content": system_prompt},
                                                               {"role": "user",
                                                                "content": student_summarize}]
                                                           )

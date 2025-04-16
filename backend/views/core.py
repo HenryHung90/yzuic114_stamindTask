@@ -139,7 +139,7 @@ def userinfo_view(request):
             student_info = User.objects.get(student_id=request.user.student_id)
             return Response(
                 {'name': student_info.name, 'student_id': student_info.student_id,
-                 'isAuthenticated': student_info.user_type},
+                 'isAuthenticated': student_info.user_type, 'group_type': student_info.student_group.group_type},
                 status=status.HTTP_200_OK)
         else:
             return Response({'isAuthenticated': request.user.is_authenticated}, status=status.HTTP_200_OK)
