@@ -1,15 +1,7 @@
 import {useEffect, useState} from "react";
-import {
-  Button,
-  Dialog,
-  DialogHeader,
-  DialogBody,
-  DialogFooter,
-} from "@material-tailwind/react";
+import {Button, Dialog, DialogBody, DialogFooter, DialogHeader,} from "@material-tailwind/react";
 // style
-
 // API
-
 // components
 import ExperiencePageComponent from "./Experience";
 import TargetComponent from "./Target";
@@ -20,9 +12,18 @@ import FeedbackComponent from "./Feedback";
 
 // interface
 import {ITaskContentProps} from "../../../utils/interface/Task";
+import {EGroupType} from "../../../utils/functions/common";
 
 const TaskContentComponent = (props: ITaskContentProps) => {
-  const {taskId, studentId, selectNode, setSelectNode, setTempStudentRecords, settingAlertLogAndLoading} = props;
+  const {
+    taskId,
+    studentId,
+    groupType,
+    selectNode,
+    setSelectNode,
+    setTempStudentRecords,
+    settingAlertLogAndLoading
+  } = props;
   const [open, setOpen] = useState(false)
 
   const handleOpen = () => {
@@ -54,7 +55,10 @@ const TaskContentComponent = (props: ITaskContentProps) => {
   }
 
   useEffect(() => {
-    if (selectNode.category) handleOpen()
+    if (selectNode.category) {
+      if((selectNode.category == 'Plan' || selectNode.category == 'Reflection') && groupType === EGroupType.CONTROL) return
+      handleOpen()
+    }
   }, [selectNode]);
 
   return (
@@ -71,7 +75,8 @@ const TaskContentComponent = (props: ITaskContentProps) => {
             <TargetComponent taskId={taskId} selectNode={selectNode}
                              settingAlertLogAndLoading={settingAlertLogAndLoading}/>
         }
-        {selectNode.category === 'Plan' &&
+        {/*實驗組才可以使用 Plan*/}
+        {(selectNode.category === 'Plan' && groupType === EGroupType.EXPERIMENTAL) &&
             <PlanComponent taskId={taskId} selectNode={selectNode}
                            studentId={studentId}
                            setTempStudentRecords={setTempStudentRecords}
@@ -95,6 +100,7 @@ const TaskContentComponent = (props: ITaskContentProps) => {
           selectNode.category === 'Feedback' &&
             <FeedbackComponent taskId={taskId} selectNode={selectNode}
                                studentId={studentId}
+                               groupType={groupType}
                                setTempStudentRecords={setTempStudentRecords}
                                settingAlertLogAndLoading={settingAlertLogAndLoading}/>
         }

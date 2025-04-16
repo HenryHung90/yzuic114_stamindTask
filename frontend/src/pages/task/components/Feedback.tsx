@@ -4,20 +4,19 @@ import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/atom-one-dark-reasonable.css'; // 引入 Highlight.js 的樣式
 // style
-import {Typography} from "@material-tailwind/react";
 
 // API
+import {API_generateTeacherFeedback, API_getTeacherFeedback} from "../../../utils/API/API_Feedback";
+import {API_getStudentTaskReflections} from "../../../utils/API/API_StudentTaskReflections";
 
 // components
+import AlertMsg from "../../../components/Alert/Alert";
 
 // interface
 import {ITaskFeedbackProps} from "../../../utils/interface/Task";
-import {API_generateTeacherFeedback, API_getTeacherFeedback} from "../../../utils/API/API_Feedback";
-import AlertMsg from "../../../components/Alert/Alert";
-import {API_getStudentTaskReflections} from "../../../utils/API/API_StudentTaskReflections";
 
 const FeedbackComponent = (props: ITaskFeedbackProps) => {
-  const {taskId, selectNode, settingAlertLogAndLoading} = props
+  const {taskId, selectNode} = props
 
   const [feedbackContent, setFeedbackContent] = useState<string>('');
 

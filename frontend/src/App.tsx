@@ -1,7 +1,6 @@
 import {useRoutes} from "react-router-dom";
-import React, {useState, useEffect, useCallback} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 // style
-
 // API
 import {API_getUserInfo} from "./utils/API/API_LoginSystem";
 import {handleTranslateAction, IStudentRecords} from "./utils/listener/action";
@@ -18,10 +17,12 @@ import AdminHome from "./pages/admin/home/AdminHome"
 import AdminTask from "./pages/admin/task/Task"
 import NotFound from "./pages/errorPage/404/NotFound"
 // interface
-import {CSRF_cookies, ResponseData} from "./utils/API/API_Interface";
+import {CSRF_cookies} from "./utils/API/API_Interface";
+import {EGroupType} from "./utils/functions/common";
 
 export default function App() {
   const [auth, setAuth] = useState<false | 'STUDENT' | 'TEACHER'>(false)
+  const [groupType, setGroupType] = useState<EGroupType>(EGroupType.NONE)
   const [routes, setRoutes] = useState<Array<{ path: string; element: JSX.Element }>>([])
   const [name, setName] = useState<string>("")
   const [studentId, setStudentId] = useState<string>("")
@@ -51,9 +52,8 @@ export default function App() {
         setAuth(response.isAuthenticated)
         setName(response.name)
         setStudentId(response.student_id)
+        setGroupType(response.group_type as EGroupType)
       }
-    }).catch((err: ResponseData) => {
-      settingAlertLogAndLoading.setAlertLog("Server Error", err.message);
     })
   }, []);
 
@@ -70,7 +70,7 @@ export default function App() {
     }
   }, [auth]);
 
-  // 點擊事件偵測
+// 點擊事件偵測
   const handleClickEventToListenStudentHabit = (e: React.MouseEvent<HTMLDivElement>) => {
     // 不是學生或還沒有 studentId 時不做紀錄
     if (auth !== 'STUDENT' || !studentId) return
@@ -129,17 +129,18 @@ export default function App() {
   const auth_routes = [
     {
       path: '/',
-      element: <Home auth={auth} name={name} studentId={studentId}
+      element: <Home auth={auth} name={name} studentId={studentId} groupType={groupType}
                      settingAlertLogAndLoading={settingAlertLogAndLoading}/>
     },
     {
       path: '/home',
-      element: <Home auth={auth} name={name} studentId={studentId}
+      element: <Home auth={auth} name={name} studentId={studentId} groupType={groupType}
                      settingAlertLogAndLoading={settingAlertLogAndLoading}/>
     },
     {
       path: '/task/:taskId',
-      element: <Task name={name} studentId={studentId} settingAlertLogAndLoading={settingAlertLogAndLoading}
+      element: <Task name={name} studentId={studentId} groupType={groupType}
+                     settingAlertLogAndLoading={settingAlertLogAndLoading}
                      setTempStudentRecords={setTempStudentRecords}/>
     },
     {
