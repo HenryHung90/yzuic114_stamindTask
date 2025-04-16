@@ -40,7 +40,7 @@ import {
   ITaskSubTarget,
   ITaskPlan,
   ITaskPlanContentProps,
-  ITaskSubTargetLisProps
+  ITaskSubTargetListProps
 } from "../../../utils/interface/Task"
 import {API_uploadTaskPlan} from "../../../utils/API/API_StudentTaskPlans";
 
@@ -53,7 +53,7 @@ const STRATEGY = [
 ]
 
 // 子目標列舉
-const SubTargetListComponent = (props: ITaskSubTargetLisProps) => {
+const SubTargetListComponent = (props: ITaskSubTargetListProps) => {
   const {subTargetList, selectSubList, setSelectSubList} = props
 
   return (
@@ -261,6 +261,17 @@ const PlanComponent = (props: ITaskPlanProps) => {
       API_uploadTaskPlan(taskId || '', selectNode.key, selectSubList, planList).then(response => {
         setAlertContent("🟢更新成功")
       })
+      // 紀錄儲存 Code
+      handleCustomRecord({
+          action: 'click',
+          type: 'button',
+          object: 'savePlan',
+          id: 'task_savePlan'
+        },
+        false,
+        studentId || '',
+        setTempStudentRecords
+      )
     }
     if (savingTrigger > 0) uploadTaskPlan()
   }, [savingTrigger])
@@ -288,11 +299,7 @@ const PlanComponent = (props: ITaskPlanProps) => {
       })
     }
     fetchSubTarget(fetchTaskPlan)
-  }, []);
-
-  useEffect(() => {
-    console.log(planList)
-  }, [planList]);
+  }, [])
 
   return (
     <div>

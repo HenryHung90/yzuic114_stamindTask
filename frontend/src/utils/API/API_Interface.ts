@@ -111,6 +111,8 @@ interface Req_StudentReflectionInfo extends RequestParams {
   task_id: string | undefined
   select_node?: number
   reflects?: Array<IStudentReflection>
+  completed_targets?: Array<boolean>
+  self_scoring?: number
 }
 
 interface Req_StudentChatHistory extends RequestParams {
