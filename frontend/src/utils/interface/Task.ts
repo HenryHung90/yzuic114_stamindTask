@@ -26,6 +26,7 @@ interface ITaskTargetProps extends ITaskContentProps {
 interface ITaskSubTarget {
   title: string
   description: string
+  selected?: boolean
 }
 
 interface ITaskSubTargetProps extends ITaskSubTarget {
@@ -53,7 +54,7 @@ interface ITaskPlanContentProps {
   planIndex: number
 }
 
-interface ITaskSubTargetLisProps {
+interface ITaskSubTargetListProps {
   subTargetList: Array<ITaskSubTarget>
   selectSubList: Array<boolean>
   setSelectSubList: React.Dispatch<React.SetStateAction<Array<boolean>>>
@@ -90,7 +91,7 @@ export type {
   ITaskPlanProps,
   ITaskPlan,
   ITaskPlanContentProps,
-  ITaskSubTargetLisProps,
+  ITaskSubTargetListProps,
   ITaskProcessProps,
   ITaskReflectionProps,
   IReflection,

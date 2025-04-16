@@ -1,15 +1,14 @@
 import {useEffect, useState} from "react";
 // style
+import {Button, Input} from "@material-tailwind/react";
 
 // API
-
+import {API_getReflectionQuestions, API_saveReflectionQuestions} from "../../../../utils/API/API_ReflectionQuestions";
 // components
 import AlertMsg from "../../../../components/Alert/Alert";
 
 // interface
 import {ITaskReflectionProps, IReflection} from "../../../../utils/interface/Task";
-import {Button, Input} from "@material-tailwind/react";
-import {API_getReflectionQuestions, API_saveReflectionQuestions} from "../../../../utils/API/API_ReflectionQuestions";
 
 const ReflectionComponent = (props: ITaskReflectionProps) => {
   const {taskId, selectNode, savingTrigger} = props
@@ -53,7 +52,7 @@ const ReflectionComponent = (props: ITaskReflectionProps) => {
   }, []);
 
   useEffect(() => {
-    const saveReflectionQuestions = async () => {
+    const saveReflectionQuestions = () => {
       setAlertOpen(true)
       setAlertContent("🟠更新中...")
       API_saveReflectionQuestions(taskId || '', selectNode.key, reflectionQuestions).then(response => {
