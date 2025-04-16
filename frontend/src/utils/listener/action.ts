@@ -68,6 +68,7 @@ const typeTable: Record<string, string> = {
   'checkbox': '選擇鈕',
   'tab': '分頁',
   'inputField': '文字輸入',
+  'slideField': '滑動輸入',
 }
 
 // 找使用者使用的瀏覽器
@@ -127,6 +128,8 @@ function debounce(func: (...args: any[]) => void, delay: number) {
 const debouncedRecord = debounce((recordChange: () => void) => {
   recordChange()
 }, 1000)
+
+
 const handleCustomRecord = (
   formatedDataset: IDataset,
   useDebounce: boolean,

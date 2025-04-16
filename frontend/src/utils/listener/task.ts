@@ -4,11 +4,13 @@ const taskTable: Record<string, string> = {
   'enterPlan': '進入計畫設定',
   'enterProcess': '進入計劃執行',
   'enterReflection': '進入自我反思',
+  'enterFeedback': '進入總體回饋',
   'leaveTarget': '離開學習目標',
   'leaveExperience': '離開體驗任務',
   'leavePlan': '離開計畫設定',
   'leaveProcess': '離開計劃執行',
   'leaveReflection': '離開自我反思',
+  'leaveFeedback': '離開總體回饋',
   // target
   'target': '學習目標',
   'targetDescription': '學習目標描述',
@@ -21,6 +23,7 @@ const taskTable: Record<string, string> = {
   'changePlanstrategy': '變更策略種類',
   'changePlandescription': '變更策略描述',
   'changePlantime': '變更策略時間',
+  'savePlan': '儲存策略',
   // process
   'processhtml': 'HTML 程式區',
   'processcss': 'CSS 程式區',
@@ -34,6 +37,7 @@ const taskTable: Record<string, string> = {
   //reflection
   'saveReflection': '儲存反思內容',
   'changeReflection': '更改反思內容',
+  'changeSelfScoring': '更改自我評分'
 }
 
 

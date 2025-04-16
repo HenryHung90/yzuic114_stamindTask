@@ -9,11 +9,13 @@ const API_getStudentTaskReflections = (taskId: string) => {
   return new API_POST(import.meta.env.VITE_APP_API_GET_STUDENT_TASK_REFLECTIONS, reflectionData).sendRequest()
 }
 
-const API_saveStudentTaskReflections = (taskId: string, selectNode: number, reflects: Array<IStudentReflection>) => {
+const API_saveStudentTaskReflections = (taskId: string, selectNode: number, reflects: Array<IStudentReflection>, completedTargets: Array<boolean>, selfScoring: number) => {
   const reflectionData: Req_StudentReflectionInfo = {
     task_id: taskId,
     select_node: selectNode,
-    reflects: reflects
+    reflects: reflects,
+    completed_targets: completedTargets,
+    self_scoring: selfScoring,
   }
   return new API_POST(import.meta.env.VITE_APP_API_SAVE_STUDENT_TASK_REFLECTIONS, reflectionData).sendRequest()
 }
