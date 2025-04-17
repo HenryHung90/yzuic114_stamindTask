@@ -2,15 +2,15 @@ import React, {useState} from "react";
 // style
 
 // API
+import {handleCustomRecord, IStudentRecords} from "../../utils/listener/action";
 
 // components
 import {Editor} from "@monaco-editor/react";
 import {emmetCSS, emmetHTML, emmetJSX} from "emmet-monaco-es";
 import FontSizeAdjustButtonComponent from "./FontSizeAdjustButton";
 import SavingStatusButtonComponent from "./SavingStatusButton";
+import OpenPageButtonComponent from "./OpenPageButton";
 import {CODE_STATUS, LANGUAGE_TYPE} from "../../pages/task/components/Process";
-import OpenIframeButtonComponent from "./OpenIframeButton";
-import {handleCustomRecord, IStudentRecords} from "../../utils/listener/action";
 
 
 // interface
@@ -22,6 +22,8 @@ interface ICodeEditorProps {
   handleSaveStudentCode: () => void
   openIframe: boolean
   setOpenIframe: React.Dispatch<React.SetStateAction<boolean>>
+  openProcessHint: boolean
+  setOpenProcessHint: React.Dispatch<React.SetStateAction<boolean>>
   studentId?: string
   setTempStudentRecords?: React.Dispatch<React.SetStateAction<Array<IStudentRecords>>>;
 }
@@ -35,6 +37,8 @@ const CodeEditorComponent = (props: ICodeEditorProps) => {
     handleSaveStudentCode,
     openIframe,
     setOpenIframe,
+    openProcessHint,
+    setOpenProcessHint,
     studentId,
     setTempStudentRecords
   } = props
@@ -98,7 +102,20 @@ const CodeEditorComponent = (props: ICodeEditorProps) => {
         <FontSizeAdjustButtonComponent fontSize={fontSize} increaseFontSize={increaseFontSize}
                                        decreaseFontSize={decreaseFontSize}/>
         <SavingStatusButtonComponent codeStatus={codeStatus} handleClickSave={handleSaveStudentCode}/>
-        <OpenIframeButtonComponent openIframe={openIframe} setOpenIframe={setOpenIframe}/>
+        <OpenPageButtonComponent
+          title='預覽畫面'
+          icon='🖥️'
+          open={openIframe}
+          setOpen={setOpenIframe}
+          dataObject="Iframe"
+        />
+        <OpenPageButtonComponent
+          title='實作提示'
+          icon='💡'
+          open={openProcessHint}
+          setOpen={setOpenProcessHint}
+          dataObject="ProcessHint"
+        />
       </div>
     </div>
   )
