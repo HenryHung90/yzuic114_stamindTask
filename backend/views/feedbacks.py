@@ -140,7 +140,7 @@ def get_teacher_feedback(request):
         task_id = request.data.get('task_id')
         select_node = request.data.get('select_node')
 
-        feedback_data = StudentTask.objects.get(class_name_id=task_id, student_id=request.user.student_id).feedback
+        feedback_data = StudentTask.objects.get(task_id=task_id, student_id=request.user.student_id).feedback
 
         if not feedback_data:
             return Response({'feedback': 'empty'}, status=status.HTTP_200_OK)
@@ -171,7 +171,7 @@ def generate_teacher_feedback(request):
 
         with transaction.atomic():
             task_data = Task.objects.get(id=task_id)
-            student_task_data = StudentTask.objects.get(class_name_id=task_id, student_id=request.user.student_id)
+            student_task_data = StudentTask.objects.get(task_id=task_id, student_id=request.user.student_id)
             feedback_data = student_task_data.feedback
 
             # get task target
