@@ -105,7 +105,7 @@ def login_system(request):
 
         return Response(
             {'message': 'success', 'name': student_info.name, 'user_type': student_info.user_type,
-             'student_id': student_info.student_id, 'status': 200},
+             'student_id': student_info.student_id, 'group_type': student_info.student_group.group_type, 'status': 200},
             status=status.HTTP_200_OK)
 
     except Exception as e:

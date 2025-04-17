@@ -98,6 +98,7 @@ class API_POST extends APIController {
         data: response.data,
         student_id: response.data.student_id,
         user_type: response.data.user_type,
+        group_type: response.data.group_type,
         status: response.status
       }
       return resData

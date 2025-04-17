@@ -17,17 +17,19 @@ import {API_login} from "../../utils/API/API_LoginSystem";
 // interface
 import {ISettingAlertLogAndLoading} from "../../utils/interface/alertLog";
 import {ResponseData} from "../../utils/API/API_Interface";
+import {EGroupType} from "../../utils/functions/common";
 
 interface ILoginProps {
   settingAlertLogAndLoading: ISettingAlertLogAndLoading;
   setAuth: React.Dispatch<React.SetStateAction<false | 'STUDENT' | 'TEACHER'>>;
   setName: React.Dispatch<React.SetStateAction<string>>
-  setStudentId: React.Dispatch<React.SetStateAction<string>>;
+  setStudentId: React.Dispatch<React.SetStateAction<string>>
+  setGroupType: React.Dispatch<React.SetStateAction<EGroupType>>
 }
 
 const Login = (props: ILoginProps) => {
 
-  const {settingAlertLogAndLoading, setAuth, setName, setStudentId} = props;
+  const {settingAlertLogAndLoading, setAuth, setName, setStudentId, setGroupType} = props;
 
   const [acc, setAcc] = useState<string>("")
   const [psw, setPsw] = useState<string>("")
@@ -56,6 +58,7 @@ const Login = (props: ILoginProps) => {
         setName(response.name)
         setAuth(response.user_type)
         setStudentId(response.student_id)
+        setGroupType(response.group_type as EGroupType)
         settingAlertLogAndLoading.setLoadingOpen(false)
 
         response.user_type === 'TEACHER' ? NavLocation("/admin") : NavLocation("/home")
