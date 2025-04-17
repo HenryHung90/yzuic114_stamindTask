@@ -64,7 +64,7 @@ interface ITaskSubTargetListProps {
 
 // Process
 interface ITaskProcessProps extends ITaskContentProps {
-  savingTrigger: number
+  savingTrigger?: number
 }
 
 interface ITaskProcessHint {
