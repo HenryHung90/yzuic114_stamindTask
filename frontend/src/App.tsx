@@ -122,7 +122,7 @@ export default function App() {
     {
       path: '*',
       element: <Login settingAlertLogAndLoading={settingAlertLogAndLoading} setAuth={setAuth} setName={setName}
-                      setStudentId={setStudentId}/>
+                      setStudentId={setStudentId} setGroupType={setGroupType}/>
     },
   ]
 
