@@ -111,7 +111,7 @@ const CarouselComponent = (props: ICarouselProps) => {
             carouselImgList.map((link, index) => (
               <img
                 key={index}
-                src={`/files/text_book/${link}`}
+                src={`/${import.meta.env.VITE_APP_FILE_ROUTE}/text_book/${link}`}
                 alt={`page_${index + 1}`}
                 className="object-fill object-center text-center"
                 draggable='false'

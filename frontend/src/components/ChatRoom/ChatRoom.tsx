@@ -47,7 +47,7 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
         if (response.data.messages == 'empty') return setIsMessageEnded(true)
 
         const history_list: Array<IMessages> = response.data.messages
-        if(history_list){
+        if (history_list) {
           setMessages(prevState => {
             return [...history_list, ...prevState]
           })
@@ -151,7 +151,7 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
       className="overflow-hidden flex flex-col justify-between min-w-[24rem] min-h-[40rem] bg-stamindTask-white-200 rounded-xl shadow-lg shadow-stamindTask-primary-blue-600 animate-tooltipSlideIn">
       <div className='flex justify-between bg-stamindTask-black-850 p-3 gap-x-2'>
         <div className='flex items-center gap-x-2'>
-          <img src='/files/img/logo.PNG' width='36'/>
+          <img src={`/${import.meta.env.VITE_APP_FILE_ROUTE}/img/logo.PNG`} width='36'/>
           <Typography variant="h5" color='blue' textGradient placeholder={undefined}>AmumAmum 助理</Typography>
         </div>
         <IconButton
