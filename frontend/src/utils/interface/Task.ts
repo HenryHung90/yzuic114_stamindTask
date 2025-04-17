@@ -64,6 +64,18 @@ interface ITaskSubTargetListProps {
 
 // Process
 interface ITaskProcessProps extends ITaskContentProps {
+  savingTrigger?: number
+}
+
+interface ITaskProcessHint {
+  title: string
+  description: string
+}
+
+interface ITaskProcessHintProps extends ITaskProcessHint {
+  index: number | undefined
+  handleEditProcessHint: (index: number, key: 'title' | 'description', value: string) => void
+  handleDeleteProcessHint: (index: number) => void
 }
 
 // Reflection
@@ -95,6 +107,8 @@ export type {
   ITaskPlanContentProps,
   ITaskSubTargetListProps,
   ITaskProcessProps,
+  ITaskProcessHint,
+  ITaskProcessHintProps,
   ITaskReflectionProps,
   IReflection,
   IStudentReflection,

@@ -48,7 +48,7 @@ const TaskContentComponent = (props: ITaskContentProps) => {
             <TargetComponent taskId={taskId} selectNode={selectNode} savingTrigger={savingTrigger}
                              settingAlertLogAndLoading={settingAlertLogAndLoading}/>}
         {selectNode.category === 'Process' &&
-            <ProcessComponent taskId={taskId} selectNode={selectNode}
+            <ProcessComponent taskId={taskId} selectNode={selectNode} savingTrigger={savingTrigger}
                               settingAlertLogAndLoading={settingAlertLogAndLoading}/>
         }
         {selectNode.category === 'Reflection' &&
@@ -57,7 +57,7 @@ const TaskContentComponent = (props: ITaskContentProps) => {
         }
       </DialogBody>
       <DialogFooter placeholder={undefined} className='gap-x-2'>
-        {(selectNode.category === 'Target' || selectNode.category === 'Reflection') &&
+        {(selectNode.category === 'Target' || selectNode.category === 'Reflection' || selectNode.category === 'Process') &&
             <Button variant="gradient" color="green" onClick={handleSavingTriggerClick} placeholder={undefined}>
                 <span>Save</span>
             </Button>

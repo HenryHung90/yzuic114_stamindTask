@@ -13,7 +13,7 @@ interface IFileUploadProps {
   fileInputRef: React.RefObject<HTMLInputElement>
   setAlertOpen: React.Dispatch<React.SetStateAction<boolean>>
   setAlertContent: React.Dispatch<React.SetStateAction<string>>
-  setFileData: React.Dispatch<React.SetStateAction<string>> | React.Dispatch<React.SetStateAction<Array<string>>>
+  setFileData: undefined | React.Dispatch<React.SetStateAction<string>> | React.Dispatch<React.SetStateAction<Array<string>>>
 }
 
 const FileUploadComponent = (props: IFileUploadProps) => {
@@ -54,7 +54,7 @@ const FileUploadComponent = (props: IFileUploadProps) => {
         setFileName(files[0].name)
         // 本地預覽
         const fileURL = URL.createObjectURL(files[0])
-        if (type == 'HTML') (setFileData as React.Dispatch<React.SetStateAction<string>>)(fileURL)
+        if (type == 'HTML' && setFileData) (setFileData as React.Dispatch<React.SetStateAction<string>>)(fileURL)
       }
     }
   };

@@ -40,11 +40,11 @@ def get_task_target(request):
         return Response({'get tasks experience Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
-# Upload Task Target
+# save Task Target
 @ensure_csrf_cookie
 @permission_classes([IsAuthenticated])
 @api_view(['POST'])
-def upload_task_target(request):
+def save_task_target(request):
     try:
         task_id = request.data.get('task_id')
         select_node = int(request.data.get('select_node'))

@@ -32,10 +32,12 @@ const DiagramInitComponent = (props: IDiagramInitProps) => {
     isEditMode
   } = props
 
-  function filterNodeForGroup(node: Array<Node>) {
-    for (const item of nodeDataArray) {
-      if (groupType === EGroupType.CONTROL && item.text == '計畫設定' || item.text == '自我反思') {
-        item.text = '繼續加油～'
+  function filterNodeForGroup(nodes: Array<Node>) {
+    if (nodes) {
+      for (const node of nodes) {
+        if (groupType === EGroupType.CONTROL && (node.text == '計畫設定' || node.text == '自我反思')) {
+          node.text = '繼續加油～'
+        }
       }
     }
   }
@@ -348,7 +350,7 @@ const DiagramInitComponent = (props: IDiagramInitProps) => {
     return () => {
       diagram.div = null;
     };
-  }, [])
+  }, [divRef])
 
   // 當資料變更時更新圖表
   useEffect(() => {

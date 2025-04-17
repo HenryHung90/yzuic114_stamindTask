@@ -18,6 +18,7 @@ from backend.views.chat_histories import *
 from backend.views.chatgpt import *
 from backend.views.student_records import *
 from backend.views.student_group import *
+from backend.views.process_hints import *
 
 urlpatterns = []
 
@@ -43,6 +44,8 @@ API_POST = [
     # upload Student Task Plan
     path('upload_task_plan/', upload_task_plan, name='upload_task_plan'),
 
+    # get Process Hint
+    path('get_process_hint/', get_process_hint, name='get_process_hint'),
     # get Process Code
     path('get_student_task_process_code/', get_student_task_process_code, name='get_student_task_process_code'),
     # save Process Code
@@ -108,10 +111,12 @@ API_ADMIN_POST = [
     path('admin/save_task_diagram/', save_task_diagram, name='save_task_diagram'),
     # upload Experience file
     path('admin/upload_experience_file/', upload_experience_file, name='upload_experience_file'),
-    # upload Task Target
-    path('admin/upload_task_target/', upload_task_target, name='upload_task_target'),
+    # save Task Target
+    path('admin/save_task_target/', save_task_target, name='save_task_target'),
     # upload Task TextBook file
     path('admin/upload_text_book_file/', upload_text_book_file, name='upload_text_book_file'),
+    # save Process Hints
+    path('admin/save_process_hint/', save_process_hint, name='save_process_hint'),
     # save Reflection Questions
     path('admin/save_reflection_questions/', save_reflection_questions, name='save_reflection_questions'),
 

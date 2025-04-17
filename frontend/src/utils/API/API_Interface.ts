@@ -1,5 +1,5 @@
 import {Node, Link} from '../interface/diagram'
-import {IReflection, IStudentReflection, ITaskPlan, ITaskSubTarget} from "../interface/Task";
+import {IReflection, IStudentReflection, ITaskPlan, ITaskProcessHint, ITaskSubTarget} from "../interface/Task";
 import {IStudentRecords} from "../listener/action";
 import {EGroupType} from "../functions/common";
 
@@ -89,6 +89,12 @@ interface Req_planInfo extends RequestParams {
 
 interface Req_textBookInfo extends RequestParams {
   task_id: string | undefined
+}
+
+interface Req_processHintInfo extends RequestParams {
+  task_id: string | undefined
+  select_node?: number
+  process_hint_list?: Array<ITaskProcessHint>
 }
 
 interface Req_studentNoteInfo extends RequestParams {
@@ -192,6 +198,7 @@ export type{
   Req_targetInfo,
   Req_planInfo,
   Req_textBookInfo,
+  Req_processHintInfo,
   Req_studentNoteInfo,
   Req_StudentTaskProcessCodeInfo,
   Req_ReflectionQuestionInfo,

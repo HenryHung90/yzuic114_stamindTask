@@ -6,7 +6,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.db import transaction
 
 # model
-from backend.models import Task, ClassName, Experience, Target, TextBook, ReflectionQuestion
+from backend.models import Task, ClassName, Experience, Target, TextBook, ReflectionQuestion, ProcessHints
 
 """
  Response Status List:
@@ -99,6 +99,7 @@ def add_new_task(request):
             target = Target.objects.create(name=task_name + "目標")
             text_book = TextBook.objects.create(name=task_name + "教材")
             reflection_question = ReflectionQuestion.objects.create(name=task_name + "反思題目")
+            process_hint = ProcessHints.objects.create()
 
             new_task = Task.objects.create(
                 name=task_name,
@@ -107,7 +108,8 @@ def add_new_task(request):
                 experience=experience,
                 target=target,
                 text_book=text_book,
-                reflection_question=reflection_question
+                reflection_question=reflection_question,
+                process_hint=process_hint
             )
 
         return Response({'message': 'success'}, status=status.HTTP_200_OK)

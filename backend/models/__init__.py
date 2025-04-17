@@ -3,6 +3,7 @@ from .class_names import ClassName
 from .exams import Exam
 from .experiences import Experience
 from .feedbacks import Feedback
+from .process_hints import ProcessHints
 from .reflection_questions import ReflectionQuestion
 from .student_exams import StudentExam
 from .student_groups import StudentGroup
@@ -24,6 +25,7 @@ __all__ = [
     'Exam',
     'Experience',
     'Feedback',
+    'ProcessHints',
     'ReflectionQuestion',
     'StudentExam',
     'StudentGroup',
