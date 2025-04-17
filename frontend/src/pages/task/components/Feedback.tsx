@@ -28,9 +28,9 @@ const FeedbackComponent = (props: ITaskFeedbackProps) => {
     const fetchTeacherFeedback = () => {
       setAlertContent('🟠確認您的進度中...')
       API_getStudentTaskReflections(taskId || '').then(response => {
-        const reflectionData = response.data.reflect_list[selectNode.key]
-
-        if (reflectionData) {
+        setAlertOpen(true)
+        if (response.data.reflect_list) {
+          const reflectionData = response.data.reflect_list[selectNode.key] ?? []
           const isNotComplete = reflectionData.some((reflect: { reflect: string }) => reflect.reflect == '')
           if (!isNotComplete) {
             API_getTeacherFeedback(taskId || '', selectNode.key).then(response => {
@@ -48,6 +48,9 @@ const FeedbackComponent = (props: ITaskFeedbackProps) => {
             setFeedbackContent('你尚未完成本階段')
             setAlertContent('🟢取得回饋成功')
           }
+        } else {
+          setFeedbackContent('你尚未完成本階段')
+          setAlertContent('🟢取得回饋成功')
         }
 
       })
