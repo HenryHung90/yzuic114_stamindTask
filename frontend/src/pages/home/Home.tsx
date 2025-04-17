@@ -8,16 +8,18 @@ import TaskAreaComponent from './components/TaskArea'
 
 // interface
 import {ISettingAlertLogAndLoading} from "../../utils/interface/alertLog";
+import {EGroupType} from "../../utils/functions/common";
 
 interface IHomeProps {
   auth: false | 'STUDENT' | 'TEACHER'
   name: string
   studentId: string
   settingAlertLogAndLoading: ISettingAlertLogAndLoading
+  groupType: EGroupType
 }
 
 const Home = (props: IHomeProps) => {
-  const {auth, name, studentId, settingAlertLogAndLoading} = props
+  const {auth, name, studentId, groupType, settingAlertLogAndLoading} = props
 
   return (
     <div className="animate-fadeIn">

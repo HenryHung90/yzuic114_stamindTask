@@ -3,12 +3,19 @@ from django.db import models
 
 
 class StudentTaskReflection(models.Model):
-    score= ArrayField(
+    self_scoring = ArrayField(
         models.IntegerField(),
         null=True,
         blank=True,
         default=list,
         verbose_name="自我評分列表"
+    )
+
+    completed_targets = models.JSONField(
+        null=True,
+        blank=True,
+        verbose_name="是否完成子任務列表",
+        help_text='包含是否完成子任務的 Boolean 的 Array<JSON> 格式資料'
     )
 
     reflects = models.JSONField(

@@ -1,6 +1,7 @@
 import {Node, Link} from '../interface/diagram'
 import {IReflection, IStudentReflection, ITaskPlan, ITaskSubTarget} from "../interface/Task";
 import {IStudentRecords} from "../listener/action";
+import {EGroupType} from "../functions/common";
 
 // Request 訊息內容
 interface RequestParams {
@@ -111,6 +112,8 @@ interface Req_StudentReflectionInfo extends RequestParams {
   task_id: string | undefined
   select_node?: number
   reflects?: Array<IStudentReflection>
+  completed_targets?: Array<boolean>
+  self_scoring?: number
 }
 
 interface Req_StudentChatHistory extends RequestParams {
@@ -135,6 +138,7 @@ interface Req_feedbackInfo extends RequestParams {
 interface CSRF_cookies extends ResponseData {
   isAuthenticated: false | 'STUDENT' | 'TEACHER'
   user_type: false | 'STUDENT' | 'TEACHER'
+  group_type: EGroupType
   name: string
   student_id: string
 }

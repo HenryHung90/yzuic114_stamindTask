@@ -14,10 +14,11 @@ interface CheckBoxListProps {
   selectSubList: boolean[]
   setSelectSubList: React.Dispatch<React.SetStateAction<Array<boolean>>>
   index: number
+  isDisabled?: boolean
 }
 
 const CheckBoxListComponent = (props: CheckBoxListProps) => {
-  const {value, title, description, selectSubList, setSelectSubList, index} = props
+  const {value, title, description, selectSubList, setSelectSubList, index, isDisabled = true} = props
 
   const handleChange = (e: any) => {
     setSelectSubList((prev) => {
@@ -30,6 +31,7 @@ const CheckBoxListComponent = (props: CheckBoxListProps) => {
     <Checkbox
       checked={selectSubList[index]}
       onChange={handleChange}
+      {...(isDisabled ? {} : {disabled: true})}
       label={
         <div>
           <Typography color="blue-gray" className="font-medium !min-w-[8rem]" placeholder={undefined}>
