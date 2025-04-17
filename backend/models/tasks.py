@@ -58,6 +58,16 @@ class Task(models.Model):
         related_name='task'
     )
 
+    process_hint = models.OneToOneField(
+        'ProcessHints',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        verbose_name='計劃執行提示',
+        help_text='協助學生解題的提示',
+        related_name='task'
+    )
+
     reflection_question = models.OneToOneField(
         'ReflectionQuestion',
         on_delete=models.CASCADE,
