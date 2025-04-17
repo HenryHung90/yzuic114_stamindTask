@@ -145,7 +145,7 @@ const ProcessComponent = (props: ITaskProcessProps) => {
         setAlertContent(`🟢更新成功:${response.message}`)
       })
     }
-    if (savingTrigger > 0) uploadProcessHint()
+    if (savingTrigger && savingTrigger > 0) uploadProcessHint()
   }, [savingTrigger])
 
   useEffect(() => {
