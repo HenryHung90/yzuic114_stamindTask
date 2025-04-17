@@ -33,7 +33,11 @@ const taskTable: Record<string, string> = {
   'processSave': '儲存當前程式',
   'processOpenIframe': '打開程式執行預覽',
   'processCloseIframe': '關閉程式執行預覽',
+  'processOpenProcessHint': '打開實作提示',
+  'processCloseProcessHint': '關閉實作提示',
   'processCodeEditor': '程式區塊',
+  'processHintTitle': '實作提示標題',
+  'processHintDescription': '實作提示描述',
   //reflection
   'saveReflection': '儲存反思內容',
   'changeReflection': '更改反思內容',

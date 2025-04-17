@@ -17,7 +17,7 @@ const API_uploadTaskTarget = (taskId: string, selectNode: number, title: string,
     target_description: description,
     sub_target_list: subTargets
   }
-  return new API_POST(import.meta.env.VITE_APP_API_UPLOAD_TASK_TARGET || '', targetData).sendRequest()
+  return new API_POST(import.meta.env.VITE_APP_API_SAVE_TASK_TARGET || '', targetData).sendRequest()
 }
 
 
