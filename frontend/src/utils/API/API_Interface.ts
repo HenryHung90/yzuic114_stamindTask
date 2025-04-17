@@ -154,6 +154,7 @@ interface Res_login extends ResponseData {
   user_type: false | 'STUDENT' | 'TEACHER'
   student_id: string
   status: number
+  group_type: EGroupType
 }
 
 interface Res_tasksInfo extends ResponseData {
