@@ -98,7 +98,8 @@ const ProcessComponent = (props: ITaskProcessProps) => {
       API_getProcessHint(taskId || '').then(response => {
         const processHint = response.data.process_hint_list[selectNode.key]
         // 若沒有其他提示則使用第一組的hint
-        if (processHint) setProcessHintList(processHint[0] ?? [])
+        if (processHint) setProcessHintList(processHint)
+        else setProcessHintList(response.data.process_hint_list[0])
       })
     }
 
