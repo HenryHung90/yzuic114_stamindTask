@@ -34,7 +34,7 @@ const DiagramInitComponent = (props: IDiagramInitProps) => {
 
   function filterNodeForGroup(node: Array<Node>) {
     for (const item of nodeDataArray) {
-      if (groupType === EGroupType.CONTROL && item.text == '計畫設定' || item.text == '自我反思') {
+      if (groupType === EGroupType.CONTROL && (item.text == '計畫設定' || item.text == '自我反思')) {
         item.text = '繼續加油～'
       }
     }
