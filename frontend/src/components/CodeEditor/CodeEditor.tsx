@@ -11,6 +11,7 @@ import FontSizeAdjustButtonComponent from "./FontSizeAdjustButton";
 import SavingStatusButtonComponent from "./SavingStatusButton";
 import OpenPageButtonComponent from "./OpenPageButton";
 import {CODE_STATUS, LANGUAGE_TYPE} from "../../pages/task/components/Process";
+import {EGroupType} from "../../utils/functions/common";
 
 
 // interface
@@ -20,6 +21,7 @@ interface ICodeEditorProps {
   value: string | undefined
   onChangeFunction: (value: string | undefined) => void
   handleSaveStudentCode: () => void
+  groupType?: EGroupType
   openIframe: boolean
   setOpenIframe: React.Dispatch<React.SetStateAction<boolean>>
   openProcessHint: boolean
@@ -35,6 +37,7 @@ const CodeEditorComponent = (props: ICodeEditorProps) => {
     value,
     onChangeFunction,
     handleSaveStudentCode,
+    groupType,
     openIframe,
     setOpenIframe,
     openProcessHint,
@@ -109,13 +112,15 @@ const CodeEditorComponent = (props: ICodeEditorProps) => {
           setOpen={setOpenIframe}
           dataObject="Iframe"
         />
-        <OpenPageButtonComponent
-          title='實作提示'
-          icon='💡'
-          open={openProcessHint}
-          setOpen={setOpenProcessHint}
-          dataObject="ProcessHint"
-        />
+        {groupType && groupType === EGroupType.EXPERIMENTAL &&
+            <OpenPageButtonComponent
+                title='實作提示'
+                icon='💡'
+                open={openProcessHint}
+                setOpen={setOpenProcessHint}
+                dataObject="ProcessHint"
+            />
+        }
       </div>
     </div>
   )

@@ -85,7 +85,7 @@ const TaskContentComponent = (props: ITaskContentProps) => {
         }
         {selectNode.category === 'Process' &&
             <ProcessComponent taskId={taskId} selectNode={selectNode}
-                              studentId={studentId}
+                              studentId={studentId} groupType={groupType}
                               setTempStudentRecords={setTempStudentRecords}
                               settingAlertLogAndLoading={settingAlertLogAndLoading}/>
         }

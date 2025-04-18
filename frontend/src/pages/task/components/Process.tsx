@@ -34,7 +34,7 @@ export enum CODE_STATUS {
 
 
 const ProcessComponent = (props: ITaskProcessProps) => {
-  const {taskId, selectNode, studentId, setTempStudentRecords} = props
+  const {taskId, groupType, selectNode, studentId, setTempStudentRecords} = props
 
   const [activeTab, setActiveTab] = useState<LANGUAGE_TYPE>(LANGUAGE_TYPE.HTML)
   const [htmlCode, setHtmlCode] = useState<string>("")
@@ -169,6 +169,7 @@ const ProcessComponent = (props: ITaskProcessProps) => {
           value={selectCodeType()}
           onChangeFunction={handleCodeChange}
           handleSaveStudentCode={handleSaveStudentCode}
+          groupType={groupType}
           openIframe={openIframe}
           setOpenIframe={setOpenIframe}
           openProcessHint={openProcessHint}
