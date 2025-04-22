@@ -57,7 +57,7 @@ def upload_experience_file(request):
                     experience_files.append('empty')
 
         # 確保資料夾存在
-        upload_dir = os.path.join(settings.BASE_DIR, 'frontend/public/files/experience_files')
+        upload_dir = os.path.join(settings.BASE_DIR, os.getenv('EXPERIENCE_FILES_DIR'))
         os.makedirs(upload_dir, exist_ok=True)
 
         # 儲存檔案到指定資料夾
