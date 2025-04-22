@@ -12,9 +12,9 @@ import {
   handleChangeName,
   handleChangePassword,
   handleChangeStudentId,
-  handleDonwloadChatHistories,
-  handleDonwloadFeedback,
-  handleDonwloadStudentRecord
+  handleDownloadChatHistories,
+  handleDownloadFeedback,
+  handleDownloadStudentRecord
 } from "../../../../../../utils/functions/admin/home/components/studentList";
 import {API_getAllStudents, API_getStudentsByClassName} from "../../../../../../utils/API/API_Students";
 // components
@@ -42,14 +42,14 @@ const StudentListComponent = (props: IStudentListProps) => {
 
   const stableStudentList = useMemo(() => studentList || [], [studentList])
 
-  const fetchStudentListAsync = async () => {
+  const fetchStudentListAsync = () => {
     settingAlertLogAndLoading.setLoadingOpen(true)
     if (className == '' || className == 'ALL') {
-      await API_getAllStudents().then(response => {
+      API_getAllStudents().then(response => {
         setStudentList(response.data.students_data)
       })
     } else {
-      await API_getStudentsByClassName(className || '').then(response => {
+      API_getStudentsByClassName(className || '').then(response => {
         setStudentList(response.data.students_data)
       })
     }
@@ -81,29 +81,42 @@ const StudentListComponent = (props: IStudentListProps) => {
   const MENU_ITEMS = (studentId: string): Array<IMenuItems> => [
     {
       name: "啟用/停用帳號",
-      handleClick: () => handleSwitchActive(studentId, settingAlertLogAndLoading, fetchStudentListAsync)
+      handleClick: () => handleSwitchActive({studentId, loading: settingAlertLogAndLoading, fetchStudentListAsync})
     },
     {
       name: "變更實驗組/對照組",
-      handleClick: () => handleSwitchGroup(studentId, settingAlertLogAndLoading, fetchStudentListAsync)
+      handleClick: () => handleSwitchGroup({studentId, loading: settingAlertLogAndLoading, fetchStudentListAsync})
     },
     {
       subMenu: <MultipleMenuComponent menuTitle={"學生資料變更"} menuItems={[
         {
           name: "變更年級",
-          handleClick: () => handleChangeClassName(studentId, classList, settingAlertLogAndLoading, fetchStudentListAsync)
+          handleClick: () => handleChangeClassName({
+            studentId,
+            classList,
+            loading: settingAlertLogAndLoading,
+            fetchStudentListAsync
+          })
         },
         {
           name: "變更名稱",
-          handleClick: () => handleChangeName(studentId, settingAlertLogAndLoading, fetchStudentListAsync)
+          handleClick: () => handleChangeName({studentId, loading: settingAlertLogAndLoading, fetchStudentListAsync})
         },
         {
           name: "變更學號",
-          handleClick: () => handleChangeStudentId(studentId, settingAlertLogAndLoading, fetchStudentListAsync)
+          handleClick: () => handleChangeStudentId({
+            studentId,
+            loading: settingAlertLogAndLoading,
+            fetchStudentListAsync
+          })
         },
         {
           name: "變更密碼",
-          handleClick: () => handleChangePassword(studentId, settingAlertLogAndLoading, fetchStudentListAsync)
+          handleClick: () => handleChangePassword({
+            studentId,
+            loading: settingAlertLogAndLoading,
+            fetchStudentListAsync
+          })
         }
       ]}/>
     },
@@ -111,15 +124,27 @@ const StudentListComponent = (props: IStudentListProps) => {
       subMenu: <MultipleMenuComponent menuTitle={"學生資料下載"} menuItems={[
         {
           name: "下載聊天記錄",
-          handleClick: () => handleDonwloadChatHistories(studentId, settingAlertLogAndLoading, fetchStudentListAsync)
+          handleClick: () => handleDownloadChatHistories({
+            studentId,
+            loading: settingAlertLogAndLoading,
+            fetchStudentListAsync
+          })
         },
         {
           name: "下載回饋內容",
-          handleClick: () => handleDonwloadFeedback(studentId, settingAlertLogAndLoading, fetchStudentListAsync)
+          handleClick: () => handleDownloadFeedback({
+            studentId,
+            loading: settingAlertLogAndLoading,
+            fetchStudentListAsync
+          })
         },
         {
           name: "下載操作行為",
-          handleClick: () => handleDonwloadStudentRecord(studentId, settingAlertLogAndLoading, fetchStudentListAsync)
+          handleClick: () => handleDownloadStudentRecord({
+            studentId,
+            loading: settingAlertLogAndLoading,
+            fetchStudentListAsync
+          })
         }
       ]}/>
     }

@@ -13,6 +13,7 @@ import {
 // components
 // interface
 import {ISettingAlertLogAndLoading} from "../../../../interface/alertLog";
+import {convertToXlsxFile} from "../../../common";
 
 function handlePromise(messageTitle: string, messageInfo: string, loading: ISettingAlertLogAndLoading) {
   loading.setAlertLog(messageTitle, messageInfo)
@@ -47,28 +48,7 @@ function handleAddNewStudent(loading: ISettingAlertLogAndLoading) {
 function handleDownloadStudentList(loading: ISettingAlertLogAndLoading) {
   loading.setLoadingOpen(true)
   API_getAllStudents().then(response => {
-    const studentData = response.data.students_data
-    // 將數據轉換為工作表
-    const worksheet = XLSX.utils.json_to_sheet(studentData);
-
-    // 創建工作簿並添加工作表
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Students');
-
-    // 將工作簿轉換為二進制數據
-    const workbookBinary = XLSX.write(workbook, {bookType: 'xlsx', type: 'array'});
-
-    // 創建 Blob 對象
-    const blob = new Blob([workbookBinary], {type: 'application/octet-stream'});
-
-    // 創建下載鏈接並觸發下載
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'students_data.xlsx';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    convertToXlsxFile('student_list.xlsx', 'students', response.data.students_data)
     loading.setLoadingOpen(false)
   })
 }

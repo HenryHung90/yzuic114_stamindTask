@@ -129,7 +129,8 @@ interface Req_StudentReflectionInfo extends RequestParams {
 }
 
 interface Req_StudentChatHistory extends RequestParams {
-  offset: number
+  student_id?: string
+  offset?: number
 }
 
 interface Req_ChatWithAmumAmum extends RequestParams {
@@ -137,12 +138,14 @@ interface Req_ChatWithAmumAmum extends RequestParams {
 }
 
 interface Req_StudentRecordInfo extends RequestParams {
-  student_records: Array<IStudentRecords>
+  student_id?: string
+  student_records?: Array<IStudentRecords>
 }
 
 interface Req_feedbackInfo extends RequestParams {
-  task_id: string | undefined
-  select_node: number
+  task_id?: string | undefined
+  select_node?: number
+  student_id?: string
 }
 
 // API Response Extension

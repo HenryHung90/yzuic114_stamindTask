@@ -11,6 +11,14 @@ interface IAdminMangeProps {
 interface IStudentManageProps extends IAdminMangeProps {
 }
 
+// Student Manage -> Student List
+interface IStudentListFuncProps {
+  studentId: string
+  loading: ISettingAlertLogAndLoading
+  fetchStudentListAsync: () => void
+  classList?: Array<Res_classNamesInfo>
+}
+
 interface ITaskManageProps extends IAdminMangeProps {
 }
 
@@ -38,6 +46,7 @@ interface IStudentManageControlBarProps extends IControlBarProps {
 
 export type {
   IStudentManageProps,
+  IStudentListFuncProps,
   ITaskManageProps,
   IGroupManageProps,
   IGroupData,

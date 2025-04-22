@@ -26,4 +26,11 @@ const API_saveStudentRecordsBeforeUnload = (studentRecords: FormData, e: any) =>
   }
 }
 
-export {API_saveStudentRecords, API_saveStudentRecordsBeforeUnload}
+const API_getStudentRecordByStudentId = (studentId: string) => {
+  const recordData: Req_StudentRecordInfo = {
+    student_id: studentId
+  }
+  return new API_POST(import.meta.env.VITE_APP_API_GET_STUDENT_RECORD_BY_STUDENT_ID, recordData).sendRequest()
+}
+
+export {API_saveStudentRecords, API_saveStudentRecordsBeforeUnload, API_getStudentRecordByStudentId}
