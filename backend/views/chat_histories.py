@@ -43,3 +43,33 @@ def get_chat_histories(request):
     except Exception as e:
         print(f'get Chat Histories Error: {e}')
         return Response({'get Chat Histories Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+# get Chat Histories
+@ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
+@api_view(['POST'])
+def get_chat_histories_by_student_id(request):
+    try:
+        student_id = request.data.get('student_id')
+
+        chat_history_data = User.objects.get(student_id=student_id).chat_history
+
+        if chat_history_data is None or chat_history_data is []:
+            return Response({'messages': 'empty'}, status=status.HTTP_204_NO_CONTENT)
+        else:
+            chat_history_data = chat_history_data.chat_history
+
+        res_messages = []
+        for history in chat_history_data:
+            modify_message = {
+                "time": history["time"],
+                "message": history["message"],
+                "studentId": history["student_id"],
+                "name": history["name"],
+            }
+            res_messages.append(modify_message)
+
+        return Response({'chat_history': res_messages}, status=status.HTTP_200_OK)
+    except Exception as e:
+        print(f'get Chat Histories by Student Id Error: {e}')
+        return Response({'get Chat Histories by Student Id Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

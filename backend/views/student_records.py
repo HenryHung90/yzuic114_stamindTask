@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.views.decorators.csrf import ensure_csrf_cookie
 
-from backend.models import ClassName, StudentRecord
+from backend.models import ClassName, StudentRecord, User
 
 """
  Response Status List:
@@ -15,6 +15,25 @@ from backend.models import ClassName, StudentRecord
  2. 400: client error
  3. 500: server error
 """
+
+
+def serialize_result_data(student_record_set):
+    serialized_data = []
+    for record in student_record_set:
+        record_data = {
+            'student_id': record.user_id,
+            'verb': record.verb,
+            'object_type': record.object_type,
+            'object_name': record.object_name,
+            'object_id': record.object_id,
+            'time': record.time,
+            'timer': record.timer,
+            'description': record.context.get('description'),
+            'device': str(record.context.get('device')),
+        }
+
+        serialized_data.append(record_data)
+    return serialized_data
 
 
 # save student note
@@ -40,7 +59,6 @@ def save_student_records(request):
                 for field in required_fields:
                     if field not in record_data:
                         raise ValueError(f"Missing required field: {field}")
-
 
                 # 建立記錄物件
                 record = StudentRecord(
@@ -74,3 +92,28 @@ def save_student_records(request):
     except Exception as e:
         print(f'save student records Error: {e}')
         return Response({'save student records Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# get student record by student id
+@ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
+@api_view(['POST'])
+def get_student_record_by_student_id(request):
+    try:
+        student_id = request.data.get('student_id')
+        record_data = User.objects.get(student_id=student_id).student_records.all()
+
+        if not record_data:
+            return Response({
+                'student_record': 'empty'
+            }, status=status.HTTP_204_NO_CONTENT)
+
+        record_result = serialize_result_data(record_data)
+        return Response({
+            'student_record': record_result
+        }, status=status.HTTP_200_OK)
+
+
+    except Exception as e:
+        print(f'get student record by student id Error: {e}')
+        return Response({'get student record by student id Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

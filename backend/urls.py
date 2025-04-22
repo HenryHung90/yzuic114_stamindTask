@@ -109,6 +109,13 @@ API_ADMIN_POST = [
     path('admin/update_student_group_by_student_id/', update_student_group_by_student_id,
          name='update_student_group_by_student_id'),
 
+    # get chat histories by student id
+    path('admin/get_chat_histories_by_student_id/', get_chat_histories_by_student_id, name='get_chat_histories_by_student_id'),
+    # get feedback by student id
+    path('admin/get_feedback_by_student_id/', get_feedback_by_student_id, name='get_feedback_by_student_id'),
+    # get student record by student id
+    path('admin/get_student_record_by_student_id/', get_student_record_by_student_id, name='get_student_record_by_student_id'),
+
     # add new class name
     path('admin/add_new_class_name/', add_new_class_name, name='add_new_class_name'),
     # add new Task

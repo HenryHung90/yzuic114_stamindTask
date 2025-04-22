@@ -131,6 +131,24 @@ def serialize_description_of_student(target, student_plan, student_code, task_re
     return '\n\n'.join(sections)
 
 
+
+def serialize_feedback_data(student_task_set):
+    serialized_data = []
+    for student_task in student_task_set:
+        feedback_data = {'教程': student_task.task.name}
+
+        # 處理智能回饋
+        for index, feedback in enumerate(student_task.feedback.teacher_feedback):
+            feedback_data[f'智能回饋_階段{index + 1}'] = feedback
+
+        # 處理學生資料紀錄
+        for index, feedback in enumerate(student_task.feedback.student_feedback):
+            feedback_data[f'學生資料紀錄_階段{index + 1}'] = feedback
+
+        serialized_data.append(feedback_data)
+    return serialized_data
+
+
 # get Teacher feedback
 @ensure_csrf_cookie
 @permission_classes([IsAuthenticated])
@@ -214,12 +232,15 @@ def generate_teacher_feedback(request):
                 file.write(student_summarize + '\n\n\n智能回饋' + gpt_response)
 
             if len(feedback_data.teacher_feedback) > select_node:
+                feedback_data.student_feedback[select_node] = student_summarize
                 feedback_data.teacher_feedback[select_node] = gpt_response
             else:
                 for i in range(len(feedback_data.teacher_feedback), select_node + 1):
                     if i == select_node:
+                        feedback_data.student_feedback.append(student_summarize)
                         feedback_data.teacher_feedback.append(gpt_response)
                     else:
+                        feedback_data.student_feedback.append('empty')
                         feedback_data.teacher_feedback.append('empty')
 
         feedback_data.save()
@@ -231,3 +252,22 @@ def generate_teacher_feedback(request):
     except Exception as e:
         print(f'generate teacher feedback Error: {e}')
         return Response({'generate teacher feedback Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+# get feedback by student id
+@ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
+@api_view(['POST'])
+def get_feedback_by_student_id(request):
+    try:
+        student_id = request.data.get('student_id')
+        student_data = StudentTask.objects.filter(student_id=student_id)
+
+        feedback_result = serialize_feedback_data(student_data)
+
+        return Response({
+            'feedback': feedback_result
+        }, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        print(f'get feedback by student id Error: {e}')
+        return Response({'get feedback by student id Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
