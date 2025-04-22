@@ -23,7 +23,7 @@ const MessageContentComponent = (props: IMessages) => {
       <div>
         <Typography className='text-sm' placeholder={undefined}>{name} {studentId}</Typography>
       </div>
-      <div className={`rounded-md py-2 px-4 ${type === 'User' ? 'bg-light-blue-200' : 'bg-white'}`}>
+      <div className={`rounded-md py-2 px-4 text-left ${type === 'User' ? 'bg-light-blue-200' : 'bg-white'}`}>
         <div
           className={`${type === 'Waiting' && 'bg-[length:600%_100%] bg-no-repeat bg-gradient-to-r from-light-blue-200 via-blue-500 to-light-blue-200 bg-clip-text animate-marquee'}`}>
           <MarkDownTextComponent text={message}/>
