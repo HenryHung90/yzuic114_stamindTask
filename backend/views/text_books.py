@@ -94,7 +94,7 @@ def upload_text_book_file(request):
 
         # 確保資料夾存在
         upload_dir = os.path.join(settings.BASE_DIR,
-                                  'frontend/public/files/text_book',
+                                  os.getenv('TEST_BOOK_FILES_DIR'),
                                   str(text_book_data.name),
                                   str(select_node))
         os.makedirs(upload_dir, exist_ok=True)
