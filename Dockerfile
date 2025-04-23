@@ -34,5 +34,8 @@ COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
 ENV PYTHONUNBUFFERED=1
 ENV DJANGO_SETTINGS_MODULE=yzuic114_webstudy.settings
 
+# 清理不必要的文件（示例：node_modules）
+RUN rm -rf /app/frontend/node_modules
+
 # 運行 Django 應用程式的指令
 CMD ["sh", "-c", "gunicorn yzuic114_webstudy.wsgi:application --bind 0.0.0.0:8000"]

@@ -13,10 +13,6 @@ services:
              python manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
-    volumes:
-      - .:/app
-      - /app/frontend/node_modules  # 排除 node_modules
-      - /app/frontend/dist          # 排除 dist 目錄，防止被主機目錄覆蓋
     env_file:
       - .env
     environment:
