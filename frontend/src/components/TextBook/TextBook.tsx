@@ -51,7 +51,7 @@ const TextBookComponent = (props: ITextBookProps) => {
           x: 0,
           y: 0,
           width: window.innerWidth * 0.3,
-          height: 'auto',
+          height: window.innerHeight * 0.3,
         }}
         bounds="parent"
         className='pointer-events-auto'

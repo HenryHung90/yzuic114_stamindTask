@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import {API_getTaskTarget} from "../../../utils/API/API_Targets";
 
 // components
+import MarkDownTextComponent from "../../../components/MarkDownText/MarkDownText";
 
 // interface
 import {ITaskContentProps, ITaskSubTarget} from "../../../utils/interface/Task";
@@ -49,7 +50,7 @@ const TargetComponent = (props: ITaskContentProps) => {
           data-id='task_targetDescription'
         >{targetDescription}</p>
       </div>
-      <div className='overflow-scroll flex flex-col gap-y-5 mt-5 pt-4 w-[60%] h-[32rem] border-stamindTask-black-850'>
+      <div className='overflow-scroll flex flex-col gap-y-5 mt-5 pt-4 h-[60vh] border-stamindTask-black-850'>
         {subTargetList.map(({title, description}, index) => (
           <div key={index}
                className='flex flex-col min-h-44 p-4 gap-y-3 border-2 border-stamindTask-black-600 rounded-2xl'>
@@ -65,7 +66,9 @@ const TargetComponent = (props: ITaskContentProps) => {
               data-type='text'
               data-object='subTargetDescription'
               data-id='task_subTargetDescription'
-            >{description}</p>
+            >
+              <MarkDownTextComponent text={description}/>
+            </p>
           </div>
         ))}
       </div>
