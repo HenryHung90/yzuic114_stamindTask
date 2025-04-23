@@ -95,7 +95,7 @@ const StudentGroupListComponent = (props: IGroupManageProps) => {
                     <div
                       ref={provided.innerRef}
                       {...provided.droppableProps}
-                      className={`max-h-96 overflow-auto p-2 rounded duration-500 ${
+                      className={`h-96 overflow-auto p-2 rounded duration-500 ${
                         snapshot.isDraggingOver ? "bg-blue-50" : "bg-gray-50"
                       }`}
                     >
