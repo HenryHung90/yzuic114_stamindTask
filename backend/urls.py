@@ -19,6 +19,7 @@ from backend.views.chatgpt import *
 from backend.views.student_records import *
 from backend.views.student_group import *
 from backend.views.process_hints import *
+from backend.views.student_task_processes import *
 
 urlpatterns = []
 
@@ -46,6 +47,11 @@ API_POST = [
 
     # get Process Hint
     path('get_process_hint/', get_process_hint, name='get_process_hint'),
+    # get Process Hint Reply
+    path('get_process_hint_reply/', get_process_hint_reply, name='get_process_hint_reply'),
+    # save Process Hint Reply
+    path('save_process_hint_reply/', save_process_hint_reply, name='save_process_hint_reply'),
+
     # get Process Code
     path('get_student_task_process_code/', get_student_task_process_code, name='get_student_task_process_code'),
     # save Process Code
