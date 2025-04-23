@@ -12,6 +12,7 @@ import {Typography} from "@material-tailwind/react";
 
 // interface
 import {IMessages} from "../../utils/interface/chatRoom";
+import MarkDownTextComponent from "../MarkDownText/MarkDownText";
 
 
 const MessageContentComponent = (props: IMessages) => {
@@ -25,15 +26,7 @@ const MessageContentComponent = (props: IMessages) => {
       <div className={`rounded-md py-2 px-4 ${type === 'User' ? 'bg-light-blue-200' : 'bg-white'}`}>
         <div
           className={`${type === 'Waiting' && 'bg-[length:600%_100%] bg-no-repeat bg-gradient-to-r from-light-blue-200 via-blue-500 to-light-blue-200 bg-clip-text animate-marquee'}`}>
-          {/*@ts-ignore*/}
-          <div className="prose prose-slate max-w-none">
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeHighlight]}
-            >
-              {message}
-            </ReactMarkdown>
-          </div>
+          <MarkDownTextComponent text={message}/>
         </div>
       </div>
       <div>
