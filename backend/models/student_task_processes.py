@@ -18,6 +18,13 @@ class StudentTaskProcess(models.Model):
         verbose_name='任務執行設定內容'
     )
 
+    process_hint_reply = models.JSONField(
+        default=list,
+        null=True,
+        blank=True,
+        verbose_name='實作提示回覆內容'
+    )
+
     # 時間戳記
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
