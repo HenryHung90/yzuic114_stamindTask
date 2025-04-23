@@ -4,19 +4,22 @@ import React, {useEffect, useState} from "react"
 
 // API
 import {
-  API_getStudentTaskProcessCode,
+  API_getProcessHintReply,
+  API_getStudentTaskProcessCode, API_saveProcessHintReply,
   API_saveStudentTaskProcessCode
-} from "../../../utils/API/API_StudentTaskProcessCode";
+} from "../../../utils/API/API_StudentTaskProcess";
 import {API_getProcessHint} from "../../../utils/API/API_ProcessHint";
+import {handleCustomRecord} from "../../../utils/listener/action";
 
 // components
 import TabSelectorComponent from "../../../components/TabSelector/TabSelector";
 import CodeEditorComponent from "../../../components/CodeEditor/CodeEditor";
 import IframeShowerComponent from "../../../components/IframeShower/IframeShower";
+import MarkDownTextComponent from "../../../components/MarkDownText/MarkDownText";
 
 // interface
 import {ITaskProcessHint, ITaskProcessProps} from "../../../utils/interface/Task";
-import {IconButton} from "@material-tailwind/react";
+import {Button, IconButton, Textarea, Typography} from "@material-tailwind/react";
 import {XMarkIcon} from "@heroicons/react/24/solid";
 
 export enum LANGUAGE_TYPE {
@@ -41,9 +44,36 @@ const ProcessComponent = (props: ITaskProcessProps) => {
   const [cssCode, setCssCode] = useState<string>("")
   const [jsCode, setJsCode] = useState<string>("")
   const [processHintList, setProcessHintList] = useState<Array<ITaskProcessHint>>([])
+  const [processHintReplyList, setProcessHintReplyList] = useState<Array<string>>([])
 
   const [openIframe, setOpenIframe] = useState<boolean>(false)
   const [openProcessHint, setOpenProcessHint] = useState<boolean>(false)
+
+  // 修改實作提示回覆部分
+  const handleChangeProcessHintReply = (e: React.ChangeEvent<HTMLTextAreaElement>, index: number, hintTitle: string) => {
+    setProcessHintReplyList(prevState => {
+      const updateList = [...prevState]
+      updateList[index] = e.target.value
+      return updateList
+    })
+    // 紀錄回應的操作
+    handleCustomRecord({
+        action: 'input',
+        type: 'inputField',
+        object: `changeProcessHintReply_實作提示回應「${hintTitle}」更改為 ${e.target.value}`,
+        id: `task_changeProcessHintReply`
+      },
+      true,
+      studentId || '',
+      setTempStudentRecords
+    )
+  }
+  // 儲存實作提示回應
+  const saveProcessHintReply = () => {
+    API_saveProcessHintReply(taskId || '', selectNode.key, processHintReplyList).then(response => {
+
+    })
+  }
 
   // 儲存狀態
   const [codeStatus, setCodeStatus] = useState<CODE_STATUS>(CODE_STATUS.SYNC)
@@ -57,7 +87,6 @@ const ProcessComponent = (props: ITaskProcessProps) => {
   useEffect(() => {
     setCodeStatus(CODE_STATUS.ASYNC)
   }, [htmlCode, cssCode, jsCode])
-
   // 選擇當前顯示的程式碼內容
   const selectCodeType = () => {
     switch (activeTab) {
@@ -94,19 +123,47 @@ const ProcessComponent = (props: ITaskProcessProps) => {
         setCodeStatus(CODE_STATUS.SYNC)
       })
     }
-    const fetchProcessHint = () => {
+    // 取得 Process hint
+    const fetchProcessHint = (fetchReply: (hintLength: number) => void) => {
       API_getProcessHint(taskId || '').then(response => {
         const processHint = response.data.process_hint_list[selectNode.key]
         // 若沒有其他提示則使用第一組的hint
         if (processHint) setProcessHintList(processHint)
-        else setProcessHintList(response.data.process_hint_list[0])
+        else setProcessHintList(response.data.process_hint_list[0] ?? [])
+        fetchReply(processHint.length ?? 1)
+      })
+    }
+    // 取得 Process hint reply
+    const fetchProcessHintReply = (hintLength: number) => {
+      API_getProcessHintReply(taskId || '').then(response => {
+        const processHintReply = response.data.process_hint_reply_list[selectNode.key]
+        setProcessHintReplyList(processHintReply ?? new Array(hintLength).fill(""))
       })
     }
 
     fetchProcessCode()
-    fetchProcessHint()
+    fetchProcessHint(fetchProcessHintReply)
   }, []);
 
+  // 偵測 Keydown 事件同時紀錄
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (!studentId) return
+    if ((e.metaKey && e.key === 's') || (e.ctrlKey && e.key === 's')) {
+      e.preventDefault()
+      saveProcessHintReply()
+      // 紀錄儲存 Code
+      handleCustomRecord({
+          action: 'click',
+          type: 'button',
+          object: 'saveProcessHintReply',
+          id: 'task_saveProcessHintReply'
+        },
+        false,
+        studentId,
+        setTempStudentRecords
+      )
+    }
+  }
 
   return (
     <>
@@ -127,12 +184,13 @@ const ProcessComponent = (props: ITaskProcessProps) => {
                     height: window.innerHeight * 0.3,
                   }}
                   bounds="parent"
-                  className='p-10 text-stamindTask-black-850 pointer-events-auto overflow-scroll rounded-xl bg-stamindTask-white-200'
+                  className='px-10 py-3 text-stamindTask-black-850 pointer-events-auto rounded-xl bg-stamindTask-white-200'
+                  cancel=".no-drag"
               >
-                  <div className='flex flex-col gap-y-4'>
+                  <div className='flex flex-col gap-y-4 h-full overflow-scroll' onKeyDown={handleKeyDown}>
                     {processHintList.map(({title, description}, index) => (
                       <div key={index}
-                           className='flex flex-col min-h-22 p-4 gap-y-3 border-[1px] border-stamindTask-black-600 rounded-2xl'>
+                           className='flex flex-col min-h-22 p-4 gap-y-3 border-[1px] border-stamindTask-black-600 bg-stamindTask-white-000 rounded-2xl no-drag cursor-default'>
                         <h5
                           className='text-[1.2rem]'
                           data-action='click'
@@ -145,18 +203,43 @@ const ProcessComponent = (props: ITaskProcessProps) => {
                           data-type='text'
                           data-object='processHintDescription'
                           data-id='task_processHintDescription'
-                        >{description}</p>
+                        >
+                          <MarkDownTextComponent text={description}/>
+                        </p>
+                        <div>
+                          <Typography variant='h6' placeholder={undefined}>引導問題回應</Typography>
+                          <Textarea
+                            variant='outlined'
+                            label="反思回覆"
+                            rows={5}
+                            value={processHintReplyList[index]}
+                            onChange={(e) => handleChangeProcessHintReply(e, index, title)}
+                          />
+                        </div>
                       </div>
                     ))}
                   </div>
-                  <div className='absolute right-3 top-1'>
-                      <IconButton
-                          variant="text"
-                          placeholder={undefined}
-                          onClick={() => setOpenProcessHint(false)}
-                      >
-                          <XMarkIcon className='h-5 w-5 color-black'/>
-                      </IconButton>
+                  <div className='absolute right-1 top-1'>
+                      <div className='flex flex-col gap-y-2 justify-center items-center'>
+                          <IconButton
+                              variant="text"
+                              placeholder={undefined}
+                              onClick={() => {
+                                setOpenProcessHint(false)
+                                saveProcessHintReply()
+                              }}
+                          >
+                              <XMarkIcon className='h-5 w-5 color-black'/>
+                          </IconButton>
+                          <Button
+                              color='green'
+                              size='sm'
+                              placeholder={undefined}
+                              onClick={saveProcessHintReply}
+                          >
+                              💾
+                          </Button>
+                      </div>
                   </div>
               </Rnd>
           </div>

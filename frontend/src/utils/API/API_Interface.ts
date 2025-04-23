@@ -108,6 +108,12 @@ interface Req_StudentTaskProcessCodeInfo extends RequestParams {
   js_code?: string
 }
 
+interface Req_StudentTaskProcessHintInfo extends RequestParams {
+  task_id: string | undefined
+  select_node?: number
+  process_hint_reply?: Array<string>
+}
+
 interface Req_ReflectionQuestionInfo extends RequestParams {
   task_id: string | undefined
   select_node?: number
@@ -202,6 +208,7 @@ export type{
   Req_processHintInfo,
   Req_studentNoteInfo,
   Req_StudentTaskProcessCodeInfo,
+  Req_StudentTaskProcessHintInfo,
   Req_ReflectionQuestionInfo,
   Req_StudentReflectionInfo,
   Req_StudentChatHistory,
