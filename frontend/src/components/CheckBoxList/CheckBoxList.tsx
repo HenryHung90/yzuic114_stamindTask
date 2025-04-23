@@ -34,10 +34,10 @@ const CheckBoxListComponent = (props: CheckBoxListProps) => {
       {...(isDisabled ? {} : {disabled: true})}
       label={
         <div>
-          <Typography color="blue-gray" className="font-medium !min-w-[8rem]" placeholder={undefined}>
+          <Typography color="blue-gray" className="font-medium" placeholder={undefined}>
             {title}
           </Typography>
-          <Typography variant="small" color="gray" className="font-normal" placeholder={undefined}>
+          <Typography variant="small" color="gray" className="font-normal line-clamp-2" placeholder={undefined}>
             {description}
           </Typography>
         </div>
