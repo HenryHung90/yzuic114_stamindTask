@@ -1,6 +1,6 @@
 import {useState, useEffect, useRef} from 'react';
 // style
-import {Button, Input, Typography} from "@material-tailwind/react";
+import {Button, Input, Textarea, Typography} from "@material-tailwind/react";
 
 // API
 import {API_getTextBookFile, API_uploadTextBookFile} from "../../../../utils/API/API_TextBooks";
@@ -29,11 +29,9 @@ const ProcessHintComponent = (props: ITaskProcessHintProps) => {
         value={title}
         onChange={(e) => handleEditProcessHint(index, 'title', e.target.value)}
       />
-      <Input
+      <Textarea
         variant="standard"
         label="執行提示描述"
-        placeholder="請輸入執行提示描述"
-        crossOrigin={undefined}
         value={description}
         onChange={(e) => handleEditProcessHint(index, 'description', e.target.value)}
       />

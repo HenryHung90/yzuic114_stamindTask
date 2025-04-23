@@ -38,6 +38,9 @@ const taskTable: Record<string, string> = {
   'processCodeEditor': '程式區塊',
   'processHintTitle': '實作提示標題',
   'processHintDescription': '實作提示描述',
+  'processHintSave': '儲存實作提示回覆',
+  'changeProcessHintReply': '更改實作提示回覆',
+  'saveProcessHintReply': '儲存實作提示回覆',
   //reflection
   'saveReflection': '儲存反思內容',
   'changeReflection': '更改反思內容',

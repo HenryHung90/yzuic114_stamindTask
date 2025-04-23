@@ -101,7 +101,13 @@ export default withMT({
                     '100%': {
                         backgroundPosition: '0% 50%',
                     }
-                }
+                },
+                slideAndBreath: {
+                    '0%': {maxHeight: '10px', opacity: '0', backgroundPosition: '0% 50%'},
+                    '50%': {backgroundPosition: '100% 50%'},
+                    '99%': {maxHeight: '15rem', opacity: '1', backgroundPosition: '0% 50%'},
+                    '100%': {maxHeight: 'none'}
+                },
             },
             animation: {
                 fadeIn: 'fadeIn 0.5s ease forwards',
@@ -114,7 +120,8 @@ export default withMT({
                 marquee:
                     'marquee 2.5s ease infinite',
                 gradientMove:
-                    'gradientMove 6s ease infinite'
+                    'gradientMove 6s ease infinite',
+                slideAndBreath: 'slideAndBreath 1s ease forwards',
             }
             ,
         },
@@ -127,7 +134,8 @@ export default withMT({
     }
     ,
     plugins: [
-        require('@tailwindcss/typography')
+        require('@tailwindcss/typography'),
+        require('@tailwindcss/line-clamp')
     ],
 })
 ;

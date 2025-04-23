@@ -44,7 +44,7 @@ const SubTargetListComponent = (props: ITaskSubTargetListProps) => {
                   index={index}
                   title={title}
                   description={description}
-                  isDisabled={selected}
+                  isDisabled={selected ? selected : false}
                 />
               </ListItem>
             )

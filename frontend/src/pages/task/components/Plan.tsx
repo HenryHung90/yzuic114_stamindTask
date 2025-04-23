@@ -85,10 +85,10 @@ const PlanContentComponent = (props: ITaskPlanContentProps) => {
   const {plan, handleChangePlanList, handleDeletePlanList, subTargetIndex, planIndex} = props
 
   return (
-    <TimelineItem>
+    <TimelineItem className='animate-slideAndBreath'>
       <TimelineConnector/>
       <TimelineHeader>
-        <TimelineIcon className="p-2">
+        <TimelineIcon className="p-2 hover:animate-pulse">
           {plan.strategy == 'environment' && <CubeIcon className='h-4 w-4'/>}
           {plan.strategy == 'learning_strategy' && <QueueListIcon className='h-4 w-4'/>}
           {plan.strategy == 'time_management' && <CalendarDaysIcon className='h-4 w-4'/>}
@@ -96,7 +96,7 @@ const PlanContentComponent = (props: ITaskPlanContentProps) => {
           {plan.strategy == 'self_assessment' && <DocumentCheckIcon className='h-4 w-4'/>}
         </TimelineIcon>
       </TimelineHeader>
-      <TimelineBody>
+      <TimelineBody className='ml-5'>
         <div className='flex justify-between w-72 mb-2'>
           <div className='w-24'>
             <Select
@@ -314,11 +314,12 @@ const PlanComponent = (props: ITaskPlanProps) => {
           selectSubList.map((selected, subTargetIndex) => {
             if (selected) {
               return (
-                <div key={subTargetIndex} className='w-full py-5 border-b-2 border-stamindTask-black-850'>
+                <div key={subTargetIndex}
+                     className='w-full py-5 border-stamindTask-black-850 animate-slideAndBreath'>
                   <Typography color="blue-gray" className="font-bold text-[1.5rem]" placeholder={undefined}>
                     子目標：{subTargetList[subTargetIndex].title}
                   </Typography>
-                  <div className='w-[95%] m-auto'>
+                  <div className='w-[95%] m-auto backdrop-blur-lg'>
                     <Timeline>
                       {planList[subTargetIndex]?.map((plan, planIndex) => {
                         return (
@@ -334,7 +335,9 @@ const PlanComponent = (props: ITaskPlanProps) => {
                     variant="gradient"
                     placeholder={undefined}
                     onClick={() => handleAddNewPlan(subTargetIndex)}
-                    className='min-h-11'
+                    size='sm'
+                    color='deep-orange'
+                    className='min-h-8'
                     data-action='click'
                     data-type='button'
                     data-object='addPlan'
@@ -342,6 +345,7 @@ const PlanComponent = (props: ITaskPlanProps) => {
                   >
                     新增策略
                   </Button>
+                  <hr className="mt-4 h-[2px] bg-gradient-to-r from-stamindTask-decoration-primary-1 to-stamindTask-decoration-error-2 border-none bg-[length:600%_100%] animate-gradientMove"/>
                 </div>
               )
             }
