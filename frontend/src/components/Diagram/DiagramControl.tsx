@@ -44,7 +44,7 @@ function NavList(props: IDiagramControlProps) {
     {
       name: "離開",
       onClick: () => {
-        NavLocation('/admin')
+        NavLocation('/admin/taskManage')
       }
     },
   ]

@@ -17,4 +17,11 @@ const API_generateTeacherFeedback = (taskId: string, selectNode: number) => {
   return new API_POST(import.meta.env.VITE_APP_API_GENERATE_TEACHER_FEEDBACK || '', feedbackData).sendRequest()
 }
 
-export {API_getTeacherFeedback, API_generateTeacherFeedback}
+const API_getFeedbackByStudentId = (studentId: string) => {
+  const feedbackData: Req_feedbackInfo = {
+    student_id: studentId
+  }
+  return new API_POST(import.meta.env.VITE_APP_API_GET_FEEDBACK_BY_STUDENT_ID, feedbackData).sendRequest()
+}
+
+export {API_getTeacherFeedback, API_generateTeacherFeedback, API_getFeedbackByStudentId}

@@ -12,9 +12,10 @@ import {
   handleChangeName,
   handleChangePassword,
   handleChangeStudentId,
-  handleDonwloadChatHistories,
-  handleDonwloadFeedback,
-  handleDonwloadStudentRecord
+  handleDownloadChatHistories,
+  handleDownloadFeedback,
+  handleDownloadStudentRecord,
+  handleDownloadAllStudentTaskContent
 } from "../../../../../../utils/functions/admin/home/components/studentList";
 import {API_getAllStudents, API_getStudentsByClassName} from "../../../../../../utils/API/API_Students";
 // components
@@ -23,42 +24,18 @@ import MultipleMenuComponent from "../../../../../../components/menu/MultipleMen
 
 // interface
 import {IMenuItems} from "../../../../../../components/menu/Menu";
-import {Res_classNamesInfo, Res_studentsInfo} from "../../../../../../utils/API/API_Interface";
-import {ISettingAlertLogAndLoading} from "../../../../../../utils/interface/alertLog";
+import {Res_studentsInfo} from "../../../../../../utils/API/API_Interface";
+import {IStudentListProps} from "../../../../../../utils/interface/adminManage";
 
-interface IStudentListProps {
-  className: string | undefined
-  classList: Array<Res_classNamesInfo>
-  searchStudentId: string
-  settingAlertLogAndLoading: ISettingAlertLogAndLoading
-}
 
 const TABLE_HEAD = ["是否啟用", "年級", "組別", "學號", "姓名", ""];
 
 const StudentListComponent = (props: IStudentListProps) => {
-  const {className, classList, searchStudentId, settingAlertLogAndLoading} = props
-  const [studentList, setStudentList] = useState<Array<Res_studentsInfo>>()
+  const {studentList, classList, searchStudentId, settingAlertLogAndLoading, fetchStudentListAsync} = props
   const [filteredStudentList, setFilteredStudentList] = useState<Array<Res_studentsInfo>>()
 
   const stableStudentList = useMemo(() => studentList || [], [studentList])
 
-  const fetchStudentListAsync = async () => {
-    settingAlertLogAndLoading.setLoadingOpen(true)
-    if (className == '' || className == 'ALL') {
-      await API_getAllStudents().then(response => {
-        setStudentList(response.data.students_data)
-      })
-    } else {
-      await API_getStudentsByClassName(className || '').then(response => {
-        setStudentList(response.data.students_data)
-      })
-    }
-    settingAlertLogAndLoading.setLoadingOpen(false)
-  }
-
-  useEffect(() => {
-    if (className !== 'loading') fetchStudentListAsync()
-  }, [className])
 
   useEffect(() => {
     if (stableStudentList && searchStudentId !== '') {
@@ -81,29 +58,42 @@ const StudentListComponent = (props: IStudentListProps) => {
   const MENU_ITEMS = (studentId: string): Array<IMenuItems> => [
     {
       name: "啟用/停用帳號",
-      handleClick: () => handleSwitchActive(studentId, settingAlertLogAndLoading, fetchStudentListAsync)
+      handleClick: () => handleSwitchActive({studentId, loading: settingAlertLogAndLoading, fetchStudentListAsync})
     },
     {
       name: "變更實驗組/對照組",
-      handleClick: () => handleSwitchGroup(studentId, settingAlertLogAndLoading, fetchStudentListAsync)
+      handleClick: () => handleSwitchGroup({studentId, loading: settingAlertLogAndLoading, fetchStudentListAsync})
     },
     {
       subMenu: <MultipleMenuComponent menuTitle={"學生資料變更"} menuItems={[
         {
           name: "變更年級",
-          handleClick: () => handleChangeClassName(studentId, classList, settingAlertLogAndLoading, fetchStudentListAsync)
+          handleClick: () => handleChangeClassName({
+            studentId,
+            classList,
+            loading: settingAlertLogAndLoading,
+            fetchStudentListAsync
+          })
         },
         {
           name: "變更名稱",
-          handleClick: () => handleChangeName(studentId, settingAlertLogAndLoading, fetchStudentListAsync)
+          handleClick: () => handleChangeName({studentId, loading: settingAlertLogAndLoading, fetchStudentListAsync})
         },
         {
           name: "變更學號",
-          handleClick: () => handleChangeStudentId(studentId, settingAlertLogAndLoading, fetchStudentListAsync)
+          handleClick: () => handleChangeStudentId({
+            studentId,
+            loading: settingAlertLogAndLoading,
+            fetchStudentListAsync
+          })
         },
         {
           name: "變更密碼",
-          handleClick: () => handleChangePassword(studentId, settingAlertLogAndLoading, fetchStudentListAsync)
+          handleClick: () => handleChangePassword({
+            studentId,
+            loading: settingAlertLogAndLoading,
+            fetchStudentListAsync
+          })
         }
       ]}/>
     },
@@ -111,15 +101,35 @@ const StudentListComponent = (props: IStudentListProps) => {
       subMenu: <MultipleMenuComponent menuTitle={"學生資料下載"} menuItems={[
         {
           name: "下載聊天記錄",
-          handleClick: () => handleDonwloadChatHistories(studentId, settingAlertLogAndLoading, fetchStudentListAsync)
+          handleClick: () => handleDownloadChatHistories({
+            studentId,
+            loading: settingAlertLogAndLoading,
+            fetchStudentListAsync
+          })
         },
         {
           name: "下載回饋內容",
-          handleClick: () => handleDonwloadFeedback(studentId, settingAlertLogAndLoading, fetchStudentListAsync)
+          handleClick: () => handleDownloadFeedback({
+            studentId,
+            loading: settingAlertLogAndLoading,
+            fetchStudentListAsync
+          })
         },
         {
           name: "下載操作行為",
-          handleClick: () => handleDonwloadStudentRecord(studentId, settingAlertLogAndLoading, fetchStudentListAsync)
+          handleClick: () => handleDownloadStudentRecord({
+            studentId,
+            loading: settingAlertLogAndLoading,
+            fetchStudentListAsync
+          })
+        },
+        {
+          name: "下載所有課程內容",
+          handleClick: () => handleDownloadAllStudentTaskContent({
+            studentId,
+            loading: settingAlertLogAndLoading,
+            fetchStudentListAsync
+          })
         }
       ]}/>
     }

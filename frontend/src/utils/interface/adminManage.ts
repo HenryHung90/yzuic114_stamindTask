@@ -1,4 +1,4 @@
-import {Res_classNamesInfo} from "../API/API_Interface";
+import {Res_classNamesInfo, Res_studentsInfo} from "../API/API_Interface";
 import {ISettingAlertLogAndLoading} from "./alertLog";
 import React from "react";
 
@@ -7,13 +7,44 @@ interface IAdminMangeProps {
   settingAlertLogAndLoading: ISettingAlertLogAndLoading
 }
 
-
-interface IStudentManageProps extends IAdminMangeProps {
+interface IControlBarProps extends IAdminMangeProps {
+  className: string
+  setClassName: React.Dispatch<React.SetStateAction<string>>
 }
 
+
+// Student Manage -> Student List
+interface IStudentListFuncProps {
+  studentId: string
+  loading: ISettingAlertLogAndLoading
+  fetchStudentListAsync: () => void
+  classList?: Array<Res_classNamesInfo>
+}
+
+interface IStudentManageProps extends IAdminMangeProps {
+  studentList?: Array<Res_studentsInfo>
+}
+
+
+interface IStudentManageControlBarProps extends IControlBarProps {
+  searchStudentId: string
+  studentList: Array<Res_studentsInfo>
+  setSearchStudentId: React.Dispatch<React.SetStateAction<string>>
+}
+
+interface IStudentListProps extends IStudentManageProps {
+  className: string | undefined
+  classList: Array<Res_classNamesInfo>
+  searchStudentId: string
+  settingAlertLogAndLoading: ISettingAlertLogAndLoading
+  fetchStudentListAsync: () => void
+}
+
+// TaskManagement
 interface ITaskManageProps extends IAdminMangeProps {
 }
 
+// GroupManagement
 interface IGroupManageProps extends IAdminMangeProps {
   className?: string
 }
@@ -26,21 +57,14 @@ interface IGroupData {
   }
 }
 
-interface IControlBarProps extends IAdminMangeProps {
-  className: string
-  setClassName: React.Dispatch<React.SetStateAction<string>>
-}
-
-interface IStudentManageControlBarProps extends IControlBarProps {
-  searchStudentId: string
-  setSearchStudentId: React.Dispatch<React.SetStateAction<string>>
-}
 
 export type {
   IStudentManageProps,
+  IStudentListFuncProps,
+  IControlBarProps,
+  IStudentListProps,
+  IStudentManageControlBarProps,
   ITaskManageProps,
   IGroupManageProps,
   IGroupData,
-  IControlBarProps,
-  IStudentManageControlBarProps,
 }
