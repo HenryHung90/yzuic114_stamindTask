@@ -17,23 +17,51 @@ from backend.models import ClassName, StudentRecord, User
 """
 
 
-def serialize_result_data(student_record_set):
+def serialize_record_data(record):
+    return {
+        '學號': record.user_id,
+        '動作': record.verb,
+        '物件類別': record.object_type,
+        '物件名稱': record.object_name,
+        '物件識別ID': record.object_id,
+        '發生時間': record.time,
+        '計時器': record.timer,
+        '詳細描述': record.context.get('description'),
+        '裝置資訊': str(record.context.get('device')),
+    }
+
+
+def serialize_records_data(student_record_set):
     serialized_data = []
     for record in student_record_set:
-        record_data = {
-            'student_id': record.user_id,
-            'verb': record.verb,
-            'object_type': record.object_type,
-            'object_name': record.object_name,
-            'object_id': record.object_id,
-            'time': record.time,
-            'timer': record.timer,
-            'description': record.context.get('description'),
-            'device': str(record.context.get('device')),
-        }
+        record_data = serialize_record_data(record)
 
         serialized_data.append(record_data)
     return serialized_data
+
+
+def serialize_multi_student_record_data(student_record_set):
+    """
+    處理多位學生並放置在同一資料表中
+    :param student_record_set:
+    :return:
+    """
+    student_id_list = []
+    student_data_list = []
+
+    for record in student_record_set:
+        student_id = record.user_id
+        serialized_data = serialize_record_data(record)
+
+        if student_id not in student_id_list:
+            student_id_list.append(student_id)
+            student_data_list.append([serialized_data])
+        else:
+            # 將資料加入對應的 student_data_list 中
+            index = student_id_list.index(student_id)
+            student_data_list[index].append(serialized_data)
+
+    return student_id_list, student_data_list
 
 
 # save student note
@@ -108,7 +136,7 @@ def get_student_record_by_student_id(request):
                 'student_record': 'empty'
             }, status=status.HTTP_204_NO_CONTENT)
 
-        record_result = serialize_result_data(record_data)
+        record_result = serialize_records_data(record_data)
         return Response({
             'student_record': record_result
         }, status=status.HTTP_200_OK)
@@ -117,3 +145,21 @@ def get_student_record_by_student_id(request):
     except Exception as e:
         print(f'get student record by student id Error: {e}')
         return Response({'get student record by student id Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# get all student record
+@ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
+@api_view(['GET'])
+def get_all_student_record(request):
+    try:
+        record_data = StudentRecord.objects.all()
+        student_id_list, student_data_list = serialize_multi_student_record_data(record_data)
+        return Response({
+            'student_data_list': student_data_list, 'student_id_list': student_id_list
+        }, status=status.HTTP_200_OK)
+
+
+    except Exception as e:
+        print(f'get all student record Error: {e}')
+        return Response({'get all student record Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
