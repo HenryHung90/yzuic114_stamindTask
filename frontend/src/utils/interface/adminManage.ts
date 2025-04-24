@@ -22,7 +22,7 @@ interface IStudentListFuncProps {
 }
 
 interface IStudentManageProps extends IAdminMangeProps {
-  studentList: Array<Res_studentsInfo>
+  studentList?: Array<Res_studentsInfo>
 }
 
 
