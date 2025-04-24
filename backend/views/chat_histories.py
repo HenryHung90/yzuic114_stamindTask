@@ -62,10 +62,10 @@ def get_chat_histories_by_student_id(request):
         res_messages = []
         for history in chat_history_data:
             modify_message = {
-                "time": history["time"],
-                "message": history["message"],
-                "studentId": history["student_id"],
-                "name": history["name"],
+                "使用者名稱": history["name"],
+                "學生ID": history["student_id"],
+                "發送時間": history["time"],
+                "傳送訊息": history["message"],
             }
             res_messages.append(modify_message)
 

@@ -183,7 +183,7 @@ def get_student_task_by_student_id(request):
         if student_tasks_data is None:
             return Response({'student task does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
-        result_data = serialize_student_task_data(student_tasks_data)
+        result_data = serialize_student_tasks_data(student_tasks_data)
         return Response({'student_task_content': result_data}, status=status.HTTP_200_OK)
 
     except Exception as e:

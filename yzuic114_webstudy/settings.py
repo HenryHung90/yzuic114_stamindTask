@@ -188,24 +188,24 @@ SESSION_COOKIE_AGE = 86400  # 24小時
 # production Setting
 
 # Marked up when publish------------------------------------
-# DEBUG = True
-# ALLOWED_HOSTS = ["localhost", '127.0.0.1']
-# CORS_ALLOW_CREDENTIALS = True
-# CORS_ALLOW_ALL_ORIGINS = True
-# CSRF_TRUSTED_ORIGINS = [
-#     'http://localhost:5173'
-# ]
-# CSRF_COOKIE_HTTPONLY = False
-# SESSION_COOKIE_HTTPONLY = True
-# Showed up when publish---------------------------------------------------------
 DEBUG = True
-ALLOWED_HOSTS = ["*"]
-X_FRAME_OPTIONS = 'SAMEORIGIN'
-CORS_ALLOW_CREDENTIALS = True  # 允許攜帶憑證（Cookies）
-CORS_ALLOW_ALL_ORIGINS = False  # 不建議設置為 True，改為允許特定來源
+ALLOWED_HOSTS = ["localhost", '127.0.0.1']
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
 CSRF_TRUSTED_ORIGINS = [
-    'https://ccj.infocom.yzu.edu.tw'
+    'http://localhost:5173'
 ]
 CSRF_COOKIE_HTTPONLY = False
 SESSION_COOKIE_HTTPONLY = True
-SECURE_CROSS_ORIGIN_OPENER_POLICY = None  # 僅在測試 HTTP 情況下
+# Showed up when publish---------------------------------------------------------
+# DEBUG = True
+# ALLOWED_HOSTS = ["*"]
+# X_FRAME_OPTIONS = 'SAMEORIGIN'
+# CORS_ALLOW_CREDENTIALS = True  # 允許攜帶憑證（Cookies）
+# CORS_ALLOW_ALL_ORIGINS = False  # 不建議設置為 True，改為允許特定來源
+# CSRF_TRUSTED_ORIGINS = [
+#     'https://ccj.infocom.yzu.edu.tw'
+# ]
+# CSRF_COOKIE_HTTPONLY = False
+# SESSION_COOKIE_HTTPONLY = True
+# SECURE_CROSS_ORIGIN_OPENER_POLICY = None  # 僅在測試 HTTP 情況下
