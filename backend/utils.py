@@ -30,3 +30,19 @@ def read_xlsx_and_xls_file(expected_headers, headers, file_extension, sheet):
                 'user_type': filtered_values[4],
             })
     return row_data
+
+
+def transfer_key_to_values(value):
+    words = {
+        # for plan
+        'strategy': '策略',
+        'time': '時間',
+        'description': '描述',
+        'environment': '環境制定',
+        'learning_strategy': '學習策略',
+        'time_management': '時間管理',
+        'finding_help': '尋求協助',
+        'self_assessment': '自我評估'
+    }
+
+    return words[value] if words.get(value) else value
