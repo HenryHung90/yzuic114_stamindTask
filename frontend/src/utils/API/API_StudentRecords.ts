@@ -1,5 +1,5 @@
+import {API_POST,API_GET} from "./API_Config";
 import {Req_StudentRecordInfo} from "./API_Interface";
-import {API_POST} from "./API_Config";
 import {IStudentRecords} from "../listener/action";
 
 const API_saveStudentRecords = (studentRecords: Array<IStudentRecords>) => {
@@ -33,4 +33,8 @@ const API_getStudentRecordByStudentId = (studentId: string) => {
   return new API_POST(import.meta.env.VITE_APP_API_GET_STUDENT_RECORD_BY_STUDENT_ID, recordData).sendRequest()
 }
 
-export {API_saveStudentRecords, API_saveStudentRecordsBeforeUnload, API_getStudentRecordByStudentId}
+const API_getAllStudentRecord = () => {
+  return new API_GET(import.meta.env.VITE_APP_API_GET_ALL_STUDENT_RECORD).sendRequest()
+}
+
+export {API_saveStudentRecords, API_saveStudentRecordsBeforeUnload, API_getStudentRecordByStudentId,API_getAllStudentRecord}
