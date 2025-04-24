@@ -1,25 +1,32 @@
 import React from "react"
-import * as XLSX from 'xlsx'
 // style
 // API
 import {API_addNewTask} from "../../../../API/API_Tasks";
-import {Res_classNamesInfo} from "../../../../API/API_Interface";
+import {Res_classNamesInfo, Res_studentsInfo} from "../../../../API/API_Interface";
 import {API_addNewClassName} from "../../../../API/API_ClassName";
 import {
   API_addStudent,
   API_getAllStudents,
   API_multiStudentUpload
 } from "../../../../API/API_Students";
+import {convertToXlsxFile} from "../../../common";
+import {
+  API_getStudentTaskByClassName,
+  API_getStudentTaskByStudentId,
+  API_getAllStudentTasks
+} from "../../../../API/API_StudentTasks";
 // components
 // interface
 import {ISettingAlertLogAndLoading} from "../../../../interface/alertLog";
-import {convertToXlsxFile} from "../../../common";
+import {API_getAllStudentRecord} from "../../../../API/API_StudentRecords";
 
 function handlePromise(messageTitle: string, messageInfo: string, loading: ISettingAlertLogAndLoading) {
   loading.setAlertLog(messageTitle, messageInfo)
   loading.setLoadingOpen(false)
 }
 
+
+// For StudentManagement
 function handleAddNewStudent(loading: ISettingAlertLogAndLoading) {
   const className = prompt("請輸入年級")
   if (className === '' || className === null) return
@@ -48,7 +55,7 @@ function handleAddNewStudent(loading: ISettingAlertLogAndLoading) {
 function handleDownloadStudentList(loading: ISettingAlertLogAndLoading) {
   loading.setLoadingOpen(true)
   API_getAllStudents().then(response => {
-    convertToXlsxFile('student_list.xlsx', 'students', response.data.students_data)
+    convertToXlsxFile('student_list.xlsx', ['students'], [response.data.students_data])
     loading.setLoadingOpen(false)
   })
 }
@@ -66,6 +73,52 @@ function handleUploadStudentList(event: React.ChangeEvent<HTMLInputElement>, fil
     setTimeout(() => {
       window.location.reload()
     }, 1000)
+  })
+}
+
+function handleDownloadAllStudentTask(loading: ISettingAlertLogAndLoading) {
+  loading.setLoadingOpen(true)
+  API_getAllStudentTasks().then(response => {
+    convertToXlsxFile(`all_student_task_content.xlsx`, response.data.student_id_list, response.data.student_data_list)
+    loading.setLoadingOpen(false)
+  })
+}
+
+function handleDownloadStudentTaskByClassName(loading: ISettingAlertLogAndLoading, classList: Array<Res_classNamesInfo>) {
+  const className = prompt("請輸入欲下載年級")
+  if (className === '' || className === null) return
+
+  if (classList.some(value => value.name === className)) {
+    loading.setLoadingOpen(true)
+    API_getStudentTaskByClassName(className).then(response => {
+      convertToXlsxFile(`${className}_student_task_content.xlsx`, response.data.student_id_list, response.data.student_data_list)
+      loading.setLoadingOpen(false)
+    })
+  } else {
+    alert("該年級不存在")
+  }
+}
+
+function handleDownloadStudentTaskByStudentId(loading: ISettingAlertLogAndLoading, studentList: Array<Res_studentsInfo>) {
+  const studentId = prompt("請輸入欲下載學生學號")
+  if (studentId === '' || studentId === null) return
+
+  if (studentList.some(value => value.student_id === studentId)) {
+    loading.setLoadingOpen(true)
+    API_getStudentTaskByStudentId(studentId).then(response => {
+      convertToXlsxFile(`${studentId}_student_task_content.xlsx`, [studentId], [response.data.student_task_content])
+      loading.setLoadingOpen(false)
+    })
+  } else {
+    alert("該學生不存在")
+  }
+}
+
+function handleDownloadAllStudentRecords(loading: ISettingAlertLogAndLoading) {
+  loading.setLoadingOpen(true)
+  API_getAllStudentRecord().then(response => {
+    convertToXlsxFile(`all_student_record_content.xlsx`, response.data.student_id_list, response.data.student_data_list)
+    loading.setLoadingOpen(false)
   })
 }
 
@@ -105,6 +158,10 @@ export {
   handleAddNewStudent,
   handleDownloadStudentList,
   handleUploadStudentList,
+  handleDownloadStudentTaskByClassName,
+  handleDownloadStudentTaskByStudentId,
+  handleDownloadAllStudentTask,
+  handleDownloadAllStudentRecords,
   handleAddNewTask,
-  handleAddNewGroup
+  handleAddNewGroup,
 }
