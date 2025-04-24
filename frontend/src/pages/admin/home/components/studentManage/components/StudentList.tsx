@@ -14,7 +14,8 @@ import {
   handleChangeStudentId,
   handleDownloadChatHistories,
   handleDownloadFeedback,
-  handleDownloadStudentRecord
+  handleDownloadStudentRecord,
+  handleDownloadAllStudentTaskContent
 } from "../../../../../../utils/functions/admin/home/components/studentList";
 import {API_getAllStudents, API_getStudentsByClassName} from "../../../../../../utils/API/API_Students";
 // components
@@ -23,42 +24,18 @@ import MultipleMenuComponent from "../../../../../../components/menu/MultipleMen
 
 // interface
 import {IMenuItems} from "../../../../../../components/menu/Menu";
-import {Res_classNamesInfo, Res_studentsInfo} from "../../../../../../utils/API/API_Interface";
-import {ISettingAlertLogAndLoading} from "../../../../../../utils/interface/alertLog";
+import {Res_studentsInfo} from "../../../../../../utils/API/API_Interface";
+import {IStudentListProps} from "../../../../../../utils/interface/adminManage";
 
-interface IStudentListProps {
-  className: string | undefined
-  classList: Array<Res_classNamesInfo>
-  searchStudentId: string
-  settingAlertLogAndLoading: ISettingAlertLogAndLoading
-}
 
 const TABLE_HEAD = ["是否啟用", "年級", "組別", "學號", "姓名", ""];
 
 const StudentListComponent = (props: IStudentListProps) => {
-  const {className, classList, searchStudentId, settingAlertLogAndLoading} = props
-  const [studentList, setStudentList] = useState<Array<Res_studentsInfo>>()
+  const {studentList, classList, searchStudentId, settingAlertLogAndLoading, fetchStudentListAsync} = props
   const [filteredStudentList, setFilteredStudentList] = useState<Array<Res_studentsInfo>>()
 
   const stableStudentList = useMemo(() => studentList || [], [studentList])
 
-  const fetchStudentListAsync = () => {
-    settingAlertLogAndLoading.setLoadingOpen(true)
-    if (className == '' || className == 'ALL') {
-      API_getAllStudents().then(response => {
-        setStudentList(response.data.students_data)
-      })
-    } else {
-      API_getStudentsByClassName(className || '').then(response => {
-        setStudentList(response.data.students_data)
-      })
-    }
-    settingAlertLogAndLoading.setLoadingOpen(false)
-  }
-
-  useEffect(() => {
-    if (className !== 'loading') fetchStudentListAsync()
-  }, [className])
 
   useEffect(() => {
     if (stableStudentList && searchStudentId !== '') {
@@ -141,6 +118,14 @@ const StudentListComponent = (props: IStudentListProps) => {
         {
           name: "下載操作行為",
           handleClick: () => handleDownloadStudentRecord({
+            studentId,
+            loading: settingAlertLogAndLoading,
+            fetchStudentListAsync
+          })
+        },
+        {
+          name: "下載所有課程內容",
+          handleClick: () => handleDownloadAllStudentTaskContent({
             studentId,
             loading: settingAlertLogAndLoading,
             fetchStudentListAsync
