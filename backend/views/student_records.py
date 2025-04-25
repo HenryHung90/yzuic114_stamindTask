@@ -70,10 +70,10 @@ def serialize_multi_student_record_data(student_record_set):
 @api_view(['POST'])
 def save_student_records(request):
     try:
-        student_records = request.data.get('student_records')
-        class_name = ClassName.objects.get(name=request.user.class_name)
-
         user = request.user
+        student_records = request.data.get('student_records')
+        class_name = ClassName.objects.get(name=user.class_name)
+
         records_to_create = []
         errors = []
         # 處理每一筆記錄(若為 str 表示從 Beacon 寄送，需轉為 json)
@@ -129,7 +129,7 @@ def save_student_records(request):
 def get_student_record_by_student_id(request):
     try:
         student_id = request.data.get('student_id')
-        record_data = User.objects.get(student_id=student_id).student_records.all()
+        record_data = User.objects.get(student_id=student_id).student_records.all().order_by('created_at')
 
         if not record_data:
             return Response({
@@ -153,7 +153,7 @@ def get_student_record_by_student_id(request):
 @api_view(['GET'])
 def get_all_student_record(request):
     try:
-        record_data = StudentRecord.objects.all()
+        record_data = StudentRecord.objects.all().order_by('created_at')
         student_id_list, student_data_list = serialize_multi_student_record_data(record_data)
         return Response({
             'student_data_list': student_data_list, 'student_id_list': student_id_list
