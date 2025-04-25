@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from torch.distributed import group
+from datetime import datetime
 
 # User model
 from backend.models import User, ClassName, StudentGroup, ChatHistory, StudentRecord
@@ -103,6 +103,20 @@ def login_system(request):
 
         login(request._request, user)
 
+        now_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        StudentRecord.objects.create(
+            user=user,
+            class_name_id=user.class_name_id,
+            verb='login',
+            time=now_time,
+            object_type='登入',
+            object_name='登入',
+            object_id='login',
+            context={
+                "description": f"使用者 {user.student_id} 在 {now_time} 時執行了 登入 的動作。"
+            }
+        )
+
         return Response(
             {'message': 'success', 'name': student_info.name, 'user_type': student_info.user_type,
              'student_id': student_info.student_id, 'group_type': student_info.student_group.group_type, 'status': 200},
@@ -121,6 +135,21 @@ def logout_system(request):
     try:
         if not request.user.is_authenticated:
             return Response({'message': '未有帳戶登入', 'status': 400}, status=status.HTTP_400_BAD_REQUEST)
+
+        user = request.user
+        now_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        StudentRecord.objects.create(
+            user=user,
+            class_name_id=user.class_name_id,
+            verb='login',
+            time=now_time,
+            object_type='登出',
+            object_name='登出',
+            object_id='logout',
+            context={
+                "description": f"使用者 {user.student_id} 在 {now_time} 時執行了 登出 的動作。"
+            }
+        )
 
         logout(request._request)
         return Response({'message': 'logout success', 'status': 200}, status=status.HTTP_200_OK)
