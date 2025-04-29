@@ -19,15 +19,6 @@ from ..utils import transfer_key_to_values
  3. 500: server error
 """
 
-
-def serialize_student_id_list(student_task_data):
-    serialized_data = []
-    for student_task in student_task_data:
-        student_id = student_task.user.student_id
-        serialized_data.append(student_id)
-    return serialized_data
-
-
 def serialize_task_process_hint_data(student_data, question_list):
     serialized_data = []
     for process_index, process in enumerate(student_data):

@@ -12,6 +12,10 @@ import MenuComponent, {IMenuItems} from "../../../../../../components/menu/Menu"
 // interface
 import {ISettingAlertLogAndLoading} from "../../../../../../utils/interface/alertLog"
 import {Res_tasksInfo} from "../../../../../../utils/API/API_Interface";
+import {
+  handleChangeTaskName,
+  handleSwitchTaskOpen
+} from "../../../../../../utils/functions/admin/home/components/taskList";
 
 interface ITaskListProps {
   className: string | undefined
@@ -27,14 +31,14 @@ const TaskListComponent = (props: ITaskListProps) => {
 
   const [taskList, setTaskList] = useState<Array<Res_tasksInfo>>()
 
-  const fetchTaskListAsync = async () => {
+  const fetchTaskListAsync = () => {
     settingAlertLogAndLoading.setLoadingOpen(true)
     if (className == '' || className == 'ALL') {
-      await API_getAllTasksInfo().then(response => {
+      API_getAllTasksInfo().then(response => {
         setTaskList(response.data.tasks_info)
       })
-    }else{
-      await API_getTasksByClassName(className || '').then(response => {
+    } else {
+      API_getTasksByClassName(className || '').then(response => {
         setTaskList(response.data.tasks_info)
       })
     }
@@ -45,22 +49,30 @@ const TaskListComponent = (props: ITaskListProps) => {
     if (className !== 'loading') fetchTaskListAsync()
   }, [className])
 
-  const MENU_ITEMS = (classId: number): Array<IMenuItems> => [
+  const MENU_ITEMS = (taskId: string): Array<IMenuItems> => [
     {
       name: "啟用/停用課程",
-      handleClick: () => {}
+      handleClick: () => {
+        handleSwitchTaskOpen({taskId, loading: settingAlertLogAndLoading, fetchTaskListAsync})
+      }
     },
     {
       name: "變更課程名稱",
-      handleClick: () => {}
+      handleClick: () => {
+        handleChangeTaskName({taskId, loading: settingAlertLogAndLoading, fetchTaskListAsync})
+      }
     },
     {
       name: "課程數據",
-      handleClick: () => {}
+      handleClick: () => {
+        NavLocation(`/admin/taskInfo/${taskId}`)
+      }
     },
     {
       name: "管理課程內容",
-      handleClick: () => {NavLocation(`/admin/task/${classId}`)}
+      handleClick: () => {
+        NavLocation(`/admin/task/${taskId}`)
+      }
     },
   ]
 
@@ -107,7 +119,7 @@ const TaskListComponent = (props: ITaskListProps) => {
               </Typography>
             </td>
             <td className="p-4 text-left">
-              <MenuComponent menuHandler={"課程設定"} menuItems={MENU_ITEMS(id)}/>
+              <MenuComponent menuHandler={"課程設定"} menuItems={MENU_ITEMS(id.toString())}/>
             </td>
           </tr>
         ))}
