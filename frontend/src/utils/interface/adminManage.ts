@@ -44,6 +44,16 @@ interface IStudentListProps extends IStudentManageProps {
 interface ITaskManageProps extends IAdminMangeProps {
 }
 
+interface ITaskListFuncProps {
+  taskId: string
+  loading: ISettingAlertLogAndLoading
+  fetchTaskListAsync: () => void
+}
+
+interface ITaskInfoProps {
+  loading: ISettingAlertLogAndLoading
+}
+
 // GroupManagement
 interface IGroupManageProps extends IAdminMangeProps {
   className?: string
@@ -65,6 +75,8 @@ export type {
   IStudentListProps,
   IStudentManageControlBarProps,
   ITaskManageProps,
+  ITaskListFuncProps,
+  ITaskInfoProps,
   IGroupManageProps,
   IGroupData,
 }
