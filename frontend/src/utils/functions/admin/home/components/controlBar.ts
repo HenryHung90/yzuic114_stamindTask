@@ -2,23 +2,23 @@ import React from "react"
 // style
 // API
 import {API_addNewTask} from "../../../../API/API_Tasks";
-import {Res_classNamesInfo, Res_studentsInfo} from "../../../../API/API_Interface";
 import {API_addNewClassName} from "../../../../API/API_ClassName";
 import {
   API_addStudent,
   API_getAllStudents,
   API_multiStudentUpload
 } from "../../../../API/API_Students";
-import {convertToXlsxFile} from "../../../common";
 import {
   API_getStudentTaskByClassName,
   API_getStudentTaskByStudentId,
   API_getAllStudentTasks
 } from "../../../../API/API_StudentTasks";
+import {API_getAllStudentRecord} from "../../../../API/API_StudentRecords";
+import {convertToXlsxFile} from "../../../common";
 // components
 // interface
+import {Res_classNamesInfo, Res_studentsInfo} from "../../../../API/API_Interface";
 import {ISettingAlertLogAndLoading} from "../../../../interface/alertLog";
-import {API_getAllStudentRecord} from "../../../../API/API_StudentRecords";
 
 function handlePromise(messageTitle: string, messageInfo: string, loading: ISettingAlertLogAndLoading) {
   loading.setAlertLog(messageTitle, messageInfo)

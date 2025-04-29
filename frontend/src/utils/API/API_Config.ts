@@ -26,7 +26,7 @@ class APIController {
       method: this.method,
       url: this.baseURL,
       withCredentials: this.TEST_MODE,
-      data: this.data,
+      ...(this.method.toUpperCase() === 'POST' ? {data: this.data} : {params: this.data}),
       headers: {
         "X-CSRFToken": this.cookies.get("csrftoken")
       }
@@ -109,9 +109,10 @@ class API_POST extends APIController {
 }
 
 class API_GET extends APIController {
-  constructor(baseURL: string) {
+  constructor(baseURL: string, params?: RequestParams | FormData) {
     super(baseURL, "GET", undefined)
     this.baseURL = baseURL
+    this.data = params
   }
 
   public async sendRequest_sessionAndUserinfo() {
@@ -123,7 +124,9 @@ class API_GET extends APIController {
         "Content-Type": "application/json",
         "X-CSRFToken": this.cookies.get("csrftoken")
       }
-    }).then((response: { data: { isAuthenticated: any; name: string; student_id: string; group_type: EGroupType } }) => {
+    }).then((response: {
+      data: { isAuthenticated: any; name: string; student_id: string; group_type: EGroupType }
+    }) => {
       const resData: CSRF_cookies = {
         message: "",
         status: 200,

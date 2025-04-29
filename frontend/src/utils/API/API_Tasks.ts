@@ -12,7 +12,7 @@ const API_getTasksInfo = (acc: string) => {
 }
 //教師取得所有課程
 const API_getAllTasksInfo = () => {
-  return new API_GET(import.meta.env.VITE_APP_API_GET_ALL_TASKS_INFO || '').sendRequest()
+  return new API_GET(import.meta.env.VITE_APP_API_GET_ALL_TASKS_INFO).sendRequest()
 }
 
 // get task by class name
@@ -51,11 +51,28 @@ const API_saveTaskDiagram = (nodeArray: Array<Node>, linkArray: Array<Link>, tas
   return new API_POST(import.meta.env.VITE_APP_API_SAVE_TASK_DIAGRAM || '', diagramData).sendRequest()
 }
 
+const API_switchTaskOpen = (taskId: string) => {
+  const taskData: Req_tasksInfo = {
+    task_id: taskId
+  }
+  return new API_GET(import.meta.env.VITE_APP_API_SWITCH_TASK_OPEN, taskData).sendRequest()
+}
+
+const API_changeTaskName = (taskId: string, taskName: string) => {
+  const taskData: Req_tasksInfo = {
+    task_id: taskId,
+    task_name: taskName
+  }
+  return new API_POST(import.meta.env.VITE_APP_API_CHANGE_TASK_NAME, taskData).sendRequest()
+}
+
 export {
   API_getTasksInfo,
   API_getAllTasksInfo,
   API_getTasksByClassName,
   API_addNewTask,
   API_saveTaskDiagram,
-  API_getTaskDiagram
+  API_getTaskDiagram,
+  API_switchTaskOpen,
+  API_changeTaskName,
 };

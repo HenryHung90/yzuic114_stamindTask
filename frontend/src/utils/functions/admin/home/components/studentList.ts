@@ -9,16 +9,9 @@ import {API_getChatHistoriesByStudentId} from "../../../../API/API_ChatHistories
 import {API_getFeedbackByStudentId} from "../../../../API/API_Feedback"
 import {API_getStudentRecordByStudentId} from "../../../../API/API_StudentRecords"
 import {API_getStudentTaskByStudentId} from '../../../../API/API_StudentTasks'
-import {convertToXlsxFile} from "../../../common"
-
-import {ISettingAlertLogAndLoading} from "../../../../interface/alertLog";
+import {convertToXlsxFile, handlePromise} from "../../../common"
 import {IStudentListFuncProps} from "../../../../interface/adminManage";
 
-const handlePromise = (messageTitle: string, messageInfo: string, loading: ISettingAlertLogAndLoading, fetchStudentListAsync: () => void) => {
-  loading.setAlertLog(messageTitle, messageInfo)
-  loading.setLoadingOpen(false)
-  fetchStudentListAsync()
-}
 
 function handleSwitchActive(props: IStudentListFuncProps) {
   const {studentId, fetchStudentListAsync, loading} = props

@@ -1,4 +1,5 @@
 import * as XLSX from 'xlsx'
+import {ISettingAlertLogAndLoading} from "../interface/alertLog";
 
 export enum EGroupType {
   NONE = 'NONE',
@@ -39,4 +40,18 @@ function convertToXlsxFile(sheetName: string, workbookNames: Array<string>, data
   document.body.removeChild(a);
 }
 
-export {calculateTimer, convertToXlsxFile}
+function handlePromise(messageTitle: string, messageInfo: string, loading: ISettingAlertLogAndLoading, fetchTaskListAsync: () => void) {
+  loading.setAlertLog(messageTitle, messageInfo)
+  loading.setLoadingOpen(false)
+  fetchTaskListAsync()
+}
+
+function autoDownloadFile(filePath: string, fileName: string) {
+  const a = document.createElement('a');
+  a.href = filePath;
+  document.body.appendChild(a);
+  a.click(); // 自動點擊以開始下載
+  a.remove(); // 移除元素
+}
+
+export {calculateTimer, convertToXlsxFile, handlePromise, autoDownloadFile}

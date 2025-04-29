@@ -19,6 +19,7 @@ import NotFound from "./pages/errorPage/404/NotFound"
 // interface
 import {CSRF_cookies} from "./utils/API/API_Interface";
 import {EGroupType} from "./utils/functions/common";
+import TaskInfo from "./pages/admin/home/components/taskInfo/TaskInfo";
 
 export default function App() {
   const [auth, setAuth] = useState<false | 'STUDENT' | 'TEACHER'>(false)
@@ -161,15 +162,19 @@ export default function App() {
     {
       path: '/admin/task/:taskId',
       element: <AdminTask settingAlertLogAndLoading={settingAlertLogAndLoading}/>
+    },
+    {
+      path: '/admin/taskInfo/:taskId',
+      element: <TaskInfo loading={settingAlertLogAndLoading}/>
     }
   ]
 
   return (
     <div onClick={handleClickEventToListenStudentHabit}>
+      {useRoutes(routes)}
       <Loading loadingOpen={loadingOpen}/>
       <AlertLog AlertOpen={alertOpen} AlertTitle={alertTitle} AlertMsg={alertMsg}
                 AlertLogClose={() => settingAlertLogAndLoading.handleAlertClose()}/>
-      {useRoutes(routes)}
     </div>
   )
 }

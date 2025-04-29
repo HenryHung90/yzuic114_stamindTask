@@ -123,6 +123,8 @@ API_ADMIN_POST = [
     path('admin/get_all_student_task/', get_all_student_task, name='get_all_student_task'),
     # get all student record
     path('admin/get_all_student_record/', get_all_student_record, name='get_all_student_record'),
+    # get student process code by task id
+    path('admin/get_all_student_process_code_by_task_id/', get_all_student_process_code_by_task_id, name='get_all_student_process_code_by_task_id'),
 
     # add new class name
     path('admin/add_new_class_name/', add_new_class_name, name='add_new_class_name'),
@@ -130,6 +132,11 @@ API_ADMIN_POST = [
     path('admin/add_new_task/', add_new_task, name='add_new_task'),
     # save Task
     path('admin/save_task_diagram/', save_task_diagram, name='save_task_diagram'),
+    # switch task open
+    path('admin/switch_task_open/', switch_task_open, name='switch_task_open'),
+    # change task name
+    path('admin/change_task_name/', change_task_name, name='change_task_name'),
+
     # upload Experience file
     path('admin/upload_experience_file/', upload_experience_file, name='upload_experience_file'),
     # save Task Target

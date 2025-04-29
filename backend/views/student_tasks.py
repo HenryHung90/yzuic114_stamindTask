@@ -19,15 +19,6 @@ from ..utils import transfer_key_to_values
  3. 500: server error
 """
 
-
-def serialize_student_id_list(student_task_data):
-    serialized_data = []
-    for student_task in student_task_data:
-        student_id = student_task.user.student_id
-        serialized_data.append(student_id)
-    return serialized_data
-
-
 def serialize_task_process_hint_data(student_data, question_list):
     serialized_data = []
     for process_index, process in enumerate(student_data):
@@ -49,11 +40,13 @@ def serialize_task_reflection_and_plan_data(student_data, question_list, type_na
             for data_index, data in enumerate(process):
                 serialized_data.append(f'{type_name}:{question_list[process_index][data_index].get("title")}')
 
-                if isinstance(data, dict):
+                if not data:
+                    serialized_data.append('學生回覆:無資料')
+                elif isinstance(data, dict):
                     serialized_data.append(f'學生回覆:{data.get("reflect")}')
                 else:
-                    for plan_detail in data:  # 將字典內容格式化為字串
-                        detail_str = ', '.join(
+                    for plan_index, plan_detail in enumerate(data):  # 將字典內容格式化為字串
+                        detail_str = f'程序{str(plan_index + 1)}:\n' + '\n'.join(
                             f'{transfer_key_to_values(key)}: {transfer_key_to_values(value)}' for key, value in
                             plan_detail.items())
                         serialized_data.append(detail_str)
@@ -118,7 +111,6 @@ def serialize_multi_student_task_data(student_tasks):
     for student_task in student_tasks:
         student_id = student_task.student.student_id
         serialized_data = serialize_student_task_data(student_task)
-
         if student_id not in student_id_list:
             student_id_list.append(student_id)
             student_data_list.append([serialized_data])

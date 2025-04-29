@@ -127,7 +127,6 @@ def get_task_diagram(request):
         task_id = request.data.get('task_id')
         task_data = Task.objects.get(id=task_id)
 
-
         if task_data.diagram_content:
             return Response({
                 'message': 'success',
@@ -154,6 +153,43 @@ def save_task_diagram(request):
         task_data = Task.objects.get(id=task_id)
 
         task_data.diagram_content = {"nodes_data": nodes_data, "links_data": links_data}
+        task_data.save()
+
+        return Response({'message': 'success'}, status=status.HTTP_200_OK)
+    except Exception as e:
+        print(f'save task diagram  Error: {e}')
+        return Response({'save task diagram Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# switch task open
+@ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
+@api_view(['GET'])
+def switch_task_open(request):
+    try:
+        task_id = request.query_params.get('task_id')
+
+        task_data = Task.objects.get(id=task_id)
+        task_data.is_open = not task_data.is_open
+        task_data.save()
+
+        return Response({'message': 'success'}, status=status.HTTP_200_OK)
+    except Exception as e:
+        print(f'save task diagram  Error: {e}')
+        return Response({'save task diagram Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# change task name
+@ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
+@api_view(['POST'])
+def change_task_name(request):
+    try:
+        task_id = request.data.get('task_id')
+        task_name = request.data.get('task_name')
+
+        task_data = Task.objects.get(id=task_id)
+        task_data.name = task_name
         task_data.save()
 
         return Response({'message': 'success'}, status=status.HTTP_200_OK)
