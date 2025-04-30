@@ -38,7 +38,7 @@ const TaskAreaComponent = (props: ITaskAreaProps) => {
   }, []);
 
   return (
-    <div className='flex gap-5 m-10'>
+    <div className='flex flex-wrap gap-5 m-10'>
       {tasks.map((task, i) => {
         return <TaskCardComponent key={i} id={task.id} name={task.name} created_at={task.created_at}
                                   updated_at={task.updated_at}/>;
