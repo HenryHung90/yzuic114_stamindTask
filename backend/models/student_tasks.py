@@ -68,6 +68,16 @@ class StudentTask(models.Model):
         related_name='student_task'
     )
 
+    chat_history = models.OneToOneField(
+        'ChatHistory',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        verbose_name='聊天記錄',
+        help_text='該課程中與機器人的對話紀錄',
+        related_name='student_task'
+    )
+
     # 時間戳記
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
