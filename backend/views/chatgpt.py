@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from django.views.decorators.csrf import ensure_csrf_cookie
 from datetime import datetime
 
-from backend.models import User
+from backend.models import StudentTask
 
 client = OpenAI(api_key=os.getenv('OPENAI_KEY'))
 
@@ -31,7 +31,8 @@ Use markdown syntax for things like headings, lists, colored text, code blocks, 
 def chat_with_amumamum(request):
     try:
         user_question = request.data.get('message')
-        user_history_data = User.objects.get(student_id=request.user.student_id).chat_history
+        task_id = request.data.get('task_id')
+        user_history_data = StudentTask.objects.get(student_id=request.user.student_id, task_id=task_id).chat_history
 
         if user_history_data.chat_history is None:
             user_history_data.chat_history = []
