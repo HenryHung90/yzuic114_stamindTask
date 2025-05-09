@@ -129,11 +129,13 @@ interface Req_StudentReflectionInfo extends RequestParams {
 }
 
 interface Req_StudentChatHistory extends RequestParams {
+  task_id?: string
   student_id?: string
   offset?: number
 }
 
 interface Req_ChatWithAmumAmum extends RequestParams {
+  task_id: string
   message: string
 }
 
