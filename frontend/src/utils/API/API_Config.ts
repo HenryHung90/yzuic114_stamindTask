@@ -12,7 +12,7 @@ class APIController {
   protected TEST_MODE: boolean
 
   constructor(baseURL: string, method: string, data: RequestParams | undefined | FormData) {
-    this.baseURL = window.location.origin + baseURL
+    this.baseURL = baseURL
     this.method = method
     this.data = data
     this.cookies = new Cookies()
@@ -76,8 +76,6 @@ class APIController {
 class API_POST extends APIController {
   constructor(baseURL: string, data: RequestParams | FormData) {
     super(baseURL, "POST", data)
-    this.data = data
-    this.baseURL = baseURL
   }
 
   public async sendLogin() {
@@ -110,9 +108,7 @@ class API_POST extends APIController {
 
 class API_GET extends APIController {
   constructor(baseURL: string, params?: RequestParams | FormData) {
-    super(baseURL, "GET", undefined)
-    this.baseURL = baseURL
-    this.data = params
+    super(baseURL, "GET", params)
   }
 
   public async sendRequest_sessionAndUserinfo() {
