@@ -131,7 +131,6 @@ def serialize_description_of_student(target, student_plan, student_code, task_re
     return '\n\n'.join(sections)
 
 
-
 def serialize_feedback_data(student_task_set):
     serialized_data = []
     for student_task in student_task_set:
@@ -202,7 +201,8 @@ def generate_teacher_feedback(request):
             task_reflection_questions = task_data.reflection_question.questions
             student_reflections = student_task_data.reflection
             # get student chat history
-            student_chat_history = User.objects.get(student_id=request.user.student_id).chat_history
+            student_chat_history = StudentTask.objects.get(task_id=task_id,
+                                                           student_id=request.user.student_id).chat_history
             student_chat_history = [] if student_chat_history is None else student_chat_history.chat_history
             student_summarize = serialize_description_of_student(task_target, student_plan, student_code,
                                                                  task_reflection_questions,
@@ -252,6 +252,7 @@ def generate_teacher_feedback(request):
     except Exception as e:
         print(f'generate teacher feedback Error: {e}')
         return Response({'generate teacher feedback Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
 
 # get feedback by student id
 @ensure_csrf_cookie

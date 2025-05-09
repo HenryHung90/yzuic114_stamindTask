@@ -17,6 +17,7 @@ import {handleCustomRecord, IStudentRecords} from "../../utils/listener/action";
 
 interface IChatRoomProps {
   name: string
+  taskId: string
   userStudentId: string | undefined
   openChatRoom: boolean
   setOpenChatRoom: React.Dispatch<React.SetStateAction<boolean>>
@@ -24,7 +25,7 @@ interface IChatRoomProps {
 }
 
 const ChatRoomComponent = (props: IChatRoomProps) => {
-  const {name, userStudentId, openChatRoom, setOpenChatRoom, setTempStudentRecords} = props
+  const {name, taskId, userStudentId, openChatRoom, setOpenChatRoom, setTempStudentRecords} = props
 
   const messageOffsetRef = useRef<number>(0);
 
@@ -43,7 +44,7 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
   // 取得訊息歷史
   const fetchMessageHistory = async () => {
     if (!isMessageEnded) {
-      API_getChatHistories(messageOffsetRef.current).then(response => {
+      API_getChatHistories(messageOffsetRef.current, taskId).then(response => {
         if (response.data.messages == 'empty') return setIsMessageEnded(true)
 
         const history_list: Array<IMessages> = response.data.messages
@@ -117,7 +118,7 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
         return [...prevState, newMessage]
       })
       // 將訊息送出給 Chat
-      API_chatWithAmumAmum(messageInput).then(response => {
+      API_chatWithAmumAmum(messageInput, taskId).then(response => {
         const assistant = response.data.assistant
         setMessages(prevState => {
           const newMessage: IMessages = {

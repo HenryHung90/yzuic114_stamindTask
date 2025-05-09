@@ -153,7 +153,7 @@ const SpeedDialComponent = (props: SpeedDialProps) => {
       </div>
       <div
         className={`opacity-50 hover:opacity-100 duration-500 absolute bottom-5 right-20 pointer-events-auto ${!openChatRoom && 'hidden'}`}>
-        <ChatRoomComponent name={name} userStudentId={studentId} openChatRoom={openChatRoom}
+        <ChatRoomComponent name={name} taskId={taskId} userStudentId={studentId} openChatRoom={openChatRoom}
                            setTempStudentRecords={setTempStudentRecords}
                            setOpenChatRoom={setOpenChatRoom}/>
       </div>

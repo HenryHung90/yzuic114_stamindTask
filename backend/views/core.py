@@ -56,7 +56,6 @@ def register(request):
                 return Response({'message': 'Class name does not exist', 'status': 404},
                                 status=status.HTTP_404_NOT_FOUND)
 
-        chat_history = ChatHistory.objects.create()
 
         # 創建新用戶
         user = User.objects.create_user(
@@ -64,7 +63,6 @@ def register(request):
             password=data.get('password'),
             name=data.get('name'),
             user_type=user_type,
-            chat_history=chat_history,
         )
 
         # 如果是學生，設置 class_name

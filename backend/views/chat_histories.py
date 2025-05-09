@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.views.decorators.csrf import ensure_csrf_cookie
 
-from backend.models import User
+from backend.models import User, StudentTask, ChatHistory
 
 
 # get Chat Histories
@@ -14,10 +14,14 @@ from backend.models import User
 def get_chat_histories(request):
     try:
         offset = request.data.get('offset')
+        task_id = request.data.get('task_id')
 
-        chat_history_data = User.objects.get(student_id=request.user.student_id).chat_history
+        student_task_data = StudentTask.objects.get(student_id=request.user.student_id, task_id=task_id)
+        chat_history_data = student_task_data.chat_history
 
         if chat_history_data is None or chat_history_data is []:
+            student_task_data.chat_history = ChatHistory.objects.create()
+            student_task_data.save()
             return Response({'messages': 'empty'}, status=status.HTTP_200_OK)
         else:
             chat_history_data = chat_history_data.chat_history
@@ -32,10 +36,10 @@ def get_chat_histories(request):
         res_messages = []
         for history in offset_data:
             modify_message = {
-                "time": history["time"],
-                "message": history["message"],
-                "studentId": history["student_id"],
-                "name": history["name"],
+                "time": history.get("time"),
+                "message": history.get("message"),
+                "studentId": history.get("student_id"),
+                "name": history.get("name"),
             }
             res_messages.append(modify_message)
 
@@ -43,6 +47,7 @@ def get_chat_histories(request):
     except Exception as e:
         print(f'get Chat Histories Error: {e}')
         return Response({'get Chat Histories Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
 
 # get Chat Histories
 @ensure_csrf_cookie
