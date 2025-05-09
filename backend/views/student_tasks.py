@@ -7,7 +7,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.db import transaction
 
 from backend.models import Task, StudentTask, User, StudentTaskPlan, StudentTaskProcess, \
-    StudentTaskProcessCode, StudentTaskReflection, Feedback, ClassName
+    StudentTaskProcessCode, StudentTaskReflection, Feedback, ClassName, ChatHistory
 
 from ..utils import transfer_key_to_values
 
@@ -18,6 +18,7 @@ from ..utils import transfer_key_to_values
  2. 400: client error
  3. 500: server error
 """
+
 
 def serialize_task_process_hint_data(student_data, question_list):
     serialized_data = []
@@ -129,14 +130,12 @@ def serialize_multi_student_task_data(student_tasks):
 def init_student_task(request):
     try:
         task_id = request.data.get('task_id')
-
-        task_data = Task.objects.get(id=task_id)
-        student_task_data = task_data.student_task.filter(student_id=request.user.student_id).first()
-
+        student_task_data = StudentTask.objects.filter(student_id=request.user.student_id, task_id=task_id).first()
         if student_task_data is None:
             with transaction.atomic():
                 student = User.objects.get(student_id=request.user.student_id)
-                class_name = task_data.class_name
+                task_data = Task.objects.get(id=task_id)
+                class_name = request.user.class_name
 
                 plan = StudentTaskPlan.objects.create()
                 process_code = StudentTaskProcessCode.objects.create()
@@ -145,6 +144,7 @@ def init_student_task(request):
                 )
                 reflection = StudentTaskReflection.objects.create()
                 feedback = Feedback.objects.create()
+                chat_history = ChatHistory.objects.create()
 
                 StudentTask.objects.create(
                     student=student,
@@ -154,6 +154,7 @@ def init_student_task(request):
                     process=process,
                     reflection=reflection,
                     feedback=feedback,
+                    chat_history=chat_history,
                 )
             return Response({'status': 'Initialized'}, status=status.HTTP_200_OK)
         else:
