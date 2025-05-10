@@ -13,6 +13,7 @@ import {
 // API
 import {API_login} from "../../utils/API/API_LoginSystem";
 // components
+import ImageComponent from "../../components/Image/Image";
 
 // interface
 import {ISettingAlertLogAndLoading} from "../../utils/interface/alertLog";
@@ -80,7 +81,7 @@ const Login = (props: ILoginProps) => {
           color="gray"
           className="mb-4 grid h-36 place-items-center"
           placeholder={undefined}>
-          <img src={`/${import.meta.env.VITE_APP_FILE_ROUTE}/img/logo.PNG`} height='50px' width='70px'/>
+          <ImageComponent src={`${import.meta.env.VITE_APP_TEST_DNS}/${import.meta.env.VITE_APP_FILES_ROUTE}/img/logo.PNG`} alt='logo' width='70px' height='50px'/>
           <p className='text-xl '>STAMIND TASK</p>
         </CardHeader>
         <CardBody className="flex flex-col gap-4 animate-loginSlideIn delay-700" placeholder={undefined}>
