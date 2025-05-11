@@ -28,6 +28,24 @@ def get_task_experience(request):
         task_data = Task.objects.get(id=task_id)
         experience_data = task_data.experience.content
 
+        if isinstance(experience_data, dict):
+            # 如果是空字典，返回空回應
+            if not experience_data:
+                return Response({'message': 'No experience data available'}, status=status.HTTP_200_OK)
+            if not experience_data['experience_files']:
+                return Response({'message': 'No experience data available'}, status=status.HTTP_200_OK)
+
+            file_name = experience_data.get('experience_files')[0]
+            file_path = os.path.join(settings.MEDIA_ROOT, 'experience_files', file_name)
+            # 檢查文件是否存在
+            if os.path.exists(file_path):
+                with open(file_path, 'r', encoding='utf-8') as file:
+                    html_content = file.read()
+                    # 直接返回 HTML 內容作為純文本
+                    return Response({'html_content': html_content}, status=status.HTTP_200_OK)
+            else:
+                return Response({'error': f'File not found: {file_name}'}, status=status.HTTP_404_NOT_FOUND)
+
         return Response({'experience_info': experience_data}, status=status.HTTP_200_OK)
     except Exception as e:
         print(f'get tasks experience Error: {e}')
@@ -57,7 +75,7 @@ def upload_experience_file(request):
                     experience_files.append('empty')
 
         # 確保資料夾存在
-        upload_dir = os.path.join(settings.BASE_DIR, os.getenv('EXPERIENCE_FILES_DIR'))
+        upload_dir = os.path.join(settings.BASE_DIR, 'files/experience_files')
         os.makedirs(upload_dir, exist_ok=True)
 
         # 儲存檔案到指定資料夾
