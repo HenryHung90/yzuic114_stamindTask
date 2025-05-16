@@ -16,7 +16,7 @@ const ExperiencePageComponent = (props: ITaskExperienceProps) => {
   const [experienceData, setExperienceData] = useState<string>()
 
   useEffect(() => {
-    const fetchTaskExperience = async () => {
+    const fetchTaskExperience = () => {
       settingAlertLogAndLoading.setLoadingOpen(true)
       API_getTaskExperience(taskId).then(response => {
         settingAlertLogAndLoading.setLoadingOpen(false)

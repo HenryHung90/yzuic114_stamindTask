@@ -44,7 +44,7 @@ def get_task_experience(request):
                     # 直接返回 HTML 內容作為純文本
                     return Response({'html_content': html_content}, status=status.HTTP_200_OK)
             else:
-                return Response({'error': f'File not found: {file_name}'}, status=status.HTTP_404_NOT_FOUND)
+                return Response({'message': f'File not found: {file_name}'}, status=status.HTTP_404_NOT_FOUND)
 
         return Response({'experience_info': experience_data}, status=status.HTTP_200_OK)
     except Exception as e:
