@@ -15,6 +15,7 @@ function calculateTimer(startTime: number) {
 function convertToXlsxFile(sheetName: string, workbookNames: Array<string>, data: Array<Array<JSON>>) {
   // 創建工作簿並添加工作表
   const workbook = XLSX.utils.book_new();
+  const sheetNameWithFileType = sheetName + '.xlsx'
 
   for (let i = 0; i < workbookNames.length; i++) {
     // Convert each dataset to a worksheet
@@ -34,7 +35,7 @@ function convertToXlsxFile(sheetName: string, workbookNames: Array<string>, data
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = sheetName;
+  a.download = sheetNameWithFileType;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -48,6 +49,7 @@ function handlePromise(messageTitle: string, messageInfo: string, loading: ISett
 
 function autoDownloadFile(filePath: string, fileName: string) {
   const a = document.createElement('a');
+  console.log(filePath)
   a.href = filePath;
   document.body.appendChild(a);
   a.click(); // 自動點擊以開始下載

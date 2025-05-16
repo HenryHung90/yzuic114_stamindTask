@@ -81,7 +81,7 @@ function handleDownloadChatHistories(props: IStudentListFuncProps) {
   const {studentId, loading} = props
   loading.setLoadingOpen(true)
   API_getChatHistoriesByStudentId(studentId).then(response => {
-    convertToXlsxFile(`${studentId}_chat_histories.xlsx`, [studentId], [response.data.chat_history])
+    convertToXlsxFile(`${studentId}_chat_histories`, [studentId], [response.data.chat_history])
     loading.setLoadingOpen(false)
   })
 }
@@ -90,7 +90,7 @@ function handleDownloadFeedback(props: IStudentListFuncProps) {
   const {studentId, loading} = props
   loading.setLoadingOpen(true)
   API_getFeedbackByStudentId(studentId).then(response => {
-    convertToXlsxFile(`${studentId}_feedback.xlsx`, [studentId], [response.data.feedback])
+    convertToXlsxFile(`${studentId}_feedback`, [studentId], [response.data.feedback])
     loading.setLoadingOpen(false)
   })
 }
@@ -99,7 +99,7 @@ function handleDownloadStudentRecord(props: IStudentListFuncProps) {
   const {studentId, loading} = props
   loading.setLoadingOpen(true)
   API_getStudentRecordByStudentId(studentId).then(response => {
-    convertToXlsxFile(`${studentId}_record.xlsx`, [studentId], [response.data.student_record])
+    convertToXlsxFile(`${studentId}_record`, [studentId], [response.data.student_record])
     loading.setLoadingOpen(false)
   })
 }
@@ -108,7 +108,7 @@ function handleDownloadAllStudentTaskContent(props: IStudentListFuncProps) {
   const {studentId, loading} = props
   loading.setLoadingOpen(true)
   API_getStudentTaskByStudentId(studentId).then(response => {
-    convertToXlsxFile(`${studentId}_student_task_content.xlsx`, [studentId], [response.data.student_task_content])
+    convertToXlsxFile(`${studentId}_student_task_content`, [studentId], [response.data.student_task_content])
     loading.setLoadingOpen(false)
   })
 }
