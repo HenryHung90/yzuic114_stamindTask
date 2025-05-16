@@ -50,9 +50,8 @@ class APIController {
       console.error("Error Response:", data.message || error.message)
       alert(data.message || error.message)
     } else if (error.request) {
-      // 请求已发出，但没有收到响应
+      // Server 無響應
       console.error("Error Request:", error.request)
-      // 提示用户请求超时
       alert("請求超時，請再試一次")
     } else {
       // 其他错误
