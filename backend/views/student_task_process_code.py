@@ -24,7 +24,7 @@ from datetime import datetime
 
 def zip_student_process_code(task_name, student_task_data):
     # 定義文件夾路徑
-    directory_path = os.path.join(settings.BASE_DIR, '/files/code_zip')
+    directory_path = os.path.join(settings.BASE_DIR, 'files/code_zip')
 
     # 如果文件夾不存在，則創建它
     if not os.path.exists(directory_path):
@@ -36,13 +36,22 @@ def zip_student_process_code(task_name, student_task_data):
 
     html_info = []
     for student_task in student_task_data:
-        code_data = [student_task.process.process_code.html_code,
-                     '<style>', student_task.process.process_code.css_code, '</style>',
-                     '<script>', student_task.process.process_code.js_code, '</script>',
-                     ]
+        html_code = student_task.process.process_code.html_code
+        css_code = "\n".join(['<style>', student_task.process.process_code.css_code, '</style>'])
+        js_code = "\n".join(['<script>', student_task.process.process_code.js_code, '</script>'])
+
+        head_index = html_code.find('<head>')
+        if head_index != -1:
+            # 計算 <head> 結尾位置
+            insertion_point = head_index + len('<head>')
+            html_code = html_code[:insertion_point] + '\n' + css_code + '\n' + js_code + '\n' + html_code[
+                                                                                                insertion_point:]
+        else:
+            # 若找不到 <head> 則直接將內容貼在 html_code 後方
+            html_code += '\n' + css_code + '\n' + js_code
+
         filename = f"{student_task.student.student_id}.html"
-        code_data = "\n".join(code_data)
-        html_info.append((filename, code_data))
+        html_info.append((filename, html_code))
 
     with zipfile.ZipFile(file_path, 'w') as zipf:
         for filename, content in html_info:
