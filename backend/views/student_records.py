@@ -92,6 +92,7 @@ def save_student_records(request):
                 record = StudentRecord(
                     user=user,
                     class_name=class_name,
+                    task_id=record_data['taskId'],
                     verb=record_data['verb'],
                     time=record_data['time'],
                     timer=record_data['timer'],
@@ -105,6 +106,7 @@ def save_student_records(request):
             except Exception as e:
                 # 如果某一筆記錄有錯誤，記錄下來並繼續處理其他記錄
                 errors.append({'index': idx, 'error': str(e)})
+                print(errors)
 
         # 批量儲存記錄
         if records_to_create:
