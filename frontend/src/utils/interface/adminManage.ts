@@ -53,16 +53,17 @@ interface ITaskListFuncProps {
 // TaskInfo
 interface ITaskInfoProps {
   loading: ISettingAlertLogAndLoading,
-  chartsRef: React.RefObject<HTMLDivElement>
 }
 
 interface IDownloadBarProps extends ITaskInfoProps {
   taskId: string | undefined
   setPageContent: React.Dispatch<React.SetStateAction<'main' | 'codeStatus'>>
+  chartsRef: React.RefObject<HTMLDivElement>
 }
 
 interface IDataVisualizationProps extends ITaskInfoProps {
   taskId: string | undefined
+  chartsRef: React.RefObject<HTMLDivElement>
 }
 
 interface ISubTargetCompleted {
