@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 
+import './chartConfig'
 import {ThemeProvider} from "@material-tailwind/react";
 import {BrowserRouter as Router} from "react-router-dom";
 

@@ -1,4 +1,4 @@
-import {API_POST,API_GET} from "./API_Config";
+import {API_POST, API_GET} from "./API_Config";
 import {Req_StudentRecordInfo} from "./API_Interface";
 import {IStudentRecords} from "../listener/action";
 
@@ -37,4 +37,17 @@ const API_getAllStudentRecord = () => {
   return new API_GET(import.meta.env.VITE_APP_API_GET_ALL_STUDENT_RECORD).sendRequest()
 }
 
-export {API_saveStudentRecords, API_saveStudentRecordsBeforeUnload, API_getStudentRecordByStudentId,API_getAllStudentRecord}
+const API_getStudentRecordsInfoByTaskId = (taskId: string) => {
+  const recordData: Req_StudentRecordInfo = {
+    task_id: taskId,
+  }
+  return new API_POST(import.meta.env.VITE_APP_API_GET_STUDENT_RECORDS_INFO_BY_TASK_ID, recordData).sendRequest()
+}
+
+export {
+  API_saveStudentRecords,
+  API_saveStudentRecordsBeforeUnload,
+  API_getStudentRecordByStudentId,
+  API_getAllStudentRecord,
+  API_getStudentRecordsInfoByTaskId
+}

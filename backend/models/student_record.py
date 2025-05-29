@@ -22,6 +22,15 @@ class StudentRecord(models.Model):
         verbose_name="班級"
     )
 
+    task = models.ForeignKey(
+        'Task',
+        on_delete=models.SET_NULL,
+        related_name='student_records',
+        null=True,
+        blank=True,
+        verbose_name="所屬課程"
+    )
+
     verb = models.CharField(
         max_length=50,
         default="",

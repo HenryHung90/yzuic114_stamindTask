@@ -6,7 +6,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.views.decorators.csrf import ensure_csrf_cookie
 
-from backend.models import ClassName, StudentRecord, User
+from backend.models import ClassName, StudentRecord, User, StudentTask, Task
+
+from ..utils import calculate_box_plot_data
 
 """
  Response Status List:
@@ -64,6 +66,73 @@ def serialize_multi_student_record_data(student_record_set):
     return student_id_list, student_data_list
 
 
+def calculate_student_records_info(student_record_set, group_info):
+    # 兩個組別各有六階段，每一階段皆需算出箱型圖的 min, q1, median, q3, max
+    # 因此每一組的每一階段皆需算出其各自的箱型圖數據
+    empty_array = [0] * 6
+    calculate_data = {
+        'EXPERIMENTAL': {
+            "min": empty_array.copy(),
+            "q1": empty_array.copy(),
+            "median": empty_array.copy(),
+            "means": empty_array.copy(),
+            "q3": empty_array.copy(),
+            "max": empty_array.copy(),
+        },
+        'CONTROL': {
+            "min": empty_array.copy(),
+            "q1": empty_array.copy(),
+            "median": empty_array.copy(),
+            "means": empty_array.copy(),
+            "q3": empty_array.copy(),
+            "max": empty_array.copy()
+        }
+    }
+
+    experimental_data = {
+        'Experience': [],
+        'Target': [],
+        'Plan': [],
+        'Process': [],
+        'Reflection': [],
+        'Feedback': []
+    }
+    control_data = {
+        'Experience': [],
+        'Target': [],
+        'Plan': [],
+        'Process': [],
+        'Reflection': [],
+        'Feedback': []
+    }
+
+    # 整理兩組數據
+    for student_record in student_record_set:
+        target = student_record.user_id
+        group_type = group_info.get(target)
+        progress_target = student_record.object_id.split("leave")[1]
+        timer = round(int(student_record.timer) / 60, 2)
+
+        if group_type is None:
+            continue
+        elif group_type == 'EXPERIMENTAL':
+            experimental_data[progress_target].append(timer)
+        else:
+            control_data[progress_target].append(timer)
+
+    # 計算各階段的 min, q1, median, q3, max
+    progress_types = ['Experience', 'Target', 'Plan', 'Process', 'Reflection', 'Feedback']
+    for i, progress in enumerate(progress_types):
+        experimental_result = calculate_box_plot_data(experimental_data[progress])
+        control_result = calculate_box_plot_data(control_data[progress])
+
+        for stat in ['min', 'q1', 'median', 'means', 'q3', 'max']:
+            calculate_data['EXPERIMENTAL'][stat][i] = experimental_result[stat]
+            calculate_data['CONTROL'][stat][i] = control_result[stat]
+
+    return calculate_data
+
+
 # save student note
 @ensure_csrf_cookie
 @permission_classes([IsAuthenticated])
@@ -92,6 +161,7 @@ def save_student_records(request):
                 record = StudentRecord(
                     user=user,
                     class_name=class_name,
+                    task_id=record_data['taskId'],
                     verb=record_data['verb'],
                     time=record_data['time'],
                     timer=record_data['timer'],
@@ -105,6 +175,7 @@ def save_student_records(request):
             except Exception as e:
                 # 如果某一筆記錄有錯誤，記錄下來並繼續處理其他記錄
                 errors.append({'index': idx, 'error': str(e)})
+                print(errors)
 
         # 批量儲存記錄
         if records_to_create:
@@ -160,6 +231,33 @@ def get_all_student_record(request):
         }, status=status.HTTP_200_OK)
 
 
+    except Exception as e:
+        print(f'get all student record Error: {e}')
+        return Response({'get all student record Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# get student records info by task id
+@ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
+@api_view(['POST'])
+def get_student_records_info_by_task_id(request):
+    try:
+        task_id = request.data.get('task_id')
+        student_task_list = Task.objects.get(id=task_id).student_tasks.select_related(
+            'student__student_group'
+        )
+
+        group_info = {}
+        for student_task in student_task_list:
+            group_info[student_task.student.student_id] = student_task.student.student_group.group_type
+
+        record_data = StudentRecord.objects.filter(task_id=task_id, timer__isnull=False).exclude(
+            timer__exact='').order_by('created_at')
+        calculate_data = calculate_student_records_info(record_data, group_info)
+
+        return Response({
+            'record_data': calculate_data,
+        }, status=status.HTTP_200_OK)
     except Exception as e:
         print(f'get all student record Error: {e}')
         return Response({'get all student record Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

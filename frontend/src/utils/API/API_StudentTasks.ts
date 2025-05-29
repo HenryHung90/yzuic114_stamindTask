@@ -26,4 +26,17 @@ const API_getAllStudentTasks = () => {
   return new API_GET(import.meta.env.VITE_APP_API_GET_ALL_STUDENT_TASK).sendRequest()
 }
 
-export {API_initStudentTask, API_getStudentTaskByStudentId, API_getStudentTaskByClassName, API_getAllStudentTasks}
+const API_getStudentTasksByTaskId = (taskId: string) => {
+  const taskData: Req_tasksInfo = {
+    task_id: taskId,
+  }
+  return new API_POST(import.meta.env.VITE_APP_API_GET_STUDENT_TASKS_BY_TASK_ID, taskData).sendRequest()
+}
+
+export {
+  API_initStudentTask,
+  API_getStudentTaskByStudentId,
+  API_getStudentTaskByClassName,
+  API_getAllStudentTasks,
+  API_getStudentTasksByTaskId
+}

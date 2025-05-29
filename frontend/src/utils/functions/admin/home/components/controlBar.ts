@@ -55,7 +55,7 @@ function handleAddNewStudent(loading: ISettingAlertLogAndLoading) {
 function handleDownloadStudentList(loading: ISettingAlertLogAndLoading) {
   loading.setLoadingOpen(true)
   API_getAllStudents().then(response => {
-    convertToXlsxFile('student_list.xlsx', ['students'], [response.data.students_data])
+    convertToXlsxFile('student_list', ['students'], [response.data.students_data])
     loading.setLoadingOpen(false)
   })
 }
@@ -91,7 +91,7 @@ function handleDownloadStudentTaskByClassName(loading: ISettingAlertLogAndLoadin
   if (classList.some(value => value.name === className)) {
     loading.setLoadingOpen(true)
     API_getStudentTaskByClassName(className).then(response => {
-      convertToXlsxFile(`${className}_student_task_content.xlsx`, response.data.student_id_list, response.data.student_data_list)
+      convertToXlsxFile(`${className}_student_task_content`, response.data.student_id_list, response.data.student_data_list)
       loading.setLoadingOpen(false)
     })
   } else {
@@ -106,7 +106,7 @@ function handleDownloadStudentTaskByStudentId(loading: ISettingAlertLogAndLoadin
   if (studentList.some(value => value.student_id === studentId)) {
     loading.setLoadingOpen(true)
     API_getStudentTaskByStudentId(studentId).then(response => {
-      convertToXlsxFile(`${studentId}_student_task_content.xlsx`, [studentId], [response.data.student_task_content])
+      convertToXlsxFile(`${studentId}_student_task_content`, [studentId], [response.data.student_task_content])
       loading.setLoadingOpen(false)
     })
   } else {
@@ -117,7 +117,7 @@ function handleDownloadStudentTaskByStudentId(loading: ISettingAlertLogAndLoadin
 function handleDownloadAllStudentRecords(loading: ISettingAlertLogAndLoading) {
   loading.setLoadingOpen(true)
   API_getAllStudentRecord().then(response => {
-    convertToXlsxFile(`all_student_record_content.xlsx`, response.data.student_id_list, response.data.student_data_list)
+    convertToXlsxFile(`all_student_record_content`, response.data.student_id_list, response.data.student_data_list)
     loading.setLoadingOpen(false)
   })
 }

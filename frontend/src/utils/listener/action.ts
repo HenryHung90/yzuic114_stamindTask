@@ -1,8 +1,8 @@
+import React from "react";
 import homeTable from "./home";
 import taskTable from "./task";
 import speedDialTable from "./speedDial";
 import carouselTable from "./carousel";
-import React from "react";
 
 // verb	         String	  行為動詞，例如 "點擊", "完成"
 // -- view	    學生瀏覽課程首頁、閱讀文章或觀看影片。
@@ -25,6 +25,7 @@ import React from "react";
 // ->status      String 操作行為狀態是否成功
 interface IStudentRecords {
   verb: string
+  taskId?: number | null
   time: string
   timer: string | null
   objectType: string
@@ -171,6 +172,11 @@ function handleTranslateAction(dataset: IDataset, studentId: string) {
       carousel: carouselTable,
     };
 
+    // 將路徑以 "/" 分割，取得最後一個部分
+    const pathSegments = window.location.pathname.split("/")
+    const lastSegment = Number(pathSegments[pathSegments.length - 1])
+
+    const taskId = !isNaN(lastSegment) ? lastSegment : null;
     const verb = actionTable[dataset.action]
     const time = formattedTime
     const objectType = typeTable[dataset.type]
@@ -189,6 +195,7 @@ function handleTranslateAction(dataset: IDataset, studentId: string) {
     const formattedRecord: IStudentRecords = {
       verb: verb,
       time: time,
+      taskId: taskId,
       objectId: dataset.id,
       objectType: objectType,
       objectName: objectName,

@@ -141,6 +141,7 @@ interface Req_ChatWithAmumAmum extends RequestParams {
 
 interface Req_StudentRecordInfo extends RequestParams {
   student_id?: string
+  task_id?: string
   student_records?: Array<IStudentRecords>
 }
 

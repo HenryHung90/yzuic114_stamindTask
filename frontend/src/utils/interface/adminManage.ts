@@ -50,8 +50,62 @@ interface ITaskListFuncProps {
   fetchTaskListAsync: () => void
 }
 
+// TaskInfo
 interface ITaskInfoProps {
-  loading: ISettingAlertLogAndLoading
+  loading: ISettingAlertLogAndLoading,
+}
+
+interface IDownloadBarProps extends ITaskInfoProps {
+  taskId: string | undefined
+  setPageContent: React.Dispatch<React.SetStateAction<'main' | 'codeStatus'>>
+  chartsRef: React.RefObject<HTMLDivElement>
+}
+
+interface IDataVisualizationProps extends ITaskInfoProps {
+  taskId: string | undefined
+  chartsRef: React.RefObject<HTMLDivElement>
+}
+
+interface ISubTargetCompleted {
+  completed: Array<number>
+  notCompleted: Array<number>
+  unselected: Array<number>
+}
+
+interface ICompleteStatus {
+  '實驗組-完成': number
+  '實驗組-未完成': number
+  '操作組-完成': number
+  '操作組-未完成': number
+}
+
+interface ISelfScoringData {
+  min: number
+  q1: number
+  median: number
+  q3: number
+  max: number
+}
+
+interface IChatAIHeatMapData {
+  day_list: Array<string>
+  ask_times_list: Array<number>
+  student_ask_list: Array<{ x: string, y: string, v: number }>
+  student_list: Array<string>
+}
+
+interface IBoxPlotData {
+  min: Array<number>,
+  q1: Array<number>,
+  median: Array<number>,
+  means: Array<number>,
+  q3: Array<number>,
+  max: Array<number>
+}
+
+interface IStageDurationData {
+  EXPERIMENTAL: IBoxPlotData,
+  CONTROL: IBoxPlotData
 }
 
 // GroupManagement
@@ -77,6 +131,13 @@ export type {
   ITaskManageProps,
   ITaskListFuncProps,
   ITaskInfoProps,
+  IDownloadBarProps,
+  IDataVisualizationProps,
+  ISubTargetCompleted,
+  ISelfScoringData,
+  ICompleteStatus,
+  IChatAIHeatMapData,
+  IStageDurationData,
   IGroupManageProps,
   IGroupData,
 }

@@ -24,4 +24,11 @@ const API_getFeedbackByStudentId = (studentId: string) => {
   return new API_POST(import.meta.env.VITE_APP_API_GET_FEEDBACK_BY_STUDENT_ID, feedbackData).sendRequest()
 }
 
-export {API_getTeacherFeedback, API_generateTeacherFeedback, API_getFeedbackByStudentId}
+const API_getFeedbackByTaskId = (taskId: string) => {
+  const feedbackData: Req_feedbackInfo = {
+    task_id: taskId
+  }
+  return new API_POST(import.meta.env.VITE_APP_API_GET_FEEDBACK_BY_TASK_ID, feedbackData).sendRequest()
+}
+
+export {API_getTeacherFeedback, API_generateTeacherFeedback, API_getFeedbackByStudentId, API_getFeedbackByTaskId}

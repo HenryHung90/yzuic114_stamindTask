@@ -40,7 +40,6 @@ def serialize_task_reflection_and_plan_data(student_data, question_list, type_na
             serialized_data.append(f'階段{process_index}')
             for data_index, data in enumerate(process):
                 serialized_data.append(f'{type_name}:{question_list[process_index][data_index].get("title")}')
-
                 if not data:
                     serialized_data.append('學生回覆:無資料')
                 elif isinstance(data, dict):
@@ -61,9 +60,11 @@ def serialize_student_task_data(student_task):
     :param student_task:
     :return:
     """
+    student_info = student_task.student
     task_name = student_task.task.name
     sub_target_list = student_task.task.target.sub_target_list
-    student_plan = serialize_task_reflection_and_plan_data(student_task.plan.plan_list, sub_target_list, '子目標')
+    student_plan_data = student_task.plan
+    student_plan = serialize_task_reflection_and_plan_data(student_plan_data.plan_list, sub_target_list, '子目標')
 
     student_process = student_task.process
     process_hint_question = [] if not student_task.task.process_hint.hints else student_task.task.process_hint.hints
@@ -78,12 +79,15 @@ def serialize_student_task_data(student_task):
 
     return {
         '課程名稱': task_name,
+        '學生組別': student_info.student_group.group_type,
         '計劃內容': student_plan,
         '程式碼_HTML': str(getattr(student_code, 'html_code', '無HTML程式碼')),
         '程式碼_CSS': str(getattr(student_code, 'css_code', '無HTML程式碼')),
         '程式碼_JS': str(getattr(student_code, 'js_code', '無JS程式碼')),
         '實作提示反饋': str(student_hint_reply),
         '反思內容': str(student_reflects),
+        "自我評分": str(student_reflection.self_scoring),
+        '選擇項目': str(getattr(student_plan_data, 'select_sub_list', '未選擇')),
         '完成項目': str(getattr(student_reflection, 'completed_targets', '尚未完成')),
         '反饋內容': str(getattr(student_feedback, 'teacher_feedback', '無系統回饋'))
     }
@@ -194,6 +198,23 @@ def get_student_task_by_class_name(request):
         class_id = ClassName.objects.get(name=class_name).id
 
         student_tasks_data = StudentTask.objects.filter(class_name_id=class_id)
+        student_id_list, student_data_list = serialize_multi_student_task_data(student_tasks_data)
+        return Response({'student_data_list': student_data_list, 'student_id_list': student_id_list},
+                        status=status.HTTP_200_OK)
+
+    except Exception as e:
+        print(f'get student task by class name Error: {e}')
+        return Response({'get student task by class name Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# get student tasks by task id
+@ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
+@api_view(['POST'])
+def get_student_tasks_by_task_id(request):
+    try:
+        task_id = request.data.get('task_id')
+        student_tasks_data = StudentTask.objects.filter(task_id=task_id)
         student_id_list, student_data_list = serialize_multi_student_task_data(student_tasks_data)
         return Response({'student_data_list': student_data_list, 'student_id_list': student_id_list},
                         status=status.HTTP_200_OK)

@@ -153,7 +153,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "frontend/dist/static"),
-    os.path.join(BASE_DIR, "frontend/dist/files")
 ]
 STATIC_URL = "/static/"
 MEDIA_URL = "/files/"
@@ -208,4 +207,4 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 CSRF_COOKIE_HTTPONLY = False
 SESSION_COOKIE_HTTPONLY = True
-SECURE_CROSS_ORIGIN_OPENER_POLICY = None  # 僅在測試 HTTP 情況下
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin'

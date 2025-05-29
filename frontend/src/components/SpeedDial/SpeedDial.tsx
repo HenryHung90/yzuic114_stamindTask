@@ -23,6 +23,7 @@ import ChatRoomComponent from '../ChatRoom/ChatRoom'
 import TextBookComponent from "../TextBook/TextBook"
 import NoteBookComponent from "../NoteBook/NoteBook"
 import {useNavigate} from "react-router-dom";
+import ImageComponent from "../Image/Image";
 
 // interface
 interface SpeedDialProps {
@@ -118,8 +119,11 @@ const SpeedDialComponent = (props: SpeedDialProps) => {
               data-object={openChatRoom ? 'closeChatRoom' : 'openChatRoom'}
               data-id={openChatRoom ? 'speedDial_closeChatRoom' : 'speedDial_openChatRoom'}
             >
-              <img src={`/${import.meta.env.VITE_APP_FILE_ROUTE}/img/logo.PNG`} height='24px' width='24px'
-                   className='pointer-events-none'/>
+              <div className='pointer-events-none'>
+                <ImageComponent
+                  src={`${import.meta.env.VITE_APP_TEST_DNS}/${import.meta.env.VITE_APP_FILES_ROUTE}/img/logo.PNG`}
+                  alt='logo' width='24px' height='24px'/>
+              </div>
               <Typography
                 className="absolute top-2/4 -left-2/4 -translate-y-2/4 -translate-x-3/4 font-normal"
                 variant='small'

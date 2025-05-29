@@ -13,14 +13,14 @@ import {ITaskExperienceProps} from "../../../utils/interface/Task";
 const ExperiencePageComponent = (props: ITaskExperienceProps) => {
   const {taskId, selectNode, iframeKey, settingAlertLogAndLoading} = props
 
-  const [experienceData, setExperienceData] = useState<String>()
+  const [experienceData, setExperienceData] = useState<string>()
 
   useEffect(() => {
-    const fetchTaskExperience = async () => {
+    const fetchTaskExperience = () => {
       settingAlertLogAndLoading.setLoadingOpen(true)
       API_getTaskExperience(taskId).then(response => {
         settingAlertLogAndLoading.setLoadingOpen(false)
-        setExperienceData(response.data.experience_info.experience_files[selectNode.key])
+        setExperienceData(response.data.html_content)
       })
     }
     fetchTaskExperience()
@@ -31,7 +31,8 @@ const ExperiencePageComponent = (props: ITaskExperienceProps) => {
       {experienceData ? (
         <iframe
           key={iframeKey}
-          src={`/${import.meta.env.VITE_APP_FILE_ROUTE}/experience_files/${experienceData}`} // 動態設置 iframe 的 src
+          sandbox="allow-scripts allow-modals"
+          srcDoc={experienceData}
           title="Experience File"
           style={{
             width: "100%",

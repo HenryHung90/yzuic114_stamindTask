@@ -4,6 +4,7 @@ import {Button, IconButton, Collapse, Navbar, Typography} from "@material-tailwi
 // API
 import {API_logout} from "../../../utils/API/API_LoginSystem";
 import {useNavigate} from "react-router-dom";
+import ImageComponent from "../../../components/Image/Image";
 // components
 
 // interface
@@ -87,7 +88,9 @@ const NavBarComponent = (props: INavBarProps) => {
           className="flex justify-center items-center mr-4 cursor-pointer py-1.5 font-bold"
           placeholder={undefined}
         >
-          <img src={`/${import.meta.env.VITE_APP_FILE_ROUTE}/img/logo.PNG`} height='24px' width='24px'/>
+          <ImageComponent
+            src={`${import.meta.env.VITE_APP_TEST_DNS}/${import.meta.env.VITE_APP_FILES_ROUTE}/img/logo.PNG`} alt='logo'
+            width='24px' height='24px'/>
           Stamind Task
         </Typography>
         <div className="flex items-center gap-4">
