@@ -134,17 +134,24 @@ def serialize_description_of_student(target, student_plan, student_code, task_re
 def serialize_feedback_data(student_task_set):
     serialized_data = []
     for student_task in student_task_set:
-        feedback_data = {'教程': student_task.task.name}
+        student_data = student_task.student
+        feedback_data = student_task.feedback
+
+        feedback_data_set = {
+            '姓名': student_data.name,
+            '學號': student_data.student_id,
+            '教程': student_task.task.name
+        }
 
         # 處理智能回饋
-        for index, feedback in enumerate(student_task.feedback.teacher_feedback):
-            feedback_data[f'智能回饋_階段{index + 1}'] = feedback
+        for index, feedback in enumerate(feedback_data.teacher_feedback):
+            feedback_data_set[f'智能回饋_階段{index + 1}'] = feedback
 
         # 處理學生資料紀錄
-        for index, feedback in enumerate(student_task.feedback.student_feedback):
-            feedback_data[f'學生資料紀錄_階段{index + 1}'] = feedback
+        for index, feedback in enumerate(feedback_data.student_feedback):
+            feedback_data_set[f'學生資料紀錄_階段{index + 1}'] = feedback
 
-        serialized_data.append(feedback_data)
+        serialized_data.append(feedback_data_set)
     return serialized_data
 
 
@@ -272,3 +279,25 @@ def get_feedback_by_student_id(request):
     except Exception as e:
         print(f'get feedback by student id Error: {e}')
         return Response({'get feedback by student id Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# get feedback by task id
+@ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
+@api_view(['POST'])
+def get_feedback_by_task_id(request):
+    try:
+        task_id = request.data.get('task_id')
+        student_data = StudentTask.objects.filter(task_id=task_id)
+
+        feedback_result = serialize_feedback_data(student_data)
+
+        return Response({
+            'message': 'success',
+            'feedback': feedback_result,
+            'task_name': student_data[0].task.name
+        }, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        print(f'get feedback by task id Error: {e}')
+        return Response({'get feedback by task id Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
