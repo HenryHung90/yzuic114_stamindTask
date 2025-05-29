@@ -90,7 +90,7 @@ const NavBarComponent = (props: IAdminNavBarProps) => {
             src={`${import.meta.env.VITE_APP_TEST_DNS}/${import.meta.env.VITE_APP_FILES_ROUTE}/img/logo.PNG`} alt='logo'
             width='24px' height='24px'/>
           Admin Center
-        </Typography>q
+        </Typography>
         <div className="flex items-center gap-4">
           <div className="mr-4 hidden lg:block">{navList}</div>
           <div className="flex items-center gap-x-1">
