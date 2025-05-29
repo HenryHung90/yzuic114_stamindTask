@@ -24,7 +24,7 @@ class StudentTask(models.Model):
         null=True,
         blank=True,
         verbose_name='任務',
-        related_name='student_task'
+        related_name='student_tasks'
     )
 
     # task 相關內容
