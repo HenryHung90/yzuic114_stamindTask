@@ -4,15 +4,12 @@ services:
       context: .
       dockerfile: Dockerfile
     command: >
-      sh -c "rm -rf /app/static &&
-             python manage.py collectstatic --noinput &&
+      sh -c "python manage.py collectstatic --noinput --clear &&
              python manage.py makemigrations &&
              python manage.py migrate && 
              python manage.py create_default_user &&
              python manage.py create_default_class &&
              python manage.py runserver 0.0.0.0:8000"
-    ports:
-      - "8000:8000"
     env_file:
       - .env
     environment:
@@ -22,7 +19,9 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       PROCESS_ON_PRODUCTION: True
-
+    volumes:
+      - static_volume:/app/static
+      - media_volume:/app/files
     depends_on:
       - db
 
@@ -39,5 +38,18 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:8080"  # 將 Nginx 暴露到主機的 8080 埠
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - static_volume:/app/static  # 掛載靜態文件
+      - media_volume:/app/files    # 掛載媒體文件
+    depends_on:
+      - web  # 確保 Django 容器啟動後再啟動 Nginx
+
 volumes:
   postgres_data:
+  static_volume:
+  media_volume:
