@@ -154,14 +154,43 @@ USE_TZ = True
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "frontend/dist/static"),
 ]
-STATIC_URL = "/static/"
-MEDIA_URL = "/files/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'files')
+STATIC_URL = os.getenv('STATIC_URL', '/static/')
+MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
+STATIC_ROOT = os.path.join(BASE_DIR, os.getenv('STATIC_ROOT', 'static'))
+MEDIA_ROOT = os.path.join(BASE_DIR, os.getenv('MEDIA_ROOT', 'files'))
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AUTH_USER_MODEL = 'backend.User'
+
+# Determine whether the environment is production or development
+PROCESS_ON_PRODUCTION = os.getenv('PROCESS_ON_PRODUCTION', False).lower() == 'true'
+
+# 根據環境設定不同的 exempt paths
+if PROCESS_ON_PRODUCTION:
+    # 生產環境 - 使用子路徑
+    MIDDLEWARE_EXEMPT_PATHS = [
+        '/taskmind/api/login/',
+        '/taskmind/api/register/',
+        '/taskmind/',
+        '/taskmind/files/img/logo.PNG',
+        '/taskmind/vite.svg',
+        '/',
+        '/files/img/logo.PNG',
+        '/vite.svg'
+    ]
+    MIDDLEWARE_ADMIN_PREFIX = '/taskmind/api/admin/'
+else:
+    # 開發環境 - 直接路徑
+    MIDDLEWARE_EXEMPT_PATHS = [
+        '/api/login/',
+        '/api/register/',
+        '/',
+        '/files/img/logo.PNG',
+        '/vite.svg'
+    ]
+    MIDDLEWARE_ADMIN_PREFIX = '/api/admin/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -198,7 +227,8 @@ SESSION_COOKIE_AGE = 86400  # 24小時
 # SESSION_COOKIE_HTTPONLY = True
 # Showed up when publish---------------------------------------------------------
 DEBUG = False
-ALLOWED_HOSTS = ["*"]
+FORCE_SCRIPT_NAME = os.getenv('FORCE_SCRIPT_NAME', '')
+ALLOWED_HOSTS = ["ccj.infocom.yzu.edu.tw", 'localhost']
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 CORS_ALLOW_CREDENTIALS = True  # 允許攜帶憑證（Cookies）
 CORS_ALLOW_ALL_ORIGINS = False  # 不建議設置為 True，改為允許特定來源
