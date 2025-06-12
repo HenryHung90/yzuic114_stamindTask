@@ -4,10 +4,11 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from datetime import datetime
+from datetime import datetime, timedelta
+from django.utils import timezone
 
 # User model
-from backend.models import User, ClassName, StudentGroup, ChatHistory, StudentRecord
+from backend.models import User, ClassName, StudentGroup, ChatHistory, StudentRecord, LoginAttempt
 
 """
  Response Status List:
@@ -89,16 +90,70 @@ def login_system(request):
         acc = data.get('student_id')
         psw = data.get('password')
 
+        # 獲取客戶端 IP
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip_address = x_forwarded_for.split(',')[0]
+        else:
+            ip_address = request.META.get('REMOTE_ADDR')
+
         # 確認帳號密碼是否為空
         if acc is None or psw is None or acc == '' or psw == '':
+            # 記錄失敗的登入嘗試
+            LoginAttempt.objects.create(
+                ip_address=ip_address,
+                student_id=acc,
+                success=False
+            )
             return Response({'message': '帳號或密碼不得為空', 'status': 400}, status=status.HTTP_400_BAD_REQUEST)
+
+        # 檢查過去一小時內的失敗嘗試次數
+        one_hour_ago = timezone.now() - timedelta(hours=1)
+        failed_attempts = LoginAttempt.objects.filter(
+            ip_address=ip_address,
+            success=False,
+            timestamp__gte=one_hour_ago
+        ).count()
+
+        # 如果失敗次數達到或超過 5 次，則封鎖該 IP
+        if failed_attempts >= 5:
+            # 設置封鎖時間為 10 分鐘
+            block_time = 10
+            block_until = timezone.now() + timedelta(minutes=block_time)
+
+            # 記錄封鎖
+            LoginAttempt.objects.create(
+                ip_address=ip_address,
+                student_id=acc,
+                success=False,
+                blocked_until=block_until
+            )
+
+            return Response({
+                'message': f'由於多次登入失敗，您的 IP 已被暫時封鎖。請 {block_time} 分鐘後再試。',
+                'status': 403
+            }, status=status.HTTP_403_FORBIDDEN)
 
         # 登入
         user = authenticate(student_id=acc, password=psw, request=request._request)
-        student_info = User.objects.get(student_id=acc)
+
         if user is None:
+            # 記錄失敗的登入嘗試
+            LoginAttempt.objects.create(
+                ip_address=ip_address,
+                student_id=acc,
+                success=False
+            )
             return Response({'message': '無此用戶或帳號密碼錯誤', 'status': 403}, status=status.HTTP_403_FORBIDDEN)
 
+        # 登入成功，記錄成功的登入嘗試
+        LoginAttempt.objects.create(
+            ip_address=ip_address,
+            student_id=acc,
+            success=True
+        )
+
+        student_info = User.objects.get(student_id=acc)
         login(request._request, user)
 
         now_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
