@@ -88,6 +88,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'backend.middleware.IPBlockerMiddleware',  # 添加 IP 限制中間件
     'backend.middleware.AuthenticationMiddleware'
 ]
 
@@ -155,7 +156,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "frontend/dist/static"),
 ]
 STATIC_URL = os.getenv('STATIC_URL', '/static/')
-MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
+MEDIA_URL = os.getenv('MEDIA_URL', '/files/')
 STATIC_ROOT = os.path.join(BASE_DIR, os.getenv('STATIC_ROOT', 'static'))
 MEDIA_ROOT = os.path.join(BASE_DIR, os.getenv('MEDIA_ROOT', 'files'))
 
