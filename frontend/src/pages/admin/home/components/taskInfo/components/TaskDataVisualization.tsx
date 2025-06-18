@@ -276,7 +276,7 @@ const TaskDataVisualizationComponent = (props: IDataVisualizationProps) => {
         </div>
       </div>
       <div className='flex flex-col justify-center items-center gap-y-4'>
-        <div className='w-full' style={{height: `${chatAIHeatMapData.student_list.length + 5}rem`}}>
+        <div className='w-full' style={{height: `${chatAIHeatMapData.student_list.length * 1.2 + 15}rem`}}>
           <HeatMapChartComponent {...heatMapData}/>
         </div>
         <div className='w-full h-[12rem]'>
