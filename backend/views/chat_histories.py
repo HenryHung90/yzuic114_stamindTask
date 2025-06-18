@@ -141,10 +141,27 @@ def get_chat_ai_heat_map_by_task_id(request):
         # 算出所有天數以及每天的詢問次數
         all_time_stamp = []
         for student_task in student_task_data:
+            # 檢查 chat_history 是否存在
+            if not student_task.chat_history:
+                continue
             chat_data = student_task.chat_history.chat_history
+            # 檢查 chat_history.chat_history 是否為有效列表
+            if not chat_data or not isinstance(chat_data, list):
+                continue
+
             for message in chat_data:
-                if message.get('name') == 'Amum Amum':
+                if message.get('name') == 'Amum Amum' and message.get('time'):
                     all_time_stamp.append(message.get('time')[:10])  # 取年月日
+
+        # 檢查是否有收集到時間戳記
+        if not all_time_stamp:
+            return Response({
+                'day_list': [],
+                'ask_times_list': [],
+                'student_ask_list': [],
+                'student_list': []
+            }, status=status.HTTP_200_OK)
+
         # 生成所有天的列表
         day_list = generate_all_days_time_stamp(all_time_stamp)
         ask_times_list = count_occurrences_by_day(day_list, all_time_stamp)
@@ -154,28 +171,43 @@ def get_chat_ai_heat_map_by_task_id(request):
         student_ask_list = []
         student_list = []
         for student_task in student_task_data:
-            student_time_stamp = []
-            student_id = student_task.student.student_id
-            student_name = student_task.student.name
-            chat_data = student_task.chat_history.chat_history
+            # 檢查學生和聊天歷史是否存在
+            if not student_task.student or not student_task.chat_history:
+                continue
 
-            student_list.append(student_id + student_name)
+            student_time_stamp = []
+            student_id = student_task.student.student_id or ""
+            student_name = student_task.student.name or ""
+
+            # 確保 student_id 和 name 不是 None
+            student_identifier = f"{student_id}{student_name}"
+            if not student_identifier.strip():
+                continue
+
+            chat_data = student_task.chat_history.chat_history
+            # 檢查 chat_history.chat_history 是否為有效列表
+            if not chat_data or not isinstance(chat_data, list):
+                continue
+
+            student_list.append(student_identifier)
             for message in chat_data:
-                if message.get('name') == 'Amum Amum':
+                if message.get('name') == 'Amum Amum' and message.get('time'):
                     student_time_stamp.append(message.get('time')[:10])  # 取年月日
 
             count_list = count_occurrences_by_day(day_list, student_time_stamp)
             for idx, day in enumerate(day_list):
                 student_ask_list.append({
                     'x': day,
-                    'y': student_id + student_name,
+                    'y': student_identifier,
                     'v': count_list[idx]
                 })
+
+        # 確保 student_list 不為空
         return Response({
             'day_list': day_list,
             'ask_times_list': ask_times_list,
             'student_ask_list': student_ask_list,
-            'student_list': sorted(student_list)
+            'student_list': sorted(student_list) if student_list else []
         }, status=status.HTTP_200_OK)
     except Exception as e:
         print(f'get Chat AI heat map by task id Error: {e}')
