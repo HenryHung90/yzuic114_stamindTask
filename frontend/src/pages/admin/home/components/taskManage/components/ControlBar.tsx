@@ -1,4 +1,5 @@
 import React from "react";
+import {useNavigate} from "react-router-dom";
 // style
 import {Button, Option, Select} from "@material-tailwind/react"
 // API
@@ -9,6 +10,8 @@ import {IControlBarProps} from "../../../../../../utils/interface/adminManage";
 
 const ControlBarComponent = (props: IControlBarProps) => {
   const {classList, className, setClassName, settingAlertLogAndLoading} = props
+  const NavLocation = useNavigate()
+
   return (
     <div className='flex justify-between my-5 p-5 rounded-2xl bg-stamindTask-black-600 bg-opacity-50'>
       <div className='flex gap-6'>
@@ -35,6 +38,12 @@ const ControlBarComponent = (props: IControlBarProps) => {
         </div>
       </div>
       <div className='flex gap-6'>
+        <Button
+          variant="gradient"
+          placeholder={undefined}
+          onClick={() => NavLocation('/admin/dataManage')}>
+          合併數據檢視
+        </Button>
         <Button
           variant="gradient"
           placeholder={undefined}

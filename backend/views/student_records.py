@@ -18,6 +18,63 @@ from ..utils import calculate_box_plot_data
  3. 500: server error
 """
 
+# 階段映射字典，用於確定 object_id 屬於哪個階段
+STAGE_MAPPING = {
+    # 體驗任務相關事件 (索引 0)
+    'enterExperience': 0,
+    'leaveExperience': 0,
+
+    # 學習目標相關事件 (索引 1)
+    'enterTarget': 1,
+    'leaveTarget': 1,
+    'target': 1,
+    'targetDescription': 1,
+    'subTarget': 1,
+    'subTargetDescription': 1,
+
+    # 計劃設定相關事件 (索引 2)
+    'enterPlan': 2,
+    'leavePlan': 2,
+    'plan': 2,
+    'addPlan': 2,
+    'removePlan': 2,
+    'changePlanstrategy': 2,
+    'changePlandescription': 2,
+    'changePlantime': 2,
+    'savePlan': 2,
+
+    # 計劃執行相關事件 (索引 3)
+    'enterProcess': 3,
+    'leaveProcess': 3,
+    'processhtml': 3,
+    'processcss': 3,
+    'processjavascript': 3,
+    'processFontIncrease': 3,
+    'processFontDecrease': 3,
+    'processSave': 3,
+    'processOpenIframe': 3,
+    'processCloseIframe': 3,
+    'processOpenProcessHint': 3,
+    'processCloseProcessHint': 3,
+    'processCodeEditor': 3,
+    'processHintTitle': 3,
+    'processHintDescription': 3,
+    'processHintSave': 3,
+    'changeProcessHintReply': 3,
+    'saveProcessHintReply': 3,
+
+    # 自我反思相關事件 (索引 4)
+    'enterReflection': 4,
+    'leaveReflection': 4,
+    'saveReflection': 4,
+    'changeReflection': 4,
+    'changeSelfScoring': 4,
+
+    # 總體回饋相關事件 (索引 5)
+    'enterFeedback': 5,
+    'leaveFeedback': 5
+}
+
 
 def serialize_record_data(record):
     return {
@@ -133,6 +190,87 @@ def calculate_student_records_info(student_record_set, group_info):
     return calculate_data
 
 
+def calculate_student_click_data(record_data, group_info):
+    """
+    計算不同組別在各階段的點擊事件數量
+
+    參數:
+    record_data: 學生記錄數據查詢集
+    group_info: 學生ID與組別類型的映射字典
+
+    返回:
+    dict: 包含實驗組和對照組在六個階段的點擊數據
+    """
+    # 初始化點擊數據結構
+    click_data = {
+        'EXPERIMENTAL': [0, 0, 0, 0, 0, 0],  # 六個階段的點擊數
+        'CONTROL': [0, 0, 0, 0, 0, 0]  # 六個階段的點擊數
+    }
+
+    # 統計每個組別在各階段的點擊次數
+    for record in record_data:
+        student_id = record.user_id
+        object_id = record.object_id
+
+        # 如果 object_id 包含下劃線，取第二部分
+        if '_' in object_id:
+            object_id = object_id.split('_')[1]
+
+        # 獲取學生所屬組別
+        group_type = group_info.get(student_id)
+        if not group_type or group_type not in ['EXPERIMENTAL', 'CONTROL']:
+            continue
+
+        # 確定事件所屬階段
+        stage_index = STAGE_MAPPING.get(object_id)
+        if stage_index is not None:
+            click_data[group_type][stage_index] += 1
+
+    return click_data
+
+
+def calculate_student_click_data_by_id(record_data, student_id_list):
+    """
+    計算每個學生在各階段的點擊事件數量，並格式化為適合 xlsx 的格式
+
+    參數:
+    record_data: 學生記錄數據查詢集
+    student_id_list: 學生ID列表
+
+    返回:
+    tuple: (student_id_list, student_click_list) 學生ID列表和對應的點擊數據列表
+    """
+    # 階段名稱列表
+    stage_names = ['體驗任務', '學習目標', '計劃設定', '計劃執行', '自我反思', '總體回饋']
+
+    # 初始化點擊數據結構，為每個學生創建一個包含各階段點擊數的字典列表
+    student_click_list = []
+    for student_id in student_id_list:
+        student_stage_clicks = []
+        for stage_index in range(6):
+            student_stage_clicks.append({
+                '學號': student_id,
+                '階段': stage_names[stage_index],
+                '點擊次數': 0
+            })
+        student_click_list.append(student_stage_clicks)
+    # 統計每個學生在各階段的點擊次數
+    for record in record_data:
+        student_id = record.user_id
+        object_id = record.object_id
+
+        # 如果 object_id 包含下劃線，取第二部分
+        if '_' in object_id:
+            object_id = object_id.split('_')[1]
+        # 確定事件所屬階段
+        stage_index = STAGE_MAPPING.get(object_id)
+        if stage_index is not None:
+            student_index = student_id_list.index(student_id)
+            student_click_list[student_index][stage_index]['點擊次數'] += 1
+
+    return student_click_list
+
+
 # save student note
 @ensure_csrf_cookie
 @permission_classes([IsAuthenticated])
@@ -226,8 +364,13 @@ def get_all_student_record(request):
     try:
         record_data = StudentRecord.objects.all().order_by('created_at')
         student_id_list, student_data_list = serialize_multi_student_record_data(record_data)
+        # 計算每個學生在各階段的點擊數據
+        student_click_list = calculate_student_click_data_by_id(record_data, student_id_list)
+
         return Response({
-            'student_data_list': student_data_list, 'student_id_list': student_id_list
+            'student_data_list': student_data_list,
+            'student_id_list': student_id_list,
+            'student_click_list': student_click_list
         }, status=status.HTTP_200_OK)
 
 
@@ -261,3 +404,42 @@ def get_student_records_info_by_task_id(request):
     except Exception as e:
         print(f'get all student record Error: {e}')
         return Response({'get all student record Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# get student records info by class ids
+@ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
+@api_view(['POST'])
+def get_student_records_info_by_class_ids(request):
+    try:
+        class_ids = request.data.get('class_ids')
+
+        if not class_ids or not isinstance(class_ids, list):
+            return Response({'error': 'class_ids must be a non-empty list'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # 獲取所有指定班級的學生
+        students = User.objects.filter(class_name__id__in=class_ids).select_related('student_group')
+
+        # 構建學生ID與組別類型的映射
+        group_info = {}
+        for student in students:
+            if hasattr(student, 'student_group') and student.student_group:
+                group_info[student.student_id] = student.student_group.group_type
+
+        # 獲取這些班級的所有學生記錄
+        record_data = StudentRecord.objects.filter(
+            class_name__id__in=class_ids,
+            timer__isnull=False
+        ).exclude(timer__exact='').order_by('created_at')
+
+        # 計算各階段的數據
+        calculate_data = calculate_student_records_info(record_data, group_info)
+        click_data = calculate_student_click_data(record_data, group_info)
+
+        return Response({
+            'record_data': calculate_data,
+            'click_data': click_data,
+        }, status=status.HTTP_200_OK)
+    except Exception as e:
+        print(f'get student records info by class ids Error: {e}')
+        return Response({'get student records info by class ids Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

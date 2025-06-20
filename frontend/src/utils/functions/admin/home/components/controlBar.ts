@@ -19,6 +19,7 @@ import {convertToXlsxFile} from "../../../common";
 // interface
 import {Res_classNamesInfo, Res_studentsInfo} from "../../../../API/API_Interface";
 import {ISettingAlertLogAndLoading} from "../../../../interface/alertLog";
+import {API_getAllChatHistories} from "../../../../API/API_ChatHistories";
 
 function handlePromise(messageTitle: string, messageInfo: string, loading: ISettingAlertLogAndLoading) {
   loading.setAlertLog(messageTitle, messageInfo)
@@ -116,10 +117,23 @@ function handleDownloadStudentTaskByStudentId(loading: ISettingAlertLogAndLoadin
 
 function handleDownloadAllStudentRecords(loading: ISettingAlertLogAndLoading) {
   loading.setLoadingOpen(true)
-  API_getAllStudentRecord().then(response => {
-    convertToXlsxFile(`all_student_record_content`, response.data.student_id_list, response.data.student_data_list)
-    loading.setLoadingOpen(false)
+  Promise.all([
+    API_getAllStudentRecord().then(response => {
+      convertToXlsxFile(`all_student_record_content`, response.data.student_id_list, response.data.student_data_list)
+      convertToXlsxFile(`all_student_record_click_times`, response.data.student_id_list, response.data.student_click_list)
+    }),
+    API_getAllChatHistories().then(response => {
+      convertToXlsxFile(`all_student_chat_histories`, ['chat_histories'], [response.data.chat_histories_list])
+    })
+  ]).then(() => {
+    // 所有請求完成後關閉加載狀態
+    loading.setLoadingOpen(false);
   })
+    .catch(error => {
+      // 錯誤處理
+      console.error("獲取數據時發生錯誤:", error);
+      loading.setLoadingOpen(false);
+    });
 }
 
 // For classManagement

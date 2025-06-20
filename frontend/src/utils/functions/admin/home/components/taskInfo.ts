@@ -73,8 +73,15 @@ export function calculateSelfScoringData(studentTaskDataList: Array<Array<{ [key
   let selfScoring: Array<number> = []
   for (const taskData of studentTaskDataList) {
     // 計算箱型圖數
-    const scoring = JSON.parse(taskData[0]['自我評分'])[0] ?? 0
-    selfScoring.push(scoring)
+    if (taskData.length == 1) {
+      const scoring = JSON.parse(taskData[0]['自我評分'])[0] ?? 0
+      selfScoring.push(scoring)
+    } else {
+      for (let j = 0; j < taskData.length; j++) {
+        const scoring = JSON.parse(taskData[j]['自我評分'])[0] ?? 0
+        selfScoring.push(scoring)
+      }
+    }
   }
   const sortedScores = [...selfScoring].sort((a, b) => a - b)
   const lowerHalf = sortedScores.slice(0, Math.floor(sortedScores.length / 2));

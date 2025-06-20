@@ -4,45 +4,35 @@ import {useState, useEffect} from "react";
 // API
 import {
   calculateCompletedNumbers,
-  calculateSelfScoringData,
-  calculateSubTargetCompleted,
+  calculateSelfScoringData
 } from "../../../../../../utils/functions/admin/home/components/taskInfo";
-import {API_getStudentTasksByTaskId} from "../../../../../../utils/API/API_StudentTasks";
-import {API_getTaskTarget} from "../../../../../../utils/API/API_Targets";
-import {API_getChatAIHeatMapDataByTaskId} from "../../../../../../utils/API/API_ChatHistories";
-import {API_getStudentRecordsInfoByTaskId} from "../../../../../../utils/API/API_StudentRecords";
+import {API_getStudentTaskByClassIds} from "../../../../../../utils/API/API_StudentTasks";
+import {API_getStudentRecordsByClassIds} from "../../../../../../utils/API/API_StudentRecords";
+import {API_getChatAIHeatMapDataByClassIds} from "../../../../../../utils/API/API_ChatHistories";
 
 // components
 import PieChartComponent, {IPieChartProps} from "../../../../../../components/Chart/PieChart";
 import BoxPlotChartComponent, {IBoxPlotChartProps} from "../../../../../../components/Chart/BoxPlotChart";
-import StackedPercentageChartComponent, {
-  IStackedPercentageBarChartProps
-} from "../../../../../../components/Chart/StackedPercentageChart";
 import HeatMapChartComponent, {IHeatMapChartProps} from "../../../../../../components/Chart/HeatMapChart";
 import LineChartComponent, {ILineChartProps} from "../../../../../../components/Chart/LineChart";
 
 // interface
 import {
   IDataVisualizationProps,
-  ISubTargetCompleted,
   ICompleteStatus,
   ISelfScoringData,
   IChatAIHeatMapData,
-  IStageDurationData
+  IStageDurationData,
+  IStageClickData
 } from "../../../../../../utils/interface/adminManage";
+import BarChartComponent, {IBarChartProps} from "../../../../../../components/Chart/BarChart";
 
 
 const TaskDataVisualizationComponent = (props: IDataVisualizationProps) => {
-  const {taskId, loading, chartsRef} = props;
+  const {classList, loading, chartsRef} = props;
 
   const [studentIdList, setStudentIdList] = useState<Array<string>>([])
   const [studentTaskDataList, setStudentTaskDataList] = useState<Array<Array<{ [key: string]: string }>>>([]);
-  const [subTargetList, setSubTargetList] = useState<Array<string>>([])
-  const [subTargetCompleted, setSubTargetCompleted] = useState<ISubTargetCompleted>({
-    completed: [],
-    notCompleted: [],
-    unselected: []
-  })
 
   const [completeStatus, setCompleteStatus] = useState<ICompleteStatus>({
     '實驗組-完成': 0,
@@ -64,38 +54,32 @@ const TaskDataVisualizationComponent = (props: IDataVisualizationProps) => {
     'EXPERIMENTAL': {min: [], q1: [], median: [], means: [], q3: [], max: []},
     'CONTROL': {min: [], q1: [], median: [], means: [], q3: [], max: []}
   })
+  const [stageClickData, setStageClickData] = useState<IStageClickData>({
+    'EXPERIMENTAL': new Array(6).fill(0),
+    'CONTROL': new Array(6).fill(0),
+  })
 
   useEffect(() => {
-    if (!taskId) return;
+    if (!classList || classList?.length == 0) return
     loading.setLoadingOpen(true);
 
     Promise.all([
-      // 獲取學生任務數據
-      API_getStudentTasksByTaskId(taskId)
+      API_getStudentTaskByClassIds(classList)
         .then(response => {
           setStudentIdList(response.data.student_id_list);
           setStudentTaskDataList(response.data.student_data_list);
           return response;
         }),
-      // 獲取任務目標
-      API_getTaskTarget(taskId)
-        .then(response => {
-          const subTargetList = response.data.sub_target_list[0].map(
-            (item: { title: string }) => item.title
-          );
-          setSubTargetList(subTargetList);
-          return response;
-        }),
       // 獲取熱力圖數據
-      API_getChatAIHeatMapDataByTaskId(taskId)
+      API_getChatAIHeatMapDataByClassIds(classList)
         .then(response => {
           setChatAIHeatMapData(response.data)
           return response;
         }),
-      API_getStudentRecordsInfoByTaskId(taskId)
+      API_getStudentRecordsByClassIds(classList)
         .then(response => {
-          console.log(response.data.record_data)
           setStageDurationData(response.data.record_data)
+          setStageClickData(response.data.click_data)
           return response
         })
     ])
@@ -108,18 +92,16 @@ const TaskDataVisualizationComponent = (props: IDataVisualizationProps) => {
         console.error("獲取數據時發生錯誤:", error);
         loading.setLoadingOpen(false);
       });
-  }, [])
+  }, [classList])
   useEffect(() => {
     const calculateData = () => {
       // 更新完成人數
       setCompleteStatus(calculateCompletedNumbers(studentTaskDataList))
       // 更新箱型圖圖資
       setSelfScoringData(calculateSelfScoringData(studentTaskDataList))
-      // 更新子任務完成狀態
-      setSubTargetCompleted(calculateSubTargetCompleted(studentTaskDataList, subTargetList.length))
     }
     calculateData()
-  }, [studentIdList, studentTaskDataList, subTargetList]);
+  }, [studentIdList, studentTaskDataList]);
 
   // 任務完成度 PieChart Data
   const pieChartData: IPieChartProps = {
@@ -150,35 +132,6 @@ const TaskDataVisualizationComponent = (props: IDataVisualizationProps) => {
         borderColor: 'rgba(75, 192, 192, 1)',
       },
     ],
-  }
-  // 子任務完成度 StackedPercentageChart Data
-  const taskData: IStackedPercentageBarChartProps = {
-    title: '子任務完成率',
-    labels: [...subTargetList],
-    datasets: [
-      {
-        label: '已完成',
-        data: [...subTargetCompleted.completed],
-        backgroundColor: 'rgba(75, 192, 192, 0.8)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1,
-      },
-      {
-        label: '未完成',
-        data: [...subTargetCompleted.notCompleted],
-        backgroundColor: 'rgba(227,101,16,0.8)',
-        borderColor: 'rgb(239,108,1)',
-        borderWidth: 1,
-      },
-      {
-        label: '未選取',
-        data: [...subTargetCompleted.unselected],
-        backgroundColor: 'rgba(255, 99, 132, 0.8)',
-        borderColor: 'rgba(255, 99, 132, 1)',
-        borderWidth: 1,
-      }
-    ],
-    horizontal: true
   }
   // AI 詢問 HeatMap Data
   const heatMapData: IHeatMapChartProps = {
@@ -212,8 +165,8 @@ const TaskDataVisualizationComponent = (props: IDataVisualizationProps) => {
     datasets: [
       {
         label: '實驗組',
-        backgroundColor: 'rgba(75, 192, 192, 0.5)',
         borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(75, 192, 192, 0.5)',
         min: stageDurationData.EXPERIMENTAL.min,     // 每個值對應一個標籤
         q1: stageDurationData.EXPERIMENTAL.q1,
         median: stageDurationData.EXPERIMENTAL.median,
@@ -222,8 +175,8 @@ const TaskDataVisualizationComponent = (props: IDataVisualizationProps) => {
       },
       {
         label: '控制組',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
         borderColor: 'rgba(255, 99, 132, 1)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
         min: stageDurationData.CONTROL.min,
         q1: stageDurationData.CONTROL.q1,
         median: stageDurationData.CONTROL.median,
@@ -260,18 +213,36 @@ const TaskDataVisualizationComponent = (props: IDataVisualizationProps) => {
       title: '分鐘'
     }
   }
+  // 各階段點擊次數 BarChart Data
+  const stageClickBarData: IBarChartProps = {
+    title: '各階段點擊次數',
+    labels: STAGES,
+    datasets: [
+      {
+        label: '實驗組',
+        data: stageClickData['EXPERIMENTAL'],
+        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+      },
+      {
+        label: '控制組',
+        data: stageClickData['CONTROL'],
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1,
+      }
+    ]
+  }
 
   return (
-    <div ref={chartsRef} className='flex flex-col gap-y-4 p-4 h-[90%] w-full overflow-scroll'>
+    <div ref={chartsRef} className='flex flex-col gap-y-6 p-4 h-[90%] w-full overflow-scroll'>
       <div className='flex justify-center items-center gap-x-8'>
         <div className='w-96 h-[20rem]'>
           <PieChartComponent {...pieChartData}/>
         </div>
         <div className='w-48 h-[20rem]'>
           <BoxPlotChartComponent {...StudentScoringBoxPlotData}/>
-        </div>
-        <div className='w-96 h-[20rem]'>
-          <StackedPercentageChartComponent {...taskData}/>
         </div>
       </div>
       <div className='flex flex-col justify-center items-center gap-y-4'>
@@ -286,6 +257,9 @@ const TaskDataVisualizationComponent = (props: IDataVisualizationProps) => {
         </div>
         <div className='w-[90%] h-[12rem]'>
           <LineChartComponent {...stageDurationMeansLineData}/>
+        </div>
+        <div className='w-full h-[12rem]'>
+          <BarChartComponent {...stageClickBarData}/>
         </div>
       </div>
     </div>

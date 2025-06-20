@@ -207,6 +207,37 @@ def get_student_task_by_class_name(request):
         return Response({'get student task by class name Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
+# get student tasks by class ids
+@ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
+@api_view(['POST'])
+def get_student_task_by_class_ids(request):
+    try:
+        class_ids = request.data.get('class_ids')
+
+        if not class_ids or not isinstance(class_ids, list):
+            return Response({'error': 'class_ids must be a non-empty list'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # 獲取所有指定班級ID的學生任務數據
+        student_tasks_data = StudentTask.objects.filter(class_name_id__in=class_ids)
+
+        if not student_tasks_data.exists():
+            return Response({'message': 'No student tasks found for the specified class IDs'},
+                            status=status.HTTP_204_NO_CONTENT)
+
+        # 序列化數據
+        student_id_list, student_data_list = serialize_multi_student_task_data(student_tasks_data)
+
+        return Response({
+            'student_data_list': student_data_list,
+            'student_id_list': student_id_list
+        }, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        print(f'get student task by class ids Error: {e}')
+        return Response({'get student task by class ids Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
 # get student tasks by task id
 @ensure_csrf_cookie
 @permission_classes([IsAuthenticated])

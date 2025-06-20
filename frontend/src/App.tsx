@@ -12,6 +12,8 @@ import Home from "./pages/home/Home";
 import AlertLog from "./components/alertLogAndLoadingPage/AlertLog";
 import Loading from "./components/alertLogAndLoadingPage/Loading";
 import Task from "./pages/task/Task";
+import TaskInfo from "./pages/admin/home/components/taskInfo/TaskInfo";
+import DataManage from "./pages/admin/home/components/dataManage/dataManage";
 
 import AdminHome from "./pages/admin/home/AdminHome"
 import AdminTask from "./pages/admin/task/Task"
@@ -19,7 +21,6 @@ import NotFound from "./pages/errorPage/404/NotFound"
 // interface
 import {CSRF_cookies} from "./utils/API/API_Interface";
 import {EGroupType} from "./utils/functions/common";
-import TaskInfo from "./pages/admin/home/components/taskInfo/TaskInfo";
 
 export default function App() {
   const [auth, setAuth] = useState<false | 'STUDENT' | 'TEACHER'>(false)
@@ -166,6 +167,10 @@ export default function App() {
     {
       path: '/admin/taskInfo/:taskId',
       element: <TaskInfo loading={settingAlertLogAndLoading}/>
+    },
+    {
+      path: '/admin/dataManage',
+      element: <DataManage loading={settingAlertLogAndLoading}/>
     }
   ]
 
