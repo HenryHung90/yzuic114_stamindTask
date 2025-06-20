@@ -1,5 +1,5 @@
 import {Req_StudentChatHistory} from "./API_Interface";
-import {API_POST} from "./API_Config";
+import {API_GET, API_POST} from "./API_Config";
 
 export const API_getChatHistories = (offset: number, taskId: string) => {
   const chatData: Req_StudentChatHistory = {
@@ -7,6 +7,10 @@ export const API_getChatHistories = (offset: number, taskId: string) => {
     task_id: taskId
   }
   return new API_POST(import.meta.env.VITE_APP_API_GET_CHAT_HISTORIES, chatData).sendRequest()
+}
+
+export const API_getAllChatHistories = () => {
+  return new API_GET(import.meta.env.VITE_APP_API_GET_ALL_CHAT_HISTORIES).sendRequest()
 }
 
 export const API_getChatHistoriesByStudentId = (studentId: string) => {

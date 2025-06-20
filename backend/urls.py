@@ -191,6 +191,8 @@ API_ADMIN_GET = [
     path('admin/get_all_class_name/', get_all_class_names, name='all_class_names'),
     # get all tasks
     path('admin/get_all_tasks_info/', get_all_tasks_info, name='all_tasks_info'),
+    # get all chat histories
+    path('admin/get_all_chat_histories/', get_all_chat_histories, name='all_chat_histories'),
 ]
 
 urlpatterns += API_POST + API_GET + API_ADMIN_POST + API_ADMIN_GET

@@ -222,6 +222,61 @@ def get_chat_histories(request):
         return Response({'get Chat Histories Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
+# get all chat histories sorted by time
+@ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
+@api_view(['GET'])
+def get_all_chat_histories(request):
+    try:
+        # 獲取所有聊天歷史記錄
+        chat_histories = ChatHistory.objects.all()
+
+        # 準備結果列表
+        all_messages = []
+
+        # 遍歷每個聊天歷史對象
+        for chat_history in chat_histories:
+            # 檢查 chat_history 是否存在
+            if not chat_history or not chat_history.chat_history:
+                continue
+
+            # 遍歷聊天歷史中的每條消息
+            for message_json in chat_history.chat_history:
+                # 檢查消息格式是否正確
+                if not isinstance(message_json, dict):
+                    # 嘗試解析可能是字符串格式的 JSON
+                    try:
+                        import json
+                        message = json.loads(message_json)
+                        if not isinstance(message, dict) or 'time' not in message:
+                            continue
+                    except:
+                        continue
+                else:
+                    message = message_json
+                # 創建新的消息對象，包含學生和班級信息
+                name = message.get("name", "未知")
+                if name != 'Amum Amum':
+                    message_data = {
+                        "使用者名稱": message.get("name", "未知"),
+                        "發送時間": message.get("time", ""),
+                        "傳送訊息": message.get("message", ""),
+                    }
+                    all_messages.append(message_data)
+
+        # 按發送時間排序
+        sorted_messages = sorted(all_messages, key=lambda x: x["發送時間"])
+
+        return Response({
+            'chat_histories_list': sorted_messages,
+            'total_count': len(sorted_messages)
+        }, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        print(f'get All Chat Histories Error: {e}')
+        return Response({'get All Chat Histories Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
 # get Chat Histories
 @ensure_csrf_cookie
 @permission_classes([IsAuthenticated])
