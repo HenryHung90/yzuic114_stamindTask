@@ -118,6 +118,7 @@ function handleDownloadAllStudentRecords(loading: ISettingAlertLogAndLoading) {
   loading.setLoadingOpen(true)
   API_getAllStudentRecord().then(response => {
     convertToXlsxFile(`all_student_record_content`, response.data.student_id_list, response.data.student_data_list)
+    convertToXlsxFile(`all_student_record_click_times`, response.data.student_id_list, response.data.student_click_list)
     loading.setLoadingOpen(false)
   })
 }
