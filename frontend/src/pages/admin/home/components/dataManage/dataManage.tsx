@@ -13,7 +13,7 @@ import TaskDataVisualizationComponent from "./components/TaskDataVisualization";
 
 // interface
 
-const DataManageComponent = (props: IDataMangeProps) => {
+const DataManage = (props: IDataMangeProps) => {
   const {loading} = props
   const chartsRef = useRef<HTMLDivElement>(null);
 
@@ -79,4 +79,4 @@ const DataManageComponent = (props: IDataMangeProps) => {
   )
 }
 
-export default DataManageComponent
+export default DataManage

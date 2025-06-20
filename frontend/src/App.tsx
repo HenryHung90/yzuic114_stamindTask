@@ -13,7 +13,7 @@ import AlertLog from "./components/alertLogAndLoadingPage/AlertLog";
 import Loading from "./components/alertLogAndLoadingPage/Loading";
 import Task from "./pages/task/Task";
 import TaskInfo from "./pages/admin/home/components/taskInfo/TaskInfo";
-import DataManageComponent from "./pages/admin/home/components/dataManage/dataManage";
+import DataManage from "./pages/admin/home/components/dataManage/dataManage";
 
 import AdminHome from "./pages/admin/home/AdminHome"
 import AdminTask from "./pages/admin/task/Task"
@@ -170,7 +170,7 @@ export default function App() {
     },
     {
       path: '/admin/dataManage',
-      element: <DataManageComponent loading={settingAlertLogAndLoading}/>
+      element: <DataManage loading={settingAlertLogAndLoading}/>
     }
   ]
 
