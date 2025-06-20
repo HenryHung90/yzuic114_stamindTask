@@ -115,6 +115,9 @@ API_ADMIN_POST = [
     # get chat ai heat map by task id
     path('admin/get_chat_ai_heat_map_by_task_id/', get_chat_ai_heat_map_by_task_id,
          name='get_chat_ai_heat_map_by_task_id'),
+    # get chat ai heat map by class ids
+    path('admin/get_chat_ai_heat_map_by_class_ids/', get_chat_ai_heat_map_by_class_ids,
+         name='get_chat_ai_heat_map_by_class_ids'),
     # get feedback by student id
     path('admin/get_feedback_by_student_id/', get_feedback_by_student_id, name='get_feedback_by_student_id'),
     # get student record by student id
@@ -128,6 +131,8 @@ API_ADMIN_POST = [
     # get student task by class name
     path('admin/get_student_task_by_class_name/', get_student_task_by_class_name,
          name='get_student_task_by_class_name'),
+    # get student tasks by class ids
+    path('admin/get_student_task_by_class_ids/', get_student_task_by_class_ids, name='get_student_task_by_class_ids'),
     # get all student task
     path('admin/get_all_student_task/', get_all_student_task, name='get_all_student_task'),
     # get all student record
@@ -135,6 +140,9 @@ API_ADMIN_POST = [
     # get all student records info by task id
     path('admin/get_student_records_info_by_task_id/', get_student_records_info_by_task_id,
          name='get_student_records_by_task_id'),
+    # get student records info by class ids
+    path('admin/get_student_records_info_by_class_ids/', get_student_records_info_by_class_ids,
+         name='get_student_records_info_by_class_ids'),
     # get student process code by task id
     path('admin/get_all_student_process_code_by_task_id/', get_all_student_process_code_by_task_id,
          name='get_all_student_process_code_by_task_id'),
