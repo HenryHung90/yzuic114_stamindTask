@@ -7,7 +7,7 @@ import {ChartData} from 'chart.js';
 // components
 
 // interface
-interface IBarChartProps {
+export interface IBarChartProps {
   // 圖表標題
   title: string;
   // X 軸的標籤，可以是字串或數字
