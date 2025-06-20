@@ -2,14 +2,14 @@ import {API_POST, API_GET} from "./API_Config";
 import {Req_StudentRecordInfo} from "./API_Interface";
 import {IStudentRecords} from "../listener/action";
 
-const API_saveStudentRecords = (studentRecords: Array<IStudentRecords>) => {
+export const API_saveStudentRecords = (studentRecords: Array<IStudentRecords>) => {
   const recordData: Req_StudentRecordInfo = {
     student_records: studentRecords
   }
   return new API_POST(import.meta.env.VITE_APP_API_SAVE_STUDENT_RECORDS, recordData).sendRequest()
 }
 
-const API_saveStudentRecordsBeforeUnload = (studentRecords: FormData, e: any) => {
+export const API_saveStudentRecordsBeforeUnload = (studentRecords: FormData, e: any) => {
   if (studentRecords) {
     //使用 navigator.sendBeacon
     const success = navigator.sendBeacon(
@@ -26,28 +26,27 @@ const API_saveStudentRecordsBeforeUnload = (studentRecords: FormData, e: any) =>
   }
 }
 
-const API_getStudentRecordByStudentId = (studentId: string) => {
+export const API_getStudentRecordByStudentId = (studentId: string) => {
   const recordData: Req_StudentRecordInfo = {
     student_id: studentId
   }
   return new API_POST(import.meta.env.VITE_APP_API_GET_STUDENT_RECORD_BY_STUDENT_ID, recordData).sendRequest()
 }
 
-const API_getAllStudentRecord = () => {
+export const API_getAllStudentRecord = () => {
   return new API_GET(import.meta.env.VITE_APP_API_GET_ALL_STUDENT_RECORD).sendRequest()
 }
 
-const API_getStudentRecordsInfoByTaskId = (taskId: string) => {
+export const API_getStudentRecordsInfoByTaskId = (taskId: string) => {
   const recordData: Req_StudentRecordInfo = {
     task_id: taskId,
   }
   return new API_POST(import.meta.env.VITE_APP_API_GET_STUDENT_RECORDS_INFO_BY_TASK_ID, recordData).sendRequest()
 }
 
-export {
-  API_saveStudentRecords,
-  API_saveStudentRecordsBeforeUnload,
-  API_getStudentRecordByStudentId,
-  API_getAllStudentRecord,
-  API_getStudentRecordsInfoByTaskId
+export const API_getStudentRecordsByClassIds = (classIds: number[]) => {
+  const recordData: Req_StudentRecordInfo = {
+    class_ids: classIds,
+  }
+  return new API_POST(import.meta.env.VITE_APP_API_GET_STUDENT_RECORDS_INFO_BY_CLASS_IDS, recordData).sendRequest()
 }

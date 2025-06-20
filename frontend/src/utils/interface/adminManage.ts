@@ -1,38 +1,38 @@
+import React from "react";
 import {Res_classNamesInfo, Res_studentsInfo} from "../API/API_Interface";
 import {ISettingAlertLogAndLoading} from "./alertLog";
-import React from "react";
 
-interface IAdminMangeProps {
+export interface IAdminMangeProps {
   classList: Array<Res_classNamesInfo>
   settingAlertLogAndLoading: ISettingAlertLogAndLoading
 }
 
-interface IControlBarProps extends IAdminMangeProps {
+export interface IControlBarProps extends IAdminMangeProps {
   className: string
   setClassName: React.Dispatch<React.SetStateAction<string>>
 }
 
 
 // Student Manage -> Student List
-interface IStudentListFuncProps {
+export interface IStudentListFuncProps {
   studentId: string
   loading: ISettingAlertLogAndLoading
   fetchStudentListAsync: () => void
   classList?: Array<Res_classNamesInfo>
 }
 
-interface IStudentManageProps extends IAdminMangeProps {
+export interface IStudentManageProps extends IAdminMangeProps {
   studentList?: Array<Res_studentsInfo>
 }
 
 
-interface IStudentManageControlBarProps extends IControlBarProps {
+export interface IStudentManageControlBarProps extends IControlBarProps {
   searchStudentId: string
   studentList: Array<Res_studentsInfo>
   setSearchStudentId: React.Dispatch<React.SetStateAction<string>>
 }
 
-interface IStudentListProps extends IStudentManageProps {
+export interface IStudentListProps extends IStudentManageProps {
   className: string | undefined
   classList: Array<Res_classNamesInfo>
   searchStudentId: string
@@ -41,45 +41,46 @@ interface IStudentListProps extends IStudentManageProps {
 }
 
 // TaskManagement
-interface ITaskManageProps extends IAdminMangeProps {
+export interface ITaskManageProps extends IAdminMangeProps {
 }
 
-interface ITaskListFuncProps {
+export interface ITaskListFuncProps {
   taskId: string
   loading: ISettingAlertLogAndLoading
   fetchTaskListAsync: () => void
 }
 
 // TaskInfo
-interface ITaskInfoProps {
+export interface ITaskInfoProps {
   loading: ISettingAlertLogAndLoading,
 }
 
-interface IDownloadBarProps extends ITaskInfoProps {
+export interface IDownloadBarProps extends ITaskInfoProps {
   taskId: string | undefined
   setPageContent: React.Dispatch<React.SetStateAction<'main' | 'codeStatus'>>
   chartsRef: React.RefObject<HTMLDivElement>
 }
 
-interface IDataVisualizationProps extends ITaskInfoProps {
-  taskId: string | undefined
+export interface IDataVisualizationProps extends ITaskInfoProps {
+  taskId?: string | undefined
+  classList?: Array<number>
   chartsRef: React.RefObject<HTMLDivElement>
 }
 
-interface ISubTargetCompleted {
+export interface ISubTargetCompleted {
   completed: Array<number>
   notCompleted: Array<number>
   unselected: Array<number>
 }
 
-interface ICompleteStatus {
+export interface ICompleteStatus {
   '實驗組-完成': number
   '實驗組-未完成': number
   '操作組-完成': number
   '操作組-未完成': number
 }
 
-interface ISelfScoringData {
+export interface ISelfScoringData {
   min: number
   q1: number
   median: number
@@ -87,14 +88,14 @@ interface ISelfScoringData {
   max: number
 }
 
-interface IChatAIHeatMapData {
+export interface IChatAIHeatMapData {
   day_list: Array<string>
   ask_times_list: Array<number>
   student_ask_list: Array<{ x: string, y: string, v: number }>
   student_list: Array<string>
 }
 
-interface IBoxPlotData {
+export interface IBoxPlotData {
   min: Array<number>,
   q1: Array<number>,
   median: Array<number>,
@@ -103,17 +104,23 @@ interface IBoxPlotData {
   max: Array<number>
 }
 
-interface IStageDurationData {
-  EXPERIMENTAL: IBoxPlotData,
+
+export interface IStageDurationData {
+  EXPERIMENTAL: IBoxPlotData
   CONTROL: IBoxPlotData
 }
 
+export interface IStageClickData {
+  EXPERIMENTAL: Array<number>
+  CONTROL: Array<number>
+}
+
 // GroupManagement
-interface IGroupManageProps extends IAdminMangeProps {
+export interface IGroupManageProps extends IAdminMangeProps {
   className?: string
 }
 
-interface IGroupData {
+export interface IGroupData {
   [key: string]: {
     class_name: string,
     group_type: string,
@@ -121,23 +128,7 @@ interface IGroupData {
   }
 }
 
-
-export type {
-  IStudentManageProps,
-  IStudentListFuncProps,
-  IControlBarProps,
-  IStudentListProps,
-  IStudentManageControlBarProps,
-  ITaskManageProps,
-  ITaskListFuncProps,
-  ITaskInfoProps,
-  IDownloadBarProps,
-  IDataVisualizationProps,
-  ISubTargetCompleted,
-  ISelfScoringData,
-  ICompleteStatus,
-  IChatAIHeatMapData,
-  IStageDurationData,
-  IGroupManageProps,
-  IGroupData,
+// dataManage
+export interface IDataMangeProps {
+  loading: ISettingAlertLogAndLoading,
 }

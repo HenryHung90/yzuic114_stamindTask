@@ -35,6 +35,7 @@ interface Req_tasksInfo extends RequestParams {
   class_name?: string
   task_name?: string
   task_id?: string
+  class_ids?: number[]
   node_array?: Array<Node>
   link_array?: Array<Link>
 }
@@ -130,6 +131,7 @@ interface Req_StudentReflectionInfo extends RequestParams {
 
 interface Req_StudentChatHistory extends RequestParams {
   task_id?: string
+  class_ids?: number[]
   student_id?: string
   offset?: number
 }
@@ -142,6 +144,7 @@ interface Req_ChatWithAmumAmum extends RequestParams {
 interface Req_StudentRecordInfo extends RequestParams {
   student_id?: string
   task_id?: string
+  class_ids?: number[]
   student_records?: Array<IStudentRecords>
 }
 
