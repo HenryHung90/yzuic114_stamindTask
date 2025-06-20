@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from "react";
+import {useState, useEffect} from "react";
 // style
 
 // API
@@ -6,7 +6,6 @@ import {
   calculateCompletedNumbers,
   calculateSelfScoringData,
   calculateSubTargetCompleted,
-  handleDownloadChartsScreenShot
 } from "../../../../../../utils/functions/admin/home/components/taskInfo";
 import {API_getStudentTasksByTaskId} from "../../../../../../utils/API/API_StudentTasks";
 import {API_getTaskTarget} from "../../../../../../utils/API/API_Targets";
