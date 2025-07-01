@@ -48,7 +48,7 @@ const NavBarComponent = (props: IAdminNavBarProps) => {
         placeholder={undefined}
         onClick={() => handleSwitchLocation('/admin/taskManage')}
       >
-        任務設定
+        任務管理
       </Button>
       <Button
         variant="text"
@@ -56,7 +56,7 @@ const NavBarComponent = (props: IAdminNavBarProps) => {
         placeholder={undefined}
         onClick={() => handleSwitchLocation('/admin/groupManage')}
       >
-        班級/組別設定
+        班級/組別管理
       </Button>
       <Button
         variant="text"

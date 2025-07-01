@@ -13,6 +13,13 @@ export const API_getAllChatHistories = () => {
   return new API_GET(import.meta.env.VITE_APP_API_GET_ALL_CHAT_HISTORIES).sendRequest()
 }
 
+export const API_getAllChatHistoriesByClassIds = (classIds: number[]) => {
+  const chatData: Req_StudentChatHistory = {
+    class_ids: classIds,
+  }
+  return new API_POST(import.meta.env.VITE_APP_API_GET_CHAT_HISTORIES_BY_CLASS_IDS, chatData).sendRequest()
+}
+
 export const API_getChatHistoriesByStudentId = (studentId: string) => {
   const chatData: Req_StudentChatHistory = {
     student_id: studentId

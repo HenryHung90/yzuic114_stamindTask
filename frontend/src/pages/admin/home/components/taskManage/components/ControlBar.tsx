@@ -40,6 +40,7 @@ const ControlBarComponent = (props: IControlBarProps) => {
       <div className='flex gap-6'>
         <Button
           variant="gradient"
+          color="deep-orange"
           placeholder={undefined}
           onClick={() => NavLocation('/admin/dataManage')}>
           合併數據檢視

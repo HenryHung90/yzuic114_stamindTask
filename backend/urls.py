@@ -149,6 +149,10 @@ API_ADMIN_POST = [
     # get student feedback by task id
     path('admin/get_feedback_by_task_id/', get_feedback_by_task_id, name='get_feedback_by_task_id'),
 
+    # get all chat histories by class ids
+    path('admin/get_all_chat_histories_by_class_ids/', get_all_chat_histories_by_class_ids,
+         name='all_chat_histories_by_class_ids'),
+
     # add new class name
     path('admin/add_new_class_name/', add_new_class_name, name='add_new_class_name'),
     # add new Task

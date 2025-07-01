@@ -36,7 +36,7 @@ const IframeShowerComponent = (props: IIframeShowerProps) => {
         height: window.innerHeight * 0.3,
       }}
       bounds="parent"
-      className='p-1 pointer-events-auto overflow-scroll rounded-xl bg-amber-100 hover:bg-amber-400'
+      className='p-1 pointer-events-auto overflow-hidden rounded-xl bg-amber-100 hover:bg-amber-400'
     >
       <Typography placeholder={undefined} variant='paragraph' className='p-2 font-bold'>黃條可以拖動頁面，未 Focus
         在此預覽畫面時會降低該畫面的運行效能</Typography>

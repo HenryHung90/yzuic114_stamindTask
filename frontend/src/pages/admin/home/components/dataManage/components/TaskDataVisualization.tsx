@@ -8,13 +8,18 @@ import {
 } from "../../../../../../utils/functions/admin/home/components/taskInfo";
 import {API_getStudentTaskByClassIds} from "../../../../../../utils/API/API_StudentTasks";
 import {API_getStudentRecordsByClassIds} from "../../../../../../utils/API/API_StudentRecords";
-import {API_getChatAIHeatMapDataByClassIds} from "../../../../../../utils/API/API_ChatHistories";
+import {
+  API_getAllChatHistoriesByClassIds,
+  API_getChatAIHeatMapDataByClassIds
+} from "../../../../../../utils/API/API_ChatHistories";
 
 // components
 import PieChartComponent, {IPieChartProps} from "../../../../../../components/Chart/PieChart";
 import BoxPlotChartComponent, {IBoxPlotChartProps} from "../../../../../../components/Chart/BoxPlotChart";
 import HeatMapChartComponent, {IHeatMapChartProps} from "../../../../../../components/Chart/HeatMapChart";
 import LineChartComponent, {ILineChartProps} from "../../../../../../components/Chart/LineChart";
+import BarChartComponent, {IBarChartProps} from "../../../../../../components/Chart/BarChart";
+import WordCloudComponent from "../../../../../../components/Chart/WordCloud";
 
 // interface
 import {
@@ -23,9 +28,8 @@ import {
   ISelfScoringData,
   IChatAIHeatMapData,
   IStageDurationData,
-  IStageClickData
+  IStageClickData,
 } from "../../../../../../utils/interface/adminManage";
-import BarChartComponent, {IBarChartProps} from "../../../../../../components/Chart/BarChart";
 
 
 const TaskDataVisualizationComponent = (props: IDataVisualizationProps) => {
@@ -48,6 +52,8 @@ const TaskDataVisualizationComponent = (props: IDataVisualizationProps) => {
     'student_ask_list': [],
     'student_list': []
   })
+
+  const [chatWordCloud, setChatWordCloud] = useState<Array<{ text: string, value: number }>>([{text: '', value: 0}])
 
   const STAGES = ['體驗任務', '學習目標', '計劃設定', '計劃執行', '自我反思', '總體回饋']
   const [stageDurationData, setStageDurationData] = useState<IStageDurationData>({
@@ -81,7 +87,11 @@ const TaskDataVisualizationComponent = (props: IDataVisualizationProps) => {
           setStageDurationData(response.data.record_data)
           setStageClickData(response.data.click_data)
           return response
-        })
+        }),
+      API_getAllChatHistoriesByClassIds(classList).then(response => {
+        setChatWordCloud(response.data.words)
+        return response
+      })
     ])
       .then(() => {
         // 所有請求完成後關閉加載狀態
@@ -246,6 +256,9 @@ const TaskDataVisualizationComponent = (props: IDataVisualizationProps) => {
         </div>
       </div>
       <div className='flex flex-col justify-center items-center gap-y-4'>
+        <div className='w-full h-[38rem]'>
+          <WordCloudComponent words={chatWordCloud}/>
+        </div>
         <div className='w-full' style={{height: `${chatAIHeatMapData.student_list.length * 1.2 + 15}rem`}}>
           <HeatMapChartComponent {...heatMapData}/>
         </div>
@@ -261,6 +274,7 @@ const TaskDataVisualizationComponent = (props: IDataVisualizationProps) => {
         <div className='w-full h-[12rem]'>
           <BarChartComponent {...stageClickBarData}/>
         </div>
+
       </div>
     </div>
   )
