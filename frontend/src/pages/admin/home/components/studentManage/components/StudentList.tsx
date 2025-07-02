@@ -17,7 +17,6 @@ import {
   handleDownloadStudentRecord,
   handleDownloadAllStudentTaskContent
 } from "../../../../../../utils/functions/admin/home/components/studentList";
-import {API_getAllStudents, API_getStudentsByClassName} from "../../../../../../utils/API/API_Students";
 // components
 import MenuComponent from "../../../../../../components/menu/Menu";
 import MultipleMenuComponent from "../../../../../../components/menu/MultipleMenu";
