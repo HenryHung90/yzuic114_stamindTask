@@ -379,23 +379,31 @@ def get_all_chat_histories_by_class_ids(request):
 def get_chat_histories_by_student_id(request):
     try:
         student_id = request.data.get('student_id')
+        student_tasks = StudentTask.objects.filter(student_id=student_id).select_related('chat_history').select_related(
+            'task')
 
-        chat_history_data = User.objects.get(student_id=student_id).chat_history
+        student_info_data_list = [{'chat_history': student_task.chat_history, 'task_name': student_task.task.name}
+                                  for student_task in student_tasks]
 
-        if chat_history_data is None or chat_history_data is []:
+        if not student_info_data_list:
             return Response({'messages': 'empty'}, status=status.HTTP_204_NO_CONTENT)
-        else:
-            chat_history_data = chat_history_data.chat_history
 
         res_messages = []
-        for history in chat_history_data:
-            modify_message = {
-                "使用者名稱": history["name"],
-                "學生ID": history["student_id"],
-                "發送時間": history["time"],
-                "傳送訊息": history["message"],
-            }
-            res_messages.append(modify_message)
+        for student_data in student_info_data_list:
+            messages = student_data['chat_history']
+            task_name = student_data["task_name"]
+
+            if not messages: continue
+
+            for message in messages.chat_history:
+                modify_message = {
+                    "使用者名稱": message.get("name", ""),
+                    "課程名稱": task_name,
+                    "學生ID": message.get("student_id", ""),
+                    "發送時間": message.get("time", ""),
+                    "傳送訊息": message.get("message", ""),
+                }
+                res_messages.append(modify_message)
 
         return Response({'chat_history': res_messages}, status=status.HTTP_200_OK)
     except Exception as e:

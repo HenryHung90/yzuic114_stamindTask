@@ -81,7 +81,9 @@ function handleDownloadChatHistories(props: IStudentListFuncProps) {
   const {studentId, loading} = props
   loading.setLoadingOpen(true)
   API_getChatHistoriesByStudentId(studentId).then(response => {
+    if (response.status === 204) return loading.setAlertLog('錯誤', '暫無資料')
     convertToXlsxFile(`${studentId}_chat_histories`, [studentId], [response.data.chat_history])
+  }).finally(() => {
     loading.setLoadingOpen(false)
   })
 }
