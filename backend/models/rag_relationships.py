@@ -14,6 +14,15 @@ class RagRelationships(models.Model):
         verbose_name='關係ID'
     )
 
+    task = models.ForeignKey(
+        'Task',
+        on_delete=models.SET_NULL,
+        related_name='task_rag_relationship',
+        null=True,
+        blank=True,
+        verbose_name="所屬課程"
+    )
+
     # 人類可讀的 ID
     human_readable_id = models.IntegerField(
         verbose_name='可讀ID',
@@ -80,6 +89,9 @@ class RagRelationships(models.Model):
         verbose_name = 'RAG關係'
         verbose_name_plural = 'RAG關係'
         ordering = ['human_readable_id']
+        indexes = [
+            models.Index(fields=['task', 'human_readable_id'], name='relationship_task_human_idx'),
+        ]
 
     def __str__(self):
         return f"{self.source} → {self.target}"

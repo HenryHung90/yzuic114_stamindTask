@@ -14,6 +14,15 @@ class RagCommunities(models.Model):
         verbose_name='社群ID'
     )
 
+    task = models.ForeignKey(
+        'Task',
+        on_delete=models.SET_NULL,
+        related_name='task_rag_community',
+        null=True,
+        blank=True,
+        verbose_name="所屬課程"
+    )
+
     # 人類可讀的 ID
     human_readable_id = models.IntegerField(
         verbose_name='可讀ID',
@@ -116,6 +125,9 @@ class RagCommunities(models.Model):
         verbose_name = 'RAG社群'
         verbose_name_plural = 'RAG社群'
         ordering = ['level', 'community']
+        indexes = [
+            models.Index(fields=['task', 'human_readable_id'], name='community_task_human_idx'),
+        ]
 
     def __str__(self):
         return f"{self.title} (Level {self.level})"

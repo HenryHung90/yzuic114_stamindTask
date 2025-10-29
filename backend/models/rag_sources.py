@@ -16,6 +16,15 @@ class RagSources(models.Model):
         help_text='文本單元的唯一哈希標識符'
     )
 
+    task = models.ForeignKey(
+        'Task',
+        on_delete=models.SET_NULL,
+        related_name='task_rag_source',
+        null=True,
+        blank=True,
+        verbose_name="所屬課程"
+    )
+
     # 人類可讀的 ID
     human_readable_id = models.IntegerField(
         verbose_name='可讀ID',
@@ -85,6 +94,9 @@ class RagSources(models.Model):
         verbose_name = 'RAG文本單元'
         verbose_name_plural = 'RAG文本單元'
         ordering = ['human_readable_id']
+        indexes = [
+            models.Index(fields=['task', 'human_readable_id'], name='source_task_human_idx'),
+        ]
 
     def __str__(self):
         return f"TextUnit {self.human_readable_id}: {self.text[:50]}..."
