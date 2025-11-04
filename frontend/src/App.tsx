@@ -13,6 +13,7 @@ import AlertLog from "./components/alertLogAndLoadingPage/AlertLog";
 import Loading from "./components/alertLogAndLoadingPage/Loading";
 import Task from "./pages/task/Task";
 import TaskInfo from "./pages/admin/home/components/taskInfo/TaskInfo";
+import GraphragInfo from "./pages/admin/home/components/graphragInfo/graphragInfo";
 import DataManage from "./pages/admin/home/components/dataManage/dataManage";
 
 import AdminHome from "./pages/admin/home/AdminHome"
@@ -72,7 +73,7 @@ export default function App() {
     }
   }, [auth]);
 
-// 點擊事件偵測
+  // 點擊事件偵測
   const handleClickEventToListenStudentHabit = (e: React.MouseEvent<HTMLDivElement>) => {
     // 不是學生或還沒有 studentId 時不做紀錄
     if (auth !== 'STUDENT' || !studentId) return
@@ -167,6 +168,10 @@ export default function App() {
     {
       path: '/admin/taskInfo/:taskId',
       element: <TaskInfo loading={settingAlertLogAndLoading}/>
+    },
+    {
+      path: '/admin/graphragInfo/:taskId',
+      element: <GraphragInfo loading={settingAlertLogAndLoading}/>
     },
     {
       path: '/admin/dataManage',

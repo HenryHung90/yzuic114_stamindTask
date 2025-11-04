@@ -115,6 +115,116 @@ export interface IStageClickData {
   CONTROL: Array<number>
 }
 
+// graphRag Info
+export interface IGraphragInfoProps {
+  loading: ISettingAlertLogAndLoading
+}
+
+export interface IGraphragStatus {
+  community_count: number;
+  entity_count: number;
+  relationship_count: number;
+  source_count: number;
+  summary_count: number;
+}
+
+// 社區 (Communities) 介面
+export interface ICommunity {
+  id: string;
+  human_readable_id: number;
+  community: number;
+  level: number;
+  parent: number;
+  children: number[];
+  title: string;
+  entity_ids: string[];
+  relationship_ids: string[];
+  text_unit_ids: string[];
+  size: number;
+  entity_count?: number;
+  relationship_count?: number;
+  text_unit_count?: number;
+  has_children?: boolean;
+  is_root?: boolean;
+  period: null | string;
+}
+
+// 實體 (Entities) 介面
+export interface IEntity {
+  id: string;
+  human_readable_id: number;
+  title: string;
+  type: string;
+  description: string;
+  text_unit_ids: string[];
+  frequency: number;
+  degree: number;
+  position?: any | null;
+  x?: number | null;
+  y?: number | null;
+}
+
+// 關係 (Relationships) 介面
+export interface IRelationship {
+  id: string;
+  human_readable_id: number;
+  source: string;
+  target: string;
+  description: string;
+  weight: number;
+  combined_degree: number;
+  text_unit_ids: string[];
+  strength?: {
+    weight: number;
+    combined_degree: number;
+    strength_score: number;
+  };
+}
+
+// 來源 (Sources) 介面
+export interface ISource {
+  id: string;
+  human_readable_id: number;
+  text: string;
+  n_tokens: number;
+  document_ids: string[];
+  entity_ids: string[];
+  relationship_ids: string[];
+  covariate_ids: string[];
+  document_count?: number;
+  entity_count?: number;
+  relationship_count?: number;
+  covariate_count?: number;
+}
+
+// 摘要 (Summaries) 介面
+export interface ISummary {
+  id: string;
+  human_readable_id: number;
+  community: number;
+  level: number;
+  parent: number | null;
+  children: number[];
+  title: string;
+  summary: string;
+  full_content: string;
+  rank: number;
+  rating_explanation: string;
+  findings: any[]; // JSON 欄位，根據實際內容可以進一步定義
+  full_content_json: any; // JSON 欄位，根據實際內容可以進一步定義
+  size: number | null;
+  period?: null | string;
+}
+
+export interface IGraphragData {
+  data_count: IGraphragStatus;
+  communities: ICommunity[];
+  entities: IEntity[];
+  relationships: IRelationship[];
+  sources: ISource[];
+  summaries: ISummary[];
+}
+
 // GroupManagement
 export interface IGroupManageProps extends IAdminMangeProps {
   className?: string

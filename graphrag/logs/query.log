@@ -1,0 +1,197 @@
+2025-11-05 02:58:49.0135 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:00:01.0862 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:01:12.0441 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:02:07.0179 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:03:21.0910 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:05:41.0653 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:07:28.0256 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:16:43.0172 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:18:54.0406 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:20:41.0594 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:22:27.0508 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:26.0193 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:26.0822 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:27.0403 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:27.0893 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:29.0699 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:30.0255 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:30.0786 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:31.0244 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:31.0807 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:32.0564 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:32.0924 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:33.0343 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:33.0958 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:34.0454 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:34.0978 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:35.0478 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:36.0556 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:37.0058 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:37.0615 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:38.0401 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:58.0326 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:58.0839 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:28:59.0378 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:00.0266 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:00.0655 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:01.0196 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:01.0706 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:02.0311 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:02.0753 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:03.0349 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:03.0959 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:04.0576 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:05.0187 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:05.0698 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:06.0147 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:06.0623 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:07.0512 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:07.0959 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:08.0567 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:09.0077 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:30.0142 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:30.0665 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:31.0148 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:31.0536 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:32.0118 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:32.0530 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:33.0176 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:34.0092 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:34.0435 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:34.0924 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:35.0476 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:35.0991 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:36.0538 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:37.0149 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:37.0697 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:38.0288 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:38.0773 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:39.0343 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:39.0710 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:29:40.0091 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:31:55.0015 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:31:55.0555 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:31:56.0070 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:31:56.0513 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:31:57.0088 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:31:57.0508 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:31:58.0116 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:31:58.0831 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:31:59.0333 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:31:59.0748 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:00.0170 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:00.0645 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:01.0080 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:01.0496 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:02.0112 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:02.0512 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:06.0653 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:07.0089 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:07.0384 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:07.0947 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:27.0712 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:28.0221 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:28.0651 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:29.0189 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:40.0208 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:40.0575 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:41.0027 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:41.0533 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:42.0046 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:42.0839 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:43.0165 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:43.0587 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:44.0378 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:44.0790 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:45.0210 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:45.0715 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:46.0143 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:46.0551 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:47.0056 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:32:47.0474 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:06.0211 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:06.0826 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:07.0283 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:07.0820 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:08.0293 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:08.0864 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:09.0308 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:09.0899 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:10.0602 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:11.0214 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:11.0646 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:12.0244 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:12.0752 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:13.0191 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:13.0791 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:14.0302 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:14.0624 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:14.0966 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:15.0500 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:15.0931 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:33:18.0441 - ERROR - graphrag.query.structured_search.local_search.search - Exception in _asearch
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 271, in __aiter__
+    async for part in self._httpcore_stream:
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 407, in __aiter__
+    raise exc from None
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 403, in __aiter__
+    async for part in self._stream:
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/httpcore/_async/http11.py", line 342, in __aiter__
+    raise exc
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/httpcore/_async/http11.py", line 334, in __aiter__
+    async for chunk in self._connection._receive_response_body(**kwargs):
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/httpcore/_async/http11.py", line 203, in _receive_response_body
+    event = await self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/httpcore/_async/http11.py", line 213, in _receive_event
+    with map_exceptions({h11.RemoteProtocolError: RemoteProtocolError}):
+  File "/opt/homebrew/Cellar/python@3.11/3.11.13/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.RemoteProtocolError: peer closed connection without sending complete message body (incomplete chunked read)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/graphrag/query/structured_search/local_search/search.py", line 91, in search
+    async for response in self.model.achat_stream(
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/graphrag/language_model/providers/fnllm/models.py", line 115, in achat_stream
+    async for chunk in response.output.content:
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/fnllm/openai/llm/openai_streaming_chat_llm.py", line 167, in __stream__
+    async for chunk in self._chunks:
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/openai/_streaming.py", line 146, in __aiter__
+    async for item in self._iterator:
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/openai/_streaming.py", line 159, in __stream__
+    async for sse in iterator:
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/openai/_streaming.py", line 150, in _iter_events
+    async for sse in self._decoder.aiter_bytes(self.response.aiter_bytes()):
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/openai/_streaming.py", line 300, in aiter_bytes
+    async for chunk in self._aiter_chunks(iterator):
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/openai/_streaming.py", line 311, in _aiter_chunks
+    async for chunk in iterator:
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/httpx/_models.py", line 997, in aiter_bytes
+    async for raw_bytes in self.aiter_raw():
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/httpx/_models.py", line 1055, in aiter_raw
+    async for raw_stream_bytes in self.stream:
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/httpx/_client.py", line 176, in __aiter__
+    async for chunk in self._stream:
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 270, in __aiter__
+    with map_httpcore_exceptions():
+  File "/opt/homebrew/Cellar/python@3.11/3.11.13/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/Users/apple/Desktop/Work/yzuic114_webstudy/.venv/lib/python3.11/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.RemoteProtocolError: peer closed connection without sending complete message body (incomplete chunked read)
+2025-11-05 03:33:18.0452 - WARNING - graphrag.query.structured_search.drift_search.action - No answer found for query: What role does responsive design play in game development?
+2025-11-05 03:33:18.0452 - WARNING - graphrag.query.structured_search.drift_search.action - No follow-up actions found for response: {}
+2025-11-05 03:33:35.0156 - WARNING - graphrag.query.structured_search.drift_search.state - No follow-up actions for action: What role does responsive design play in game development?
+2025-11-05 03:38:54.0619 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:41:10.0291 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:43:35.0238 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:47:52.0756 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:49:36.0482 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state
+2025-11-05 03:50:46.0812 - WARNING - graphrag.query.structured_search.local_search.mixed_context - Reached token limit - reverting to previous context state

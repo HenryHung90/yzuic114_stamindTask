@@ -1,0 +1,378 @@
+
+-Goal-
+Given a text document that is potentially relevant to this activity and a list of entity types, identify all entities of those types from the text and all relationships among the identified entities.
+
+-Steps-
+1. Identify all entities. For each identified entity, extract the following information:
+- entity_name: Name of the entity, capitalized
+- entity_type: One of the following types: [programming concept, data structure, method, syntax, attribute, function, algorithm, module, selector, property]
+- entity_description: Comprehensive description of the entity's attributes and activities
+Format each entity as ("entity"{tuple_delimiter}<entity_name>{tuple_delimiter}<entity_type>{tuple_delimiter}<entity_description>)
+
+2. From the entities identified in step 1, identify all pairs of (source_entity, target_entity) that are *clearly related* to each other.
+For each pair of related entities, extract the following information:
+- source_entity: name of the source entity, as identified in step 1
+- target_entity: name of the target entity, as identified in step 1
+- relationship_description: explanation as to why you think the source entity and the target entity are related to each other
+- relationship_strength: an integer score between 1 to 10, indicating strength of the relationship between the source entity and target entity
+Format each relationship as ("relationship"{tuple_delimiter}<source_entity>{tuple_delimiter}<target_entity>{tuple_delimiter}<relationship_description>{tuple_delimiter}<relationship_strength>)
+
+3. Return output in English as a single list of all the entities and relationships identified in steps 1 and 2. Use **{record_delimiter}** as the list delimiter.
+
+4. If you have to translate into English, just translate the descriptions, nothing else!
+
+5. When finished, output {completion_delimiter}.
+
+-Examples-
+######################
+
+Example 1:
+
+entity_types: [programming concept, data structure, method, syntax, attribute, function, algorithm, module, selector, property]
+text:
+# JavaScript Objects
+
+## What are Objects?
+An **object** is a variable that can hold multiple key-value pairs. Objects are collections of properties (keys) and their associated values. They can describe anything, such as houses, cars, people, animals, or other subjects.
+
+- Different objects can have the same properties, but their property values may differ.
+- Objects can also have methods that perform actions, which may be executed at different times.
+
+## Creating a JavaScript Object
+
+### Using Object Literals
+An **object literal** is a concise way to create an object. It consists of key-value pairs enclosed in curly braces `{{}}`.
+
+```javascript
+const car = {{
+  brand: "Fiat",
+  model: "500",
+  color: "white"
+}};
+```
+
+**Note:** It is recommended to declare objects using the `const` keyword. While you cannot reassign the `const` variable to a different object, you can still modify its properties and values.
+
+### Using the `new Object` Keyword
+You can also create objects using the `new Object()` syntax:
+
+```javascript
+const car = new Object();
+car.brand = "Fiat";
+car.model = "500";
+car.color = "white";
+```
+
+**Note:** While both methods achieve the same result, using object literals is simpler, faster, and more readable.
+
+## Accessing Object Properties
+Object properties can be accessed in two ways:
+- **Dot notation**: `object.property`
+- **Bracket notation**: `object["property"]`
+
+```javascript
+console.log(car.brand); // Output: Fiat
+console.log(car["model"]); // Output: 500
+```
+
+## JavaScript Object Methods
+Object methods are actions (functions) that can be performed on objects. Methods are stored as property values.
+
+```javascript
+const person = {{
+  firstName: "John",
+  lastName: "Doe",
+  fullName: function() {{
+    return this.firstName + " " + this.lastName;
+  }}
+}};
+
+console.log(person.fullName()); // Output: John Doe
+```
+
+**Note:** In methods, `this` refers to the object itself. For example, `this.firstName` refers to the `firstName` property of the `person` object.
+
+## Displaying JavaScript Objects
+
+### Displaying Objects
+Displaying an object directly will output `[object Object]`.
+
+```javascript
+console.log(person); // Output: [object Object]
+```
+
+### Displaying Object Properties
+To display specific properties, concatenate them into a string:
+
+```javascript
+console.log("Name: " + person.firstName + " " + person.lastName);
+```
+
+## Object Constructor Functions
+Sometimes, you need to create multiple objects of the same type. You can use **constructor functions** to define a reusable object type.
+
+```javascript
+function Person(firstName, lastName) {{
+  this.firstName = firstName;
+  this.lastName = lastName;
+}}
+
+const person1 = new Person("John", "Doe");
+const person2 = new Person("Jane", "Smith");
+
+console.log(person1.firstName); // Output: John
+console.log(person2.lastName); // Output: Smith
+```
+
+**Note:** Constructor functions are named with an uppercase first letter by convention.
+
+## Summary
+- **Objects** are containers for properties and methods.
+- **Properties** are named values (e.g., strings, numbers, functions, or other objects).
+- **Methods** are functions stored as properties.
+- **Constructor functions** create object prototypes.
+
+## JavaScript and Objects
+In JavaScript, almost everything is an object. All values except primitives are objects.
+
+### JavaScript Primitives
+Primitive data types can only store a single value. JavaScript defines 7 primitive data types:
+- `string`
+- `number`
+- `boolean`
+- `bigint`
+- `null`
+- `undefined`
+- `symbol`
+
+## Learn More
+Explore the following topics for more details:
+- JavaScript Object Definitions
+- JavaScript Object Properties
+- JavaScript Object Methods
+- JavaScript Object Constructors
+- JavaScript Object Prototypes
+- JavaScript Object Iterations
+- JavaScript Object Management
+- JavaScript Object Getters/Setters
+- JavaScript Object Protection
+- JavaScript Object Reference
+------------------------
+output:
+("entity"{tuple_delimiter}OBJECT{tuple_delimiter}data structure{tuple_delimiter}An object is a variable that can hold multiple key-value pairs, representing collections of properties and their associated values. Objects can describe various entities like houses, cars, people, and more)
+{record_delimiter}
+("entity"{tuple_delimiter}OBJECT LITERAL{tuple_delimiter}syntax{tuple_delimiter}A concise way to create an object using key-value pairs enclosed in curly braces)
+{record_delimiter}
+("entity"{tuple_delimiter}NEW OBJECT{tuple_delimiter}syntax{tuple_delimiter}A syntax used to create objects using the `new Object()` keyword)
+{record_delimiter}
+("entity"{tuple_delimiter}DOT NOTATION{tuple_delimiter}syntax{tuple_delimiter}A method to access object properties using the format `object.property`)
+{record_delimiter}
+("entity"{tuple_delimiter}BRACKET NOTATION{tuple_delimiter}syntax{tuple_delimiter}A method to access object properties using the format `object['property']`)
+{record_delimiter}
+("entity"{tuple_delimiter}METHOD{tuple_delimiter}function{tuple_delimiter}Actions that can be performed on objects, stored as property values)
+{record_delimiter}
+("entity"{tuple_delimiter}THIS{tuple_delimiter}programming concept{tuple_delimiter}Refers to the object itself within methods, allowing access to its properties)
+{record_delimiter}
+("entity"{tuple_delimiter}CONSTRUCTOR FUNCTION{tuple_delimiter}function{tuple_delimiter}A function used to create multiple objects of the same type, defining a reusable object type)
+{record_delimiter}
+("entity"{tuple_delimiter}PRIMITIVE DATA TYPES{tuple_delimiter}data structure{tuple_delimiter}Basic data types in JavaScript that can only store a single value, including string, number, boolean, bigint, null, undefined, and symbol)
+{record_delimiter}
+("relationship"{tuple_delimiter}OBJECT{tuple_delimiter}OBJECT LITERAL{tuple_delimiter}Object literals are a way to create objects, which are collections of properties and values{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}OBJECT{tuple_delimiter}NEW OBJECT{tuple_delimiter}The `new Object` syntax is another method to create objects, similar to object literals{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}OBJECT{tuple_delimiter}METHOD{tuple_delimiter}Methods are functions that can be performed on objects, stored as property values{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}METHOD{tuple_delimiter}THIS{tuple_delimiter}In methods, `this` refers to the object itself, allowing access to its properties{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}OBJECT{tuple_delimiter}CONSTRUCTOR FUNCTION{tuple_delimiter}Constructor functions are used to create multiple objects of the same type, defining a reusable object type{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}OBJECT{tuple_delimiter}PRIMITIVE DATA TYPES{tuple_delimiter}In JavaScript, almost everything is an object except for primitive data types{tuple_delimiter}6)
+{completion_delimiter}
+#############################
+
+
+Example 2:
+
+entity_types: [programming concept, data structure, method, syntax, attribute, function, algorithm, module, selector, property]
+text:
+# HTML Attributes
+
+HTML attributes provide additional information about HTML elements.
+
+## The `href` Attribute
+The `<a>` tag defines a hyperlink. The `href` attribute specifies the URL of the page the link goes to.
+
+#### 程式碼範例
+```html
+<a href="https://www.example.com">Visit Example</a>
+```
+
+#### Example
+You will learn more about links in our **HTML Links** chapter.
+
+## The `src` Attribute
+The `<img>` tag is used to embed an image in an HTML page. The `src` attribute specifies the path to the image to be displayed.
+
+#### 程式碼範例
+```html
+<img src="img_girl.jpg" alt="Girl">
+```
+
+### Ways to Specify the URL in `src`
+1. **Absolute URL**: Links to an external image hosted on another website.  
+   Example:  
+   ```html
+   <img src="https://www.example.com/images/img_girl.jpg" alt="Girl">
+   ```
+   **Notes**: External images might be under copyright. You cannot control external images; they can suddenly be removed or changed.
+
+2. **Relative URL**: Links to an image hosted within the website.  
+   - If the URL begins without a slash, it will be relative to the current page.  
+     Example:  
+     ```html
+     <img src="img_girl.jpg" alt="Girl">
+     ```
+   - If the URL begins with a slash, it will be relative to the domain.  
+     Example:  
+     ```html
+     <img src="/images/img_girl.jpg" alt="Girl">
+     ```
+
+   **Tip**: It is almost always best to use relative URLs. They will not break if you change the domain.
+
+## The `width` and `height` Attributes
+The `<img>` tag should also contain the `width` and `height` attributes, which specify the width and height of the image in pixels.
+
+#### 程式碼範例
+```html
+<img src="img_girl.jpg" width="500" height="600" alt="Girl">
+```
+
+## The `alt` Attribute
+The required `alt` attribute for the `<img>` tag specifies alternate text for an image if the image cannot be displayed.
+
+#### 程式碼範例
+```html
+<img src="img_does_not_exist.jpg" alt="Image not found">
+```
+
+#### Example
+See what happens if we try to display an image that does not exist.  
+You will learn more about images in our **HTML Images** chapter.
+
+## The `style` Attribute
+The `style` attribute is used to add styles to an element, such as color, font size, and more.
+
+#### 程式碼範例
+```html
+<p style="color: red; font-size: 20px;">This is styled text.</p>
+```
+
+#### Example
+You will learn more about styles in our **HTML Styles** chapter.
+
+## The `lang` Attribute
+You should always include the `lang` attribute inside the `<html>` tag to declare the language of the webpage. This assists search engines and browsers.
+
+#### Example
+```html
+<html lang="en">
+```
+Country codes can also be added to the language code in the `lang` attribute.  
+Example:  
+```html
+<html lang="en-US">
+```
+You can see all the language codes in our **HTML Language Code Reference**.
+
+## The `title` Attribute
+The `title` attribute defines extra information about an element. The value of the `title` attribute will be displayed as a tooltip when you mouse over the element.
+
+#### 程式碼範例
+```html
+<p title="This is a tooltip">Hover over this text.</p>
+```
+
+## Best Practices for HTML Attributes
+- **Always Use Lowercase Attributes**  
+  The HTML standard does not require lowercase attribute names, but W3C recommends lowercase attributes in HTML and demands lowercase attributes for stricter document types like XHTML.  
+  Example:  
+  ```html
+  <p title="example"></p>
+  ```
+
+- **Always Quote Attribute Values**  
+  The HTML standard does not require quotes around attribute values, but W3C recommends quotes in HTML and demands quotes for stricter document types like XHTML.  
+  Example:  
+  ```html
+  <p title="example"></p>
+  ```
+
+  **Single or Double Quotes**  
+  Double quotes are the most common, but single quotes can be used when the attribute value contains double quotes.  
+  Example:  
+  ```html
+  <p title='This "tooltip" uses single quotes'></p>
+  ```
+
+## Chapter Summary
+- `href`: `<a>`
+- `src`: `<img>`
+- `width` and `height`: `<img>`
+- `alt`: `<img>`
+- `style`: `<p>`
+- `lang`: `<html>`
+- `title`: `<p>`
+
+## HTML Attribute Reference
+A complete list of all attributes for each HTML element is listed in our **HTML Attribute Reference**.
+
+---
+REMOVE ADS
+------------------------
+output:
+("entity"{tuple_delimiter}HTML ATTRIBUTES{tuple_delimiter}programming concept{tuple_delimiter}HTML attributes provide additional information about HTML elements)
+{record_delimiter}
+("entity"{tuple_delimiter}HREF{tuple_delimiter}attribute{tuple_delimiter}The `href` attribute specifies the URL of the page a hyperlink goes to, used in the `<a>` tag)
+{record_delimiter}
+("entity"{tuple_delimiter}SRC{tuple_delimiter}attribute{tuple_delimiter}The `src` attribute specifies the path to the image to be displayed, used in the `<img>` tag)
+{record_delimiter}
+("entity"{tuple_delimiter}WIDTH{tuple_delimiter}attribute{tuple_delimiter}The `width` attribute specifies the width of an image in pixels, used in the `<img>` tag)
+{record_delimiter}
+("entity"{tuple_delimiter}HEIGHT{tuple_delimiter}attribute{tuple_delimiter}The `height` attribute specifies the height of an image in pixels, used in the `<img>` tag)
+{record_delimiter}
+("entity"{tuple_delimiter}ALT{tuple_delimiter}attribute{tuple_delimiter}The `alt` attribute specifies alternate text for an image if the image cannot be displayed, used in the `<img>` tag)
+{record_delimiter}
+("entity"{tuple_delimiter}STYLE{tuple_delimiter}attribute{tuple_delimiter}The `style` attribute is used to add styles to an element, such as color and font size)
+{record_delimiter}
+("entity"{tuple_delimiter}LANG{tuple_delimiter}attribute{tuple_delimiter}The `lang` attribute declares the language of the webpage, used in the `<html>` tag)
+{record_delimiter}
+("entity"{tuple_delimiter}TITLE{tuple_delimiter}attribute{tuple_delimiter}The `title` attribute defines extra information about an element, displayed as a tooltip on mouseover)
+{record_delimiter}
+("relationship"{tuple_delimiter}HREF{tuple_delimiter}HTML ATTRIBUTES{tuple_delimiter}The `href` attribute is a type of HTML attribute that provides additional information about hyperlinks{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}SRC{tuple_delimiter}HTML ATTRIBUTES{tuple_delimiter}The `src` attribute is a type of HTML attribute that provides additional information about images{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}WIDTH{tuple_delimiter}HTML ATTRIBUTES{tuple_delimiter}The `width` attribute is a type of HTML attribute that provides additional information about image dimensions{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}HEIGHT{tuple_delimiter}HTML ATTRIBUTES{tuple_delimiter}The `height` attribute is a type of HTML attribute that provides additional information about image dimensions{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}ALT{tuple_delimiter}HTML ATTRIBUTES{tuple_delimiter}The `alt` attribute is a type of HTML attribute that provides alternate text for images{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}STYLE{tuple_delimiter}HTML ATTRIBUTES{tuple_delimiter}The `style` attribute is a type of HTML attribute that provides styling information for elements{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}LANG{tuple_delimiter}HTML ATTRIBUTES{tuple_delimiter}The `lang` attribute is a type of HTML attribute that provides language information for the webpage{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}TITLE{tuple_delimiter}HTML ATTRIBUTES{tuple_delimiter}The `title` attribute is a type of HTML attribute that provides additional information displayed as a tooltip{tuple_delimiter}8)
+{completion_delimiter}
+#############################
+
+
+
+-Real Data-
+######################
+entity_types: [programming concept, data structure, method, syntax, attribute, function, algorithm, module, selector, property]
+text: {input_text}
+######################
+output:

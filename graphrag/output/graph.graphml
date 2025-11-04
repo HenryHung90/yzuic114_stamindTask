@@ -1,0 +1,5547 @@
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d0" for="edge" attr.name="weight" attr.type="double" />
+  <graph edgedefault="undirected">
+    <node id="TIC-TAC-TOE" />
+    <node id="MODULAR ARCHITECTURE" />
+    <node id="GAME MODULE" />
+    <node id="AI MODULE" />
+    <node id="APP MODULE" />
+    <node id="IMMUTABLE STATE PATTERN" />
+    <node id="MODERN JAVASCRIPT FEATURES" />
+    <node id="COMPONENT-BASED DESIGN" />
+    <node id="STATE MANAGEMENT" />
+    <node id="CSS VARIABLES" />
+    <node id="ES6+ JAVASCRIPT" />
+    <node id="MODULE PATTERN" />
+    <node id="MODERN ES6+ JAVASCRIPT FEATURES" />
+    <node id="SEPARATION OF CONCERNS" />
+    <node id="CONFIGURABLE OPTIONS" />
+    <node id="RENDERING" />
+    <node id="USER INTERACTION" />
+    <node id="IMMEDIATELY INVOKED FUNCTION EXPRESSION (IIFE)" />
+    <node id="TIC-TAC-TOE IMPLEMENTATION" />
+    <node id="CREATE" />
+    <node id="PLACE" />
+    <node id="EVALUATE" />
+    <node id="AVAILABLE MOVES" />
+    <node id="WINNING LINES" />
+    <node id="ENCAPSULATION" />
+    <node id="IMMUTABLE STATE MANAGEMENT" />
+    <node id="ES6+ JAVASCRIPT FEATURES" />
+    <node id="DATA PRIVACY" />
+    <node id="CLOSURE" />
+    <node id="PUBLIC API" />
+    <node id="MODERN STYLING" />
+    <node id="CLOSURES" />
+    <node id="DOM MANIPULATION" />
+    <node id="USER EVENTS" />
+    <node id="GAME FLOW" />
+    <node id="TIMING" />
+    <node id="SIZE" />
+    <node id="GAP" />
+    <node id="COLOR-LINE" />
+    <node id="FLEXBOX" />
+    <node id="CSS" />
+    <node id="TRANSITION" />
+    <node id="TRANSITION PROPERTY" />
+    <node id="GAME STATE" />
+    <node id="GAME LOGIC" />
+    <node id="DECISION-MAKING LOGIC" />
+    <node id="UI ACTIONS" />
+    <node id="CSS TRANSITIONS" />
+    <node id="IMPORTANT FLAG" />
+    <node id="ROOT" />
+    <node id="CELL" />
+    <node id="HIGHLIGHT" />
+    <node id="ALIGN-ITEMS" />
+    <node id="JUSTIFY-CONTENT" />
+    <node id="DISPLAY" />
+    <node id="CENTER" />
+    <node id="BACKGROUND" />
+    <node id="ROOT SELECTOR" />
+    <node id="CENTERING" />
+    <node id="VARIABLES" />
+    <node id="STATE" />
+    <node id="BOARD" />
+    <node id="MOVES" />
+    <node id="INDEX" />
+    <node id="ISFULL" />
+    <node id="WINNER" />
+    <node id="LINE" />
+    <node id="CONSISTENT SPACING" />
+    <node id="DISPLAY: FLEX" />
+    <node id="ALIGNMENT PROPERTIES" />
+    <node id="PREDICTABLE STATE CHANGES" />
+    <node id="EASIER DEBUGGING" />
+    <node id="SIMPLIFIED LOGIC" />
+    <node id="PURE FUNCTIONS" />
+    <node id="NEWBOARD" />
+    <node id="STATE STRUCTURE" />
+    <node id="CURRENT" />
+    <node id="IMMUTABILITY" />
+    <node id="ARROW FUNCTIONS" />
+    <node id="STATE OBJECT" />
+    <node id="OBJECT DESTRUCTURING" />
+    <node id="LEXICAL THIS BINDING" />
+    <node id="IMPLICIT RETURN" />
+    <node id="SPREAD OPERATOR" />
+    <node id="ES6+ FEATURES" />
+    <node id="LEXICAL THIS" />
+    <node id="TEMPLATE LITERALS" />
+    <node id="FIRSTPLAYER" />
+    <node id="OBJECT FREEZING" />
+    <node id="SHALLOW COPY" />
+    <node id="STRING INTERPOLATION" />
+    <node id="ARROW FUNCTION" />
+    <node id="WINNINGLINES" />
+    <node id="MODE" />
+    <node id="ARRAY METHODS" />
+    <node id="FUNCTION ARGUMENTS" />
+    <node id="MULTI-LINE STRINGS" />
+    <node id="EMBEDDED EXPRESSIONS" />
+    <node id="RETURN" />
+    <node id="MAP" />
+    <node id="FILTER" />
+    <node id="FUNCTION" />
+    <node id="INNERHTML" />
+    <node id="BOARD ELEMENT (BOARDEL)" />
+    <node id="FUNCTIONAL PROGRAMMING" />
+    <node id="DECLARATIVE CODE" />
+    <node id="UI MANAGEMENT" />
+    <node id="JOIN" />
+    <node id="DECLARATIVE RENDERING" />
+    <node id="CLASSLIST" />
+    <node id="TEXTCONTENT" />
+    <node id="FORLOOP" />
+    <node id="QUERYSELECTOR" />
+    <node id="TEMPLATE GENERATION" />
+    <node id="COMPONENT LIFECYCLE" />
+    <node id="DATA ATTRIBUTES" />
+    <node id="RENDER" />
+    <node id="STATUS TEXT" />
+    <node id="FOR EACH" />
+    <node id="EVENT HANDLING" />
+    <node id="INIT EVENTS" />
+    <node id="ON BOARD CLICK" />
+    <node id="NEW GAME" />
+    <node id="EVENT DELEGATION" />
+    <node id="INLINE ARROW FUNCTIONS" />
+    <node id="NAMED FUNCTIONS" />
+    <node id="ONBOARDCLICK" />
+    <node id="NEW BTN" />
+    <node id="MODE SEL" />
+    <node id="FIRST SEL" />
+    <node id="BOARD EL" />
+    <node id="STATUS EL" />
+    <node id="QUERY SELECTOR" />
+    <node id="DOM ELEMENT REFERENCES" />
+    <node id="DOM" />
+    <node id="CLASS LIST" />
+    <node id="TEXT CONTENT" />
+    <node id="ANIMATION" />
+    <node id="INLINE FUNCTION" />
+    <node id="NAMED FUNCTION" />
+    <node id="ADD EVENT LISTENER" />
+    <node id="EVENT SYSTEM" />
+    <node id="KEYFRAMES" />
+    <node id="BOARD ELEMENT" />
+    <node id="NEW BUTTON" />
+    <node id="MODE SELECTOR" />
+    <node id="FIRST SELECTOR" />
+    <node id="STATUS ELEMENT" />
+    <node id="NEWGAME" />
+    <node id="MODESEL" />
+    <node id="FIRSTSEL" />
+    <node id="POP" />
+    <node id="PREVIOUS STATE" />
+    <node id="LAST MOVE" />
+    <node id="@KEYFRAMES" />
+    <node id="CELL-NEW" />
+    <node id="PREVIOUSSTATE" />
+    <node id="SETTIMEOUT" />
+    <node id="ADDEVENTLISTENER" />
+    <node id="FINDINDEX" />
+    <node id="GAMEHISTORY" />
+    <node id="HISTORY" />
+    <node id="PUSH" />
+    <node id="UNDO" />
+    <node id="JSON" />
+    <node id="PARSE" />
+    <node id="STRINGIFY" />
+    <node id="TRANSFORM" />
+    <node id="SCALE" />
+    <node id="OPACITY" />
+    <node id="DATA-I" />
+    <node id="CLEAR" />
+    <node id="LASTMOVE" />
+    <node id="ARRAY" />
+    <node id="UNDOMOVE" />
+    <node id="GAME" />
+    <node id="CLASSLIST.ADD" />
+    <node id="STATS" />
+    <node id="UPDATE" />
+    <node id="RENDERSTATS" />
+    <node id="GAMESTATE" />
+    <node id="IDX" />
+    <node id="RESET" />
+    <node id="GAMESPLAYED" />
+    <node id="XWINS" />
+    <node id="OWINS" />
+    <node id="TIES" />
+    <node id="DOCUMENT.GETELEMENTBYID" />
+    <node id="IMMUTABLE STATE PATTERNS" />
+    <node id="DOCTYPE" />
+    <node id="HTML" />
+    <node id="HEAD" />
+    <node id="BODY" />
+    <node id="META" />
+    <node id="TITLE" />
+    <node id="STYLE" />
+    <node id="CHARSET" />
+    <node id="GRID" />
+    <node id="BORDER" />
+    <node id="FONT-SIZE" />
+    <node id="TEXT-ALIGN" />
+    <node id="LINE-HEIGHT" />
+    <node id="CURSOR" />
+    <node id="USER-SELECT" />
+    <node id="BUTTON" />
+    <node id="GRID-TEMPLATE-COLUMNS" />
+    <node id="HOVER" />
+    <node id="BORDER-RADIUS" />
+    <node id="MARGIN" />
+    <node id="PADDING" />
+    <node id="STATUS" />
+    <node id="CONTROLS" />
+    <node id="GETELEMENTBYID" />
+    <node id="BOARDSTATE" />
+    <node id="CURRENTPLAYER" />
+    <node id="FINISHED" />
+    <node id="ID SELECTOR" />
+    <node id="BACKGROUND-COLOR" />
+    <node id="MAX-WIDTH" />
+    <node id="INIT" />
+    <node id="RENDER BOARD" />
+    <node id="RESET BTN" />
+    <node id="BOARD STATE" />
+    <node id="CURRENT PLAYER" />
+    <node id="RENDERBOARD" />
+    <node id="UPDATESTATUS" />
+    <node id="RESETBTN" />
+    <node id="HANDLECELLCLICK" />
+    <node id="CHECKWINNER" />
+    <node id="DIV" />
+    <node id="CLASSNAME" />
+    <node id="DATASET" />
+    <node id="APPENDCHILD" />
+    <node id=":ROOT" />
+    <node id="APP" />
+    <node id="FONT-FAMILY" />
+    <node id="H2" />
+    <node id="WIDTH" />
+    <node id="HEIGHT" />
+    <node id="POSITION" />
+    <node id="FONT-WEIGHT" />
+    <node id="AUTO" />
+    <node id="FLEX" />
+    <node id="SOLID" />
+    <node id="ROW" />
+    <node id="FOOTER" />
+    <node id="COLOR" />
+    <node id="PANEL" />
+    <node id="MIN-HEIGHT" />
+    <node id="VAR" />
+    <node id="IMPORTANT" />
+    <node id="CLASS" />
+    <node id="ID" />
+    <node id="STYLE TAG" />
+    <node id="POINTER" />
+    <node id="CLASS SELECTOR" />
+    <node id="HEADER" />
+    <node id="SELECT" />
+    <node id="RENDERER" />
+    <node id="AI" />
+    <node id="ES6 FEATURE" />
+    <node id="MINIMAX" />
+    <node id="LI" />
+    <node id="UL" />
+    <node id="MARGIN-TOP" />
+    <node id="MODULE" />
+    <node id="DATA DRIVEN" />
+    <node id="DESTRUCTURING ASSIGNMENT" />
+    <node id="CONST/LET" />
+    <node id="TEMPLATE STRING" />
+    <node id="PVP" />
+    <node id="PLAYER VS AI" />
+    <node id="LOGIC" />
+    <node id="INTERFACE RENDERING" />
+    <node id="MODULARIZATION" />
+    <node id="ES6 FEATURES" />
+    <node id="OPTION" />
+    <node id="SELECTOR" />
+    <node id="PVP MODE" />
+    <node id="AI MODE" />
+    <node id="FIRST PLAYER SELECTOR" />
+    <node id="NEW GAME BUTTON" />
+    <node id="X" />
+    <node id="O" />
+    <node id="ES6" />
+    <node id="CONST" />
+    <node id="LET" />
+    <node id="OBJECT.FREEZE" />
+    <node id="NEWGAMEBTN" />
+    <node id="FIRST" />
+    <node id="SCRIPT" />
+    <node id="ARRAY.FILL" />
+    <node id="AVAILABLEMOVES" />
+    <node id="BESTMOVE" />
+    <node id="SIM" />
+    <node id="BEST MOVE" />
+    <node id="ISMAXIMIZING" />
+    <node id="AIPLAYER" />
+    <node id="INFINITY" />
+    <node id="BESTSCORE" />
+    <node id="MOVE" />
+    <node id="STATUSEL" />
+    <node id="GAME.STATE" />
+    <node id="GAME.SCORE" />
+    <node id="GAME.BESTSCORE" />
+    <node id="GAME.MOVE" />
+    <node id="APPEVENTS" />
+    <node id="BOARDEL" />
+    <node id="NEWBTN" />
+    <node id="INITEVENTS" />
+    <node id="DOCUMENT" />
+    <node id="VALUE" />
+    <node id="AITURN" />
+    <node id="INIT_EVENTS" />
+    <node id="NEW_GAME" />
+    <node id="ON_BOARD_CLICK" />
+    <node id="AI_TURN" />
+    <node id="BOARD_EL" />
+    <node id="CLICK" />
+    <node id="MODE_SEL" />
+    <node id="ONCHANGE" />
+    <node id="FIRST_SEL" />
+    <node id="NEW_BTN" />
+    <node id="GAME.CREATE" />
+    <node id="GAME.PLACE" />
+    <node id="AI.BESTMOVE" />
+    <node id="CHANGE" />
+    <node id="STATUSTEXT" />
+    <node id="I" />
+    <node id="CLOSEST" />
+    <node id="MATH" />
+    <node id="RANDOM" />
+    <node id="START" />
+    <node id="STATUS_EL" />
+    <node id="ONCLICK" />
+    <node id="PLAY" />
+    <node id="RESETGAME" />
+    <node id="GAMEOVER" />
+    <node id="CHECKWINORTIE" />
+    <node id="WINS" />
+    <node id="GETELEMENTSBYCLASSNAME" />
+    <node id="EVERY" />
+    <node id="PLAYER" />
+    <node id="EVENT-DRIVEN PROGRAMMING" />
+    <node id="EVENT LISTENER" />
+    <node id="DYNAMIC BOARD GENERATION" />
+    <node id="ENHANCED HTML STRUCTURE" />
+    <node id="FILL" />
+    <node id="MODERN JAVASCRIPT METHODS" />
+    <node id="SOME" />
+    <node id="ENHANCED VISUAL FEEDBACK" />
+    <node id="ADVANCED CSS TECHNIQUES" />
+    <node id="BEST PRACTICES" />
+    <node id="MODERN JAVASCRIPT IMPLEMENTATION" />
+    <node id="CLEANER SEPARATION OF CONCERNS" />
+    <node id="HOVER EFFECTS" />
+    <node id="TRANSITIONS" />
+    <node id="RESET BUTTON" />
+    <node id="EMPTY BOARD CONTAINER" />
+    <node id="ELEMENT IDS" />
+    <node id="NO INLINE EVENT HANDLERS" />
+    <node id="EVENT LISTENERS" />
+    <node id="USER SELECTION PREVENTION" />
+    <node id="CONSISTENT SIZING" />
+    <node id="INLINE EVENT HANDLERS" />
+    <node id="MODERN JAVASCRIPT" />
+    <node id="PSEUDO-CLASS" />
+    <node id="JAVASCRIPT" />
+    <node id="DOCUMENT OBJECT MODEL (DOM)" />
+    <node id="UPDATE STATUS" />
+    <node id="DOCUMENT GETELEMENTBYID" />
+    <node id="DATASET.INDEX" />
+    <node id="WINNING_COMBINATIONS" />
+    <node id="CELLS" />
+    <node id="ADVANCED ARRAY METHODS" />
+    <node id="HANDLE CELL CLICK" />
+    <node id="ARRAY.FILL()" />
+    <node id="ARRAY.EVERY()" />
+    <node id="MODULAR FUNCTION DESIGN" />
+    <node id="CREATEELEMENT" />
+    <node id="FOR LOOP" />
+    <node id="DOCUMENT.CREATEELEMENT" />
+    <node id="ARRAY.EVERY" />
+    <node id="ARRAY.SOME" />
+    <node id="EVENT OBJECT" />
+    <node id="EVENT TARGET" />
+    <node id="DATA EXTRACTION" />
+    <node id="ELEMENT VALIDATION" />
+    <node id="TYPE CONVERSION" />
+    <node id="WINNER DETECTION ALGORITHM" />
+    <node id="CLICK EVENT" />
+    <node id="CELL INDEX" />
+    <node id="PARENT ELEMENT" />
+    <node id="DATA ATTRIBUTE" />
+    <node id="STRING INDEX" />
+    <node id="CLICKED ELEMENT" />
+    <node id="EVERY()" />
+    <node id="SOME()" />
+    <node id="WINNING LINE" />
+    <node id="PLAYER'S MARK" />
+    <node id="DIAGONAL" />
+    <node id="COLUMN" />
+    <node id="HIGHLIGHT WINNING LINE" />
+    <node id="CHECK WINNER" />
+    <node id="HIGHLIGHTWINNINGLINE" />
+    <node id="APPEAR" />
+    <node id="DOCUMENT.QUERYSELECTOR" />
+    <node id="MOVEHISTORY" />
+    <node id="MARKED" />
+    <node id="UNDOLASTMOVE" />
+    <node id="DRY" />
+    <node id="DON'T REPEAT YOURSELF (DRY)" />
+    <node id="UNDO LAST MOVE" />
+    <node id="SINGLE RESPONSIBILITY PRINCIPLE" />
+    <node id="MOVE HISTORY" />
+    <node id="PROGRESSIVE ENHANCEMENT" />
+    <node id="DESCRIPTIVE NAMING" />
+    <node id="VARIABLE" />
+    <node id="WIN AND TIE DETECTION ALGORITHMS" />
+    <node id="GAME BOARD" />
+    <node id="TURN-BASED GAMEPLAY" />
+    <node id="RESPONSIVE DESIGN" />
+    <node id="INTERACTIVE APPLICATIONS" />
+    <node id="CSS GRID" />
+    <node id="ALGORITHM" />
+    <node id="RESPONSIVE GAME BOARD" />
+    <node id="LANG ATTRIBUTE" />
+    <node id="META CHARSET" />
+    <node id="TITLE ELEMENT" />
+    <node id="LANG" />
+    <node id="PLAY FUNCTION" />
+    <node id="HTML ELEMENT" />
+    <node id="HEAD SECTION" />
+    <node id="BODY SECTION" />
+    <node id="DOCUMENT TYPE DECLARATION" />
+    <node id="GAME CONTAINER" />
+    <node id="INLINE CSS" />
+    <node id="CELL ELEMENTS" />
+    <node id="STATUS DISPLAY" />
+    <node id="CONTAINER DIV" />
+    <node id="GRID TEMPLATE COLUMNS" />
+    <node id="CSS STYLING" />
+    <node id="GRID-TEMPLATE-ROWS" />
+    <node id="TEXT-CENTER" />
+    <node id="SELECTOR TYPES" />
+    <node id="ELEMENT SELECTORS" />
+    <node id="CSS GRID LAYOUT" />
+    <node id="REPEAT" />
+    <node id="ID SELECTORS" />
+    <node id="CLASS SELECTORS" />
+    <node id="DISPLAY: GRID" />
+    <node id="BOX MODEL PROPERTIES" />
+    <node id="FONT-SIZE: 18PX" />
+    <node id="FONT-SIZE: 48PX" />
+    <node id="TEXT-ALIGN: CENTER" />
+    <node id="LINE-HEIGHT: 80PX" />
+    <node id="BACKGROUND: #F0F0F0" />
+    <node id="CURSOR: POINTER" />
+    <node id="BORDER: 1PX SOLID #999" />
+    <node id="MARGIN: 15PX AUTO" />
+    <node id="#BOARD" />
+    <node id="#STATUS" />
+    <node id=".CELL" />
+    <node id="TEXT FORMATTING" />
+    <node id="ELEMENT" />
+    <node id="GRID CELL" />
+    <node id="CENTERING ELEMENTS" />
+    <node id="COLUMNS" />
+    <node id="INTERACTIVE ELEMENTS" />
+    <node id="JAVASCRIPT GAME LOGIC" />
+    <node id="INTERACTIVITY" />
+    <node id="BLOCK" />
+    <node id="DOCUMENT.GETELEMENTSBYCLASSNAME" />
+    <node id="TERNARY OPERATOR" />
+    <node id="IF" />
+    <node id="FOR" />
+    <node id="FOREACH METHOD" />
+    <node id="EVERY METHOD" />
+    <node id="IF STATEMENT" />
+    <node id="RESETPGAME" />
+    <node id="STRING" />
+    <node id="BOOLEAN" />
+    <node id="VARIABLES AND DATA TYPES" />
+    <node id="DATA TYPES" />
+    <node id="FOREACH" />
+    <node id="CONDITIONAL OPERATOR" />
+    <node id="PARAMETER" />
+    <node id="ARRAYS" />
+    <node id="PARAMETERS" />
+    <node id="CONDITIONAL STATEMENTS" />
+    <node id="DOCUMENT.GETELEMENTBYID()" />
+    <node id="DOCUMENT.GETELEMENTSBYCLASSNAME()" />
+    <node id="ITERATION" />
+    <node id="WINNING COMBINATIONS" />
+    <node id="J" />
+    <node id="TWO-DIMENSIONAL ARRAYS" />
+    <node id="FOR LOOPS" />
+    <node id="IF STATEMENTS" />
+    <node id="EMPTY STRING" />
+    <node id="TIE CONDITION" />
+    <node id="TWO-DIMENSIONAL ARRAY" />
+    <node id="PLAY()" />
+    <node id="BOARD ARRAY" />
+    <node id="CHECKWINORTIE()" />
+    <node id="TURN" />
+    <node id="GAME OVER FLAG" />
+    <node id="CELL DISPLAY" />
+    <node id="RESTART BUTTON" />
+    <node id="BACKGROUND COLOR" />
+    <node id="STYLE.BACKGROUNDCOLOR" />
+    <node id="SCORES" />
+    <node id="SCOREO" />
+    <node id="SCOREX" />
+    <node id="SPAN" />
+    <node id="LENGTH" />
+    <node id="SCORE COUNTER" />
+    <node id="WIN CONDITION" />
+    <node id="COMPUTERMOVE" />
+    <node id="EMPTYCELLS" />
+    <node id="EMPTY CELLS" />
+    <node id="RANDOMINDEX" />
+    <node id="TIE" />
+    <node id="MATH.FLOOR" />
+    <node id="MATH.RANDOM" />
+    <node id="CELLINDEX" />
+    <node id="LOCAL STORAGE" />
+    <node id="MEDIA QUERY" />
+    <node id="JSON.STRINGIFY" />
+    <node id="SETITEM" />
+    <node id="GETITEM" />
+    <node id="JSON.PARSE" />
+    <node id="SAVEGAMESTATE" />
+    <node id="LOADGAMESTATE" />
+    <node id="SAVE GAME STATE" />
+    <node id="LOAD GAME STATE" />
+    <node id="GAME OVER" />
+    <node id="WINDOW.ONLOAD" />
+    <node id="PROGRAMMING CONCEPT" />
+    <node id="LOCALSTORAGE" />
+    <node id="ONLOAD" />
+    <node id="WINDOW" />
+    <node id="ADD" />
+    <node id="FILLED" />
+    <node id="CONSOLE.LOG" />
+    <node id="TROUBLESHOOTING" />
+    <node id="FORWARDS" />
+    <node id="GRID LAYOUT" />
+    <node id="MEDIA QUERIES" />
+    <node id="RELATIVE UNITS" />
+    <node id="BROWSER CONSOLE" />
+    <node id="F12" />
+    <node id="GAPS" />
+    <node id="MAXIMIZING PLAYER" />
+    <node id="MINIMIZING PLAYER" />
+    <node id="RECURSIVE SEARCH" />
+    <node id="GAME TREE" />
+    <node id="EVALUATION FUNCTION" />
+    <node id="RECURSIVE CALCULATION" />
+    <node id="PSEUDO CODE" />
+    <node id="GENERATE GAME TREE" />
+    <node id="IS_TERMINAL" />
+    <node id="GENERATE_CHILDREN" />
+    <node id="ALPHA-BETA PRUNING" />
+    <node id="ALPHA" />
+    <node id="BETA" />
+    <node id="MAXEVAL" />
+    <node id="MINEVAL" />
+    <node id="DEPTH" />
+    <edge source="TIC-TAC-TOE" target="MODULAR ARCHITECTURE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="GAME MODULE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="AI MODULE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="APP MODULE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="IMMUTABLE STATE PATTERN">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="MODERN JAVASCRIPT FEATURES">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="DYNAMIC BOARD GENERATION">
+      <data key="d0">27.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="EVENT DELEGATION">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="MODERN JAVASCRIPT METHODS">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="ENHANCED VISUAL FEEDBACK">
+      <data key="d0">21.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="CLEANER SEPARATION OF CONCERNS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="SEPARATION OF CONCERNS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="STATUS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="HTML">
+      <data key="d0">11.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="CSS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="JAVASCRIPT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="WIN AND TIE DETECTION ALGORITHMS">
+      <data key="d0">27.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="RESET BUTTON">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="GAME BOARD">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="TURN-BASED GAMEPLAY">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="RESPONSIVE DESIGN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="INTERACTIVE APPLICATIONS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE" target="CSS GRID">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="MODULAR ARCHITECTURE" target="GAME MODULE">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="MODULAR ARCHITECTURE" target="AI MODULE">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="MODULAR ARCHITECTURE" target="APP MODULE">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="MODULAR ARCHITECTURE" target="COMPONENT-BASED DESIGN">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="MODULAR ARCHITECTURE" target="STATE MANAGEMENT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="MODULAR ARCHITECTURE" target="MODULE PATTERN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="MODULAR ARCHITECTURE" target="MODERN ES6+ JAVASCRIPT FEATURES">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="MODULAR ARCHITECTURE" target="IMMUTABLE STATE PATTERN">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="MODULAR ARCHITECTURE" target="SEPARATION OF CONCERNS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="MODULAR ARCHITECTURE" target="IMMUTABLE STATE MANAGEMENT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="MODULAR ARCHITECTURE" target="UPDATE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="MODULAR ARCHITECTURE" target="RENDERSTATS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="MODULAR ARCHITECTURE" target="RESET">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="GAME MODULE" target="TIC-TAC-TOE IMPLEMENTATION">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="GAME MODULE" target="MODULE PATTERN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GAME MODULE" target="CREATE">
+      <data key="d0">33.0</data>
+    </edge>
+    <edge source="GAME MODULE" target="PLACE">
+      <data key="d0">33.0</data>
+    </edge>
+    <edge source="GAME MODULE" target="EVALUATE">
+      <data key="d0">33.0</data>
+    </edge>
+    <edge source="GAME MODULE" target="AVAILABLE MOVES">
+      <data key="d0">33.0</data>
+    </edge>
+    <edge source="GAME MODULE" target="WINNING LINES">
+      <data key="d0">19.0</data>
+    </edge>
+    <edge source="GAME MODULE" target="IMMEDIATELY INVOKED FUNCTION EXPRESSION (IIFE)">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="GAME MODULE" target="AI MODULE">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="GAME MODULE" target="APP MODULE">
+      <data key="d0">27.0</data>
+    </edge>
+    <edge source="GAME MODULE" target="CLOSURES">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="AI MODULE" target="TIC-TAC-TOE IMPLEMENTATION">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="AI MODULE" target="MODULE PATTERN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="AI MODULE" target="IMMEDIATELY INVOKED FUNCTION EXPRESSION (IIFE)">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="AI MODULE" target="APP MODULE">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="AI MODULE" target="GAME STATE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="AI MODULE" target="GAME LOGIC">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="AI MODULE" target="DECISION-MAKING LOGIC">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="APP MODULE" target="CONFIGURABLE OPTIONS">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="APP MODULE" target="RENDERING">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="APP MODULE" target="USER INTERACTION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="APP MODULE" target="TIC-TAC-TOE IMPLEMENTATION">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="APP MODULE" target="MODULE PATTERN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="APP MODULE" target="IMMEDIATELY INVOKED FUNCTION EXPRESSION (IIFE)">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="APP MODULE" target="CSS VARIABLES">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="APP MODULE" target="DOM MANIPULATION">
+      <data key="d0">27.0</data>
+    </edge>
+    <edge source="APP MODULE" target="USER EVENTS">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="APP MODULE" target="GAME FLOW">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="APP MODULE" target="TIMING">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="APP MODULE" target="GAME STATE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="APP MODULE" target="UI ACTIONS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="IMMUTABLE STATE PATTERN" target="STATE MANAGEMENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="IMMUTABLE STATE PATTERN" target="DOM MANIPULATION">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="IMMUTABLE STATE PATTERN" target="CSS VARIABLES">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="IMMUTABLE STATE PATTERN" target="EVALUATE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="IMMUTABLE STATE PATTERN" target="STATE">
+      <data key="d0">29.0</data>
+    </edge>
+    <edge source="IMMUTABLE STATE PATTERN" target="PLACE">
+      <data key="d0">27.0</data>
+    </edge>
+    <edge source="IMMUTABLE STATE PATTERN" target="PREDICTABLE STATE CHANGES">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="IMMUTABLE STATE PATTERN" target="EASIER DEBUGGING">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="IMMUTABLE STATE PATTERN" target="SIMPLIFIED LOGIC">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="IMMUTABLE STATE PATTERN" target="PURE FUNCTIONS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="IMMUTABLE STATE PATTERN" target="STATE STRUCTURE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="IMMUTABLE STATE PATTERN" target="UNDO LAST MOVE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="IMMUTABLE STATE PATTERN" target="RENDER BOARD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="IMMUTABLE STATE PATTERN" target="GAME STATE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="IMMUTABLE STATE PATTERN" target="SEPARATION OF CONCERNS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="IMMUTABLE STATE PATTERN" target="PROGRESSIVE ENHANCEMENT">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="MODERN JAVASCRIPT FEATURES" target="CSS VARIABLES">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="MODERN JAVASCRIPT FEATURES" target="ES6+ JAVASCRIPT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="MODERN JAVASCRIPT FEATURES" target="ARROW FUNCTIONS">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="MODERN JAVASCRIPT FEATURES" target="UPDATE">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="MODERN JAVASCRIPT FEATURES" target="RENDERSTATS">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="MODERN JAVASCRIPT FEATURES" target="RESET">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="COMPONENT-BASED DESIGN" target="TEMPLATE LITERALS">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="COMPONENT-BASED DESIGN" target="ARRAY METHODS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="COMPONENT-BASED DESIGN" target="FUNCTION">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="COMPONENT-BASED DESIGN" target="DECLARATIVE CODE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="COMPONENT-BASED DESIGN" target="STATE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="COMPONENT-BASED DESIGN" target="UI MANAGEMENT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="COMPONENT-BASED DESIGN" target="DECLARATIVE RENDERING">
+      <data key="d0">28.0</data>
+    </edge>
+    <edge source="COMPONENT-BASED DESIGN" target="INNERHTML">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="COMPONENT-BASED DESIGN" target="CLASSLIST">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="COMPONENT-BASED DESIGN" target="TEXTCONTENT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="COMPONENT-BASED DESIGN" target="FORLOOP">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="COMPONENT-BASED DESIGN" target="QUERYSELECTOR">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="COMPONENT-BASED DESIGN" target="COMPONENT LIFECYCLE">
+      <data key="d0">27.0</data>
+    </edge>
+    <edge source="COMPONENT-BASED DESIGN" target="DATA ATTRIBUTES">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CSS VARIABLES" target="MODERN ES6+ JAVASCRIPT FEATURES">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="CSS VARIABLES" target="MODERN STYLING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CSS VARIABLES" target="MODULE PATTERN">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CSS VARIABLES" target="SIZE">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="CSS VARIABLES" target="GAP">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="CSS VARIABLES" target="COLOR-LINE">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="CSS VARIABLES" target="FLEXBOX">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CSS VARIABLES" target="CSS">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="CSS VARIABLES" target="CSS TRANSITIONS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CSS VARIABLES" target="IMPORTANT FLAG">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="CSS VARIABLES" target="ROOT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CSS VARIABLES" target="ROOT SELECTOR">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="MODULE PATTERN" target="IMMEDIATELY INVOKED FUNCTION EXPRESSION (IIFE)">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="MODULE PATTERN" target="ENCAPSULATION">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="MODULE PATTERN" target="SEPARATION OF CONCERNS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="MODULE PATTERN" target="DATA PRIVACY">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="MODULE PATTERN" target="PUBLIC API">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="MODERN ES6+ JAVASCRIPT FEATURES" target="TIC-TAC-TOE IMPLEMENTATION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="NO INLINE EVENT HANDLERS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="EMPTY BOARD CONTAINER">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="GAME LOGIC">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="RENDERING">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="EVENT HANDLING">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="BOARD">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="STATUS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="CONTROLS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="RESETBTN">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="EVENT LISTENERS">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="ELEMENT IDS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="INLINE EVENT HANDLERS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="MODERN JAVASCRIPT IMPLEMENTATION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="BOARD ELEMENT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="STATUS ELEMENT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="RESET BUTTON">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="HANDLECELLCLICK">
+      <data key="d0">22.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="UNDOLASTMOVE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="DRY">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="SINGLE RESPONSIBILITY PRINCIPLE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="PROGRESSIVE ENHANCEMENT">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="JAVASCRIPT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="HTML">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SEPARATION OF CONCERNS" target="CSS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CONFIGURABLE OPTIONS" target="TIC-TAC-TOE IMPLEMENTATION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RENDERING" target="CLEANER SEPARATION OF CONCERNS">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="RENDERING" target="STATUS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="IMMEDIATELY INVOKED FUNCTION EXPRESSION (IIFE)" target="TIC-TAC-TOE IMPLEMENTATION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="IMMEDIATELY INVOKED FUNCTION EXPRESSION (IIFE)" target="ENCAPSULATION">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="IMMEDIATELY INVOKED FUNCTION EXPRESSION (IIFE)" target="CLOSURE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="IMMEDIATELY INVOKED FUNCTION EXPRESSION (IIFE)" target="CLOSURES">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE IMPLEMENTATION" target="IMMUTABLE STATE MANAGEMENT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TIC-TAC-TOE IMPLEMENTATION" target="ES6+ JAVASCRIPT FEATURES">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CREATE" target="NEWGAME">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CREATE" target="STATE">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="CREATE" target="GAME">
+      <data key="d0">43.0</data>
+    </edge>
+    <edge source="CREATE" target="WINNINGLINES">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CREATE" target="FIRST">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CREATE" target="ARRAY.FILL">
+      <data key="d0">13.0</data>
+    </edge>
+    <edge source="CREATE" target="CURRENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CREATE" target="WINNER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CREATE" target="LINE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CREATE" target="MOVES">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CREATE" target="PLACE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CREATE" target="BOARD">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="PLACE" target="EVALUATE">
+      <data key="d0">29.0</data>
+    </edge>
+    <edge source="PLACE" target="ISFULL">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="PLACE" target="WINNER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="PLACE" target="LINE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="PLACE" target="STATE">
+      <data key="d0">36.0</data>
+    </edge>
+    <edge source="PLACE" target="GAME">
+      <data key="d0">60.0</data>
+    </edge>
+    <edge source="PLACE" target="ONBOARDCLICK">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="PLACE" target="IDX">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="PLACE" target="WINNINGLINES">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="PLACE" target="BOARD">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="PLACE" target="CURRENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="PLACE" target="SIM">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="PLACE" target="RENDER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVALUATE" target="STATE">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="EVALUATE" target="BOARD">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVALUATE" target="OBJECT DESTRUCTURING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="EVALUATE" target="WINNER">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="EVALUATE" target="LINE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVALUATE" target="GAME">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="EVALUATE" target="WINNINGLINES">
+      <data key="d0">45.0</data>
+    </edge>
+    <edge source="EVALUATE" target="MINIMAX">
+      <data key="d0">46.0</data>
+    </edge>
+    <edge source="EVALUATE" target="WINNING LINES">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="EVALUATE" target="ALPHA-BETA PRUNING">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="AVAILABLE MOVES" target="GAME STATE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="AVAILABLE MOVES" target="MAP">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="AVAILABLE MOVES" target="FILTER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="AVAILABLE MOVES" target="BOARD">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="WINNING LINES" target="OBJECT FREEZING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="WINNING LINES" target="INIT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="WINNING LINES" target="BOARD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="WINNING LINES" target="MODERN JAVASCRIPT IMPLEMENTATION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="WINNING LINES" target="BOARD ELEMENT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="WINNING LINES" target="JAVASCRIPT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="WINNING LINES" target="BOARD STATE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="WINNING LINES" target="ARRAY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="WINNING LINES" target="WINNER DETECTION ALGORITHM">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="WINNING LINES" target="CHECKWINNER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="WINNING LINES" target="SOME">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="WINNING LINES" target="EVERY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="WINNING LINES" target="HIGHLIGHT WINNING LINE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="WINNING LINES" target="CHECK WINNER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="DOM MANIPULATION" target="DYNAMIC BOARD GENERATION">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="DOM MANIPULATION" target="ENHANCED HTML STRUCTURE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DOM MANIPULATION" target="EVENT LISTENER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DOM MANIPULATION" target="MODERN JAVASCRIPT METHODS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DOM MANIPULATION" target="DOCUMENT.GETELEMENTBYID">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DOM MANIPULATION" target="DOCUMENT.GETELEMENTSBYCLASSNAME">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DOM MANIPULATION" target="TEXTCONTENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DOM MANIPULATION" target="ARRAYS">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="GAME FLOW" target="BOARD">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="GAME FLOW" target="TIE CONDITION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="SIZE" target=":ROOT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="SIZE" target="GRID-TEMPLATE-COLUMNS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="GAP" target="GRID">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="GAP" target=":ROOT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="GAP" target="GRID-TEMPLATE-COLUMNS">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="GAP" target="CSS">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="GAP" target="CSS STYLING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GAP" target="BOARD">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="GAP" target="CSS GRID LAYOUT">
+      <data key="d0">29.0</data>
+    </edge>
+    <edge source="GAP" target="COLUMNS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="COLOR-LINE" target=":ROOT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="COLOR-LINE" target="BORDER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="FLEXBOX" target="TRANSITION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="FLEXBOX" target="CSS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="FLEXBOX" target="CSS TRANSITIONS">
+      <data key="d0">21.0</data>
+    </edge>
+    <edge source="FLEXBOX" target="IMPORTANT FLAG">
+      <data key="d0">12.0</data>
+    </edge>
+    <edge source="FLEXBOX" target="CELL">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FLEXBOX" target="ALIGN-ITEMS">
+      <data key="d0">27.0</data>
+    </edge>
+    <edge source="FLEXBOX" target="JUSTIFY-CONTENT">
+      <data key="d0">27.0</data>
+    </edge>
+    <edge source="FLEXBOX" target="DISPLAY">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="FLEXBOX" target="CENTER">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="FLEXBOX" target="CENTERING">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CSS" target="TRANSITION PROPERTY">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CSS" target="CSS TRANSITIONS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CSS" target="IMPORTANT FLAG">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CSS" target="ANIMATION">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="CSS" target="TEXT-ALIGN">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="CSS" target="MARGIN-TOP">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS" target="FONT-SIZE">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="CSS" target="COLOR">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS" target="ADVANCED CSS TECHNIQUES">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CSS" target="USER-SELECT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS" target="TRANSITION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS" target="HOVER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS" target="PROGRESSIVE ENHANCEMENT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CSS" target="CSS GRID">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS" target="STYLE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS" target="GAME CONTAINER">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="CSS" target="GAME BOARD">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="CSS" target="STATUS DISPLAY">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="CSS" target="INLINE CSS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CSS" target="GRID TEMPLATE COLUMNS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CSS" target="FONT-FAMILY">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="CSS" target="MARGIN">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="CSS" target="BORDER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS" target="BORDER-RADIUS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CSS" target="DISPLAY">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="CSS" target="GRID">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="CSS" target="WIDTH">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="CSS" target="LINE-HEIGHT">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="CSS" target="BACKGROUND">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="CSS" target="CURSOR">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="CSS" target="RESET BUTTON">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CSS" target="SELECTOR TYPES">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS" target="BODY">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="CSS" target="BUTTON">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS" target="BOARD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS" target="CELL">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS" target="GRID-TEMPLATE-COLUMNS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS" target="STATUS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS" target="CSS GRID LAYOUT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CSS" target="CENTERING ELEMENTS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CSS" target="TEXT FORMATTING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS" target="BOX MODEL PROPERTIES">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS" target="GAME LOGIC">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CSS" target="DISPLAY: GRID">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CSS" target="MEDIA QUERIES">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TRANSITION" target="CSS TRANSITIONS">
+      <data key="d0">48.0</data>
+    </edge>
+    <edge source="TRANSITION" target="BACKGROUND">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TRANSITION" target="STYLE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TRANSITION" target="CELL">
+      <data key="d0">22.0</data>
+    </edge>
+    <edge source="TRANSITION" target="HOVER">
+      <data key="d0">29.0</data>
+    </edge>
+    <edge source="TRANSITION" target="ANIMATION">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="TRANSITION" target="SCALE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TRANSITION" target="BACKGROUND-COLOR">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="GAME LOGIC" target="CLEANER SEPARATION OF CONCERNS">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="CSS TRANSITIONS" target="IMPORTANT FLAG">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CSS TRANSITIONS" target="BACKGROUND">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CSS TRANSITIONS" target="VARIABLES">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="CSS TRANSITIONS" target="DISPLAY: FLEX">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CSS TRANSITIONS" target="CONSISTENT SPACING">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="CSS TRANSITIONS" target="HOVER EFFECTS">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="CSS TRANSITIONS" target="ADVANCED CSS TECHNIQUES">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS TRANSITIONS" target="USER-SELECT">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="CSS TRANSITIONS" target="PROGRAMMING CONCEPT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CSS TRANSITIONS" target="TRANSFORM">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="IMPORTANT FLAG" target="HIGHLIGHT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CELL" target="RENDER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CELL" target="DATA-I">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CELL" target="CLASSLIST">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CELL" target="SETTIMEOUT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CELL" target="BACKGROUND">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="CELL" target="BORDER">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="CELL" target="FONT-SIZE">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="CELL" target="TEXT-ALIGN">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="CELL" target="LINE-HEIGHT">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="CELL" target="CURSOR">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="CELL" target="USER-SELECT">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="CELL" target="BOARD">
+      <data key="d0">25.0</data>
+    </edge>
+    <edge source="CELL" target="WIDTH">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="CELL" target="HEIGHT">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="CELL" target="DISPLAY">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="CELL" target="ALIGN-ITEMS">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="CELL" target="JUSTIFY-CONTENT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CELL" target="POSITION">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="CELL" target="FONT-WEIGHT">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="CELL" target="ONBOARDCLICK">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CELL" target="DATASET">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CELL" target="QUERYSELECTOR">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CELL" target="ONCLICK">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="CELL" target="BACKGROUND-COLOR">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CELL" target="PLAY">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="CELL" target="HOVER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CELL" target="RENDERBOARD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CELL" target="HIGHLIGHTWINNINGLINE">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="CELL" target="DOCUMENT.QUERYSELECTOR">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CELL" target="IDX">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CELL" target="MARKED">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CELL" target="HANDLECELLCLICK">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CELL" target="CSS GRID">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CELL" target="DIV">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CELL" target="GAME BOARD">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CELL" target="PLAY()">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CELL" target="DOCUMENT.GETELEMENTSBYCLASSNAME">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CELL" target="BOARD ARRAY">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CELL" target="INDEX">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CELL" target="RESETGAME">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CELL" target="GETELEMENTSBYCLASSNAME">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CELL" target="FILLED">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CELL" target="POP">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CELL" target="TRANSFORM">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CELL" target="ANIMATION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HIGHLIGHT" target="BACKGROUND">
+      <data key="d0">23.0</data>
+    </edge>
+    <edge source="HIGHLIGHT" target="STYLE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="HIGHLIGHT" target="CHECKWINNER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="HIGHLIGHT" target="HIGHLIGHTWINNINGLINE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ALIGN-ITEMS" target="DISPLAY: FLEX">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="ALIGN-ITEMS" target="JUSTIFY-CONTENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ALIGN-ITEMS" target="DISPLAY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="ALIGN-ITEMS" target="CENTER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JUSTIFY-CONTENT" target="BOARD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JUSTIFY-CONTENT" target="DISPLAY: FLEX">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="JUSTIFY-CONTENT" target="DISPLAY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="JUSTIFY-CONTENT" target="CENTER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DISPLAY" target="BOARD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DISPLAY" target="GRID">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DISPLAY" target="FLEX">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="DISPLAY" target="GRID-TEMPLATE-COLUMNS">
+      <data key="d0">36.0</data>
+    </edge>
+    <edge source="DISPLAY" target="STYLE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DISPLAY" target="BUTTON">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="DISPLAY" target="CSS STYLING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DISPLAY" target="CSS GRID LAYOUT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="DISPLAY" target="BOX MODEL PROPERTIES">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DISPLAY" target="DISPLAY: GRID">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="DISPLAY" target="CENTERING ELEMENTS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DISPLAY" target="INTERACTIVE ELEMENTS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DISPLAY" target="MARGIN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DISPLAY" target="BLOCK">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DISPLAY" target="CSS GRID">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="DISPLAY" target="GRID LAYOUT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CENTER" target="TEXT-ALIGN">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="BACKGROUND" target="STYLE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BACKGROUND" target="HOVER">
+      <data key="d0">40.0</data>
+    </edge>
+    <edge source="BACKGROUND" target="LINE-HEIGHT">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="BACKGROUND" target="BODY">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BACKGROUND" target="BORDER">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="BACKGROUND" target="VAR">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BACKGROUND" target="IMPORTANT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BACKGROUND" target="CSS STYLING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BACKGROUND" target="BOX MODEL PROPERTIES">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BACKGROUND" target="BACKGROUND: #F0F0F0">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="VARIABLES" target="CONSISTENT SPACING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="VARIABLES" target="DATA TYPES">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="VARIABLES" target="CONST">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="VARIABLES" target="LET">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="VARIABLES" target="GAMEOVER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STATE" target="BOARD">
+      <data key="d0">87.0</data>
+    </edge>
+    <edge source="STATE" target="MOVES">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="STATE" target="NEWBOARD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATE" target="ISFULL">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STATE" target="CURRENT">
+      <data key="d0">87.0</data>
+    </edge>
+    <edge source="STATE" target="WINNER">
+      <data key="d0">70.0</data>
+    </edge>
+    <edge source="STATE" target="LINE">
+      <data key="d0">52.0</data>
+    </edge>
+    <edge source="STATE" target="IMMUTABILITY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="STATE" target="STATE OBJECT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STATE" target="PURE FUNCTIONS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="STATE" target="OBJECT DESTRUCTURING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATE" target="SPREAD OPERATOR">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STATE" target="MODE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATE" target="RENDER">
+      <data key="d0">58.0</data>
+    </edge>
+    <edge source="STATE" target="DECLARATIVE RENDERING">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="STATE" target="GAMEHISTORY">
+      <data key="d0">36.0</data>
+    </edge>
+    <edge source="STATE" target="GAME">
+      <data key="d0">25.0</data>
+    </edge>
+    <edge source="STATE" target="PUSH">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="STATE" target="UNDO">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STATE" target="CLEAR">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATE" target="NEWGAME">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATE" target="ONBOARDCLICK">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATE" target="UNDOMOVE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="STATE" target="STATS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STATE" target="LOGIC">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="STATE" target="INTERFACE RENDERING">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="STATE" target="AVAILABLEMOVES">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="STATE" target="BESTMOVE">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="STATE" target="MINIMAX">
+      <data key="d0">35.0</data>
+    </edge>
+    <edge source="STATE" target="BEST MOVE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="STATE" target="SIM">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STATE" target="FIRST_SEL">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STATE" target="GAME.CREATE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="STATE" target="GAME.PLACE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="STATE" target="STATUSTEXT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATE" target="AI">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATE" target="STATUS TEXT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD" target="INDEX">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD" target="STATE STRUCTURE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD" target="STATE OBJECT">
+      <data key="d0">27.0</data>
+    </edge>
+    <edge source="BOARD" target="SPREAD OPERATOR">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="BOARD" target="RENDER">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="BOARD" target="PREVIOUS STATE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BOARD" target="PREVIOUSSTATE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BOARD" target="LASTMOVE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD" target="ARRAY">
+      <data key="d0">44.0</data>
+    </edge>
+    <edge source="BOARD" target="GRID-TEMPLATE-COLUMNS">
+      <data key="d0">25.0</data>
+    </edge>
+    <edge source="BOARD" target="GAME">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="BOARD" target="AVAILABLEMOVES">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD" target="NEWBOARD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD" target="DESTRUCTURING ASSIGNMENT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BOARD" target="APP">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="BOARD" target="RESETGAME">
+      <data key="d0">50.0</data>
+    </edge>
+    <edge source="BOARD" target="PLAY">
+      <data key="d0">79.0</data>
+    </edge>
+    <edge source="BOARD" target="CHECKWINORTIE">
+      <data key="d0">52.0</data>
+    </edge>
+    <edge source="BOARD" target="GETELEMENTSBYCLASSNAME">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BOARD" target="WINS">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="BOARD" target="PLAYER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD" target="EVERY">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BOARD" target="DYNAMIC BOARD GENERATION">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD" target="EVENT DELEGATION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD" target="EMPTY BOARD CONTAINER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD" target="GETELEMENTBYID">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD" target="RENDERBOARD">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD" target="WIDTH">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="BOARD" target="MARGIN">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="BOARD" target="CSS GRID LAYOUT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD" target="JAVASCRIPT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD" target="LET">
+      <data key="d0">36.0</data>
+    </edge>
+    <edge source="BOARD" target="DOCUMENT.GETELEMENTSBYCLASSNAME">
+      <data key="d0">23.0</data>
+    </edge>
+    <edge source="BOARD" target="FOREACH METHOD">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BOARD" target="EVERY METHOD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD" target="RESETPGAME">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BOARD" target="IF STATEMENT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD" target="ARRAYS">
+      <data key="d0">25.0</data>
+    </edge>
+    <edge source="BOARD" target="CONDITIONAL STATEMENTS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD" target="GAMEOVER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD" target="CURRENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD" target="RETURN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD" target="EMPTY STRING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD" target="ARRAY.EVERY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD" target="PLAY FUNCTION">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD" target="COMPUTERMOVE">
+      <data key="d0">19.0</data>
+    </edge>
+    <edge source="BOARD" target="EMPTYCELLS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD" target="RESPONSIVE DESIGN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD" target="FOR LOOP">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD" target="LOCAL STORAGE">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="BOARD" target="SAVEGAMESTATE">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="BOARD" target="LOADGAMESTATE">
+      <data key="d0">25.0</data>
+    </edge>
+    <edge source="BOARD" target="SAVE GAME STATE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD" target="LOAD GAME STATE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD" target="SETITEM">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD" target="GETITEM">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD" target="LOCALSTORAGE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD" target="TIE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="MOVES" target="STATE STRUCTURE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="MOVES" target="ISFULL">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="MOVES" target="STATE OBJECT">
+      <data key="d0">12.0</data>
+    </edge>
+    <edge source="MOVES" target="ARROW FUNCTION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="MOVES" target="STATUSTEXT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="INDEX" target="DATASET">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="INDEX" target="DATA EXTRACTION">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="INDEX" target="TYPE CONVERSION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="INDEX" target="WINNINGLINES">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="INDEX" target="BOARDSTATE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="INDEX" target="BOARD ARRAY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="INDEX" target="PLAY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ISFULL" target="GAME">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="WINNER" target="STATE STRUCTURE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="WINNER" target="STATE OBJECT">
+      <data key="d0">35.0</data>
+    </edge>
+    <edge source="WINNER" target="OBJECT DESTRUCTURING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="WINNER" target="STATUSTEXT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="LINE" target="STATE STRUCTURE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="LINE" target="STATE OBJECT">
+      <data key="d0">34.0</data>
+    </edge>
+    <edge source="LINE" target="OBJECT DESTRUCTURING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="LINE" target="RENDER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="LINE" target="WINNINGLINES">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="LINE" target="BOARDSTATE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="LINE" target="HIGHLIGHTWINNINGLINE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DISPLAY: FLEX" target="ALIGNMENT PROPERTIES">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DISPLAY: FLEX" target="FLEX">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="PREDICTABLE STATE CHANGES" target="IMMUTABILITY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EASIER DEBUGGING" target="IMMUTABILITY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SIMPLIFIED LOGIC" target="IMMUTABILITY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="PURE FUNCTIONS" target="IMMUTABILITY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="PURE FUNCTIONS" target="ARROW FUNCTIONS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="NEWBOARD" target="STATE OBJECT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="NEWBOARD" target="SPREAD OPERATOR">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="STATE STRUCTURE" target="CURRENT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CURRENT" target="STATE OBJECT">
+      <data key="d0">35.0</data>
+    </edge>
+    <edge source="CURRENT" target="TEMPLATE LITERALS">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="CURRENT" target="FIRSTPLAYER">
+      <data key="d0">36.0</data>
+    </edge>
+    <edge source="CURRENT" target="STATUSTEXT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CURRENT" target="PLAY">
+      <data key="d0">49.0</data>
+    </edge>
+    <edge source="CURRENT" target="RESETGAME">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CURRENT" target="CHECKWINORTIE">
+      <data key="d0">25.0</data>
+    </edge>
+    <edge source="CURRENT" target="JAVASCRIPT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CURRENT" target="STATUS">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="CURRENT" target="LET">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CURRENT" target="TERNARY OPERATOR">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CURRENT" target="DOCUMENT.GETELEMENTBYID">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="CURRENT" target="CONDITIONAL OPERATOR">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CURRENT" target="STRING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CURRENT" target="CONDITIONAL STATEMENTS">
+      <data key="d0">23.0</data>
+    </edge>
+    <edge source="CURRENT" target="TEXTCONTENT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CURRENT" target="PLAY FUNCTION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CURRENT" target="PLAY()">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="CURRENT" target="PLAYER">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CURRENT" target="LOCAL STORAGE">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="CURRENT" target="SAVEGAMESTATE">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="CURRENT" target="LOADGAMESTATE">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="CURRENT" target="SAVE GAME STATE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CURRENT" target="LOAD GAME STATE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CURRENT" target="SETITEM">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CURRENT" target="GETITEM">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CURRENT" target="LOCALSTORAGE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CURRENT" target="TURN">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="IMMUTABILITY" target="STATE OBJECT">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="ARROW FUNCTIONS" target="LEXICAL THIS BINDING">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="ARROW FUNCTIONS" target="IMPLICIT RETURN">
+      <data key="d0">12.0</data>
+    </edge>
+    <edge source="ARROW FUNCTIONS" target="ES6+ FEATURES">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="ARROW FUNCTIONS" target="LEXICAL THIS">
+      <data key="d0">19.0</data>
+    </edge>
+    <edge source="ARROW FUNCTIONS" target="STATE OBJECT">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="ARROW FUNCTIONS" target="FIRSTPLAYER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STATE OBJECT" target="OBJECT DESTRUCTURING">
+      <data key="d0">23.0</data>
+    </edge>
+    <edge source="STATE OBJECT" target="SPREAD OPERATOR">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="STATE OBJECT" target="TEMPLATE LITERALS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATE OBJECT" target="OBJECT FREEZING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="OBJECT DESTRUCTURING" target="ES6+ FEATURES">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="OBJECT DESTRUCTURING" target="ARROW FUNCTION">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="OBJECT DESTRUCTURING" target="SPREAD OPERATOR">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="OBJECT DESTRUCTURING" target="OBJECT FREEZING">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="LEXICAL THIS BINDING" target="IMPLICIT RETURN">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="SPREAD OPERATOR" target="ES6+ FEATURES">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="SPREAD OPERATOR" target="SHALLOW COPY">
+      <data key="d0">19.0</data>
+    </edge>
+    <edge source="SPREAD OPERATOR" target="OBJECT FREEZING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="SPREAD OPERATOR" target="TEMPLATE LITERALS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SPREAD OPERATOR" target="ARRAY METHODS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SPREAD OPERATOR" target="FUNCTION ARGUMENTS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SPREAD OPERATOR" target="ES6 FEATURE">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="SPREAD OPERATOR" target="ES6 FEATURES">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SPREAD OPERATOR" target="ES6">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="ES6+ FEATURES" target="TEMPLATE LITERALS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="ES6+ FEATURES" target="OBJECT FREEZING">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="TEMPLATE LITERALS" target="STRING INTERPOLATION">
+      <data key="d0">19.0</data>
+    </edge>
+    <edge source="TEMPLATE LITERALS" target="ARROW FUNCTION">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="TEMPLATE LITERALS" target="MODE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TEMPLATE LITERALS" target="MULTI-LINE STRINGS">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="TEMPLATE LITERALS" target="EMBEDDED EXPRESSIONS">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="TEMPLATE LITERALS" target="ARRAY METHODS">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="TEMPLATE LITERALS" target="RETURN">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="FIRSTPLAYER" target="CONST">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="FIRSTPLAYER" target="STATUS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FIRSTPLAYER" target="PLAY">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="FIRSTPLAYER" target="RESETGAME">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FIRSTPLAYER" target="STRING">
+      <data key="d0">22.0</data>
+    </edge>
+    <edge source="OBJECT FREEZING" target="WINNINGLINES">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="OBJECT FREEZING" target="ARRAY METHODS">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="ARROW FUNCTION" target="EVENT HANDLING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ARROW FUNCTION" target="INLINE FUNCTION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ARROW FUNCTION" target="ES6 FEATURE">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="ARROW FUNCTION" target="ES6 FEATURES">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="ARROW FUNCTION" target="ES6">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="WINNINGLINES" target="GETELEMENTBYID">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="WINNINGLINES" target="CHECKWINNER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="WINNINGLINES" target="GAME">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="WINNINGLINES" target="OBJECT.FREEZE">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="WINNINGLINES" target="INIT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="WINNINGLINES" target="ARRAY.SOME">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="WINNINGLINES" target="WINNER DETECTION ALGORITHM">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="WINNINGLINES" target="BOARDSTATE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="WINNINGLINES" target="ROW">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="WINNINGLINES" target="HIGHLIGHTWINNINGLINE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="MODE" target="INIT EVENTS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="MODE" target="GAME">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="MODE" target="APP">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="MODE" target="MODE_SEL">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="MODE" target="MODESEL">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="MODE" target="NEWGAME">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="ARRAY METHODS" target="MAP">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="ARRAY METHODS" target="FILTER">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="ARRAY METHODS" target="FUNCTIONAL PROGRAMMING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ARRAY METHODS" target="DECLARATIVE CODE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ARRAY METHODS" target="JOIN">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="ARRAY METHODS" target="TEMPLATE GENERATION">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="ARRAY METHODS" target="MODERN JAVASCRIPT METHODS">
+      <data key="d0">44.0</data>
+    </edge>
+    <edge source="ARRAY METHODS" target="ARRAYS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ARRAY METHODS" target="EVERY">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RETURN" target="FUNCTION">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="RETURN" target="MINIMAX">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="RETURN" target="CHECKWINORTIE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="RETURN" target="GAMEOVER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="RETURN" target="IF STATEMENT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="MAP" target="FILTER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="MAP" target="TEMPLATE GENERATION">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="MAP" target="RENDER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FUNCTION" target="GETELEMENTBYID">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="FUNCTION" target="ARRAY">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="FUNCTION" target="INIT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FUNCTION" target="RENDERBOARD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FUNCTION" target="UPDATESTATUS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FUNCTION" target="HANDLECELLCLICK">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FUNCTION" target="CHECKWINNER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FUNCTION" target="RESET">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FUNCTION" target="VARIABLE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="FUNCTION" target="CHECKWINORTIE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="FUNCTION" target="RESETPGAME">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="FUNCTION" target="RESETGAME">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="FUNCTION" target="IF STATEMENT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="FUNCTION" target="PARAMETERS">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="FUNCTION" target="CONDITIONAL STATEMENTS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="FUNCTION" target="ARRAYS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="FUNCTION" target="PLAY">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="FUNCTION" target="PARAMETER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="FUNCTION" target="I">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FUNCTION" target="FOR LOOP">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="INNERHTML" target="BOARD ELEMENT (BOARDEL)">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="INNERHTML" target="RENDERSTATS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="INNERHTML" target="RENDER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="INNERHTML" target="RENDERBOARD">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="JOIN" target="TEMPLATE GENERATION">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="DECLARATIVE RENDERING" target="RENDER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="DECLARATIVE RENDERING" target="FOR EACH">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DECLARATIVE RENDERING" target="TEXT CONTENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DECLARATIVE RENDERING" target="ANIMATION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DECLARATIVE RENDERING" target="TEMPLATE GENERATION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DECLARATIVE RENDERING" target="DATA ATTRIBUTES">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DECLARATIVE RENDERING" target="COMPONENT LIFECYCLE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CLASSLIST" target="RENDER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CLASSLIST" target="QUERYSELECTOR">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CLASSLIST" target="CLASSLIST.ADD">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CLASSLIST" target="HANDLECELLCLICK">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="CLASSLIST" target="GETELEMENTSBYCLASSNAME">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="CLASSLIST" target="ADD">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="CLASSLIST" target="PLAY">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TEXTCONTENT" target="DIV">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TEXTCONTENT" target="DOCUMENT.CREATEELEMENT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TEXTCONTENT" target="HANDLECELLCLICK">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TEXTCONTENT" target="DOCUMENT.GETELEMENTBYID">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TEXTCONTENT" target="DOCUMENT.GETELEMENTSBYCLASSNAME">
+      <data key="d0">23.0</data>
+    </edge>
+    <edge source="TEXTCONTENT" target="GETELEMENTBYID">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TEXTCONTENT" target="GETELEMENTSBYCLASSNAME">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="TEXTCONTENT" target="DOCUMENT.GETELEMENTBYID()">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TEXTCONTENT" target="DOCUMENT.GETELEMENTSBYCLASSNAME()">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="TEXTCONTENT" target="PLAY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="QUERYSELECTOR" target="RENDER">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="QUERYSELECTOR" target="SETTIMEOUT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="QUERYSELECTOR" target="HIGHLIGHTWINNINGLINE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="QUERYSELECTOR" target="DOCUMENT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="TEMPLATE GENERATION" target="DATA ATTRIBUTES">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TEMPLATE GENERATION" target="ANIMATION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="COMPONENT LIFECYCLE" target="EVENT DELEGATION">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="COMPONENT LIFECYCLE" target="DOM ELEMENT REFERENCES">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DATA ATTRIBUTES" target="EVENT HANDLING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DATA ATTRIBUTES" target="CLASS LIST">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DATA ATTRIBUTES" target="RENDERBOARD">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="DATA ATTRIBUTES" target="DYNAMIC BOARD GENERATION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DATA ATTRIBUTES" target="EVENT DELEGATION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="RENDER" target="STATUS TEXT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RENDER" target="FOR EACH">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="RENDER" target="BOARD EL">
+      <data key="d0">32.0</data>
+    </edge>
+    <edge source="RENDER" target="STATUS EL">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="RENDER" target="ANIMATION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RENDER" target="POP">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RENDER" target="PREVIOUS STATE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="RENDER" target="LAST MOVE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="RENDER" target="DOM ELEMENT REFERENCES">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="RENDER" target="PREVIOUSSTATE">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="RENDER" target="SETTIMEOUT">
+      <data key="d0">30.0</data>
+    </edge>
+    <edge source="RENDER" target="FINDINDEX">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="RENDER" target="DATA-I">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RENDER" target="LASTMOVE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="RENDER" target="NEWGAME">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="RENDER" target="ONBOARDCLICK">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="RENDER" target="UNDOMOVE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RENDER" target="APP">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RENDER" target="NEW_GAME">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RENDER" target="GAME.PLACE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="RENDER" target="AITURN">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="RENDER" target="STATUSTEXT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RENDER" target="BOARD_EL">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="RENDER" target="START">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="RENDER" target="STATUS_EL">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RENDER" target="BOARD ELEMENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="RENDER" target="STATUS ELEMENT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STATUS TEXT" target="STATUS ELEMENT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="INIT EVENTS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="EVENT DELEGATION">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="INLINE ARROW FUNCTIONS">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="NAMED FUNCTIONS">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="ONBOARDCLICK">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="NEW GAME">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="NAMED FUNCTION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="ADD EVENT LISTENER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="EVENT SYSTEM">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="DOM ELEMENT REFERENCES">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="BOARD ELEMENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="NEW BUTTON">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="MODE SELECTOR">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="FIRST SELECTOR">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="ON BOARD CLICK">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="STATUS ELEMENT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="CLEANER SEPARATION OF CONCERNS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="EVENT LISTENER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="CONTROLS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="HANDLECELLCLICK">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="EVENT OBJECT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="BOARD EL">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="EVENT HANDLING" target="ADDEVENTLISTENER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="INIT EVENTS" target="ON BOARD CLICK">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="INIT EVENTS" target="NEW GAME">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="INIT EVENTS" target="NEW BTN">
+      <data key="d0">23.0</data>
+    </edge>
+    <edge source="INIT EVENTS" target="MODE SEL">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="INIT EVENTS" target="FIRST SEL">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="INIT EVENTS" target="EVENT DELEGATION">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="INIT EVENTS" target="ONBOARDCLICK">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="INIT EVENTS" target="NEWGAME">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="INIT EVENTS" target="MODESEL">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="INIT EVENTS" target="FIRSTSEL">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="INIT EVENTS" target="BOARD EL">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="INIT EVENTS" target="START">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="NEW GAME" target="MODE SEL">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="NEW GAME" target="FIRST SEL">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="EVENT DELEGATION" target="INLINE ARROW FUNCTIONS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="EVENT DELEGATION" target="NAMED FUNCTIONS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="EVENT DELEGATION" target="EVENT LISTENER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVENT DELEGATION" target="NO INLINE EVENT HANDLERS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="EVENT DELEGATION" target="EVENT LISTENERS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVENT DELEGATION" target="RENDERBOARD">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVENT DELEGATION" target="DOM ELEMENT REFERENCES">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVENT DELEGATION" target="HANDLECELLCLICK">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="EVENT DELEGATION" target="DYNAMIC BOARD GENERATION">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVENT DELEGATION" target="STATUS EL">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="EVENT DELEGATION" target="HANDLE CELL CLICK">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="EVENT DELEGATION" target="ADDEVENTLISTENER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVENT DELEGATION" target="BOARDEL">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="EVENT DELEGATION" target="ELEMENT VALIDATION">
+      <data key="d0">23.0</data>
+    </edge>
+    <edge source="EVENT DELEGATION" target="PARENT ELEMENT">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="ONBOARDCLICK" target="GAMEHISTORY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ONBOARDCLICK" target="PUSH">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ONBOARDCLICK" target="GAMESTATE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ONBOARDCLICK" target="IDX">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ONBOARDCLICK" target="INITEVENTS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ONBOARDCLICK" target="APP">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="ONBOARDCLICK" target="ADDEVENTLISTENER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ONBOARDCLICK" target="GAME">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="ONBOARDCLICK" target="AITURN">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ONBOARDCLICK" target="CLICK">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD EL" target="RENDER BOARD">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD EL" target="MODERN JAVASCRIPT IMPLEMENTATION">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BOARD EL" target="DOCUMENT GETELEMENTBYID">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD EL" target="RENDERBOARD">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD EL" target="DYNAMIC BOARD GENERATION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD EL" target="APPENDCHILD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD EL" target="HANDLECELLCLICK">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BOARD EL" target="ADDEVENTLISTENER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="STATUS EL" target="INIT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATUS EL" target="MODERN JAVASCRIPT IMPLEMENTATION">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="STATUS EL" target="UPDATE STATUS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="STATUS EL" target="DOCUMENT GETELEMENTBYID">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="STATUS EL" target="UPDATESTATUS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="QUERY SELECTOR" target="DOM ELEMENT REFERENCES">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="QUERY SELECTOR" target="DOM">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="DOM ELEMENT REFERENCES" target="MODERN JAVASCRIPT IMPLEMENTATION">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="DOM ELEMENT REFERENCES" target="BOARD STATE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DOM ELEMENT REFERENCES" target="RENDERBOARD">
+      <data key="d0">23.0</data>
+    </edge>
+    <edge source="DOM ELEMENT REFERENCES" target="BOARDEL">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DOM ELEMENT REFERENCES" target="STATUSEL">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DOM ELEMENT REFERENCES" target="RESETBTN">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="DOM ELEMENT REFERENCES" target="DYNAMIC BOARD GENERATION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DOM" target="ADD EVENT LISTENER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ANIMATION" target="KEYFRAMES">
+      <data key="d0">19.0</data>
+    </edge>
+    <edge source="ANIMATION" target="POP">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="ANIMATION" target="CELL-NEW">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ANIMATION" target="APPEAR">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ANIMATION" target="HANDLECELLCLICK">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ANIMATION" target="MARKED">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ANIMATION" target="TRANSFORM">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ANIMATION" target="OPACITY">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="KEYFRAMES" target="HIGHLIGHTWINNINGLINE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="KEYFRAMES" target="APPEAR">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="KEYFRAMES" target="OPACITY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="KEYFRAMES" target="TRANSFORM">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="KEYFRAMES" target="FORWARDS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BOARD ELEMENT" target="JAVASCRIPT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD ELEMENT" target="DOCUMENT OBJECT MODEL (DOM)">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="STATUS ELEMENT" target="JAVASCRIPT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="STATUS ELEMENT" target="DOCUMENT OBJECT MODEL (DOM)">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="STATUS ELEMENT" target="UPDATE STATUS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="NEWGAME" target="FIRSTSEL">
+      <data key="d0">21.0</data>
+    </edge>
+    <edge source="NEWGAME" target="ADDEVENTLISTENER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="NEWGAME" target="GAMEHISTORY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="NEWGAME" target="GAME">
+      <data key="d0">34.0</data>
+    </edge>
+    <edge source="NEWGAME" target="PUSH">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="NEWGAME" target="GAMESTATE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="NEWGAME" target="INITEVENTS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="NEWGAME" target="APP">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="NEWGAME" target="GAME.CREATE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="NEWGAME" target="AI.BESTMOVE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="NEWGAME" target="AITURN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="NEWGAME" target="MODESEL">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="NEWGAME" target="NEWBTN">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="MODESEL" target="APP">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="MODESEL" target="APPEVENTS">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="MODESEL" target="CHANGE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="FIRSTSEL" target="ADDEVENTLISTENER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FIRSTSEL" target="APPEVENTS">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="FIRSTSEL" target="GAME.CREATE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FIRSTSEL" target="CHANGE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="POP" target="@KEYFRAMES">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="POP" target="CELL-NEW">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="PREVIOUSSTATE" target="GAMEHISTORY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="SETTIMEOUT" target="LASTMOVE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SETTIMEOUT" target="AI.BESTMOVE">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="SETTIMEOUT" target="AITURN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SETTIMEOUT" target="COMPUTERMOVE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="SETTIMEOUT" target="PLAY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SETTIMEOUT" target="CHECKWINORTIE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SETTIMEOUT" target="RESPONSIVE DESIGN">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="ADDEVENTLISTENER" target="RESET">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ADDEVENTLISTENER" target="DOCUMENT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ADDEVENTLISTENER" target="DOCUMENT.GETELEMENTBYID">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ADDEVENTLISTENER" target="NEWBTN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ADDEVENTLISTENER" target="BOARDEL">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="ADDEVENTLISTENER" target="INITEVENTS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ADDEVENTLISTENER" target="MODULAR FUNCTION DESIGN">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ADDEVENTLISTENER" target="HANDLECELLCLICK">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="GAMEHISTORY" target="HISTORY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="GAMEHISTORY" target="PUSH">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="GAMEHISTORY" target="UNDO">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="GAMEHISTORY" target="JSON">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="GAMEHISTORY" target="CLEAR">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="GAMEHISTORY" target="UNDOMOVE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="HISTORY" target="PUSH">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="HISTORY" target="UNDO">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="HISTORY" target="CLEAR">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="PUSH" target="PARSE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="PUSH" target="STRINGIFY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="UNDO" target="UNDOMOVE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="JSON" target="PARSE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="JSON" target="STRINGIFY">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="JSON" target="LOCALSTORAGE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="TRANSFORM" target="SCALE">
+      <data key="d0">29.0</data>
+    </edge>
+    <edge source="TRANSFORM" target="OPACITY">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="ARRAY" target="BOARD STATE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="ARRAY" target="VARIABLE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ARRAY" target="WINS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ARRAY" target="DATA TYPES">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="ARRAY" target="EVERY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ARRAY" target="FOREACH">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ARRAY" target="ITERATION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ARRAY" target="WINNING COMBINATIONS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ARRAY" target="FOR LOOP">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="ARRAY" target="ARRAY.EVERY">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ARRAY" target="ARRAY.EVERY()">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="ARRAY" target="PLAY()">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ARRAY" target="GAME BOARD">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="GAME" target="RENDERER">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="GAME" target="AI">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="GAME" target="ES6 FEATURE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="GAME" target="PVP">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="GAME" target="PLAYER VS AI">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="GAME" target="MODULARIZATION">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="GAME" target="PVP MODE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="GAME" target="AI MODE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="GAME" target="FIRST PLAYER SELECTOR">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="GAME" target="NEW GAME BUTTON">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="GAME" target="NEWGAMEBTN">
+      <data key="d0">22.0</data>
+    </edge>
+    <edge source="GAME" target="STATUS">
+      <data key="d0">19.0</data>
+    </edge>
+    <edge source="GAME" target="FIRST">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="GAME" target="SCRIPT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="GAME" target="AVAILABLEMOVES">
+      <data key="d0">46.0</data>
+    </edge>
+    <edge source="GAME" target="APPEVENTS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="GAME" target="APP">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CLASSLIST.ADD" target="DOCUMENT.GETELEMENTSBYCLASSNAME">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CLASSLIST.ADD" target="PLAY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="STATS" target="UPDATE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATS" target="RENDERSTATS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATS" target="RESET">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STATS" target="GAMESPLAYED">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATS" target="XWINS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATS" target="OWINS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATS" target="TIES">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="UPDATE" target="GAMESTATE">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="UPDATE" target="RENDERSTATS">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="RENDERSTATS" target="RESET">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="RENDERSTATS" target="DOCUMENT.GETELEMENTBYID">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GAMESTATE" target="IMMUTABLE STATE PATTERNS">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="IDX" target="MINIMAX">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="IDX" target="HIGHLIGHTWINNINGLINE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="IDX" target="BOARDSTATE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="IDX" target="HANDLECELLCLICK">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="RESET" target="INIT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RESET" target="MODULAR FUNCTION DESIGN">
+      <data key="d0">11.0</data>
+    </edge>
+    <edge source="RESET" target="HANDLECELLCLICK">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DOCUMENT.GETELEMENTBYID" target="RESETBTN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DOCUMENT.GETELEMENTBYID" target="RENDERBOARD">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DOCUMENT.GETELEMENTBYID" target="STATUS">
+      <data key="d0">51.0</data>
+    </edge>
+    <edge source="DOCUMENT.GETELEMENTBYID" target="CHECKWINORTIE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="DOCUMENT.GETELEMENTBYID" target="IF STATEMENT">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="DOCUMENT.GETELEMENTBYID" target="RESETGAME">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DOCUMENT.GETELEMENTBYID" target="SCORE COUNTER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DOCUMENT.GETELEMENTBYID" target="SCOREO">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DOCUMENT.GETELEMENTBYID" target="SCOREX">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="DOCUMENT.GETELEMENTBYID" target="PLAY">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="DOCUMENT.GETELEMENTBYID" target="LOADGAMESTATE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DOCUMENT.GETELEMENTBYID" target="GAMEOVER">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DOCTYPE" target="HTML">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DOCTYPE" target="LANG">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DOCTYPE" target="CHARSET">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DOCTYPE" target="TITLE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DOCTYPE" target="STYLE">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="HTML" target="HEAD">
+      <data key="d0">23.0</data>
+    </edge>
+    <edge source="HTML" target="BODY">
+      <data key="d0">23.0</data>
+    </edge>
+    <edge source="HTML" target="SELECTOR">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HTML" target="CSS GRID">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HTML" target="ALGORITHM">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="HTML" target="LANG ATTRIBUTE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HTML" target="META CHARSET">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="HTML" target="TITLE ELEMENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HTML" target="DIV">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="HTML" target="LANG">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="HTML" target="WIN AND TIE DETECTION ALGORITHMS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="HTML" target="RESET BUTTON">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="HTML" target="PLAY">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="HTML" target="TITLE">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="HTML" target="BACKGROUND-COLOR">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="HTML" target="PADDING">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="HTML" target="MARGIN">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="HTML" target="BORDER">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="HTML" target="BORDER-RADIUS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="HTML" target="STYLE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HTML" target="ONCLICK">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HEAD" target="META">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="HEAD" target="TITLE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HEAD" target="STYLE">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="HEAD" target="STYLE TAG">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="HEAD" target="META CHARSET">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HEAD" target="CHARSET">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HEAD" target="BODY">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BODY" target="BUTTON">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BODY" target="APP">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="BODY" target="FONT-FAMILY">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="BODY" target="MARGIN">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="BODY" target="PADDING">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BODY" target="MAX-WIDTH">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BODY" target="BORDER">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BODY" target="BORDER-RADIUS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BODY" target="DIV">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BODY" target="HTML ELEMENT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BODY" target="ELEMENT SELECTORS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="META" target="CHARSET">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TITLE" target="HEAD SECTION">
+      <data key="d0">33.0</data>
+    </edge>
+    <edge source="STYLE" target="GRID">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="STYLE" target="BORDER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STYLE" target="FONT-SIZE">
+      <data key="d0">23.0</data>
+    </edge>
+    <edge source="STYLE" target="TEXT-ALIGN">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STYLE" target="LINE-HEIGHT">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="STYLE" target="CURSOR">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="STYLE" target="USER-SELECT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="STYLE" target="BUTTON">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="STYLE" target="ID SELECTOR">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STYLE" target="BACKGROUND-COLOR">
+      <data key="d0">49.0</data>
+    </edge>
+    <edge source="STYLE" target="PADDING">
+      <data key="d0">41.0</data>
+    </edge>
+    <edge source="STYLE" target="MAX-WIDTH">
+      <data key="d0">32.0</data>
+    </edge>
+    <edge source="STYLE" target="MARGIN">
+      <data key="d0">41.0</data>
+    </edge>
+    <edge source="STYLE" target="BORDER-RADIUS">
+      <data key="d0">34.0</data>
+    </edge>
+    <edge source="STYLE" target="CLASS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="STYLE" target="COLOR">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STYLE" target="APP">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="STYLE" target="FOOTER">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="STYLE" target="FONT-FAMILY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STYLE" target="MARGIN-TOP">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STYLE" target="HIGHLIGHTWINNINGLINE">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="STYLE" target="DIV">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STYLE" target="GAME CONTAINER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STYLE" target="INLINE CSS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STYLE" target="DOCUMENT.GETELEMENTSBYCLASSNAME">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STYLE" target="GETELEMENTSBYCLASSNAME">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STYLE" target="BACKGROUND COLOR">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CHARSET" target="HEAD SECTION">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="GRID" target="GRID-TEMPLATE-COLUMNS">
+      <data key="d0">35.0</data>
+    </edge>
+    <edge source="GRID" target="GRID-TEMPLATE-ROWS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GRID" target="COLUMNS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BORDER" target="BORDER-RADIUS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BORDER" target="SOLID">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="BORDER" target="VAR">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BORDER" target="DIV">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BORDER" target="INLINE CSS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BORDER" target="GAME CONTAINER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BORDER" target="BOX MODEL PROPERTIES">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="BORDER" target="BORDER: 1PX SOLID #999">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BORDER" target="WIDTH">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="FONT-SIZE" target="TEXT-ALIGN">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="FONT-SIZE" target="STATUS">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="FONT-SIZE" target="FONT-WEIGHT">
+      <data key="d0">23.0</data>
+    </edge>
+    <edge source="FONT-SIZE" target="FOOTER">
+      <data key="d0">21.0</data>
+    </edge>
+    <edge source="FONT-SIZE" target="CLASS SELECTOR">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="FONT-SIZE" target="SELECT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="FONT-SIZE" target="BUTTON">
+      <data key="d0">21.0</data>
+    </edge>
+    <edge source="FONT-SIZE" target="H2">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="FONT-SIZE" target="CSS STYLING">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="FONT-SIZE" target="BOX MODEL PROPERTIES">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="FONT-SIZE" target="FONT-SIZE: 18PX">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="FONT-SIZE" target="FONT-SIZE: 48PX">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="FONT-SIZE" target="TEXT FORMATTING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FONT-SIZE" target="LINE-HEIGHT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FONT-SIZE" target="RESPONSIVE DESIGN">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="FONT-SIZE" target="MEDIA QUERY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FONT-SIZE" target=".CELL">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TEXT-ALIGN" target="STATUS">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="TEXT-ALIGN" target="CONTROLS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TEXT-ALIGN" target="H2">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="TEXT-ALIGN" target="COLOR">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TEXT-ALIGN" target="PANEL">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TEXT-ALIGN" target="FOOTER">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="TEXT-ALIGN" target="APP">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="TEXT-ALIGN" target="PADDING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TEXT-ALIGN" target="ID SELECTOR">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="TEXT-ALIGN" target="HEADER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TEXT-ALIGN" target="FONT-FAMILY">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TEXT-ALIGN" target="CSS STYLING">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TEXT-ALIGN" target="TEXT-CENTER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TEXT-ALIGN" target="BOX MODEL PROPERTIES">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TEXT-ALIGN" target="TEXT-ALIGN: CENTER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="TEXT-ALIGN" target="TEXT FORMATTING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TEXT-ALIGN" target="LINE-HEIGHT">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="LINE-HEIGHT" target="CSS STYLING">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="LINE-HEIGHT" target="BOX MODEL PROPERTIES">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="LINE-HEIGHT" target="LINE-HEIGHT: 80PX">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="LINE-HEIGHT" target="TEXT FORMATTING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="LINE-HEIGHT" target="RESPONSIVE DESIGN">
+      <data key="d0">3.0</data>
+    </edge>
+    <edge source="LINE-HEIGHT" target="MEDIA QUERY">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="LINE-HEIGHT" target=".CELL">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CURSOR" target="ONCLICK">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CURSOR" target="BOX MODEL PROPERTIES">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CURSOR" target="CURSOR: POINTER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CURSOR" target="INTERACTIVE ELEMENTS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CURSOR" target="POINTER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CURSOR" target="JAVASCRIPT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="USER-SELECT" target="CLASS SELECTOR">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="USER-SELECT" target="HOVER">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="BUTTON" target="PADDING">
+      <data key="d0">28.0</data>
+    </edge>
+    <edge source="BUTTON" target="SELECTOR">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BUTTON" target="ONCLICK">
+      <data key="d0">29.0</data>
+    </edge>
+    <edge source="BUTTON" target="MARGIN">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BUTTON" target="RESETGAME">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BUTTON" target="ELEMENT SELECTORS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="GRID-TEMPLATE-COLUMNS" target="CSS STYLING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GRID-TEMPLATE-COLUMNS" target="REPEAT">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="GRID-TEMPLATE-COLUMNS" target="CSS GRID LAYOUT">
+      <data key="d0">45.0</data>
+    </edge>
+    <edge source="GRID-TEMPLATE-COLUMNS" target="RESPONSIVE DESIGN">
+      <data key="d0">31.0</data>
+    </edge>
+    <edge source="GRID-TEMPLATE-COLUMNS" target="MEDIA QUERY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GRID-TEMPLATE-COLUMNS" target="#BOARD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GRID-TEMPLATE-COLUMNS" target="CSS GRID">
+      <data key="d0">19.0</data>
+    </edge>
+    <edge source="GRID-TEMPLATE-COLUMNS" target="DISPLAY: GRID">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="HOVER" target="POINTER">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="HOVER" target="ENHANCED VISUAL FEEDBACK">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BORDER-RADIUS" target="DIV">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BORDER-RADIUS" target="INLINE CSS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BORDER-RADIUS" target="GAME CONTAINER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="MARGIN" target="PADDING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="MARGIN" target="AUTO">
+      <data key="d0">31.0</data>
+    </edge>
+    <edge source="MARGIN" target="MAX-WIDTH">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="MARGIN" target="STATUS">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="MARGIN" target="ROW">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="MARGIN" target="FOOTER">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="MARGIN" target="APP">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="MARGIN" target="CLASS SELECTOR">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="MARGIN" target="UL">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="MARGIN" target="LI">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="MARGIN" target="WIDTH">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="MARGIN" target="CSS GRID">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="MARGIN" target="INLINE CSS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="MARGIN" target="GAME CONTAINER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="MARGIN" target="CSS STYLING">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="MARGIN" target="BOX MODEL PROPERTIES">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="MARGIN" target="MARGIN: 15PX AUTO">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="MARGIN" target="MARGIN-TOP">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="MARGIN" target="CENTERING ELEMENTS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="PADDING" target="CLASS SELECTOR">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="PADDING" target="SELECT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="PADDING" target="LI">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="PADDING" target="DIV">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="PADDING" target="CSS GRID">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="PADDING" target="INLINE CSS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="PADDING" target="GAME CONTAINER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATUS" target="MIN-HEIGHT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="STATUS" target="APP">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="STATUS" target="GETELEMENTBYID">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="STATUS" target="UPDATESTATUS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STATUS" target="HTML ELEMENT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="STATUS" target="BODY SECTION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STATUS" target="DIV">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STATUS" target="MARGIN-TOP">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STATUS" target="JAVASCRIPT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATUS" target="PLAY FUNCTION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="STATUS" target="PLAY()">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATUS" target="TURN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATUS" target="PLAY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="STATUS" target="CHECKWINORTIE">
+      <data key="d0">33.0</data>
+    </edge>
+    <edge source="STATUS" target="RESETGAME">
+      <data key="d0">11.0</data>
+    </edge>
+    <edge source="STATUS" target="CURRENT PLAYER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="STATUS" target="GAME OVER FLAG">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CONTROLS" target="RESET BUTTON">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="GETELEMENTBYID" target="BOARDSTATE">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="GETELEMENTBYID" target="CURRENTPLAYER">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="GETELEMENTBYID" target="FINISHED">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="GETELEMENTBYID" target="ID SELECTOR">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="GETELEMENTBYID" target="DOCUMENT">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="GETELEMENTBYID" target="CHECKWINORTIE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GETELEMENTBYID" target="RESETGAME">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="GETELEMENTBYID" target="RENDERBOARD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GETELEMENTBYID" target="UPDATESTATUS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="GETELEMENTBYID" target="RESETBTN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARDSTATE" target="INIT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARDSTATE" target="RENDERBOARD">
+      <data key="d0">36.0</data>
+    </edge>
+    <edge source="BOARDSTATE" target="HANDLECELLCLICK">
+      <data key="d0">124.0</data>
+    </edge>
+    <edge source="BOARDSTATE" target="ADVANCED ARRAY METHODS">
+      <data key="d0">27.0</data>
+    </edge>
+    <edge source="BOARDSTATE" target="ARRAY.FILL">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARDSTATE" target="ARRAY.EVERY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARDSTATE" target="ARRAY.SOME">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARDSTATE" target="FILL">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARDSTATE" target="EVERY">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BOARDSTATE" target="SOME">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BOARDSTATE" target="CURRENTPLAYER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARDSTATE" target="CHECKWINNER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BOARDSTATE" target="COLUMN">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BOARDSTATE" target="ROW">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BOARDSTATE" target="PLAYER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARDSTATE" target="UNDOLASTMOVE">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="BOARDSTATE" target="UNDO LAST MOVE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CURRENTPLAYER" target="INIT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CURRENTPLAYER" target="UPDATESTATUS">
+      <data key="d0">11.0</data>
+    </edge>
+    <edge source="CURRENTPLAYER" target="HANDLECELLCLICK">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CURRENTPLAYER" target="UNDOLASTMOVE">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="CURRENTPLAYER" target="UNDO LAST MOVE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="FINISHED" target="INIT">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="FINISHED" target="HANDLECELLCLICK">
+      <data key="d0">50.0</data>
+    </edge>
+    <edge source="FINISHED" target="CHECKWINNER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="FINISHED" target="MODERN JAVASCRIPT IMPLEMENTATION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FINISHED" target="JAVASCRIPT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="FINISHED" target="CURRENT PLAYER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="FINISHED" target="UNDOLASTMOVE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FINISHED" target="UNDO LAST MOVE">
+      <data key="d0">20.0</data>
+    </edge>
+    <edge source="ID SELECTOR" target="POSITION">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="ID SELECTOR" target="MIN-HEIGHT">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="ID SELECTOR" target="DIV">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BACKGROUND-COLOR" target="DIV">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BACKGROUND-COLOR" target="HIGHLIGHTWINNINGLINE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BACKGROUND-COLOR" target="CSS GRID">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BACKGROUND-COLOR" target="INLINE CSS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BACKGROUND-COLOR" target="GAME CONTAINER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="MAX-WIDTH" target="APP">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="MAX-WIDTH" target="UL">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="MAX-WIDTH" target="DIV">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="MAX-WIDTH" target="CSS GRID">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="MAX-WIDTH" target="GAME CONTAINER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="INIT" target="RESET BTN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="INIT" target="BOARD STATE">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="INIT" target="CURRENT PLAYER">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="INIT" target="RENDERBOARD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="INIT" target="UPDATESTATUS">
+      <data key="d0">42.0</data>
+    </edge>
+    <edge source="INIT" target="RESET BUTTON">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="INIT" target="RENDER BOARD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="INIT" target="UPDATE STATUS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="INIT" target="WINNING_COMBINATIONS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="INIT" target="ADVANCED ARRAY METHODS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="INIT" target="MODULAR FUNCTION DESIGN">
+      <data key="d0">39.0</data>
+    </edge>
+    <edge source="RENDER BOARD" target="BOARD STATE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="RENDER BOARD" target="UNDO LAST MOVE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="RENDER BOARD" target="PROGRESSIVE ENHANCEMENT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RESET BTN" target="MODERN JAVASCRIPT IMPLEMENTATION">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="RESET BTN" target="DOCUMENT GETELEMENTBYID">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="RESET BTN" target="HANDLE CELL CLICK">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="BOARD STATE" target="MODERN JAVASCRIPT IMPLEMENTATION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD STATE" target="CURRENT PLAYER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD STATE" target="FILL">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BOARD STATE" target="ADVANCED ARRAY METHODS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD STATE" target="ARRAY.FILL()">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD STATE" target="ARRAY.EVERY()">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BOARD STATE" target="WINNER DETECTION ALGORITHM">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="BOARD STATE" target="CHECKWINNER">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="BOARD STATE" target="WINNING LINE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD STATE" target="PLAYER'S MARK">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BOARD STATE" target="UNDO LAST MOVE">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="BOARD STATE" target="CHECK WINNER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CURRENT PLAYER" target="MODERN JAVASCRIPT IMPLEMENTATION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CURRENT PLAYER" target="JAVASCRIPT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CURRENT PLAYER" target="UPDATE STATUS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CURRENT PLAYER" target="HANDLECELLCLICK">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CURRENT PLAYER" target="UNDO LAST MOVE">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="CURRENT PLAYER" target="PLAYER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CURRENT PLAYER" target="RESETGAME">
+      <data key="d0">23.0</data>
+    </edge>
+    <edge source="CURRENT PLAYER" target="PLAY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="RENDERBOARD" target="DATASET.INDEX">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RENDERBOARD" target="CELLS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="RENDERBOARD" target="ADVANCED ARRAY METHODS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="RENDERBOARD" target="MODULAR FUNCTION DESIGN">
+      <data key="d0">39.0</data>
+    </edge>
+    <edge source="RENDERBOARD" target="CREATEELEMENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="RENDERBOARD" target="CLASSNAME">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="RENDERBOARD" target="DATASET">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="RENDERBOARD" target="APPENDCHILD">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RENDERBOARD" target="UNDOLASTMOVE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="RENDERBOARD" target="UNDO LAST MOVE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="RENDERBOARD" target="DON'T REPEAT YOURSELF (DRY)">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="RENDERBOARD" target="DESCRIPTIVE NAMING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="UPDATESTATUS" target="HANDLECELLCLICK">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="UPDATESTATUS" target="MODULAR FUNCTION DESIGN">
+      <data key="d0">33.0</data>
+    </edge>
+    <edge source="UPDATESTATUS" target="UNDOLASTMOVE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="UPDATESTATUS" target="UNDO LAST MOVE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="UPDATESTATUS" target="DON'T REPEAT YOURSELF (DRY)">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="UPDATESTATUS" target="DESCRIPTIVE NAMING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="CHECKWINNER">
+      <data key="d0">50.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="MODULAR FUNCTION DESIGN">
+      <data key="d0">32.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="EVENT LISTENER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="DATASET">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="EVENT OBJECT">
+      <data key="d0">27.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="EVENT TARGET">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="DATA EXTRACTION">
+      <data key="d0">23.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="ELEMENT VALIDATION">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="TYPE CONVERSION">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="BOARDEL">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="CLICK">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="APPEAR">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="PLAYER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="MOVEHISTORY">
+      <data key="d0">34.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="MARKED">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="HIGHLIGHTWINNINGLINE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="UNDOLASTMOVE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="DRY">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="DON'T REPEAT YOURSELF (DRY)">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="MOVE HISTORY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="SINGLE RESPONSIBILITY PRINCIPLE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HANDLECELLCLICK" target="DESCRIPTIVE NAMING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CHECKWINNER" target="MODULAR FUNCTION DESIGN">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="CHECKWINNER" target="EVERY">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="CHECKWINNER" target="SOME">
+      <data key="d0">19.0</data>
+    </edge>
+    <edge source="CHECKWINNER" target="ADVANCED ARRAY METHODS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CHECKWINNER" target="WINNER DETECTION ALGORITHM">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="CHECKWINNER" target="DIAGONAL">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CHECKWINNER" target="COLUMN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CHECKWINNER" target="ROW">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CHECKWINNER" target="HIGHLIGHTWINNINGLINE">
+      <data key="d0">27.0</data>
+    </edge>
+    <edge source="CHECKWINNER" target="SINGLE RESPONSIBILITY PRINCIPLE">
+      <data key="d0">19.0</data>
+    </edge>
+    <edge source="CHECKWINNER" target="DESCRIPTIVE NAMING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DIV" target="CLASSNAME">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DIV" target="DATASET">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DIV" target="APPENDCHILD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DIV" target="APP">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DIV" target="CLASS SELECTOR">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DIV" target="ONCLICK">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="DIV" target="ID">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="DIV" target="CLASS">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="DIV" target="BODY SECTION">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DIV" target="GAME CONTAINER">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="DIV" target="INLINE CSS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DIV" target="GAME BOARD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DIV" target="CELL ELEMENTS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CLASSNAME" target="DOCUMENT.CREATEELEMENT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CLASSNAME" target="DOCUMENT.GETELEMENTSBYCLASSNAME">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="DATASET" target="I">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DATASET" target="CLOSEST">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DATASET" target="DOCUMENT.CREATEELEMENT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="APPENDCHILD" target="DOCUMENT.CREATEELEMENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="APPENDCHILD" target="MODULAR FUNCTION DESIGN">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="APP" target="ID">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="APP" target="STATUSEL">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="APP" target="INITEVENTS">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="APP" target="AITURN">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="APP" target="FIRST">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="APP" target="NEWGAMEBTN">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="APP" target="INIT_EVENTS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="APP" target="NEW_GAME">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="APP" target="ON_BOARD_CLICK">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="APP" target="AI_TURN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FONT-FAMILY" target="CSS STYLING">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="WIDTH" target="HEIGHT">
+      <data key="d0">27.0</data>
+    </edge>
+    <edge source="WIDTH" target="BOX MODEL PROPERTIES">
+      <data key="d0">32.0</data>
+    </edge>
+    <edge source="WIDTH" target="TEXT FORMATTING">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="WIDTH" target="RESPONSIVE DESIGN">
+      <data key="d0">31.0</data>
+    </edge>
+    <edge source="WIDTH" target="MEDIA QUERY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="WIDTH" target="#BOARD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="WIDTH" target=".CELL">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HEIGHT" target="BOX MODEL PROPERTIES">
+      <data key="d0">25.0</data>
+    </edge>
+    <edge source="HEIGHT" target="TEXT FORMATTING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="HEIGHT" target="RESPONSIVE DESIGN">
+      <data key="d0">25.0</data>
+    </edge>
+    <edge source="HEIGHT" target="MEDIA QUERY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HEIGHT" target=".CELL">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="POSITION" target="MOVE HISTORY">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="FONT-WEIGHT" target="CLASS SELECTOR">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="ROW" target="PANEL">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="FOOTER" target="COLOR">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="COLOR" target="HIGHLIGHTWINNINGLINE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="PANEL" target="SELECTOR">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CLASS" target="CELL ELEMENTS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ID" target="GAME BOARD">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="ID" target="STATUS DISPLAY">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="SELECT" target="OPTION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RENDERER" target="MODULARIZATION">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="AI" target="MINIMAX">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="AI" target="MODULARIZATION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="AI" target="SELECTOR">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="AI" target="BESTMOVE">
+      <data key="d0">19.0</data>
+    </edge>
+    <edge source="AI" target="AITURN">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="AI" target="MOVE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="AI" target="BEST MOVE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="ES6 FEATURE" target="DESTRUCTURING ASSIGNMENT">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="ES6 FEATURE" target="CONST/LET">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="ES6 FEATURE" target="TEMPLATE STRING">
+      <data key="d0">3.0</data>
+    </edge>
+    <edge source="MINIMAX" target="ES6">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="MINIMAX" target="BESTMOVE">
+      <data key="d0">45.0</data>
+    </edge>
+    <edge source="MINIMAX" target="SIM">
+      <data key="d0">34.0</data>
+    </edge>
+    <edge source="MINIMAX" target="BEST MOVE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="MINIMAX" target="ISMAXIMIZING">
+      <data key="d0">39.0</data>
+    </edge>
+    <edge source="MINIMAX" target="AIPLAYER">
+      <data key="d0">23.0</data>
+    </edge>
+    <edge source="MINIMAX" target="INFINITY">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="MINIMAX" target="GAME.STATE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="MINIMAX" target="GAME.SCORE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="MINIMAX" target="MAXIMIZING PLAYER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="MINIMAX" target="MINIMIZING PLAYER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="MINIMAX" target="RECURSIVE SEARCH">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="MINIMAX" target="GAME TREE">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="MINIMAX" target="EVALUATION FUNCTION">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="MINIMAX" target="RECURSIVE CALCULATION">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="MINIMAX" target="PSEUDO CODE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="MINIMAX" target="GENERATE GAME TREE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="MINIMAX" target="IS_TERMINAL">
+      <data key="d0">33.0</data>
+    </edge>
+    <edge source="MINIMAX" target="GENERATE_CHILDREN">
+      <data key="d0">53.0</data>
+    </edge>
+    <edge source="MINIMAX" target="ALPHA-BETA PRUNING">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="MINIMAX" target="MAXEVAL">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="MINIMAX" target="MINEVAL">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="MINIMAX" target="DEPTH">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="MARGIN-TOP" target="BOX MODEL PROPERTIES">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="MODULE" target="DATA DRIVEN">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DESTRUCTURING ASSIGNMENT" target="ES6 FEATURES">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DESTRUCTURING ASSIGNMENT" target="ES6">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CONST/LET" target="ES6 FEATURES">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TEMPLATE STRING" target="ES6 FEATURES">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TEMPLATE STRING" target="ES6">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="PVP" target="SELECTOR">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="LOGIC" target="INTERFACE RENDERING">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="OPTION" target="SELECTOR">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="SELECTOR" target="AI MODE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SELECTOR" target="X">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="SELECTOR" target="O">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="ES6" target="CONST">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="ES6" target="LET">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="ES6" target="OBJECT.FREEZE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CONST" target="VARIABLES AND DATA TYPES">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="CONST" target="LET">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="LET" target="GAMEOVER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="LET" target="CHECKWINORTIE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="LET" target="WINS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="LET" target="VARIABLES AND DATA TYPES">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="LET" target="FOR LOOP">
+      <data key="d0">22.0</data>
+    </edge>
+    <edge source="ARRAY.FILL" target="ARRAY.EVERY">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="AVAILABLEMOVES" target="BESTMOVE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BESTMOVE" target="SIM">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BESTMOVE" target="BESTSCORE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BESTMOVE" target="MOVE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BESTMOVE" target="GAME.BESTSCORE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BESTMOVE" target="GAME.MOVE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BESTMOVE" target="AITURN">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="STATUSEL" target="APPEVENTS">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="APPEVENTS" target="BOARDEL">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="APPEVENTS" target="NEWBTN">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BOARDEL" target="EVENT LISTENER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DOCUMENT" target="VALUE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DOCUMENT" target="GETELEMENTSBYCLASSNAME">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="INIT_EVENTS" target="START">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="NEW_GAME" target="NEW_BTN">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ON_BOARD_CLICK" target="BOARD_EL">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BOARD_EL" target="CLICK">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CLICK" target="NEW_BTN">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CLICK" target="EVENT LISTENER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="MODE_SEL" target="ONCHANGE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ONCHANGE" target="FIRST_SEL">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GAME.CREATE" target="GAME.PLACE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="GAME.PLACE" target="AI.BESTMOVE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="MATH" target="RANDOM">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ONCLICK" target="PLAY">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="ONCLICK" target="RESETGAME">
+      <data key="d0">46.0</data>
+    </edge>
+    <edge source="ONCLICK" target="PLAY FUNCTION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ONCLICK" target="BODY SECTION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ONCLICK" target="CELL ELEMENTS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="ONCLICK" target="RESET BUTTON">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="ONCLICK" target="BROWSER CONSOLE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ONCLICK" target="JAVASCRIPT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="PLAY" target="GAMEOVER">
+      <data key="d0">30.0</data>
+    </edge>
+    <edge source="PLAY" target="CHECKWINORTIE">
+      <data key="d0">142.0</data>
+    </edge>
+    <edge source="PLAY" target="TURN-BASED GAMEPLAY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="PLAY" target="CELL ELEMENTS">
+      <data key="d0">33.0</data>
+    </edge>
+    <edge source="PLAY" target="JAVASCRIPT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="PLAY" target="GETELEMENTSBYCLASSNAME">
+      <data key="d0">42.0</data>
+    </edge>
+    <edge source="PLAY" target="IF">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="PLAY" target="CELLS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="PLAY" target="PARAMETER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="PLAY" target="BOARD ARRAY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="PLAY" target="DOCUMENT.GETELEMENTSBYCLASSNAME">
+      <data key="d0">49.0</data>
+    </edge>
+    <edge source="PLAY" target="COMPUTERMOVE">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="PLAY" target="TIE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="PLAY" target="IF STATEMENT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="PLAY" target="CELLINDEX">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="PLAY" target="SAVEGAMESTATE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="PLAY" target="WINDOW.ONLOAD">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="PLAY" target="SAVE GAME STATE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="PLAY" target="CONSOLE.LOG">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="PLAY" target="WINS">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="RESETGAME" target="GAMEOVER">
+      <data key="d0">28.0</data>
+    </edge>
+    <edge source="RESETGAME" target="GETELEMENTSBYCLASSNAME">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="RESETGAME" target="RESET BUTTON">
+      <data key="d0">28.0</data>
+    </edge>
+    <edge source="RESETGAME" target="DOCUMENT.GETELEMENTSBYCLASSNAME">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="RESETGAME" target="FOR LOOP">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="RESETGAME" target="CELLS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="RESETGAME" target="GAME OVER FLAG">
+      <data key="d0">23.0</data>
+    </edge>
+    <edge source="RESETGAME" target="CHECKWINORTIE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="RESETGAME" target="RESTART BUTTON">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="GAMEOVER" target="JAVASCRIPT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GAMEOVER" target="CHECKWINORTIE">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="GAMEOVER" target="BOOLEAN">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="GAMEOVER" target="CONDITIONAL STATEMENTS">
+      <data key="d0">30.0</data>
+    </edge>
+    <edge source="GAMEOVER" target="PLAY FUNCTION">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="GAMEOVER" target="PLAY()">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="GAMEOVER" target="COMPUTERMOVE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GAMEOVER" target="LOCAL STORAGE">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="GAMEOVER" target="SAVEGAMESTATE">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="GAMEOVER" target="LOADGAMESTATE">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="GAMEOVER" target="SETITEM">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GAMEOVER" target="GETITEM">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GAMEOVER" target="LOCALSTORAGE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GAMEOVER" target="IF STATEMENT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CHECKWINORTIE" target="WINS">
+      <data key="d0">93.0</data>
+    </edge>
+    <edge source="CHECKWINORTIE" target="EVERY">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CHECKWINORTIE" target="JAVASCRIPT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CHECKWINORTIE" target="FOR">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CHECKWINORTIE" target="IF STATEMENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CHECKWINORTIE" target="IF">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CHECKWINORTIE" target="WINNING COMBINATIONS">
+      <data key="d0">37.0</data>
+    </edge>
+    <edge source="CHECKWINORTIE" target="GAME OVER FLAG">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CHECKWINORTIE" target="BOARD ARRAY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CHECKWINORTIE" target="PLAYER">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="CHECKWINORTIE" target="DOCUMENT.GETELEMENTSBYCLASSNAME">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CHECKWINORTIE" target="SCORE COUNTER">
+      <data key="d0">19.0</data>
+    </edge>
+    <edge source="CHECKWINORTIE" target="WIN CONDITION">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="CHECKWINORTIE" target="TIE CONDITION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CHECKWINORTIE" target="SCOREO">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CHECKWINORTIE" target="SCOREX">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="WINS" target="FOR LOOP">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="WINS" target="ARRAYS">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="WINS" target="FOR LOOPS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="WINS" target="BOARD ARRAY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="WINS" target="CONSOLE.LOG">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="GETELEMENTSBYCLASSNAME" target="RESETPGAME">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GETELEMENTSBYCLASSNAME" target="DOCUMENT.GETELEMENTSBYCLASSNAME">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="EVERY" target="MODERN JAVASCRIPT METHODS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="EVERY" target="ADVANCED ARRAY METHODS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVERY" target="WINNER DETECTION ALGORITHM">
+      <data key="d0">3.0</data>
+    </edge>
+    <edge source="EVERY" target="SOME">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="EVERY" target="IF STATEMENT">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="PLAYER" target="MOVE HISTORY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="PLAYER" target="IF STATEMENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="EVENT-DRIVEN PROGRAMMING" target="EVENT LISTENER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVENT LISTENER" target="RESET BUTTON">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DYNAMIC BOARD GENERATION" target="EMPTY BOARD CONTAINER">
+      <data key="d0">18.0</data>
+    </edge>
+    <edge source="DYNAMIC BOARD GENERATION" target="ADVANCED ARRAY METHODS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="FILL" target="MODERN JAVASCRIPT METHODS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FILL" target="ADVANCED ARRAY METHODS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="MODERN JAVASCRIPT METHODS" target="SOME">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="MODERN JAVASCRIPT METHODS" target="EMPTY BOARD CONTAINER">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SOME" target="ADVANCED ARRAY METHODS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="SOME" target="WINNER DETECTION ALGORITHM">
+      <data key="d0">25.0</data>
+    </edge>
+    <edge source="ENHANCED VISUAL FEEDBACK" target="ADVANCED CSS TECHNIQUES">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ENHANCED VISUAL FEEDBACK" target="HOVER EFFECTS">
+      <data key="d0">33.0</data>
+    </edge>
+    <edge source="ENHANCED VISUAL FEEDBACK" target="TRANSITIONS">
+      <data key="d0">11.0</data>
+    </edge>
+    <edge source="ADVANCED CSS TECHNIQUES" target="HOVER EFFECTS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ADVANCED CSS TECHNIQUES" target="CONSISTENT SIZING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="BEST PRACTICES" target="MODERN JAVASCRIPT IMPLEMENTATION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="HOVER EFFECTS" target="TRANSITIONS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HOVER EFFECTS" target="USER SELECTION PREVENTION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="HOVER EFFECTS" target="PSEUDO-CLASS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RESET BUTTON" target="EVENT LISTENERS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RESET BUTTON" target="JAVASCRIPT">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="RESET BUTTON" target="DOCUMENT OBJECT MODEL (DOM)">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RESET BUTTON" target="TURN-BASED GAMEPLAY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="EMPTY BOARD CONTAINER" target="MODERN JAVASCRIPT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ELEMENT IDS" target="NO INLINE EVENT HANDLERS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ELEMENT IDS" target="EVENT LISTENERS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="NO INLINE EVENT HANDLERS" target="EVENT LISTENERS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="EVENT LISTENERS" target="INLINE EVENT HANDLERS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVENT LISTENERS" target="MODERN JAVASCRIPT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JAVASCRIPT" target="PROGRESSIVE ENHANCEMENT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="JAVASCRIPT" target="ALGORITHM">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="JAVASCRIPT" target="TURN-BASED GAMEPLAY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="UPDATE STATUS" target="UNDO LAST MOVE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CELLS" target="DOCUMENT.GETELEMENTSBYCLASSNAME">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ADVANCED ARRAY METHODS" target="MODULAR FUNCTION DESIGN">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="ARRAY.EVERY()" target="ARRAYS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ARRAY.EVERY()" target="TWO-DIMENSIONAL ARRAY">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="ARRAY.EVERY()" target="BOARD ARRAY">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="FOR LOOP" target="DOCUMENT.CREATEELEMENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FOR LOOP" target="IF STATEMENT">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="FOR LOOP" target="TERNARY OPERATOR">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="FOR LOOP" target="TWO-DIMENSIONAL ARRAY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FOR LOOP" target="PLAY FUNCTION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="FOR LOOP" target="WINNING COMBINATIONS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="FOR LOOP" target="LENGTH">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="FOR LOOP" target="DOCUMENT.GETELEMENTSBYCLASSNAME">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ARRAY.EVERY" target="ARRAY.SOME">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ARRAY.EVERY" target="TIE CONDITION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="EVENT OBJECT" target="EVENT TARGET">
+      <data key="d0">43.0</data>
+    </edge>
+    <edge source="EVENT OBJECT" target="CLICK EVENT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="DATA EXTRACTION" target="TYPE CONVERSION">
+      <data key="d0">23.0</data>
+    </edge>
+    <edge source="DATA EXTRACTION" target="CELL INDEX">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="DATA EXTRACTION" target="ELEMENT VALIDATION">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="DATA EXTRACTION" target="DATA ATTRIBUTE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="ELEMENT VALIDATION" target="CLICKED ELEMENT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="TYPE CONVERSION" target="STRING INDEX">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="EVERY()" target="SOME()">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="WINNING LINE" target="PLAYER'S MARK">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="HIGHLIGHT WINNING LINE" target="CHECK WINNER">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="HIGHLIGHTWINNINGLINE" target="DOCUMENT.QUERYSELECTOR">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="APPEAR" target="MARKED">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="MOVEHISTORY" target="UNDOLASTMOVE">
+      <data key="d0">19.0</data>
+    </edge>
+    <edge source="MOVEHISTORY" target="UNDO LAST MOVE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="UNDOLASTMOVE" target="DRY">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DRY" target="DESCRIPTIVE NAMING">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="DON'T REPEAT YOURSELF (DRY)" target="DESCRIPTIVE NAMING">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="UNDO LAST MOVE" target="SINGLE RESPONSIBILITY PRINCIPLE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="UNDO LAST MOVE" target="MOVE HISTORY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="SINGLE RESPONSIBILITY PRINCIPLE" target="DESCRIPTIVE NAMING">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="DESCRIPTIVE NAMING" target="VARIABLE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="WIN AND TIE DETECTION ALGORITHMS" target="TURN-BASED GAMEPLAY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="GAME BOARD" target="CSS GRID">
+      <data key="d0">28.0</data>
+    </edge>
+    <edge source="GAME BOARD" target="GAME CONTAINER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GAME BOARD" target="CELL ELEMENTS">
+      <data key="d0">27.0</data>
+    </edge>
+    <edge source="GAME BOARD" target="STATUS DISPLAY">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="GAME BOARD" target="CSS STYLING">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="GAME BOARD" target="BOARD ARRAY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="RESPONSIVE DESIGN" target="CSS GRID">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="RESPONSIVE DESIGN" target="MEDIA QUERY">
+      <data key="d0">27.0</data>
+    </edge>
+    <edge source="RESPONSIVE DESIGN" target="MEDIA QUERIES">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="RESPONSIVE DESIGN" target="RELATIVE UNITS">
+      <data key="d0">2.0</data>
+    </edge>
+    <edge source="CSS GRID" target="RESPONSIVE GAME BOARD">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="META CHARSET" target="HEAD SECTION">
+      <data key="d0">32.0</data>
+    </edge>
+    <edge source="LANG" target="HTML ELEMENT">
+      <data key="d0">48.0</data>
+    </edge>
+    <edge source="HTML ELEMENT" target="DOCUMENT TYPE DECLARATION">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="HTML ELEMENT" target="HEAD SECTION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HTML ELEMENT" target="BODY SECTION">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BODY SECTION" target="GAME CONTAINER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="GAME CONTAINER" target="INLINE CSS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="INLINE CSS" target="CONTAINER DIV">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CELL ELEMENTS" target="CSS STYLING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="SELECTOR TYPES" target="ELEMENT SELECTORS">
+      <data key="d0">25.0</data>
+    </edge>
+    <edge source="SELECTOR TYPES" target="ID SELECTORS">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="SELECTOR TYPES" target="CLASS SELECTORS">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="CSS GRID LAYOUT" target="DISPLAY: GRID">
+      <data key="d0">36.0</data>
+    </edge>
+    <edge source="CSS GRID LAYOUT" target="ID SELECTORS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CSS GRID LAYOUT" target="CLASS SELECTORS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CSS GRID LAYOUT" target="GRID CELL">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="ID SELECTORS" target="#BOARD">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="ID SELECTORS" target="#STATUS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="ID SELECTORS" target="ELEMENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CLASS SELECTORS" target=".CELL">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CLASS SELECTORS" target="ELEMENT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="JAVASCRIPT GAME LOGIC" target="INTERACTIVITY">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DOCUMENT.GETELEMENTSBYCLASSNAME" target="PLAY()">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DOCUMENT.GETELEMENTSBYCLASSNAME" target="CELL DISPLAY">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="DOCUMENT.GETELEMENTSBYCLASSNAME" target="BACKGROUND COLOR">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="DOCUMENT.GETELEMENTSBYCLASSNAME" target="STYLE.BACKGROUNDCOLOR">
+      <data key="d0">24.0</data>
+    </edge>
+    <edge source="DOCUMENT.GETELEMENTSBYCLASSNAME" target="LOADGAMESTATE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TERNARY OPERATOR" target="CONDITIONAL STATEMENTS">
+      <data key="d0">26.0</data>
+    </edge>
+    <edge source="TERNARY OPERATOR" target="IF STATEMENTS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="FOR" target="RESETPGAME">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ARRAYS" target="CONDITIONAL STATEMENTS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ARRAYS" target="TWO-DIMENSIONAL ARRAYS">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="ARRAYS" target="FOR LOOPS">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="ARRAYS" target="EMPTY STRING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ITERATION" target="J">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="WINNING COMBINATIONS" target="TWO-DIMENSIONAL ARRAYS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="WINNING COMBINATIONS" target="CHECKWINORTIE()">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="PLAY()" target="BOARD ARRAY">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="BOARD ARRAY" target="CHECKWINORTIE()">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="SCORES" target="SCOREO">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SCORES" target="SCOREX">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="SCORES" target="SPAN">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="SCOREO" target="SCORE COUNTER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SCOREO" target="TIE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SCOREX" target="SCORE COUNTER">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SCOREX" target="TIE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="COMPUTERMOVE" target="EMPTYCELLS">
+      <data key="d0">33.0</data>
+    </edge>
+    <edge source="COMPUTERMOVE" target="EMPTY CELLS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="COMPUTERMOVE" target="RANDOMINDEX">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="EMPTYCELLS" target="RANDOMINDEX">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="RANDOMINDEX" target="MATH.FLOOR">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="RANDOMINDEX" target="MATH.RANDOM">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="RANDOMINDEX" target="CELLINDEX">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="MATH.FLOOR" target="MATH.RANDOM">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="LOCAL STORAGE" target="JSON.STRINGIFY">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="LOCAL STORAGE" target="SETITEM">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="LOCAL STORAGE" target="GETITEM">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="LOCAL STORAGE" target="SAVEGAMESTATE">
+      <data key="d0">17.0</data>
+    </edge>
+    <edge source="LOCAL STORAGE" target="LOADGAMESTATE">
+      <data key="d0">10.0</data>
+    </edge>
+    <edge source="LOCAL STORAGE" target="SAVE GAME STATE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="LOCAL STORAGE" target="LOAD GAME STATE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="JSON.STRINGIFY" target="SETITEM">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="SETITEM" target="LOCALSTORAGE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="GETITEM" target="JSON.PARSE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="GETITEM" target="LOCALSTORAGE">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="LOADGAMESTATE" target="WINDOW.ONLOAD">
+      <data key="d0">16.0</data>
+    </edge>
+    <edge source="LOADGAMESTATE" target="ONLOAD">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SAVE GAME STATE" target="GAME OVER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="LOAD GAME STATE" target="GAME OVER">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="LOAD GAME STATE" target="WINDOW.ONLOAD">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ONLOAD" target="WINDOW">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CONSOLE.LOG" target="TROUBLESHOOTING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CONSOLE.LOG" target="BROWSER CONSOLE">
+      <data key="d0">19.0</data>
+    </edge>
+    <edge source="GRID LAYOUT" target="GAPS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="BROWSER CONSOLE" target="F12">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="RECURSIVE SEARCH" target="GAME TREE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="GAME TREE" target="EVALUATION FUNCTION">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="GAME TREE" target="ALPHA-BETA PRUNING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="GENERATE_CHILDREN" target="ALPHA-BETA PRUNING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="ALPHA-BETA PRUNING" target="ALPHA">
+      <data key="d0">47.0</data>
+    </edge>
+    <edge source="ALPHA-BETA PRUNING" target="BETA">
+      <data key="d0">20.0</data>
+    </edge>
+  </graph>
+</graphml>

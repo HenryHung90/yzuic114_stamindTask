@@ -3,6 +3,7 @@ from django.urls import path
 from backend.views.class_name import get_all_class_names, add_new_class_name
 from backend.views.core import *
 from backend.views.experience import *
+from backend.views.graphrag import *
 from backend.views.student_notes import *
 from backend.views.student_task_plans import *
 from backend.views.student_tasks import *
@@ -187,6 +188,11 @@ API_ADMIN_POST = [
     path('admin/change_student_password/', change_student_password, name='change_student_password'),
     # multi students upload
     path('admin/multi_students_upload/', multi_students_upload, name='multi_students_upload'),
+
+    # get task graphrag info
+    path('admin/get_task_graphrag_info/', get_task_graphrag_info, name='get_task_graphrag_info'),
+    # upload graphrag file
+    path('admin/upload_graphrag_file/', upload_graphrag_file, name='upload_graphrag_file'),
 ]
 API_ADMIN_GET = [
     # get all students
