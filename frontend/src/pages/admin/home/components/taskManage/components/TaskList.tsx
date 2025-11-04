@@ -74,7 +74,12 @@ const TaskListComponent = (props: ITaskListProps) => {
         NavLocation(`/admin/taskInfo/${taskId}`)
       }
     },
-
+    {
+      name: "graphRAG 管理",
+      handleClick: () => {
+        NavLocation(`/admin/graphragInfo/${taskId}`)
+      }
+    }
   ]
 
   return (

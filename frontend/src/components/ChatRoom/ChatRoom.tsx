@@ -16,6 +16,20 @@ import {API_getChatHistories} from "../../utils/API/API_ChatHistories";
 import {handleCustomRecord, IStudentRecords} from "../../utils/listener/action";
 import ImageComponent from "../Image/Image";
 
+// 思考中的有趣訊息集合
+const THINKING_MESSAGES = [
+  "Amum Amum 正在思考中，請耐心等待...",
+  "Amum Amum 正在深入思考您的問題，馬上回來...",
+  "Amum Amum 正在檢索相關知識，很快就好...",
+  "Amum Amum 正在整理答案，即將完成...",
+  "Amum Amum 腦袋正在高速運轉中...",
+  "Amum Amum 正在揣摩您問題的精髓...",
+  "Amum Amum 正在召喚靈感，請稍等...",
+  "Amum Amum 正在跟程式之神溝通中...",
+  "Amum Amum 正在搜索知識的海洋...",
+  "Amum Amum 正在激活超級思維模式..."
+];
+
 interface IChatRoomProps {
   name: string
   taskId: string
@@ -41,6 +55,36 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
 
 
   const [messages, setMessages] = useState<Array<IMessages>>([])
+
+  const [thinkingSeconds, setThinkingSeconds] = useState<number>(0)
+  const [currentMessageIndex, setCurrentMessageIndex] = useState<number>(0)
+
+  // 添加思考秒數計時器
+  useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+
+    if (isSubmitMessage) {
+      setThinkingSeconds(0); // 重置秒數
+      setCurrentMessageIndex(0); // 重置消息索引
+
+      timer = setInterval(() => {
+        setThinkingSeconds(prev => {
+          const newSeconds = prev + 1;
+          // 每3秒切換一次消息
+          if (newSeconds % 3 === 0) {
+            setCurrentMessageIndex(Math.floor(Math.random() * THINKING_MESSAGES.length));
+          }
+          return newSeconds;
+        });
+      }, 1000);
+    } else {
+      setThinkingSeconds(0);
+    }
+
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [isSubmitMessage]);
 
   // 取得訊息歷史
   const fetchMessageHistory = async () => {
@@ -150,8 +194,8 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
 
   return (
     <div
-      className="overflow-hidden flex flex-col justify-between min-w-[24rem] min-h-[40rem] bg-stamindTask-white-200 rounded-xl shadow-lg shadow-stamindTask-primary-blue-600 animate-tooltipSlideIn">
-      <div className='flex justify-between bg-stamindTask-black-850 p-3 gap-x-2'>
+      className="overflow-hidden flex flex-col justify-start min-w-[24rem] bg-stamindTask-white-200 rounded-xl shadow-lg shadow-stamindTask-primary-blue-600 animate-tooltipSlideIn">
+      <div className='flex justify-between bg-stamindTask-black-850 p-3 gap-x-2 h-[7vh]'>
         <div className='flex items-center gap-x-2'>
           <ImageComponent
             src={`${import.meta.env.VITE_APP_TEST_DNS}/${import.meta.env.VITE_APP_FILES_ROUTE}/img/logo.PNG`} alt='logo'
@@ -171,64 +215,67 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
           <XMarkIcon className='h-5 w-5 color-white pointer-events-none'/>
         </IconButton>
       </div>
-      <div ref={chatContainerRef} onScroll={handleScrollToChatContainerTop} className='h-[32rem] overflow-scroll'>
-        <div className='flex flex-col h-full px-3'>
-          {
-            isMessageEnded &&
+      <div className='flex flex-col justify-between h-[85vh]'>
+        <div ref={chatContainerRef} onScroll={handleScrollToChatContainerTop} className='overflow-scroll h-[92%] my-2'>
+          <div className='flex flex-col h-full px-3'>
+            {
+              messages.length > 0 &&
+              isMessageEnded &&
+                <Typography
+                    color='blue-gray'
+                    textGradient
+                    placeholder={undefined}
+                    className='text-center text-sm my-2'
+                >
+                    已經到底了！
+                </Typography>
+            }
+            {messages.length > 0 ?
+              messages.map(({message, studentId, time, name}, i) => {
+                const isUserOrOther = userStudentId === studentId
+                return (
+                  <div className={isUserOrOther ? 'self-end text-right text-sm' : 'self-start text-left text-sm'}
+                       key={i}>
+                    <MessageContentComponent
+                      type={isUserOrOther ? 'User' : 'Other'}
+                      message={message}
+                      studentId={studentId}
+                      time={time}
+                      name={name}
+                    />
+                  </div>
+                )
+              })
+              :
               <Typography
-                  color='blue-gray'
-                  textGradient
-                  placeholder={undefined}
-                  className='text-center text-sm my-2'
+                variant="h5"
+                color='blue'
+                textGradient
+                placeholder={undefined}
+                className='text-center'
               >
-                  已經到底了！
+                開始聊天！
               </Typography>
-          }
-          {messages.length > 0 ?
-            messages.map(({message, studentId, time, name}, i) => {
-              const isUserOrOther = userStudentId === studentId
-              return (
-                <div className={isUserOrOther ? 'self-end text-right text-sm' : 'self-start text-left text-sm'}>
-                  <MessageContentComponent
-                    type={isUserOrOther ? 'User' : 'Other'}
-                    message={message}
-                    studentId={studentId}
-                    time={time}
-                    name={name}
-                    key={i}
-                  />
-                </div>
-              )
-            })
-            :
-            <Typography
-              variant="h5"
-              color='blue'
-              textGradient
-              placeholder={undefined}
-              className='text-center'
-            >
-              開始聊天！
-            </Typography>
-          }
-          {
-            isSubmitMessage &&
-              <MessageContentComponent
-                  type={'Waiting'}
-                  message={'Amum Amum 正在思考中...'}
-                  studentId={''}
-                  time={''}
-                  name={''}
-              />
-          }
-          <div ref={messageBottomRef}></div>
+            }
+            {
+              isSubmitMessage &&
+                <MessageContentComponent
+                    type={'Waiting'}
+                    message={`## ${THINKING_MESSAGES[currentMessageIndex]}  \n已思考 ${thinkingSeconds} 秒`}
+                    studentId={''}
+                    time={''}
+                    name={''}
+                />
+            }
+            <div ref={messageBottomRef}></div>
+          </div>
         </div>
-      </div>
-      <div className="relative flex w-full max-w-[24rem]">
-        <TextAreaComponent messageInput={messageInput}
-                           setMessageInput={setMessageInput}
-                           setIsSubmitMessage={setIsSubmitMessage}
-        />
+        <div className="relative flex w-full max-w-[24rem] h-[8%]">
+          <TextAreaComponent messageInput={messageInput}
+                             setMessageInput={setMessageInput}
+                             setIsSubmitMessage={setIsSubmitMessage}
+          />
+        </div>
       </div>
     </div>
   )

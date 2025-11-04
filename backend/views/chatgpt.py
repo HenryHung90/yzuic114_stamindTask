@@ -1,4 +1,6 @@
 import os
+import re
+import subprocess
 
 from openai import OpenAI
 from rest_framework import status
@@ -37,14 +39,24 @@ def chat_with_amumamum(request):
         if user_history_data.chat_history is None:
             user_history_data.chat_history = []
 
-        # 取前 10 則訊息當作回顧輸入
+        # # 取前 10 則訊息當作回顧輸入
+        # user_history_stringify = ""
+        # for history in user_history_data.chat_history[-10:]:
+        #     if history['student_id'] != '':
+        #         user_history_stringify += '過去的訊息內容：時間:{time}訊息:{message}*end*\n'.format(time=history['time'],
+        #                                                                                            message=history[
+        #                                                                                                'message']
+        #                                                                                            )
+
+        # 取前 4 則訊息當作回顧輸入
         user_history_stringify = ""
-        for history in user_history_data.chat_history[-10:]:
-            if history['student_id'] != '':
-                user_history_stringify += '過去的訊息內容：時間:{time}訊息:{message}*end*\n'.format(time=history['time'],
-                                                                                                   message=history[
-                                                                                                       'message']
-                                                                                                   )
+        for history in user_history_data.chat_history[-4:]:
+            cleaned_message = re.sub(r'\s+', ' ', history['message']).strip()
+            user_history_stringify += '過去的訊息內容：傳送人:{name}時間:{time}訊息:{message}\n'.format(
+                name=history['name'] if history['name'] != 'Amun Amum' else 'OpenAI Assistant',
+                time=history['time'],
+                message=cleaned_message
+            )
         user_content = {
             "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "name": request.user.name,
@@ -52,23 +64,42 @@ def chat_with_amumamum(request):
             "message": user_question,
         }
 
-        sending_data = client.chat.completions.create(model="gpt-3.5-turbo",
-                                                      temperature=0.5,
-                                                      max_tokens=2048,
-                                                      messages=[
-                                                          {"role": "system",
-                                                           "content": SYSTEM_PROMPT + user_history_stringify},
-                                                          {"role": "user",
-                                                           "content": user_question}]
-                                                      )
+        # sending_data = client.chat.completions.create(model="gpt-3.5-turbo",
+        #                                               temperature=0.5,
+        #                                               max_tokens=2048,
+        #                                               messages=[
+        #                                                   {"role": "system",
+        #                                                    "content": SYSTEM_PROMPT + user_history_stringify},
+        #                                                   {"role": "user",
+        #                                                    "content": user_question}]
+        #                                               )
+        #
+        # gpt_response = sending_data.choices[0].message.content
 
-        gpt_response = sending_data.choices[0].message.content
+        cmd = [
+            "graphrag", "query",
+            "--root", './graphrag',
+            "--method", 'local',
+            "--query", user_history_stringify + "本次的問題:" + user_question,
+        ]
+
+        print(user_history_stringify, user_question)
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        output_text = result.stdout or result.stderr
+
         gpt_content = {
             "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "name": "Amum Amum",
             "student_id": "",
-            "message": gpt_response,
+            "message": output_text,
         }
+
+        # gpt_content = {
+        #     "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        #     "name": "Amum Amum",
+        #     "student_id": "",
+        #     "message": gpt_response,
+        # }
         user_history_data.chat_history.append(user_content)
         user_history_data.chat_history.append(gpt_content)
         user_history_data.save()
