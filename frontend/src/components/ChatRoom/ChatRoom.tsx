@@ -1,20 +1,60 @@
 import React, {useEffect, useRef, useState} from "react";
 // style
-import {IconButton, Typography} from "@material-tailwind/react";
-import {XMarkIcon} from "@heroicons/react/24/solid";
+import {
+  IconButton,
+  Typography
+} from "@material-tailwind/react";
+import {
+  XMarkIcon,
+} from "@heroicons/react/24/solid";
 
 // API
 
 // components
 import TextAreaComponent from "./TextArea";
 import MessageContentComponent from "./MessageContent";
+import ChatMethodSelectorComponent, {ChatMethodType} from "./ChatMethodSelector";
+import SideActionButtonsComponent from "./SideActionButtons";
+import GraphDialogComponent from "./GraphDialog";
 
 // interface
 import {IMessages} from "../../utils/interface/chatRoom";
-import {API_chatWithAmumAmum} from "../../utils/API/API_ChatGPT";
+import {API_chatWithAmumAmum, API_specifyChatWithAmumAmum} from "../../utils/API/API_ChatGPT";
 import {API_getChatHistories} from "../../utils/API/API_ChatHistories";
 import {handleCustomRecord, IStudentRecords} from "../../utils/listener/action";
 import ImageComponent from "../Image/Image";
+
+// 思考中的訊息集合
+const THINKING_MESSAGES = [
+  "Amum Amum 正在思考中，請耐心等待...",
+  "Amum Amum 正在深入思考您的問題，馬上回來...",
+  "Amum Amum 正在檢索相關知識，很快就好...",
+  "Amum Amum 正在整理答案，即將完成...",
+  "Amum Amum 腦袋正在高速運轉中...",
+  "Amum Amum 正在揣摩您問題的精髓...",
+  "Amum Amum 正在召喚靈感，請稍等...",
+  "Amum Amum 正在跟程式之神溝通中...",
+  "Amum Amum 正在搜索知識的海洋...",
+  "Amum Amum 正在激活超級思維模式..."
+];
+
+// 定義圖譜數據接口
+interface IGraphData {
+  nodes: Array<{
+    id: number;
+    label: string;
+    color: string;
+    size: number;
+  }>;
+  edges: Array<{
+    id: string;
+    from: number;
+    to: number;
+    label: string;
+    color: string;
+    width: number;
+  }>;
+}
 
 interface IChatRoomProps {
   name: string
@@ -39,8 +79,44 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const previousScrollHeightRef = useRef<number>(0);
 
-
   const [messages, setMessages] = useState<Array<IMessages>>([])
+
+  const [currentMethod, setCurrentMethod] = useState<ChatMethodType>('normal')
+
+  // Graph Dialog 狀態
+  const [openGraphDialog, setOpenGraphDialog] = useState<boolean>(false);
+  const [graphData, setGraphData] = useState<IGraphData | null>(null);
+
+  // 計算思考秒數
+  const [thinkingSeconds, setThinkingSeconds] = useState<number>(0)
+  const [currentMessageIndex, setCurrentMessageIndex] = useState<number>(0)
+
+  // 添加思考秒數計時器
+  useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+
+    if (isSubmitMessage) {
+      setThinkingSeconds(0); // 重置秒數
+      setCurrentMessageIndex(0); // 重置消息索引
+
+      timer = setInterval(() => {
+        setThinkingSeconds(prev => {
+          const newSeconds = prev + 1;
+          // 每3秒切換一次消息
+          if (newSeconds % 3 === 0) {
+            setCurrentMessageIndex(Math.floor(Math.random() * THINKING_MESSAGES.length));
+          }
+          return newSeconds;
+        });
+      }, 1000);
+    } else {
+      setThinkingSeconds(0);
+    }
+
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [isSubmitMessage]);
 
   // 取得訊息歷史
   const fetchMessageHistory = async () => {
@@ -91,47 +167,29 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
   // 送出訊息
   useEffect(() => {
     if (isSubmitMessage && userStudentId && messageInput != '') {
-      // 檢測送出訊息紀錄
-      handleCustomRecord({
-        action: 'click',
-        type: 'button',
-        object: `submitChat_${messageInput}`,
-        id: 'speedDial_submitChat',
-      }, false, userStudentId || '', setTempStudentRecords)
-
-      const formattedTime = new Date().toLocaleString('zh-TW', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-      });
-      // 新增自己送出的訊息
-      setMessages(prevState => {
-        const newMessage: IMessages = {
-          time: formattedTime,
-          name: name,
-          studentId: userStudentId,
-          message: messageInput,
-        }
-        return [...prevState, newMessage]
-      })
-      // 將訊息送出給 Chat
-      API_chatWithAmumAmum(messageInput, taskId).then(response => {
-        const assistant = response.data.assistant
-        setMessages(prevState => {
-          const newMessage: IMessages = {
-            time: assistant.time,
-            name: assistant.name,
-            studentId: assistant.student_id,
-            message: assistant.message,
-          }
-          return [...prevState, newMessage]
+      sendMyMessage()
+      if (currentMethod === "normal") {
+        // 將訊息送出給 Chat
+        API_chatWithAmumAmum(messageInput, taskId).then(response => {
+          const assistant = response.data.assistant
+          setMessages(prevState => {
+            const newMessage: IMessages = {
+              time: assistant.time,
+              name: assistant.name,
+              studentId: assistant.student_id,
+              message: assistant.message,
+            }
+            return [...prevState, newMessage]
+          })
+          setIsSubmitMessage(false)
         })
-        setIsSubmitMessage(false)
-      })
+      } else {
+        // 特殊功能
+        API_specifyChatWithAmumAmum(messageInput, taskId, currentMethod).then(response => {
+          console.log(response.data)
+          setIsSubmitMessage(false)
+        })
+      }
       setMessageInput("")
     }
   }, [isSubmitMessage])
@@ -148,89 +206,220 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
     fetchMessageHistory()
   }, [])
 
+  // 處理方法切換
+  const handleMethodChange = (method: ChatMethodType) => {
+    setCurrentMethod(method);
+  };
+
+
+  const handleGenerateKnowledgeGraph = (functionType: "code_debug" | "deep_learn" | "similar" | "next_step", findPrev: boolean = false) => {
+    setIsSubmitMessage(true);
+    API_specifyChatWithAmumAmum("", taskId, functionType, findPrev).then(response => {
+      let graphData: any = null;
+      if (functionType === 'deep_learn' && response.data?.recommendation_data?.recommendations?.deep_exploration?.[0]?.graph_data) {
+        graphData = response.data.recommendation_data.recommendations.deep_exploration[0].graph_data;
+      } else if (functionType === 'similar' && response.data?.recommendation_data?.recommendations?.related_knowledge?.[0].graph_data) {
+        graphData = response.data.recommendation_data.recommendations.related_knowledge[0].graph_data;
+      } else if (functionType === 'next_step' && response.data?.recommendation_data?.recommendations?.next_step?.[0].graph_data) {
+        graphData = response.data.recommendation_data.recommendations.next_step[0].graph_data;
+      } else {
+        alert("該知識節點沒有辦法再繼續延伸，可能是因為：\n1. 已經到達知識的盡頭。\n2. 實體之間缺乏足夠的關聯。\n 將給您上一次知識圖譜。")
+        handleGenerateKnowledgeGraph(functionType, true);
+      }
+      setGraphData(graphData);
+      setOpenGraphDialog(true);
+      setIsSubmitMessage(false);
+    }).catch(error => {
+      console.error(`${functionType} API error:`, error);
+      setIsSubmitMessage(false);
+    });
+  }
+
+  const sendMyMessage = () => {
+    // 檢測送出訊息紀錄
+    handleCustomRecord({
+      action: 'click',
+      type: 'button',
+      object: `submitChat_${messageInput}`,
+      id: 'speedDial_submitChat',
+    }, false, userStudentId || '', setTempStudentRecords)
+    const formattedTime = new Date().toLocaleString('zh-TW', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    });
+    // 新增自己送出的訊息
+    setMessages(prevState => {
+      const newMessage: IMessages = {
+        time: formattedTime,
+        name: name,
+        studentId: userStudentId || '',
+        message: messageInput,
+      }
+      return [...prevState, newMessage]
+    })
+  }
+
+  // 側邊按鈕處理函數
+  const handleDeepLearnClick = () => {
+    handleGenerateKnowledgeGraph('deep_learn');
+  };
+
+  const handleSimilarClick = () => {
+    handleGenerateKnowledgeGraph('similar');
+  };
+
+  const handleNextStepClick = () => {
+    handleGenerateKnowledgeGraph('next_step');
+  };
+
+  const handleGraphClick = () => {
+    // 記錄點擊圖譜按鈕事件
+    handleCustomRecord({
+      action: 'click',
+      type: 'button',
+      object: 'openGraphInfo',
+      id: 'speedDial_openGraphInfo',
+    }, false, userStudentId || '', setTempStudentRecords);
+
+    setOpenGraphDialog(true);
+  };
+
+  const handleGraphNodeClick = (nodeTitle: string) => {
+    setMessageInput(`我想要繼續了解關於 ${nodeTitle} 的內容，請提供有關 ${nodeTitle} 的更多、更深入的資訊。`);
+    setIsSubmitMessage(true)
+  }
+
+  const handleCloseGraphDialog = () => {
+    setOpenGraphDialog(false);
+    // 記錄關閉事件
+    handleCustomRecord({
+      action: 'click',
+      type: 'button',
+      object: 'closeGraphInfo',
+      id: 'speedDial_closeGraphInfo',
+    }, false, userStudentId || '', setTempStudentRecords);
+  };
+
   return (
-    <div
-      className="overflow-hidden flex flex-col justify-between min-w-[24rem] min-h-[40rem] bg-stamindTask-white-200 rounded-xl shadow-lg shadow-stamindTask-primary-blue-600 animate-tooltipSlideIn">
-      <div className='flex justify-between bg-stamindTask-black-850 p-3 gap-x-2'>
-        <div className='flex items-center gap-x-2'>
-          <ImageComponent
-            src={`${import.meta.env.VITE_APP_TEST_DNS}/${import.meta.env.VITE_APP_FILES_ROUTE}/img/logo.PNG`} alt='logo'
-            width='36'/>
-          <Typography variant="h5" color='blue' textGradient placeholder={undefined}>AmumAmum 助理</Typography>
+    <>
+      <div
+        className="overflow-hidden flex flex-col justify-start min-w-[24rem] bg-stamindTask-white-200 rounded-xl shadow-lg shadow-stamindTask-primary-blue-600 animate-tooltipSlideIn">
+        <div className='flex justify-between bg-stamindTask-black-850 px-2 gap-x-2 h-[5vh]'>
+          <SideActionButtonsComponent
+            onDeepLearnClick={handleDeepLearnClick}
+            onLightBulbClick={handleSimilarClick}
+            onArrowRightClick={handleNextStepClick}
+            onGraphClick={handleGraphClick}
+          />
+          <div className='flex items-center gap-x-2'>
+            <ImageComponent
+              src={`${import.meta.env.VITE_APP_TEST_DNS}/${import.meta.env.VITE_APP_FILES_ROUTE}/img/logo.PNG`}
+              alt='logo'
+              width='36'/>
+            <Typography variant="h5" color='blue' textGradient placeholder={undefined}>AmumAmum 助理</Typography>
+          </div>
+          <IconButton
+            variant="text"
+            color='white'
+            ripple={false}
+            placeholder={undefined}
+            onClick={() => setOpenChatRoom(false)}
+            className='mt-[2px] hover:bg-stamindTask-black-850'
+            data-action='click'
+            data-type='button'
+            data-object='closeChatRoom'
+            data-id='speedDial_closeChatRoom'
+          >
+            <XMarkIcon className='h-5 w-5 color-white pointer-events-none'/>
+          </IconButton>
         </div>
-        <IconButton
-          variant="text"
-          color='white'
-          placeholder={undefined}
-          onClick={() => setOpenChatRoom(false)}
-          data-action='click'
-          data-type='button'
-          data-object='closeChatRoom'
-          data-id='speedDial_closeChatRoom'
-        >
-          <XMarkIcon className='h-5 w-5 color-white pointer-events-none'/>
-        </IconButton>
-      </div>
-      <div ref={chatContainerRef} onScroll={handleScrollToChatContainerTop} className='h-[32rem] overflow-scroll'>
-        <div className='flex flex-col h-full px-3'>
-          {
-            isMessageEnded &&
-              <Typography
-                  color='blue-gray'
+        {/* Graph Dialog */}
+        <GraphDialogComponent
+          open={openGraphDialog}
+          onClose={handleCloseGraphDialog}
+          onClickNode={handleGraphNodeClick}
+          taskId={taskId}
+          graphData={graphData}
+        />
+        <div className='flex flex-col justify-between w-[90vw] h-[90vh]'>
+          <div ref={chatContainerRef} onScroll={handleScrollToChatContainerTop}
+               className='overflow-scroll w-full h-[95%] my-2'>
+            <div className='flex flex-col h-full px-5'>
+              {
+                messages.length > 0 &&
+                isMessageEnded &&
+                  <Typography
+                      color='blue-gray'
+                      textGradient
+                      placeholder={undefined}
+                      className='text-center text-sm my-2'
+                  >
+                      已經到底了！
+                  </Typography>
+              }
+              {messages.length > 0 ?
+                messages.map(({message, studentId, time, name}, i) => {
+                  const isUserOrOther = userStudentId === studentId
+                  return (
+                    <div className={isUserOrOther ? 'self-end text-right text-sm' : 'self-start text-left text-sm'}
+                         key={i}>
+                      <MessageContentComponent
+                        taskId={taskId}
+                        type={isUserOrOther ? 'User' : 'Other'}
+                        message={message}
+                        studentId={studentId}
+                        time={time}
+                        name={name}
+                      />
+                    </div>
+                  )
+                })
+                :
+                <Typography
+                  variant="h5"
+                  color='blue'
                   textGradient
                   placeholder={undefined}
-                  className='text-center text-sm my-2'
-              >
-                  已經到底了！
-              </Typography>
-          }
-          {messages.length > 0 ?
-            messages.map(({message, studentId, time, name}, i) => {
-              const isUserOrOther = userStudentId === studentId
-              return (
-                <div className={isUserOrOther ? 'self-end text-right text-sm' : 'self-start text-left text-sm'}>
+                  className='text-center'
+                >
+                  開始聊天！
+                </Typography>
+              }
+              {
+                isSubmitMessage &&
                   <MessageContentComponent
-                    type={isUserOrOther ? 'User' : 'Other'}
-                    message={message}
-                    studentId={studentId}
-                    time={time}
-                    name={name}
-                    key={i}
+                      taskId={taskId}
+                      type={'Waiting'}
+                      message={`## ${THINKING_MESSAGES[currentMessageIndex]}  \n已思考 ${thinkingSeconds} 秒`}
+                      studentId={''}
+                      time={''}
+                      name={''}
                   />
-                </div>
-              )
-            })
-            :
-            <Typography
-              variant="h5"
-              color='blue'
-              textGradient
-              placeholder={undefined}
-              className='text-center'
-            >
-              開始聊天！
-            </Typography>
-          }
-          {
-            isSubmitMessage &&
-              <MessageContentComponent
-                  type={'Waiting'}
-                  message={'Amum Amum 正在思考中...'}
-                  studentId={''}
-                  time={''}
-                  name={''}
-              />
-          }
-          <div ref={messageBottomRef}></div>
+              }
+              <div ref={messageBottomRef}></div>
+            </div>
+          </div>
+          <div className="relative flex w-full h-[6%]">
+            <TextAreaComponent
+              isSubmitMessage={isSubmitMessage}
+              messageInput={messageInput}
+              setMessageInput={setMessageInput}
+              setIsSubmitMessage={setIsSubmitMessage}
+            />
+          </div>
+
+          <ChatMethodSelectorComponent
+            currentMethod={currentMethod}
+            onMethodChange={handleMethodChange}
+          />
         </div>
       </div>
-      <div className="relative flex w-full max-w-[24rem]">
-        <TextAreaComponent messageInput={messageInput}
-                           setMessageInput={setMessageInput}
-                           setIsSubmitMessage={setIsSubmitMessage}
-        />
-      </div>
-    </div>
+    </>
   )
 }
 

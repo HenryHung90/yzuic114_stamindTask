@@ -5,6 +5,11 @@ from rest_framework.response import Response
 from django.views.decorators.csrf import ensure_csrf_cookie
 from datetime import datetime, timedelta
 
+from stopwordsiso import stopwords as sw
+import jieba
+import re
+from collections import Counter
+
 from backend.models import User, StudentTask, ChatHistory
 
 
@@ -180,6 +185,48 @@ def process_heat_map_data(student_task_data, include_class_name=False):
     }, status=status.HTTP_200_OK)
 
 
+# 分析文本並生成詞雲數據
+def analyze_text_for_word_cloud(text_list):
+    """
+    分析文本並生成詞雲數據
+
+    參數:
+    text_list (list): 包含文本的列表
+
+    返回:
+    list: 詞雲數據，格式為 [{"text": word, "value": count}, ...]
+    """
+    try:
+        # 獲取中文和英文停用詞
+        zh_stopwords = sw('zh')
+        en_stopwords = sw('en')
+        # 合併停用詞
+        stopwords = list(zh_stopwords) + list(en_stopwords)
+
+        # 合併所有文本
+        all_text = ' '.join(text_list)
+
+        # 使用結巴分詞
+        jieba.initialize()  # 確保結巴已初始化
+        words = jieba.cut(all_text)
+
+        # 過濾停用詞和單字符詞
+        filtered_words = [
+            word for word in words
+            if word.lower() not in stopwords
+               and len(word.strip()) > 1
+               and not re.match(r'^(\d{1,3}(,\d{3})*|\d+)(\.\d+)?%?$', word)  # 過濾純數字
+        ]
+
+        word_counter = Counter(filtered_words)
+        common_words = word_counter.most_common(500)
+        return [{"text": word, "value": count} for word, count in common_words]
+
+    except Exception as e:
+        print(f'Word frequency analysis error: {e}')
+        return []
+
+
 # get Chat Histories
 @ensure_csrf_cookie
 @permission_classes([IsAuthenticated])
@@ -277,6 +324,54 @@ def get_all_chat_histories(request):
         return Response({'get All Chat Histories Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
+@ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
+@api_view(['POST'])
+def get_all_chat_histories_by_class_ids(request):
+    try:
+        class_ids = request.data.get('class_ids', [])
+
+        student_tasks = StudentTask.objects.filter(class_name_id__in=class_ids).select_related('chat_history')
+
+        all_messages = []
+
+        # 遍歷每個聊天歷史對象
+        for student_task in student_tasks:
+            # 檢查 chat_history 是否存在
+            if not student_task or not student_task.chat_history:
+                continue
+
+            # 遍歷聊天歷史中的每條消息
+            for message_json in student_task.chat_history.chat_history:
+                # 檢查消息格式是否正確
+                if not isinstance(message_json, dict):
+                    # 嘗試解析可能是字符串格式的 JSON
+                    try:
+                        import json
+                        message = json.loads(message_json)
+                        if not isinstance(message, dict) or 'time' not in message:
+                            continue
+                    except:
+                        continue
+                else:
+                    message = message_json
+                # 創建新的消息對象，包含學生和班級信息
+                name = message.get("name", "未知")
+                if name != 'Amum Amum':
+                    all_messages.append(message.get("message", ""))
+
+        word_cloud_data = analyze_text_for_word_cloud([msg for msg in all_messages])
+
+        return Response({
+            'total_count': len(all_messages),
+            'words': word_cloud_data
+        }, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        print(f'get Chat Histories By Class IDs Error: {e}')
+        return Response({'get Chat Histories By Class IDs Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
 # get Chat Histories
 @ensure_csrf_cookie
 @permission_classes([IsAuthenticated])
@@ -284,23 +379,31 @@ def get_all_chat_histories(request):
 def get_chat_histories_by_student_id(request):
     try:
         student_id = request.data.get('student_id')
+        student_tasks = StudentTask.objects.filter(student_id=student_id).select_related('chat_history').select_related(
+            'task')
 
-        chat_history_data = User.objects.get(student_id=student_id).chat_history
+        student_info_data_list = [{'chat_history': student_task.chat_history, 'task_name': student_task.task.name}
+                                  for student_task in student_tasks]
 
-        if chat_history_data is None or chat_history_data is []:
+        if not student_info_data_list:
             return Response({'messages': 'empty'}, status=status.HTTP_204_NO_CONTENT)
-        else:
-            chat_history_data = chat_history_data.chat_history
 
         res_messages = []
-        for history in chat_history_data:
-            modify_message = {
-                "使用者名稱": history["name"],
-                "學生ID": history["student_id"],
-                "發送時間": history["time"],
-                "傳送訊息": history["message"],
-            }
-            res_messages.append(modify_message)
+        for student_data in student_info_data_list:
+            messages = student_data['chat_history']
+            task_name = student_data["task_name"]
+
+            if not messages: continue
+
+            for message in messages.chat_history:
+                modify_message = {
+                    "使用者名稱": message.get("name", ""),
+                    "課程名稱": task_name,
+                    "學生ID": message.get("student_id", ""),
+                    "發送時間": message.get("time", ""),
+                    "傳送訊息": message.get("message", ""),
+                }
+                res_messages.append(modify_message)
 
         return Response({'chat_history': res_messages}, status=status.HTTP_200_OK)
     except Exception as e:

@@ -3,6 +3,7 @@ from django.urls import path
 from backend.views.class_name import get_all_class_names, add_new_class_name
 from backend.views.core import *
 from backend.views.experience import *
+from backend.views.graphrag import *
 from backend.views.student_notes import *
 from backend.views.student_task_plans import *
 from backend.views.student_tasks import *
@@ -80,6 +81,12 @@ API_POST = [
 
     # save student record
     path('save_student_records/', save_student_records, name='save_student_records'),
+
+    # get graphrag detail by type and id
+    path('get_graphrag_detail_by_type_and_id/', get_graphrag_detail_by_type_and_id,
+         name='get_graphrag_detail_by_type_and_id'),
+    # specify chat with AmumAmum
+    path('specific_chat_with_amumamum/', specific_chat_with_amumamum, name='specific_chat_with_amumamum'),
 ]
 
 API_GET = [
@@ -149,6 +156,10 @@ API_ADMIN_POST = [
     # get student feedback by task id
     path('admin/get_feedback_by_task_id/', get_feedback_by_task_id, name='get_feedback_by_task_id'),
 
+    # get all chat histories by class ids
+    path('admin/get_all_chat_histories_by_class_ids/', get_all_chat_histories_by_class_ids,
+         name='all_chat_histories_by_class_ids'),
+
     # add new class name
     path('admin/add_new_class_name/', add_new_class_name, name='add_new_class_name'),
     # add new Task
@@ -183,6 +194,11 @@ API_ADMIN_POST = [
     path('admin/change_student_password/', change_student_password, name='change_student_password'),
     # multi students upload
     path('admin/multi_students_upload/', multi_students_upload, name='multi_students_upload'),
+
+    # get task graphrag info
+    path('admin/get_task_graphrag_info/', get_task_graphrag_info, name='get_task_graphrag_info'),
+    # upload graphrag file
+    path('admin/upload_graphrag_file/', upload_graphrag_file, name='upload_graphrag_file'),
 ]
 API_ADMIN_GET = [
     # get all students

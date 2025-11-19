@@ -5,6 +5,11 @@ from .experiences import Experience
 from .feedbacks import Feedback
 from .login_attempts import LoginAttempt
 from .process_hints import ProcessHints
+from .rag_communities import RagCommunities
+from .rag_entities import RagEntities
+from .rag_relationships import RagRelationships
+from .rag_sources import RagSources
+from .rag_summaries import RagSummaries
 from .reflection_questions import ReflectionQuestion
 from .student_exams import StudentExam
 from .student_groups import StudentGroup
@@ -28,6 +33,11 @@ __all__ = [
     'Feedback',
     'LoginAttempt',
     'ProcessHints',
+    'RagCommunities',
+    'RagEntities',
+    'RagRelationships',
+    'RagSources',
+    'RagSummaries',
     'ReflectionQuestion',
     'StudentExam',
     'StudentGroup',

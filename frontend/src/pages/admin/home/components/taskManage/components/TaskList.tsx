@@ -63,17 +63,23 @@ const TaskListComponent = (props: ITaskListProps) => {
       }
     },
     {
+      name: "課程內容",
+      handleClick: () => {
+        NavLocation(`/admin/task/${taskId}`)
+      }
+    },
+    {
       name: "課程數據",
       handleClick: () => {
         NavLocation(`/admin/taskInfo/${taskId}`)
       }
     },
     {
-      name: "管理課程內容",
+      name: "graphRAG 管理",
       handleClick: () => {
-        NavLocation(`/admin/task/${taskId}`)
+        NavLocation(`/admin/graphragInfo/${taskId}`)
       }
-    },
+    }
   ]
 
   return (
@@ -119,7 +125,7 @@ const TaskListComponent = (props: ITaskListProps) => {
               </Typography>
             </td>
             <td className="p-4 text-left">
-              <MenuComponent menuHandler={"課程設定"} menuItems={MENU_ITEMS(id.toString())}/>
+              <MenuComponent menuHandler={"課程管理"} menuItems={MENU_ITEMS(id.toString())}/>
             </td>
           </tr>
         ))}

@@ -16,6 +16,7 @@ const ExperiencePageComponent = (props: ITaskExperienceProps) => {
   const {taskId, selectNode, settingAlertLogAndLoading} = props
 
   const [experienceData, setExperienceData] = useState<string>("")
+  const [experienceDataType, setExperienceDataType] = useState<'Current' | 'Upload'>('Current')
 
   // alert
   const [alertOpen, setAlertOpen] = useState(false)
@@ -46,9 +47,9 @@ const ExperiencePageComponent = (props: ITaskExperienceProps) => {
   useEffect(() => {
     const fetchTaskExperience = async () => {
       API_getTaskExperience(taskId).then(response => {
-        const fileLocation = response.data.experience_info.experience_files[selectNode.key]
-        if (fileLocation) {
-          setExperienceData(`/${import.meta.env.VITE_APP_FILE_ROUTE}/experience_files/${fileLocation}`)
+        console.log(experienceDataType)
+        if (response.data.html_content) {
+          setExperienceData(response.data.html_content)
         } else {
           setExperienceData("")
         }
@@ -60,12 +61,13 @@ const ExperiencePageComponent = (props: ITaskExperienceProps) => {
   return (
     <div>
       <AlertMsg content={alertContent} open={alertOpen} setOpen={setAlertOpen}/>
-      <FileUploadComponent handleUploadFile={handleUploadFile} fileInputRef={fileInputRef} setAlertOpen={setAlertOpen}
+      <FileUploadComponent handleUploadFile={handleUploadFile} setExperienceDataType={setExperienceDataType}
+                           fileInputRef={fileInputRef} setAlertOpen={setAlertOpen}
                            type={"HTML"} setAlertContent={setAlertContent} setFileData={setExperienceData}/>
       <div>
-        {experienceData ? (
+        {experienceData && experienceDataType === 'Current' ? (
           <iframe
-            src={experienceData} // 動態設置 iframe 的 src
+            srcDoc={experienceData}
             title="Experience File"
             style={{
               width: "100%",
@@ -76,6 +78,18 @@ const ExperiencePageComponent = (props: ITaskExperienceProps) => {
           ></iframe>
         ) : (
           <p>目前無上傳檔案</p>
+        )}
+        {experienceData && experienceDataType === 'Upload' && (
+          <iframe
+            src={experienceData}
+            title="Experience File"
+            style={{
+              width: "100%",
+              height: "600px",
+              border: "1px solid #ddd",
+              borderRadius: "8px",
+            }}
+          ></iframe>
         )}
       </div>
     </div>

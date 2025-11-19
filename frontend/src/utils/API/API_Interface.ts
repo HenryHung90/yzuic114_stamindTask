@@ -4,12 +4,12 @@ import {IStudentRecords} from "../listener/action";
 import {EGroupType} from "../functions/common";
 
 // Request 訊息內容
-interface RequestParams {
+export interface RequestParams {
   message?: string
 }
 
 // Response 訊息內容
-interface ResponseData {
+export interface ResponseData {
   message: string
   data: any
   status: number
@@ -17,12 +17,12 @@ interface ResponseData {
 
 // API Extension ---------------------------------------------------------
 // API Request Extension
-interface Req_login extends RequestParams {
+export interface Req_login extends RequestParams {
   student_id: string
   password: string
 }
 
-interface Req_register extends RequestParams {
+export interface Req_register extends RequestParams {
   student_id: string
   user_type: 'STUDENT' | 'TEACHER'
   password: string
@@ -30,7 +30,7 @@ interface Req_register extends RequestParams {
   class_name: string
 }
 
-interface Req_tasksInfo extends RequestParams {
+export interface Req_tasksInfo extends RequestParams {
   student_id?: string
   class_name?: string
   task_name?: string
@@ -40,28 +40,28 @@ interface Req_tasksInfo extends RequestParams {
   link_array?: Array<Link>
 }
 
-interface Req_classNameInfo extends RequestParams {
+export interface Req_classNameInfo extends RequestParams {
   class_name: string
 }
 
-interface Req_studentGroupInfo extends RequestParams {
+export interface Req_studentGroupInfo extends RequestParams {
   class_name: string
   change_group?: string
   student_id?: string
 }
 
-interface Req_studentsInfo extends RequestParams {
+export interface Req_studentsInfo extends RequestParams {
   class_name: string
 }
 
-interface Req_studentInfo extends RequestParams {
+export interface Req_studentInfo extends RequestParams {
   student_id: string
   exchange_class_name?: string
   new_name?: string
   new_password?: string
 }
 
-interface Req_registerStudentInfo extends RequestParams {
+export interface Req_registerStudentInfo extends RequestParams {
   student_id: string
   user_type: 'STUDENT' | 'TEACHER'
   password: string
@@ -69,11 +69,11 @@ interface Req_registerStudentInfo extends RequestParams {
   class_name: string
 }
 
-interface Req_experienceInfo extends RequestParams {
+export interface Req_experienceInfo extends RequestParams {
   task_id: string | undefined
 }
 
-interface Req_targetInfo extends RequestParams {
+export interface Req_targetInfo extends RequestParams {
   task_id: string | undefined
   select_node?: number
   target_title?: string
@@ -81,47 +81,47 @@ interface Req_targetInfo extends RequestParams {
   sub_target_list?: Array<ITaskSubTarget>
 }
 
-interface Req_planInfo extends RequestParams {
+export interface Req_planInfo extends RequestParams {
   task_id: string | undefined
   select_node?: number
   select_sub_list?: Array<boolean>
   plan_list?: Array<Array<ITaskPlan>>
 }
 
-interface Req_textBookInfo extends RequestParams {
+export interface Req_textBookInfo extends RequestParams {
   task_id: string | undefined
 }
 
-interface Req_processHintInfo extends RequestParams {
+export interface Req_processHintInfo extends RequestParams {
   task_id: string | undefined
   select_node?: number
   process_hint_list?: Array<ITaskProcessHint>
 }
 
-interface Req_studentNoteInfo extends RequestParams {
+export interface Req_studentNoteInfo extends RequestParams {
   student_notes: { [key: string]: any[] }
 }
 
-interface Req_StudentTaskProcessCodeInfo extends RequestParams {
+export interface Req_StudentTaskProcessCodeInfo extends RequestParams {
   task_id: string | undefined
   html_code?: string
   css_code?: string
   js_code?: string
 }
 
-interface Req_StudentTaskProcessHintInfo extends RequestParams {
+export interface Req_StudentTaskProcessHintInfo extends RequestParams {
   task_id: string | undefined
   select_node?: number
   process_hint_reply?: Array<string>
 }
 
-interface Req_ReflectionQuestionInfo extends RequestParams {
+export interface Req_ReflectionQuestionInfo extends RequestParams {
   task_id: string | undefined
   select_node?: number
   questions?: Array<IReflection>
 }
 
-interface Req_StudentReflectionInfo extends RequestParams {
+export interface Req_StudentReflectionInfo extends RequestParams {
   task_id: string | undefined
   select_node?: number
   reflects?: Array<IStudentReflection>
@@ -129,34 +129,45 @@ interface Req_StudentReflectionInfo extends RequestParams {
   self_scoring?: number
 }
 
-interface Req_StudentChatHistory extends RequestParams {
+export interface Req_StudentChatHistory extends RequestParams {
   task_id?: string
   class_ids?: number[]
   student_id?: string
   offset?: number
 }
 
-interface Req_ChatWithAmumAmum extends RequestParams {
+export interface Req_ChatWithAmumAmum extends RequestParams {
   task_id: string
   message: string
+  function_type?: 'code_debug' | 'deep_learn' | 'similar' | 'next_step';
+  find_prev?: boolean;
 }
 
-interface Req_StudentRecordInfo extends RequestParams {
+export interface Req_StudentRecordInfo extends RequestParams {
   student_id?: string
   task_id?: string
   class_ids?: number[]
   student_records?: Array<IStudentRecords>
 }
 
-interface Req_feedbackInfo extends RequestParams {
+export interface Req_feedbackInfo extends RequestParams {
   task_id?: string | undefined
   select_node?: number
   student_id?: string
 }
 
+export interface Req_graphragInfo extends RequestParams {
+  task_id?: string
+}
+
+export interface Req_graphragDetail extends Req_graphragInfo {
+  type: string
+  id: string
+}
+
 // API Response Extension
 // csrf cookie Response
-interface CSRF_cookies extends ResponseData {
+export interface CSRF_cookies extends ResponseData {
   isAuthenticated: false | 'STUDENT' | 'TEACHER'
   user_type: false | 'STUDENT' | 'TEACHER'
   group_type: EGroupType
@@ -164,7 +175,7 @@ interface CSRF_cookies extends ResponseData {
   student_id: string
 }
 
-interface Res_login extends ResponseData {
+export interface Res_login extends ResponseData {
   name: string
   user_type: false | 'STUDENT' | 'TEACHER'
   student_id: string
@@ -172,7 +183,7 @@ interface Res_login extends ResponseData {
   group_type: EGroupType
 }
 
-interface Res_tasksInfo extends ResponseData {
+export interface Res_tasksInfo extends ResponseData {
   id: number
   is_open?: boolean
   class_name?: string
@@ -181,14 +192,14 @@ interface Res_tasksInfo extends ResponseData {
   updated_at: string
 }
 
-interface Res_classNamesInfo extends ResponseData {
+export interface Res_classNamesInfo extends ResponseData {
   id: number
   name: string
   created_at: string
   updated_at: string
 }
 
-interface Res_studentsInfo extends ResponseData {
+export interface Res_studentsInfo extends ResponseData {
   id: number
   is_active: boolean
   class_name: string
@@ -197,36 +208,4 @@ interface Res_studentsInfo extends ResponseData {
   name: string
   created_at: string
   updated_at: string
-}
-
-export type{
-  RequestParams,
-  ResponseData,
-  Req_login,
-  Req_register,
-  Req_tasksInfo,
-  Req_classNameInfo,
-  Req_studentGroupInfo,
-  Req_studentsInfo,
-  Req_studentInfo,
-  Req_registerStudentInfo,
-  Req_experienceInfo,
-  Req_targetInfo,
-  Req_planInfo,
-  Req_textBookInfo,
-  Req_processHintInfo,
-  Req_studentNoteInfo,
-  Req_StudentTaskProcessCodeInfo,
-  Req_StudentTaskProcessHintInfo,
-  Req_ReflectionQuestionInfo,
-  Req_StudentReflectionInfo,
-  Req_StudentChatHistory,
-  Req_ChatWithAmumAmum,
-  Req_StudentRecordInfo,
-  Req_feedbackInfo,
-  CSRF_cookies,
-  Res_login,
-  Res_tasksInfo,
-  Res_classNamesInfo,
-  Res_studentsInfo
 }

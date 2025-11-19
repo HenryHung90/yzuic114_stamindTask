@@ -51,8 +51,9 @@ const DataManage = (props: IDataMangeProps) => {
               onClick={() => window.history.back()}>返回</Button>
       <div className='h-[90%] p-10 bg-stamindTask-white-100 rounded-xl shadow-lg shadow-black/50'>
         <div>
-          <Typography variant="h5" color="blue-gray" className="mb-2" placeholder={undefined}>課程數據</Typography>
           <Card placeholder={undefined}>
+            <Typography variant="h6" color="blue-gray" className="pl-4 pt-2"
+                        placeholder={undefined}>選擇欲合併檢視的班級</Typography>
             <List placeholder={undefined} className='flex-row'>
               {classList.length > 0 && classList.map(value => {
                 return (
