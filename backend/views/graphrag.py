@@ -20,6 +20,28 @@ from backend.serializers.rag_communities_serializer import RagCommunitiesSeriali
 from backend.serializers.rag_summaries_serializer import RagSummariesSerializer
 from backend.serializers.rag_sources_serializer import RagSourcesSerializer
 
+GRAPHRAG_TYPE_MAPPING = {
+    'Entitie': {
+        'model': RagEntities,
+        'serializer': RagEntitiesSerializer,
+    },
+    'Relationship': {
+        'model': RagRelationships,
+        'serializer': RagRelationshipsSerializer,
+    },
+    'Community': {
+        'model': RagCommunities,
+        'serializer': RagCommunitiesSerializer,
+    },
+    'Report': {
+        'model': RagSummaries,
+        'serializer': RagSummariesSerializer,
+    },
+    'Source': {
+        'model': RagSources,
+        'serializer': RagSourcesSerializer,
+    }
+}
 
 # 輔助函數：處理數組字段
 def parse_array_field(value, item_type=int):
@@ -140,6 +162,7 @@ def get_task_graphrag_info(request):
         return Response({'get tasks graphrag info Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
+# upload GraphRag file
 @ensure_csrf_cookie
 @permission_classes([IsAuthenticated])
 @api_view(['POST'])
@@ -352,3 +375,40 @@ def upload_graphrag_file(request):
 
     except Exception as e:
         return Response({'message': f'上傳文件失敗: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# 簡化後的函數
+@ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
+@api_view(['POST'])
+def get_graphrag_detail_by_type_and_id(request):
+    try:
+        task_id = request.data.get('task_id')
+        record_type = request.data.get('type')
+        record_id = request.data.get('id')
+
+        if not record_type or not record_id:
+            return Response({'message': '缺少必要參數'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # 檢查類型是否支持
+        if record_type not in GRAPHRAG_TYPE_MAPPING:
+            return Response({'message': f'不支持的類型: {record_type}'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # 獲取對應的配置
+        config = GRAPHRAG_TYPE_MAPPING[record_type]
+
+        # 查詢記錄
+        record = config['model'].objects.filter(
+            human_readable_id=record_id,
+            task_id=task_id
+        ).first()
+
+        if not record:
+            return Response({'message': "找不到對應關係"}, status=status.HTTP_404_NOT_FOUND)
+
+        # 序列化並返回
+        serializer = config['serializer'](record)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        return Response({'message': f'獲取詳情失敗: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)

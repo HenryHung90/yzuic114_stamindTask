@@ -1,4 +1,5 @@
 interface IMessages {
+  taskId?: string
   time: string
   message: string
   studentId: string

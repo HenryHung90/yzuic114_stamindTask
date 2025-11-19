@@ -40,6 +40,8 @@
     "rehype-highlight": "^7.0.2",
     "remark-gfm": "^4.0.1",
     "universal-cookie": "^7.2.2",
+    "vis-data": "^8.0.3",
+    "vis-network": "^10.0.2",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {

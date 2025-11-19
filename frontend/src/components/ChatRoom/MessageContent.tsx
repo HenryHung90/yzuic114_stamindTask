@@ -16,17 +16,17 @@ import MarkDownTextComponent from "../MarkDownText/MarkDownText";
 
 
 const MessageContentComponent = (props: IMessages) => {
-  const {time, studentId, name, message, type} = props
+  const {time, studentId, name, message, type, taskId} = props
 
   return (
-    <div className='max-w-[20rem] animate-messageSlideIn'>
+    <div className='min-w-[20rem] max-w-[50vw] animate-messageSlideIn'>
       <div>
-        <Typography className='text-sm' placeholder={undefined}>{name} {studentId}</Typography>
+        <Typography className='text-sm select-none' placeholder={undefined}>{name} {studentId}</Typography>
       </div>
       <div className={`rounded-md py-2 px-4 text-left ${type === 'User' ? 'bg-light-blue-200' : 'bg-white'}`}>
         <div
           className={`${type === 'Waiting' && 'bg-[length:600%_100%] bg-no-repeat bg-gradient-to-r from-light-blue-200 via-blue-500 to-light-blue-200 bg-clip-text animate-marquee'}`}>
-          <MarkDownTextComponent text={message}/>
+          <MarkDownTextComponent text={message} taskId={taskId}/>
         </div>
       </div>
       <div>

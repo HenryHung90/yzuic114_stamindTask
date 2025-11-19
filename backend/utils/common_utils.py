@@ -3,6 +3,7 @@ from rest_framework import status
 
 import numpy as np
 
+
 def read_xlsx_and_xls_file(expected_headers, headers, file_extension, sheet):
     if headers != expected_headers:
         return Response({"message": f"文件格式錯誤，欄位必須依序為：{str(expected_headers)}"},

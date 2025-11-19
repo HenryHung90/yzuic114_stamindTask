@@ -81,6 +81,12 @@ API_POST = [
 
     # save student record
     path('save_student_records/', save_student_records, name='save_student_records'),
+
+    # get graphrag detail by type and id
+    path('get_graphrag_detail_by_type_and_id/', get_graphrag_detail_by_type_and_id,
+         name='get_graphrag_detail_by_type_and_id'),
+    # specify chat with AmumAmum
+    path('specific_chat_with_amumamum/', specific_chat_with_amumamum, name='specific_chat_with_amumamum'),
 ]
 
 API_GET = [

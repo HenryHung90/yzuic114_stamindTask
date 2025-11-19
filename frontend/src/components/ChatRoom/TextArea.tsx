@@ -11,13 +11,14 @@ import {IStudentRecords} from "../../utils/listener/action";
 
 // interface
 interface ITextAreaProps {
+  isSubmitMessage: boolean
   messageInput: string
   setMessageInput: React.Dispatch<React.SetStateAction<string>>
   setIsSubmitMessage: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const TextAreaComponent = (props: ITextAreaProps) => {
-  const {messageInput, setMessageInput, setIsSubmitMessage} = props
+  const {isSubmitMessage, messageInput, setMessageInput, setIsSubmitMessage} = props
 
   const [isComposing, setIsComposing] = React.useState<boolean>(false)
 
@@ -25,18 +26,20 @@ const TextAreaComponent = (props: ITextAreaProps) => {
     setIsSubmitMessage(true)
   }
   const handleEnterKeyDown = (e: any) => {
-    if (e.key === 'Enter' && !e.shiftKey && !isComposing) {
+    if (e.key === 'Enter' && !e.shiftKey && !isComposing && !isSubmitMessage) {
       e.preventDefault()
       handleSumbitMessage()
     }
   }
 
   return (
-    <div className="flex w-full flex-row items-center gap-2 bg-gradient-to-r from-stamindTask-decoration-block p-2">
+    <div
+      className={`flex w-full flex-row items-center gap-2 bg-gradient-to-r ${isSubmitMessage ? 'from-stamindTask-decoration-error-1' : 'from-stamindTask-decoration-block'} p-2`}>
       <Textarea
         rows={1}
         resize={true}
-        placeholder="請輸入訊息..."
+        disabled={isSubmitMessage}
+        placeholder={isSubmitMessage ? "請稍等，系統正在回覆中..." : "請輸入訊息..."}
         className="min-h-full !border-0 focus:border-transparent"
         onCompositionStart={() => setIsComposing(true)}
         onCompositionEnd={() => setIsComposing(false)}
