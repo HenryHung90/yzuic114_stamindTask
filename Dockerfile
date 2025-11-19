@@ -7,7 +7,7 @@ COPY frontend ./
 RUN npm run build
 
 # 第二階段：建構後端 (backend)
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 # 安裝系統依賴（包括 poppler-utils 和其他工具）
 RUN apt-get update && apt-get install -y \
