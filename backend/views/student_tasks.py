@@ -9,7 +9,7 @@ from django.db import transaction
 from backend.models import Task, StudentTask, User, StudentTaskPlan, StudentTaskProcess, \
     StudentTaskProcessCode, StudentTaskReflection, Feedback, ClassName, ChatHistory
 
-from ..utils import transfer_key_to_values
+from backend.utils.common_utils import transfer_key_to_values
 
 """
  Response Status List:

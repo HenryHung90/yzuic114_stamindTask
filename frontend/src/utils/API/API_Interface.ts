@@ -139,6 +139,8 @@ export interface Req_StudentChatHistory extends RequestParams {
 export interface Req_ChatWithAmumAmum extends RequestParams {
   task_id: string
   message: string
+  function_type?: 'code_debug' | 'deep_learn' | 'similar' | 'next_step';
+  find_prev?: boolean;
 }
 
 export interface Req_StudentRecordInfo extends RequestParams {
@@ -155,7 +157,12 @@ export interface Req_feedbackInfo extends RequestParams {
 }
 
 export interface Req_graphragInfo extends RequestParams {
-  task_id: string
+  task_id?: string
+}
+
+export interface Req_graphragDetail extends Req_graphragInfo {
+  type: string
+  id: string
 }
 
 // API Response Extension

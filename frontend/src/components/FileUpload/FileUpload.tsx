@@ -11,13 +11,22 @@ interface IFileUploadProps {
   handleUploadFile: () => void
   type: 'HTML' | 'PDF2images'
   fileInputRef: React.RefObject<HTMLInputElement>
+  setExperienceDataType?: React.Dispatch<React.SetStateAction<'Current' | 'Upload'>>
   setAlertOpen: React.Dispatch<React.SetStateAction<boolean>>
   setAlertContent: React.Dispatch<React.SetStateAction<string>>
   setFileData: undefined | React.Dispatch<React.SetStateAction<string>> | React.Dispatch<React.SetStateAction<Array<string>>>
 }
 
 const FileUploadComponent = (props: IFileUploadProps) => {
-  const {handleUploadFile, type, fileInputRef, setAlertOpen, setAlertContent, setFileData} = props
+  const {
+    handleUploadFile,
+    type,
+    fileInputRef,
+    setExperienceDataType,
+    setAlertOpen,
+    setAlertContent,
+    setFileData
+  } = props
 
   const [fileName, setFileName] = useState<string>("")
 
@@ -52,6 +61,7 @@ const FileUploadComponent = (props: IFileUploadProps) => {
         if (fileInputRef.current) fileInputRef.current.value = ""; // 清空 input 的值
       } else {
         setFileName(files[0].name)
+        setExperienceDataType?.('Upload')
         // 本地預覽
         const fileURL = URL.createObjectURL(files[0])
         if (type == 'HTML' && setFileData) (setFileData as React.Dispatch<React.SetStateAction<string>>)(fileURL)

@@ -8,7 +8,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 
 from backend.models import ClassName, StudentRecord, User, StudentTask, Task
 
-from ..utils import calculate_box_plot_data
+from backend.utils.common_utils import calculate_box_plot_data
 
 """
  Response Status List:

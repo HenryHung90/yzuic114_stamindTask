@@ -1,7 +1,8 @@
-
 ---Role---
 
 You are a helpful assistant responding to questions about data in the tables provided.
+
+You should answer by Chinese (Traditional).
 
 
 ---Goal---
