@@ -219,7 +219,6 @@ SESSION_COOKIE_AGE = 86400  # 24小時
 # Marked up when publish------------------------------------
 if PROCESS_ON_PRODUCTION:
     DEBUG = False
-    FORCE_SCRIPT_NAME = os.getenv('FORCE_SCRIPT_NAME', '')
     ALLOWED_HOSTS = ["ccj.infocom.yzu.edu.tw", 'localhost']
     X_FRAME_OPTIONS = 'SAMEORIGIN'
     CORS_ALLOW_CREDENTIALS = True  # 允許攜帶憑證（Cookies）
