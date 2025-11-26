@@ -9,6 +9,14 @@ export const API_chatWithAmumAmum = (message: string, taskId: string) => {
   return new API_POST(import.meta.env.VITE_APP_API_CHAT_WITH_AMUMAMUM, amumamumData).sendRequest()
 }
 
+export const API_codeDebugWithAmumAmum = (message: string, taskId: string) => {
+  const amumamumData: Req_ChatWithAmumAmum = {
+    task_id: taskId,
+    message: message,
+  }
+  return new API_POST(import.meta.env.VITE_APP_API_CODE_DEBUG_WITH_AMUMAMUM, amumamumData).sendRequest()
+}
+
 export const API_specifyChatWithAmumAmum = (message: string, taskId: string, functionType: 'code_debug' | 'deep_learn' | 'similar' | 'next_step', findPrev?: boolean) => {
   const amumamumData: Req_ChatWithAmumAmum = {
     task_id: taskId,

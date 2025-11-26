@@ -19,6 +19,12 @@ class StudentTaskProcessCode(models.Model):
         verbose_name='CSS 程式'
     )
 
+    assistant_thread_id = models.CharField(
+        max_length=255,
+        blank=True,
+        verbose_name='助理對話Thread ID'
+    )
+
     code_history = models.JSONField(
         blank=True,
         null=True,

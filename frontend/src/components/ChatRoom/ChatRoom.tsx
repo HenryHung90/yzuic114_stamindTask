@@ -19,7 +19,11 @@ import GraphDialogComponent from "./GraphDialog";
 
 // interface
 import {IMessages} from "../../utils/interface/chatRoom";
-import {API_chatWithAmumAmum, API_specifyChatWithAmumAmum} from "../../utils/API/API_ChatGPT";
+import {
+  API_chatWithAmumAmum,
+  API_codeDebugWithAmumAmum,
+  API_specifyChatWithAmumAmum
+} from "../../utils/API/API_ChatGPT";
 import {API_getChatHistories} from "../../utils/API/API_ChatHistories";
 import {handleCustomRecord, IStudentRecords} from "../../utils/listener/action";
 import ImageComponent from "../Image/Image";
@@ -171,6 +175,20 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
       if (currentMethod === "normal") {
         // 將訊息送出給 Chat
         API_chatWithAmumAmum(messageInput, taskId).then(response => {
+          const assistant = response.data.assistant
+          setMessages(prevState => {
+            const newMessage: IMessages = {
+              time: assistant.time,
+              name: assistant.name,
+              studentId: assistant.student_id,
+              message: assistant.message,
+            }
+            return [...prevState, newMessage]
+          })
+          setIsSubmitMessage(false)
+        })
+      } else if (currentMethod === "code_debug") {
+        API_codeDebugWithAmumAmum(messageInput, taskId).then(response => {
           const assistant = response.data.assistant
           setMessages(prevState => {
             const newMessage: IMessages = {

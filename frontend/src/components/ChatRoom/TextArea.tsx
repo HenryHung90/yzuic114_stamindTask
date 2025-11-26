@@ -22,13 +22,13 @@ const TextAreaComponent = (props: ITextAreaProps) => {
 
   const [isComposing, setIsComposing] = React.useState<boolean>(false)
 
-  const handleSumbitMessage = () => {
+  const handleSubmitMessage = () => {
     setIsSubmitMessage(true)
   }
   const handleEnterKeyDown = (e: any) => {
-    if (e.key === 'Enter' && !e.shiftKey && !isComposing && !isSubmitMessage) {
+    if (e.key === 'Enter' && !e.shiftKey && !isComposing && !isSubmitMessage && messageInput.trim() !== '') {
       e.preventDefault()
-      handleSumbitMessage()
+      handleSubmitMessage()
     }
   }
 
@@ -57,7 +57,7 @@ const TextAreaComponent = (props: ITextAreaProps) => {
         <IconButton
           variant="text"
           className="rounded-full bg-stamindTask-black-600"
-          onClick={handleSumbitMessage}
+          onClick={handleSubmitMessage}
           aria-label="提交訊息"
           placeholder={undefined}>
           <svg
