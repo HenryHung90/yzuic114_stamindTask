@@ -204,7 +204,6 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
       } else {
         // 特殊功能
         API_specifyChatWithAmumAmum(messageInput, taskId, currentMethod).then(response => {
-          console.log(response.data)
           setIsSubmitMessage(false)
         })
       }

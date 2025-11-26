@@ -168,7 +168,6 @@ const GraphDialogComponent = (props: IGraphDialogProps) => {
         if (params.nodes.length > 0) {
           const nodeId = params.nodes[0];
           const node = data.nodes.get(nodeId);
-          console.log('點擊節點:', node);
 
           // 如果節點不是 community 類型，則觸發 onClickNode 回調
           if (node && !node.community) {
@@ -181,7 +180,6 @@ const GraphDialogComponent = (props: IGraphDialogProps) => {
       networkInstance.current.on("hoverNode", function (params: any) {
         const nodeId = params.node;
         const node = data.nodes.get(nodeId);
-        console.log('Hover 節點:', node);
         setHoveredNode(node);
       });
 
@@ -190,7 +188,6 @@ const GraphDialogComponent = (props: IGraphDialogProps) => {
       });
 
       networkInstance.current.on("hoverEdge", function (params: any) {
-        console.log('Hover 邊:', params.edge);
       });
 
       // 網路圖載入完成後適應容器

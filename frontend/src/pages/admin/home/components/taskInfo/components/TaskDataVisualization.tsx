@@ -94,7 +94,6 @@ const TaskDataVisualizationComponent = (props: IDataVisualizationProps) => {
         }),
       API_getStudentRecordsInfoByTaskId(taskId)
         .then(response => {
-          console.log(response.data.record_data)
           setStageDurationData(response.data.record_data)
           return response
         })

@@ -217,8 +217,6 @@ def specific_chat_with_amumamum(request):
                     'weight': rel['weight']
                 })
 
-            print(f"找到的 Relationships: {len(relationships)} 條關係")
-
             # 3. 根據 function_type 生成不同的推薦
             recommendations = {}
 

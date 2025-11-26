@@ -47,7 +47,6 @@ const ExperiencePageComponent = (props: ITaskExperienceProps) => {
   useEffect(() => {
     const fetchTaskExperience = async () => {
       API_getTaskExperience(taskId).then(response => {
-        console.log(experienceDataType)
         if (response.data.html_content) {
           setExperienceData(response.data.html_content)
         } else {
