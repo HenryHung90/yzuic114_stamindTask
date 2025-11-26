@@ -72,9 +72,6 @@ def chat_with_amumamum(request):
         result = subprocess.run(cmd, capture_output=True, text=True)
         output_text = result.stdout or result.stderr
 
-        print("User Entry:" + user_question)
-        print(result)
-
         gpt_content = {
             "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "name": "Amum Amum",
