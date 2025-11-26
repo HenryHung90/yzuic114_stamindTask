@@ -10,7 +10,7 @@ from rest_framework.response import Response
 from django.views.decorators.csrf import ensure_csrf_cookie
 from datetime import datetime
 
-from backend.models import StudentTask, RagRelationships, RagEntities, RagCommunities
+from backend.models import StudentTask, RagRelationships, RagEntities, StudentTaskProcessCode
 from backend.utils.graphrag_utils import extract_graphrag_references, generate_next_step_graph
 from backend.utils.recommendation_utils import (
     generate_related_knowledge_recommendations,
@@ -19,18 +19,8 @@ from backend.utils.recommendation_utils import (
 
 client = OpenAI(api_key=os.getenv('OPENAI_KEY'))
 
+CODE_DEBUG_ASSISTANT_ID = os.getenv('CODE_DEBUG_ASSISTANT_ID')
 AI_NAME = "Amum Amum"
-
-SYSTEM_PROMPT = """
-#zh-tw
-The user may provide you with past messages in the following format: 過去的訊息內容：時間:{time}訊息:{message}*end*\n
-You should only use these past messages as a reference to better understand the context of the user's question. Do not directly include or repeat the past messages in your response unless explicitly requested by the user.
-You are an intelligent and helpful assistant dedicated to answering only questions related to the course content. 
-You must not answer any question or provide information that is unrelated to the course.
-When responding to the following prompt, 
-please make sure to properly style your response using Github Flavored Markdown. 
-Use markdown syntax for things like headings, lists, colored text, code blocks, highlights etc.
-"""
 
 
 # OpenAI integrate
@@ -74,7 +64,7 @@ def chat_with_amumamum(request):
 
         gpt_content = {
             "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "name": "Amum Amum",
+            "name": AI_NAME,
             "student_id": "",
             "message": output_text,
         }
@@ -87,6 +77,72 @@ def chat_with_amumamum(request):
     except Exception as e:
         print(f'chat with amumamum Error: {e}')
         return Response({'chat with amumamum Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
+@api_view(['POST'])
+def code_debug_with_amumamum(request):
+    user_question = request.data.get('message')
+    task_id = request.data.get('task_id')
+    student_task = StudentTask.objects.get(student_id=request.user.student_id, task_id=task_id)
+    user_process_code = student_task.process.process_code
+    user_history_data = student_task.chat_history
+
+    html_code = user_process_code.html_code or ""
+    css_code = user_process_code.css_code or ""
+    js_code = user_process_code.js_code or ""
+
+    prompt_message = f"""
+            請幫我解決以下程式碼問題：
+
+            問題描述：{user_question}
+
+            HTML 代碼：
+            ```html
+            {html_code}
+            ```
+
+            CSS 代碼：
+            ```css
+            {css_code}
+            ```
+
+            JavaScript 代碼：
+            ```javascript
+            {js_code}
+            ```
+
+            請提供詳細的解釋和解決方案。
+            """
+    messages = []
+    messages.append({"role": "user", "content": prompt_message})
+    response = client.chat.completions.create(
+        model="gpt-4o-mini-2024-07-18",  # 或者您想使用的其他模型
+        messages=messages,
+        temperature=0.7,
+        max_tokens=4000
+    )
+    response_text = response.choices[0].message.content
+
+    user_content = {
+        "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "name": request.user.name,
+        "student_id": request.user.student_id,
+        "message": user_question,
+    }
+    gpt_content = {
+        "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "name": AI_NAME,
+        "student_id": "",
+        "message": response_text,
+    }
+    # 更新聊天歷史
+    user_history_data.chat_history.append(user_content)
+    user_history_data.chat_history.append(gpt_content)
+    user_history_data.save()
+
+    return Response({'assistant': gpt_content}, status=status.HTTP_200_OK)
 
 
 # Specific function for graphRag recommendation

@@ -73,6 +73,8 @@ API_POST = [
 
     # chat with AmumAmum
     path('chat_with_amumamum/', chat_with_amumamum, name='chat_with_amumamum'),
+    # code debug with AmumAmum
+    path('code_debug_with_amumamum/', code_debug_with_amumamum, name='code_debug_with_amumamum'),
     # get Chat History
     path('get_chat_histories/', get_chat_histories, name='get_chat_histories'),
 

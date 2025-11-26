@@ -1,15 +1,20 @@
+version: "3.9"
+
 services:
   web:
+    platform: linux/arm64
     build:
       context: .
       dockerfile: Dockerfile
     command: >
-      sh -c "python manage.py collectstatic --noinput --clear &&
-             python manage.py makemigrations &&
-             python manage.py migrate && 
-             python manage.py create_default_user &&
-             python manage.py create_default_class &&
-             python manage.py runserver 0.0.0.0:8000"
+      sh -c "
+        python manage.py collectstatic --noinput --clear &&
+        python manage.py makemigrations &&
+        python manage.py migrate &&
+        python manage.py create_default_user &&
+        python manage.py create_default_class &&
+        python manage.py runserver 0.0.0.0:8000
+      "
     env_file:
       - .env
     environment:
@@ -19,6 +24,10 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       PROCESS_ON_PRODUCTION: True
+      OPENBLAS_CORETYPE: ARMV8
+      OPENBLAS_NUM_THREADS: 1
+      OMP_NUM_THREADS: 1
+      NUMEXPR_MAX_THREADS: 1
     volumes:
       - static_volume:/app/static
       - media_volume:/app/files
@@ -26,28 +35,28 @@ services:
       - db
 
   db:
+    platform: linux/arm64
     image: postgres:15
     environment:
-      POSTGRES_DB: yzuic114_stamindtask         # 自動創建的資料庫名稱
-      POSTGRES_USER: henry                      # 自動創建的用戶名稱
-      POSTGRES_PASSWORD: henry_yzuic            # 用戶的密碼
-      DJANGO_SUPERUSER_ID:
-      DJANGO_SUPERUSER_PASSWORD:
+      POSTGRES_DB: yzuic114_stamindtask
+      POSTGRES_USER: henry
+      POSTGRES_PASSWORD: henry_yzuic
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
   nginx:
+    platform: linux/arm64
     image: nginx:latest
     ports:
-      - "8080:8080"  # 將 Nginx 暴露到主機的 8080 埠
+      - "8080:8080"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      - static_volume:/app/static  # 掛載靜態文件
-      - media_volume:/app/files    # 掛載媒體文件
+      - static_volume:/app/static
+      - media_volume:/app/files
     depends_on:
-      - web  # 確保 Django 容器啟動後再啟動 Nginx
+      - web
 
 volumes:
   postgres_data:

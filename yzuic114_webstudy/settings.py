@@ -171,14 +171,11 @@ PROCESS_ON_PRODUCTION = os.getenv('PROCESS_ON_PRODUCTION', False).lower() == 'tr
 if PROCESS_ON_PRODUCTION:
     # 生產環境 - 使用子路徑
     MIDDLEWARE_EXEMPT_PATHS = [
-        '/taskmind/api/login/',
-        '/taskmind/api/register/',
-        '/taskmind/',
-        '/taskmind/files/img/logo.PNG',
-        '/taskmind/vite.svg',
-        '/',
+        '/api/login/',
+        '/api/register/',
         '/files/img/logo.PNG',
-        '/vite.svg'
+        '/vite.svg',
+        '/'
     ]
     MIDDLEWARE_ADMIN_PREFIX = '/taskmind/api/admin/'
 else:
@@ -218,8 +215,7 @@ SESSION_COOKIE_AGE = 86400  # 24小時
 
 # Marked up when publish------------------------------------
 if PROCESS_ON_PRODUCTION:
-    DEBUG = False
-    FORCE_SCRIPT_NAME = os.getenv('FORCE_SCRIPT_NAME', '')
+    DEBUG = True
     ALLOWED_HOSTS = ["ccj.infocom.yzu.edu.tw", 'localhost']
     X_FRAME_OPTIONS = 'SAMEORIGIN'
     CORS_ALLOW_CREDENTIALS = True  # 允許攜帶憑證（Cookies）

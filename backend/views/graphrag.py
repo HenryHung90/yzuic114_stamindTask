@@ -1,3 +1,6 @@
+import time
+
+from django.utils import timezone
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -216,6 +219,7 @@ def upload_graphrag_file(request):
                         relationship_ids=relationship_ids,
                         text_unit_ids=text_unit_ids,
                         size=int(row.get('size', 0)),
+                        created_at=timezone.now(),  # 設置為當前時間
                         # period字段需要特殊處理，这里先不设置，如需處理可添加
                     )
                     community.save()
@@ -249,6 +253,7 @@ def upload_graphrag_file(request):
                         text_unit_ids=text_unit_ids,
                         frequency=int(row.get('frequency', 0)),
                         degree=int(row.get('degree', 0)),
+                        created_at=timezone.now(),  # 設置為當前時間
                     )
                     entity.save()
 
@@ -281,6 +286,7 @@ def upload_graphrag_file(request):
                         weight=float(row.get('weight', 0.0)),
                         combined_degree=int(row.get('combined_degree', 0)),
                         text_unit_ids=text_unit_ids,
+                        created_at=timezone.now(),  # 設置為當前時間
                     )
                     relationship.save()
 
@@ -316,6 +322,7 @@ def upload_graphrag_file(request):
                         entity_ids=entity_ids,
                         relationship_ids=relationship_ids,
                         covariate_ids=covariate_ids,
+                        created_at=timezone.now(),  # 設置為當前時間
                     )
                     source.save()
 
@@ -358,6 +365,7 @@ def upload_graphrag_file(request):
                         findings=findings,
                         full_content_json=full_content_json,
                         size=int(row.get('size', 0)) if row.get('size') is not None else None,
+                        created_at=timezone.now(),  # 設置為當前時間
                         # period字段需要特殊處理，这里先不设置
                     )
                     summary.save()
