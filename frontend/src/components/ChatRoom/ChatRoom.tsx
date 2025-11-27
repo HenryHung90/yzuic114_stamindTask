@@ -204,7 +204,6 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
       } else {
         // 特殊功能
         API_specifyChatWithAmumAmum(messageInput, taskId, currentMethod).then(response => {
-          console.log(response.data)
           setIsSubmitMessage(false)
         })
       }
@@ -242,7 +241,7 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
         graphData = response.data.recommendation_data.recommendations.next_step[0].graph_data;
       } else {
         alert("該知識節點沒有辦法再繼續延伸，可能是因為：\n1. 已經到達知識的盡頭。\n2. 實體之間缺乏足夠的關聯。\n 將給您上一次知識圖譜。")
-        handleGenerateKnowledgeGraph(functionType, true);
+        if (!findPrev) handleGenerateKnowledgeGraph(functionType, true);
       }
       setGraphData(graphData);
       setOpenGraphDialog(true);
