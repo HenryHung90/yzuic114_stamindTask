@@ -17,7 +17,6 @@ import MarkDownTextComponent from "../MarkDownText/MarkDownText";
 
 const MessageContentComponent = (props: IMessages) => {
   const {time, studentId, name, message, type, taskId} = props
-
   return (
     <div className='min-w-[20rem] max-w-[50vw] animate-messageSlideIn'>
       <div>
