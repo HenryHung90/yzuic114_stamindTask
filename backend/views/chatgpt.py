@@ -83,66 +83,138 @@ def chat_with_amumamum(request):
 @permission_classes([IsAuthenticated])
 @api_view(['POST'])
 def code_debug_with_amumamum(request):
-    user_question = request.data.get('message')
-    task_id = request.data.get('task_id')
-    student_task = StudentTask.objects.get(student_id=request.user.student_id, task_id=task_id)
-    user_process_code = student_task.process.process_code
-    user_history_data = student_task.chat_history
+    try:
+        user_question = request.data.get('message')
+        task_id = request.data.get('task_id')
+        student_task = StudentTask.objects.get(student_id=request.user.student_id, task_id=task_id)
+        user_process_code = student_task.process.process_code
+        user_history_data = student_task.chat_history
 
-    html_code = user_process_code.html_code or ""
-    css_code = user_process_code.css_code or ""
-    js_code = user_process_code.js_code or ""
+        html_code = user_process_code.html_code or ""
+        css_code = user_process_code.css_code or ""
+        js_code = user_process_code.js_code or ""
 
-    prompt_message = f"""
-            請幫我解決以下程式碼問題：
+        # 檢查是否有 thread_id，如果沒有則創建新的 thread
+        thread_id = user_process_code.assistant_thread_id
+        if not thread_id:
+            # 創建新的 thread
+            thread = client.beta.threads.create()
+            thread_id = thread.id
+            # 保存 thread_id
+            user_process_code.assistant_thread_id = thread_id
+            user_process_code.save()
 
-            問題描述：{user_question}
+        # 構建提示訊息
+        prompt_message = f"""
+                請幫我解決以下程式碼問題：
 
-            HTML 代碼：
-            ```html
-            {html_code}
-            ```
+                問題描述：{user_question}
 
-            CSS 代碼：
-            ```css
-            {css_code}
-            ```
+                HTML 代碼：
+                ```html
+                {html_code}
+                ```
 
-            JavaScript 代碼：
-            ```javascript
-            {js_code}
-            ```
+                CSS 代碼：
+                ```css
+                {css_code}
+                ```
 
-            請提供詳細的解釋和解決方案。
-            """
-    messages = []
-    messages.append({"role": "user", "content": prompt_message})
-    response = client.chat.completions.create(
-        model="gpt-4o-mini-2024-07-18",  # 或者您想使用的其他模型
-        messages=messages,
-        temperature=0.7,
-        max_tokens=4000
-    )
-    response_text = response.choices[0].message.content
+                JavaScript 代碼：
+                ```javascript
+                {js_code}
+                ```
 
-    user_content = {
-        "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "name": request.user.name,
-        "student_id": request.user.student_id,
-        "message": user_question,
-    }
-    gpt_content = {
-        "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "name": AI_NAME,
-        "student_id": "",
-        "message": response_text,
-    }
-    # 更新聊天歷史
-    user_history_data.chat_history.append(user_content)
-    user_history_data.chat_history.append(gpt_content)
-    user_history_data.save()
+                請提供詳細的解釋和解決方案。
+                """
 
-    return Response({'assistant': gpt_content}, status=status.HTTP_200_OK)
+        # 將用戶問題添加到 thread
+        message = client.beta.threads.messages.create(
+            thread_id=thread_id,
+            role="user",
+            content=prompt_message
+        )
+
+        # 運行助手
+        run = client.beta.threads.runs.create(
+            thread_id=thread_id,
+            assistant_id=CODE_DEBUG_ASSISTANT_ID
+        )
+
+        # 等待運行完成
+        import time
+        max_retries = 30  # 最多等待30秒
+        retry_count = 0
+
+        while True:
+            if retry_count >= max_retries:
+                return Response({'error': 'Assistant response timeout'}, status=status.HTTP_504_GATEWAY_TIMEOUT)
+
+            run_status = client.beta.threads.runs.retrieve(
+                thread_id=thread_id,
+                run_id=run.id
+            )
+
+            if run_status.status == 'completed':
+                break
+            elif run_status.status in ['failed', 'cancelled', 'expired']:
+                return Response(
+                    {'error': f'Assistant run failed with status: {run_status.status}'},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+
+            # 短暫等待後再檢查狀態
+            time.sleep(1)
+            retry_count += 1
+
+        # 獲取助手的回應
+        messages = client.beta.threads.messages.list(
+            thread_id=thread_id
+        )
+
+        # 獲取最新的助手回應
+        assistant_message = None
+        for msg in messages.data:
+            if msg.role == "assistant":
+                assistant_message = msg
+                break
+
+        if assistant_message:
+            # 提取文本內容
+            response_text = ""
+            for content_item in assistant_message.content:
+                if content_item.type == "text":
+                    response_text += content_item.text.value
+
+            # 創建用戶消息和助手回應內容
+            user_content = {
+                "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "name": request.user.name,
+                "student_id": request.user.student_id,
+                "message": user_question,
+            }
+            gpt_content = {
+                "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "name": AI_NAME,
+                "student_id": "",
+                "message": response_text,
+            }
+
+            # 更新聊天歷史
+            user_history_data.chat_history.append(user_content)
+            user_history_data.chat_history.append(gpt_content)
+            user_history_data.save()
+
+            return Response({'assistant': gpt_content}, status=status.HTTP_200_OK)
+        else:
+            return Response({'error': 'No assistant response received'},
+                            status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    except Exception as e:
+        print(f'code debug with amumamum Error: {e}')
+        import traceback
+        traceback.print_exc()
+        return Response({'code debug with amumamum Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
 # Specific function for graphRag recommendation
