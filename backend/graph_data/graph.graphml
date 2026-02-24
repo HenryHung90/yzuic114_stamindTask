@@ -1,0 +1,291 @@
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d0" for="edge" attr.name="weight" attr.type="double" />
+  <graph edgedefault="undirected">
+    <node id="HTML" />
+    <node id="CSS" />
+    <node id="JS" />
+    <node id="TODO-LIST" />
+    <node id="FLEXBOX" />
+    <node id="RENDERTODOS()" />
+    <node id="INNERHTML" />
+    <node id="VIEW-MODE" />
+    <node id="EDIT-MODE" />
+    <node id="HTML&#27169;&#32068;" />
+    <node id="&#38748;&#24907;&#39592;&#26550;" />
+    <node id="CSS&#30340;&#38468;&#33879;&#40670;" />
+    <node id="JS&#30340;&#25805;&#20316;&#33310;&#21488;" />
+    <node id="&#24453;&#36774;&#20107;&#38917;&#21015;&#34920;&#23481;&#22120;" />
+    <node id="&#21629;&#21517;&#31574;&#30053;" />
+    <node id="&#21807;&#19968;&#24615;" />
+    <node id="&#37325;&#35079;&#24615;" />
+    <node id="&#35486;&#24847;&#21270;&#33287;&#21407;&#29983;&#34892;&#28858;" />
+    <node id="&#34920;&#21934;&#25552;&#20132;" />
+    <node id="&#38450;&#21574;&#27231;&#21046;" />
+    <node id="&#20027;&#25033;&#29992;&#23481;&#22120;" />
+    <node id="&#34920;&#21934;&#21312;&#22495;" />
+    <node id="SUBMIT&#20107;&#20214;" />
+    <node id="APP" />
+    <node id="TODO-FORM" />
+    <node id="SUBMIT" />
+    <node id="TODOINPUT" />
+    <node id="TODOBUTTON" />
+    <node id="REQUIRED" />
+    <node id="TODO-LIST-ID" />
+    <node id="CSS &#27169;&#32068;" />
+    <node id="HTML &#32080;&#27083;" />
+    <node id="JAVASCRIPT" />
+    <node id="&#38450;&#31142;&#24615;&#35373;&#35336;" />
+    <node id="&#21345;&#29255;&#35373;&#35336;" />
+    <node id="FLEX: 1" />
+    <node id="TODO-CONTENT" />
+    <node id="CARD-BUTTONS" />
+    <node id="&#35222;&#35258;&#29376;&#24907;&#27231;" />
+    <node id="&#32232;&#36655;&#27169;&#24335;" />
+    <node id="DISPLAY: NONE" />
+    <node id="&#32178;&#26684;&#31995;&#32113;" />
+    <node id="SPACING MANAGEMENT" />
+    <node id="GAP" />
+    <node id="MAX-WIDTH: 600PX" />
+    <node id="MARGIN: 0 AUTO" />
+    <node id="&#36984;&#25799;&#22120;&#31574;&#30053;" />
+    <node id="&#29305;&#30064;&#24615;" />
+    <node id="MAX-WIDTH" />
+    <node id="TODO-CARD" />
+    <node id="FLEX" />
+    <node id="FLEX-WRAP" />
+    <node id="FLEX-DIRECTION" />
+    <node id="MARGIN" />
+    <node id="JAVASCRIPT &#27169;&#32068;" />
+    <node id="CSS &#39006;&#21029;" />
+    <node id="E.PREVENTDEFAULT" />
+    <node id="TODOLIST" />
+    <node id="RENDERTODOS" />
+    <node id="UNIQUE ID" />
+    <node id="E.TARGET" />
+    <node id="SPA&#34892;&#28858;&#25511;&#21046;" />
+    <node id="TODOFORM" />
+    <node id="&#25876;&#25130;&#25552;&#20132;" />
+    <node id="E.PREVENTDEFAULT()" />
+    <node id="&#21807;&#19968;&#35672;&#21029;&#30908;" />
+    <node id="ADDTODO" />
+    <node id="DATE.NOW()" />
+    <node id="ISEDITING" />
+    <node id="TODOLISTELEMENT" />
+    <node id="BTN-DELETE" />
+    <node id="INDEX.HTML" />
+    <node id="STYLE.CSS" />
+    <node id="SCRIPT.JS" />
+    <node id="TODO FORM" />
+    <node id="ADD TODO" />
+    <node id="TODO LIST" />
+    <node id="RENDER TODOS" />
+    <node id="TODO CARD" />
+    <node id="TODO CONTENT" />
+    <node id="VIEW MODE" />
+    <node id="EDIT MODE" />
+    <edge source="HTML" target="CSS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HTML" target="JS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="HTML" target="TODO-LIST">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="CSS" target="JS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS" target="FLEXBOX">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TODO-LIST" target="APP">
+      <data key="d0">13.0</data>
+    </edge>
+    <edge source="TODO-LIST" target="TODO-LIST-ID">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="TODO-LIST" target="&#32178;&#26684;&#31995;&#32113;">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TODO-LIST" target="TODO-CARD">
+      <data key="d0">14.0</data>
+    </edge>
+    <edge source="TODO-LIST" target="FLEX">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="TODO-LIST" target="FLEX-WRAP">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TODO-LIST" target="RENDERTODOS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="RENDERTODOS()" target="INNERHTML">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="VIEW-MODE" target="EDIT-MODE">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="VIEW-MODE" target="TODO-CARD">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="EDIT-MODE" target="TODO-CARD">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="HTML&#27169;&#32068;" target="&#38748;&#24907;&#39592;&#26550;">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="HTML&#27169;&#32068;" target="CSS&#30340;&#38468;&#33879;&#40670;">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="HTML&#27169;&#32068;" target="JS&#30340;&#25805;&#20316;&#33310;&#21488;">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JS&#30340;&#25805;&#20316;&#33310;&#21488;" target="&#24453;&#36774;&#20107;&#38917;&#21015;&#34920;&#23481;&#22120;">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="&#21629;&#21517;&#31574;&#30053;" target="&#21807;&#19968;&#24615;">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="&#21629;&#21517;&#31574;&#30053;" target="&#37325;&#35079;&#24615;">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="&#35486;&#24847;&#21270;&#33287;&#21407;&#29983;&#34892;&#28858;" target="&#34920;&#21934;&#25552;&#20132;">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="&#35486;&#24847;&#21270;&#33287;&#21407;&#29983;&#34892;&#28858;" target="&#38450;&#21574;&#27231;&#21046;">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="&#20027;&#25033;&#29992;&#23481;&#22120;" target="&#34920;&#21934;&#21312;&#22495;">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="&#34920;&#21934;&#21312;&#22495;" target="SUBMIT&#20107;&#20214;">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="APP" target="TODO-FORM">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="APP" target="MAX-WIDTH: 600PX">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="APP" target="MARGIN: 0 AUTO">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="APP" target="MAX-WIDTH">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TODO-FORM" target="SUBMIT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TODO-FORM" target="TODOINPUT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TODO-FORM" target="TODOBUTTON">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TODO-FORM" target="REQUIRED">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CSS &#27169;&#32068;" target="HTML &#32080;&#27083;">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS &#27169;&#32068;" target="JAVASCRIPT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="HTML &#32080;&#27083;" target="JAVASCRIPT &#27169;&#32068;">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="&#38450;&#31142;&#24615;&#35373;&#35336;" target="&#21345;&#29255;&#35373;&#35336;">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="&#38450;&#31142;&#24615;&#35373;&#35336;" target="TODO-CARD">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="FLEX: 1" target="TODO-CONTENT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TODO-CONTENT" target="CARD-BUTTONS">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TODO-CONTENT" target="TODO-CARD">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="&#35222;&#35258;&#29376;&#24907;&#27231;" target="&#32232;&#36655;&#27169;&#24335;">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="&#32232;&#36655;&#27169;&#24335;" target="DISPLAY: NONE">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="SPACING MANAGEMENT" target="GAP">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="GAP" target="MARGIN">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="&#36984;&#25799;&#22120;&#31574;&#30053;" target="&#29305;&#30064;&#24615;">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="TODO-CARD" target="FLEX-DIRECTION">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TODO-CARD" target="E.TARGET">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="JAVASCRIPT &#27169;&#32068;" target="CSS &#39006;&#21029;">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="JAVASCRIPT &#27169;&#32068;" target="E.PREVENTDEFAULT">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="TODOLIST" target="RENDERTODOS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TODOLIST" target="UNIQUE ID">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="SPA&#34892;&#28858;&#25511;&#21046;" target="TODOFORM">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="&#25876;&#25130;&#25552;&#20132;" target="E.PREVENTDEFAULT()">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="&#21807;&#19968;&#35672;&#21029;&#30908;" target="ADDTODO">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="ADDTODO" target="DATE.NOW()">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="ADDTODO" target="ISEDITING">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TODOLISTELEMENT" target="BTN-DELETE">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="INDEX.HTML" target="STYLE.CSS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="INDEX.HTML" target="SCRIPT.JS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TODO FORM" target="ADD TODO">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TODO LIST" target="RENDER TODOS">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="TODO CARD" target="TODO CONTENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TODO CARD" target="VIEW MODE">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="TODO CARD" target="EDIT MODE">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="TODO CONTENT" target="VIEW MODE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TODO CONTENT" target="EDIT MODE">
+      <data key="d0">1.0</data>
+    </edge>
+  </graph>
+</graphml>

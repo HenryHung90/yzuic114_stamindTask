@@ -9,13 +9,17 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.views.decorators.csrf import ensure_csrf_cookie
 from datetime import datetime
+from asgiref.sync import async_to_sync
 
 from backend.models import StudentTask, RagRelationships, RagEntities, StudentTaskProcessCode
-from backend.utils.graphrag_utils import extract_graphrag_references, generate_next_step_graph
+from backend.utils.graphrag_utils import extract_graphrag_references, generate_next_step_graph, \
+    format_context_data_to_data_tag
 from backend.utils.recommendation_utils import (
     generate_related_knowledge_recommendations,
     generate_deep_exploration_recommendations
 )
+
+from backend.utils.graphRAGService import GraphRAGService
 
 client = OpenAI(api_key=os.getenv('OPENAI_KEY'))
 
@@ -37,14 +41,14 @@ def chat_with_amumamum(request):
             user_history_data.chat_history = []
 
         # 取前 4 則訊息當作回顧輸入
-        user_history_stringify = ""
-        for history in user_history_data.chat_history[-4:]:
-            cleaned_message = re.sub(r'\s+', ' ', history['message']).strip()
-            user_history_stringify += '過去的訊息內容：傳送人:{name}時間:{time}訊息:{message}\n'.format(
-                name=history['name'] if history['name'] != AI_NAME else 'OpenAI Assistant',
-                time=history['time'],
-                message=cleaned_message
-            )
+        # user_history_stringify = ""
+        # for history in user_history_data.chat_history[-4:]:
+        #     cleaned_message = re.sub(r'\s+', ' ', history['message']).strip()
+        #     user_history_stringify += '過去的訊息內容：傳送人:{name}\n時間:{time}\n訊息:{message}\n'.format(
+        #         name=history['name'] if history['name'] != AI_NAME else 'OpenAI Assistant',
+        #         time=history['time'],
+        #         message=cleaned_message
+        #     )
         user_content = {
             "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "name": request.user.name,
@@ -52,15 +56,24 @@ def chat_with_amumamum(request):
             "message": user_question,
         }
 
-        cmd = [
-            "graphrag", "query",
-            "--root", './graphrag',
-            "--method", 'local',
-            "--query", user_history_stringify + "本次的問題:" + user_question,
-        ]
+        search_engine = GraphRAGService.get_engine()
+        # query = user_history_stringify + "\n----本次的問題:----\n" + user_question
+        query = user_question
 
-        result = subprocess.run(cmd, capture_output=True, text=True)
-        output_text = result.stdout or result.stderr
+        search_func = async_to_sync(search_engine.search)
+        result_object = search_func(query)
+        output_text = result_object.response
+
+        data_tag = format_context_data_to_data_tag(result_object.context_data)
+        if data_tag:
+            output_text = f"{output_text}\n\n{data_tag}"
+
+        print(result_object.context_data.get('reports', '無資料'))
+        print(result_object.context_data.get('entities', '無資料'))
+        print(result_object.context_data.get('relationships', '無資料'))
+        print(result_object.context_data.get('claims', '無資料'))
+        print(result_object.context_data.get('sources', '無資料'))
+        print(f"生成的 Data 標籤: {data_tag}")
 
         gpt_content = {
             "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -107,24 +120,19 @@ def code_debug_with_amumamum(request):
         # 構建提示訊息
         prompt_message = f"""
                 請幫我解決以下程式碼問題：
-
                 問題描述：{user_question}
-
                 HTML 代碼：
                 ```html
                 {html_code}
                 ```
-
                 CSS 代碼：
                 ```css
                 {css_code}
                 ```
-
                 JavaScript 代碼：
                 ```javascript
                 {js_code}
                 ```
-
                 請提供詳細的解釋和解決方案。
                 """
 
