@@ -1,55 +1,41 @@
-# ===============================
-# 第一階段：前端
-# ===============================
-FROM --platform=linux/arm64 node:20 AS frontend-builder
+# 第一階段：建構前端 (frontend)
+FROM node:20 AS frontend-builder
 WORKDIR /app/frontend
 COPY frontend/package.json frontend/package-lock.json ./
-RUN npm install --legacy-peer-deps
+RUN npm install
 COPY frontend ./
 RUN npm run build
 
-# ===============================
-# 第二階段：後端
-# ===============================
-FROM --platform=linux/arm64 python:3.11-slim AS backend
+# 第二階段：建構後端 (backend)
+FROM python:3.11-slim
 
-# 安裝系統依賴（ARM64）
+# 安裝系統依賴（包括 poppler-utils 和其他工具）
 RUN apt-get update && apt-get install -y \
-    libpq-dev gcc g++ poppler-utils build-essential \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    libpq-dev gcc poppler-utils && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# 設定工作目錄
 WORKDIR /app
 
-# 複製 requirements.txt
+# 複製 requirements.txt 並安裝依賴
 COPY requirements.txt .
-
-# 強制抓 ARM64 wheel，避免 Illegal Instruction
-RUN pip install --no-cache-dir --upgrade pip
-RUN pip install --no-cache-dir \
-    numpy \
-    pyarrow \
-    umap-learn \
-    tiktoken \
-    litellm \
-    fnllm \
-    --only-binary=:all:
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 安裝 pdf2image（純 Python）
-RUN pip install --no-cache-dir pdf2image
+# 確保 pdf2image 與其他依賴正確安裝
+RUN pip install pdf2image
 
-# 複製後端程式碼
+# 複製專案檔案到容器中
 COPY . .
 
-# 複製前端建置結果
+# 複製前端建構結果到後端容器
 COPY --from=frontend-builder /app/frontend/dist ./frontend/dist
 
-# 清理 node_modules
-RUN rm -rf /app/frontend/node_modules
-
-# 環境變數
+# 設定環境變數
 ENV PYTHONUNBUFFERED=1
 ENV DJANGO_SETTINGS_MODULE=yzuic114_webstudy.settings
 
-# 預設啟動指令
-CMD ["gunicorn", "yzuic114_webstudy.wsgi:application", "--bind", "0.0.0.0:8000"]
+# 清理不必要的文件（示例：node_modules）
+RUN rm -rf /app/frontend/node_modules
+
+# 運行 Django 應用程式的指令
+CMD ["sh", "-c", "gunicorn yzuic114_webstudy.wsgi:application --bind 0.0.0.0:8000"]

@@ -27,8 +27,7 @@ class RagSummaries(models.Model):
     # 人類可讀的 ID
     human_readable_id = models.IntegerField(
         verbose_name='可讀ID',
-        db_index=True,
-        unique=True
+        db_index=True
     )
 
     # 社群和層級資訊

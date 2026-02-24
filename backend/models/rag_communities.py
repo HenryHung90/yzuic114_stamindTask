@@ -27,7 +27,6 @@ class RagCommunities(models.Model):
     human_readable_id = models.IntegerField(
         verbose_name='可讀ID',
         db_index=True,
-        unique=True
     )
 
     # 社群編號
