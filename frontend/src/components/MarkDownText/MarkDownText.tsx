@@ -33,6 +33,8 @@ const MarkDownTextComponent = (props: MarkDownTextProps) => {
 
     const references: ReferenceData[] = [];
 
+    const uniqueRefs = new Set<string>();
+
     const processed = text.replace(/\[Data:\s*(.*?)\]/g, (match, dataContent) => {
       const parts = dataContent.split(';').map((part: string) => part.trim());
 
@@ -47,11 +49,16 @@ const MarkDownTextComponent = (props: MarkDownTextProps) => {
               dataType.slice(0, -1) : dataType;
 
             if (dataType === 'Sources') return;
-            references.push({
-              type: singularType,
-              number: number,
-              id: `${singularType.toLowerCase()}-${number}`
-            });
+            const uniqueKey = `${singularType}-${number}`;
+
+            if (!uniqueRefs.has(uniqueKey)) {
+              uniqueRefs.add(uniqueKey);
+              references.push({
+                type: singularType,
+                number: number,
+                id: uniqueKey
+              });
+            }
           });
         }
       });

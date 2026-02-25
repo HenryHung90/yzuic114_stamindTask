@@ -1,0 +1,284 @@
+id,human_readable_id,title,text,text_unit_ids,creation_date,metadata
+doc-0,1,00_course_detail.csv,"[系統架構總覽]
+這份文件定義了模組之間的**依賴關係 (Dependencies)** 與**資料流 (Data Flow)**，是理解整個系統運作的核心。
+1. **結構與樣式的依賴 (HTML <-> CSS)**：
+   HTML 定義的 `.todo-list` 容器，直接依賴 CSS 模組中的 Flexbox 規則 (`display: flex`) 來實現網格排列。若沒有 CSS 的 `flex: 1` 設定，HTML 中的 `.todo-content` 將無法正確推擠按鈕區域，導致 UI 破版。
+2. **行為與結構的依賴 (JS <-> HTML)**：
+   JS 模組中的 `renderTodos()` 函式扮演「渲染引擎」的角色。它會查找 HTML 中定義的 `id=""todoList""` 元素，並透過 DOM API (`innerHTML`) 將動態生成的卡片注入其中。HTML 只是骨架，內容完全由 JS 驅動。
+3. **狀態驅動視覺 (JS <-> CSS)**：
+   JS 是狀態的管理者 (State Manager)。當使用者點擊編輯按鈕時，JS 會切換 HTML 元素的 class (如 `.view-mode` 和 `.edit-mode`)。這些 class 的視覺效果（顯示或隱藏）則是由 CSS 模組定義的。
+**總結**：
+- **JS (JavaScript)**：控制資料邏輯與 DOM 操作。
+- **HTML**：提供語意化結構與 JS 掛載點 (Mount Points)。
+- **CSS**：提供視覺回饋與響應式佈局。
+三者缺一不可，共同構成單頁應用程式 (SPA) 的基礎。",['d39173a54ea8333401c6fc92b0a3d24d6c60b5d03c0352c9c996f419c9935c19c152374823ea381dddec2726266a2113d77facffeff2c7b69001481158285e85'],2026-02-12 21:26:10 +0800,
+doc-1,2,00_course_detail.csv,"[課程內容]
+HTML 模組在本專案中扮演著多重角色，教材常使用以下比喻來描述它：
+1. **靜態骨架 (Static Skeleton)**：
+   HTML 就像建築物的鋼筋結構。它定義了應用程式的基礎層次（Header, Form, List Container）。沒有這個骨架，CSS 無法裝飾，JS 無法操作。
+2. **CSS 的附著點 (Attachment Point)**：
+   HTML 元素透過 `class` 和 `id` 屬性，為 CSS 提供了「掛鉤」。例如 `.app` 容器是 CSS 控制最大寬度的附著點；`.todo-card` 是卡片樣式的附著點。
+3. **JS 的操作舞台 (Operation Stage)**：
+   HTML 預留了特定的容器（如 `<div id=""""todoList"""">`），這是一個空的舞台。JavaScript 腳本執行後，會在這個舞台上動態生成內容。
+
+**4. 命名策略 (Naming Strategy: ID vs Class)**：
+   - **唯一性 (Identity)**：我們給予列表容器 `id=""""todoList""""`，因為在整個頁面上，這個容器是「獨一無二」的單例 (Singleton)。JS 可以透過 `getElementById` 快速且精準地找到它。
+   - **重複性 (Reusability)**：相對地，動態生成的卡片使用 `class=""""todo-card""""`。因為卡片會有無限多張，它們共享相同的樣式藍圖，但各自擁有獨立的內容。
+
+**5. 語意化與原生行為 (Semantic & Native Behavior)**：
+   - **表單提交**：我們使用 `<form>` 標籤包裹輸入框，而不僅僅是 `<div>`。這賦予了應用程式「原生」的鍵盤支援——使用者在輸入文字後按下 **Enter 鍵**，瀏覽器會自動觸發 `submit` 事件。這讓 JS 不需要額外監聽鍵盤事件就能實現流暢的 UX。
+   - **防呆機制**：`<input required>` 屬性利用了瀏覽器內建的驗證機制，防止使用者送出空白的待辦事項。
+
+**核心 DOM 結構詳解**：
+1. **主應用容器 (.app)**：
+   最外層包裹器，負責整體居中。
+2. **表單區域 (.todo-form)**：
+   包含 `<input>` 和 `<button>`。它是使用者與系統互動的入口。
+   - **互動機制**：透過 `submit` 事件觸發資料新增。
+3. **待辦事項列表容器 (.todo-list)**：
+   這是一個關鍵的「掛載點 (Mount Point)」。
+   - **初始狀態**：在 HTML 原始碼中，它是空的 (`<div></div>`)。
+   - **執行狀態**：程式運作後，JS 會將生成的卡片 HTML 字串注入此處。
+
+[Code_Mapping: 關鍵 DOM 結構]
+```html
+<!-- 靜態骨架 -->
+<div class=""""app"""">
+    <div class=""""todo-form"""">
+        <!-- 使用 form 以支援 Enter 鍵提交 -->
+        <form id=""""todoForm"""">
+            <!-- required 屬性提供基礎驗證 -->
+            <input type=""""text"""" id=""""todoInput"""" placeholder=""""輸入待辦事項..."""" required>
+            <button type=""""submit"""">新增</button>
+        </form>
+    </div>
+    
+    <!-- JS 操作舞台 / 掛載點 -->
+    <!-- ID 用於唯一容器，Class 用於樣式佈局 -->
+    <div class=""""todo-list"""" id=""""todoList""""></div>
+</div>
+```","['a5374a22bae550dbb85e0b0ed12e1af3ef3b86816411b2f80b235561cc85af264ec4398b7f5c86941b6b9c65ee7870b340b0c7f84fd5b337101f00b7d6b5271f'
+ '424a2ccaaaab6a0b5dbe807e07dc6d8da118def8918a0f21d3ff6cf3717a68da6b539145a4b473a9d5c064ba10a3f6f44bb84698efbb7da8e087110d8d1b109c']",2026-02-12 21:26:10 +0800,
+doc-2,3,00_course_detail.csv,"[課程內容]
+CSS 模組不僅負責美化，還負責實現 **HTML 結構** 的佈局邏輯，並配合 **JavaScript** 進行狀態切換。
+
+**1. 防禦性設計 (Defensive Design) 與佈局推擠**：
+在卡片設計中，我們無法預知使用者會輸入多少文字。
+- **問題**：如果文字很短，按鈕會浮在半空中；如果文字很長，可能會蓋住按鈕。
+- **解決方案**：使用 `flex: 1` 技巧。
+- **運作機制**：針對 `.todo-content` 設定 `flex: 1`。這會強制內容區域「貪婪地」佔據卡片中所有的剩餘垂直空間。
+- **結果**：無論文字長短，底部的按鈕區 (`.card-buttons`) 都會被穩穩地推擠到卡片的最底端，確保了高度的視覺一致性。
+
+**2. 視覺狀態機 (Visual State Machine)**：
+CSS 配合 JS 實現了編輯模式的切換。我們定義了兩種狀態的樣式：
+- **瀏覽模式 (.view-mode)**：預設顯示文字。
+- **編輯模式 (.edit-mode)**：預設隱藏 (`display: none`)。
+- **切換邏輯**：當 JS 為卡片加上 `.editing` class 時，CSS 規則會反轉這兩個元素的顯示狀態（隱藏瀏覽模式，顯示編輯輸入框）。
+
+**3. 網格系統 (Grid System)**：
+`.todo-list` 使用 `display: flex; flex-wrap: wrap;` 來讓卡片自動換行排列，適應不同螢幕寬度。
+
+**4. 空間管理 (Spacing Management)**：
+   - **Gap 屬性**：我們在 `.todo-list` 容器上使用 `gap: 1em`。這是一種現代化的間距設定方式，它只在卡片「之間」產生空隙，而不會在容器邊緣產生多餘的 margin。這避免了傳統 `margin-right` 導致最後一個元素破版的問題。
+   - **盒模型控制**：`.app` 容器使用 `max-width: 600px` 搭配 `margin: 0 auto`，這是一個經典的「置中約束」模式，確保在大螢幕上內容不會過度拉伸，保持最佳閱讀體驗。
+
+**5. 選擇器策略 (Selector Strategy)**：
+   - **狀態覆蓋**：注意 `.todo-card.editing .view-mode` 這個選擇器。我們利用了 CSS 的「特異性 (Specificity)」規則——透過串接兩個 class (`.todo-card` + `.editing`)，其權重高於單獨的 `.view-mode`，從而成功覆蓋預設樣式，實現狀態切換。
+
+[Code_Mapping: 樣式實作細節]
+```css
+/* 1. 空間管理：置中約束 */
+.app { max-width: 600px; margin: 0 auto; }
+
+/* 2. 網格系統：智慧間距 */
+.todo-list { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 1em; /* 取代傳統 margin */
+}
+
+/* 3. 防禦性設計：推擠按鈕 */
+.todo-card { display: flex; flex-direction: column; }
+.todo-content { flex: 1; } /* 貪婪佔據空間 */
+
+/* 4. 視覺狀態機：權重覆蓋 */
+.edit-mode { display: none; } /* 預設隱藏 */
+/* 當父層有 .editing 時，強制顯示 .edit-mode */
+.todo-card.editing .edit-mode { display: block; background: #eef3ff; }
+","['3d55262dfdf71a867fcf94b7ec83f592a1dd0bcc9c79a56a663d67b8d7b304366dc63397a71bad01b38e49843338d934aa9c2ccccc69e1636897177a2e65414c'
+ '798058df5e7d5a87fb3fad31c0bf4e241352da07fc38b66ecabdc11fd4f99ba7ec04d68af920a5cb52771d449022350bf74189e3d0ecf0c5c928df7eda544da8']",2026-02-12 21:26:10 +0800,
+doc-3,4,00_course_detail.csv,"[課程內容]
+JavaScript 模組是應用程式的大腦，它透過 DOM API 操作 **HTML 結構**，並依賴 **CSS 類別** 來控制視覺狀態。
+
+**1. 單一資料來源 (Single Source of Truth)**：
+我們使用一個全域陣列 `todoList` 來儲存所有資料。
+- **原則**：永遠不要直接修改 DOM 來改變數據。應該先修改 `todoList` 陣列，然後呼叫 `renderTodos()` 重新繪製畫面。這就是「資料驅動 (Data-Driven)」架構。
+
+**2. 渲染引擎 (The Render Engine)**：
+`renderTodos()` 是核心函式。
+- **清理與重建**：每次資料變動，它都會先用 `innerHTML = """"` 清空 `.todo-list` 容器。
+- **動態注入**：接著遍歷資料陣列，使用 `document.createElement` 建立新的卡片元素，並組裝 HTML 字串注入其中。
+- **強耦合 (Strong Coupling)**：JS 產生的 HTML 字串中，寫死了 `.todo-card`, `.view-mode` 等 class 名稱。這意味著 JS 與 CSS 是高度相依的，修改任何一方的命名都可能導致系統崩潰。
+
+**3. 事件代理與冒泡 (Event Delegation & Bubbling)**：
+為了效能優化，我們不在每一顆按鈕上綁定監聽器，而是將監聽器綁定在父容器 `.todo-list` 上。
+- **冒泡機制**：當使用者點擊內部的「刪除按鈕」時，這個點擊事件會像氣泡一樣向上傳遞，最終被父容器 `.todo-list` 捕獲。
+- **目標識別**：透過 `e.target` 我們可以知道真正被點擊的是誰。配合 `e.target.closest('.todo-card')`，我們可以反向查找到該按鈕所屬的「卡片容器」，進而得知要操作哪一筆資料。
+
+**4. SPA 行為控制 (SPA Behavior Control)**：
+- **攔截提交**：在表單監聽器中，第一行代碼是 `e.preventDefault()`。這是單頁應用程式 (SPA) 的關鍵。它阻止了瀏覽器預設的「表單提交後刷新頁面」行為，讓 JS 能夠接手處理資料，實現無刷新更新。
+
+**5. 資料完整性與識別 (Data Integrity)**：
+- **唯一識別碼 (Unique ID)**：在 `addTodo` 時，我們使用 `Date.now()` 作為 ID。這確保了每一筆待辦事項都有一個獨一無二的身分證，即使兩筆事項的文字內容完全相同，程式也能區分它們（例如：刪除第一筆「買牛奶」，不會誤刪第二筆「買牛奶」）。
+
+[Code_Mapping: 核心邏輯實作]
+```javascript
+// 4. SPA 行為控制：阻止頁面刷新
+todoForm.addEventListener('submit', function(e) {
+    e.preventDefault(); // 關鍵！
+    addTodo(input.value);
+});
+
+// 5. 資料識別：生成唯一 ID
+function addTodo(text) {
+    const newTodo = {
+        id: Date.now(), // 時間戳記作為 ID
+        text: text,
+        isEditing: false // 狀態旗標
+    };
+    // ...
+}
+
+// 3. 事件代理：父層監聽
+todoListElement.addEventListener('click', (e) => {
+    // 判斷點擊目標
+    if (e.target.classList.contains('btn-delete')) {
+        // 執行刪除邏輯...
+    }
+});
+","['f983d5325bafbd0aaf1f0a33224d1bd433640b7713800b31bee21e11cda05343e224c75142dd953558eb58eeb203f7caf75856a0239bcd6ef7097188c6cbd8a6'
+ '9281918a7bf42b02b47a116bdf4ee131ce4423cbea2dd0213e48cb75c7a048f3f3c8acb51bc6464f92335db75b4605d74e5e8ce60d215285de6fd647fa121867']",2026-02-12 21:26:10 +0800,
+doc-4,5,00_course_detail.csv,"[完整專案原始碼]
+這是 Todo List 專案的完整實作代碼，包含 HTML 結構、CSS 樣式與 JavaScript 邏輯。所有的架構描述與模組依賴關係均基於此代碼。
+
+### 1. index.html
+```html
+<!DOCTYPE html>
+<html lang=""zh-TW"">
+<head>
+    <meta charset=""UTF-8"">
+    <title>Todo List App</title>
+    <link rel=""stylesheet"" href=""style.css"">
+</head>
+<body>
+    <div class=""app"">
+        <!-- 表單區域：JS 監聽目標 -->
+        <div class=""todo-form"">
+            <form id=""todoForm"">
+                <input type=""text"" id=""todoInput"" placeholder=""輸入待辦事項..."" required>
+                <button type=""submit"">新增</button>
+            </form>
+        </div>
+
+        <!-- 列表容器：JS 渲染掛載點 (Mount Point) -->
+        <!-- 初始為空，依賴 JS 注入內容 -->
+        <div class=""todo-list"" id=""todoList""></div>
+    </div>
+    <script src=""script.js""></script>
+</body>
+</html>
+2. style.css
+```css
+/* 應用程式容器 */
+.app {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 列表佈局：Flexbox 網格系統 */
+.todo-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em; /* 卡片間距 */
+}
+
+/* 卡片設計 */
+.todo-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* 垂直排列內容與按鈕 */
+}
+
+/* 內容區域：防禦性設計 */
+/* 強制佔據剩餘空間，推擠按鈕至底部 */
+.todo-content {
+    flex: 1; 
+    margin-bottom: 10px;
+}
+
+/* 狀態樣式：由 JS 切換 */
+.view-mode { display: block; }
+.edit-mode { display: none; }
+
+/* 編輯狀態下的外觀定義 */
+.todo-card.editing .view-mode { display: none; }
+.todo-card.editing .edit-mode { display: block; background: #eef3ff; }
+```
+3. script.js
+```javascript
+// 資料模型
+let todoList = [];
+
+// DOM 元素引用
+const todoForm = document.getElementById('todoForm');
+const todoListElement = document.getElementById('todoList');
+
+// 監聽表單提交
+todoForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const input = document.getElementById('todoInput');
+    addTodo(input.value);
+    input.value = '';
+});
+
+// 新增邏輯
+function addTodo(text) {
+    const newTodo = {
+        id: Date.now(),
+        text: text,
+        isEditing: false
+    };
+    todoList.push(newTodo);
+    renderTodos();
+}
+
+// 渲染核心 (Render Engine)
+// 強耦合警告：此處生成的 HTML class 必須與 CSS 一致
+function renderTodos() {
+    // 清空容器
+    todoListElement.innerHTML = '';
+    
+    // 生成 HTML 字串
+    todoList.forEach(todo => {
+        const card = document.createElement('div');
+        // 動態切換 class
+        card.className = `todo-card ${todo.isEditing ? 'editing' : ''}`;
+        
+        card.innerHTML = `
+            <div class=""todo-content"">
+                <div class=""view-mode"">${todo.text}</div>
+                <input class=""edit-mode"" value=""${todo.text}"">
+            </div>
+            <div class=""card-buttons"">
+                <button class=""btn-edit"">編輯</button>
+                <button class=""btn-delete"">刪除</button>
+            </div>
+        `;
+        todoListElement.appendChild(card);
+    });
+}
+```",['8f467b4d992cf2d7bd6c762a947adf5fa6aa94ab17b1502ee94ed006ddf046b9e32b8d89dab8a97ba8cc73cb326a06c3ab68099e9cebcd5ab056cf1587775fe2'],2026-02-12 21:26:10 +0800,

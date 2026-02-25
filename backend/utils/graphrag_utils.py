@@ -57,6 +57,40 @@ def extract_graphrag_references(text):
     }
 
 
+def format_context_data_to_data_tag(context_data):
+    """
+    將 context_data 轉換為 [Data: ...] 格式
+    處理 DataFrame 數據
+    """
+    data_parts = []
+
+    # 處理各種類型的數據
+    for data_type, values in context_data.items():
+        # 跳過空值
+        if values is None:
+            continue
+
+        # 處理 DataFrame 類型
+        if hasattr(values, 'empty'):  # 檢查是否為 DataFrame
+            if not values.empty:  # 確保 DataFrame 不為空
+                # 根據不同的數據類型處理
+                if 'id' in values.columns:
+                    ids = values['id'].astype(str).tolist()
+                    # 過濾掉空值並去重
+                    ids = list(set(filter(None, ids)))
+                    if ids:  # 確保有 ID
+                        # 首字母大寫
+                        data_type_capitalized = data_type.capitalize()
+                        data_parts.append(f"{data_type_capitalized} ({', '.join(ids)})")
+
+    # 如果沒有任何數據，返回空字符串
+    if not data_parts:
+        return ""
+
+    # 組合成最終格式
+    return f"[Data: {'; '.join(data_parts)}]"
+
+
 def find_entity_communities(entity_title, task_id):
     """
     根據實體標題找到包含該實體的社群
@@ -173,16 +207,17 @@ def generate_next_step_graph(entities_info, task_id):
 
     # 顏色映射
     color_map = {
-        'PERSON': '#3B82F6',  # 藍色 - 人物
-        'ORGANIZATION': '#10B981',  # 綠色 - 組織
+        'MODULE': '#3B82F6',  # 藍色 - 模組
         'CONCEPT': '#8B5CF6',  # 紫色 - 概念
-        'TECHNOLOGY': '#F59E0B',  # 橙色 - 技術
-        'EVENT': '#EF4444',  # 紅色 - 事件
-        'LOCATION': '#6366F1',  # 靛色 - 地點
-        'METHOD': '#EC4899',  # 粉色 - 方法
-        'TOOL': '#14B8A6',  # 青色 - 工具
-        'DATA': '#F97316',  # 橙紅色 - 數據
-        'PROCESS': '#84CC16',  # 綠黃色 - 流程
+        'UI_COMPONENT': '#EC4899',  # 粉色 - UI元件
+        'CSS_SELECTOR': '#14B8A6',  # 青色 - CSS選擇器
+        'CSS_PROPERTY': '#06B6D4',  # 淺藍色 - CSS屬性
+        'HTML_TAG': '#F97316',  # 橙紅色 - HTML標籤
+        'JAVASCRIPT_FUNCTION': '#EF4444',  # 紅色 - JavaScript函數
+        'DOM_EVENT': '#F59E0B',  # 橙色 - DOM事件
+        'VARIABLE': '#84CC16',  # 綠黃色 - 變數
+        'TECHNOLOGY': '#10B981',  # 綠色 - 技術
+        'IMPLEMENTATION_DETAIL': '#6366F1'  # 靛色 - 實作細節
     }
 
     # 初始化節點和邊
@@ -273,16 +308,17 @@ def generate_next_step_graph(entities_info, task_id):
                     # 添加類型信息（如果有）
                     if 'type' in entity and entity['type']:
                         entity_type_desc = {
-                            'PERSON': '人物',
-                            'ORGANIZATION': '組織',
+                            'MODULE': '模組',
                             'CONCEPT': '概念',
+                            'UI_COMPONENT': 'UI元件',
+                            'CSS_SELECTOR': 'CSS選擇器',
+                            'CSS_PROPERTY': 'CSS屬性',
+                            'HTML_TAG': 'HTML標籤',
+                            'JAVASCRIPT_FUNCTION': 'JavaScript函數',
+                            'DOM_EVENT': 'DOM事件',
+                            'VARIABLE': '變數',
                             'TECHNOLOGY': '技術',
-                            'EVENT': '事件',
-                            'LOCATION': '地點',
-                            'METHOD': '方法',
-                            'TOOL': '工具',
-                            'DATA': '數據',
-                            'PROCESS': '流程'
+                            'IMPLEMENTATION_DETAIL': '實作細節'
                         }.get(entity['type'], '實體')
                         entity_description += f" 這是一個{entity_type_desc}。"
 
