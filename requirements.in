@@ -1,0 +1,17 @@
+Django
+gunicorn
+psycopg2
+pdf2image
+spacy
+jieba
+dotenv
+django-cors-headers
+djangorestframework
+django_extensions
+openai
+pandas
+openpyxl
+xlrd
+stopwordsiso
+whitenoise
+graphrag==2.7.0
