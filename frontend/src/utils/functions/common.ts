@@ -51,7 +51,6 @@ function handlePromise(messageTitle: string, messageInfo: string, loading: ISett
 
 function autoDownloadFile(filePath: string, fileName: string) {
   const a = document.createElement('a');
-  console.log(filePath)
   a.href = filePath;
   document.body.appendChild(a);
   a.click(); // 自動點擊以開始下載

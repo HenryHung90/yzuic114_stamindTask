@@ -56,7 +56,6 @@ const Task = (props: ITaskProps) => {
       settingAlertLogAndLoading.setLoadingOpen(true)
       API_initStudentTask(taskId || '').then(response => {
         settingAlertLogAndLoading.setLoadingOpen(false)
-        console.log(response.data.status)
       })
     }
 
