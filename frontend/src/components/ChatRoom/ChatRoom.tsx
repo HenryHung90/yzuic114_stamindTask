@@ -21,7 +21,7 @@ import GraphDialogComponent from "./GraphDialog";
 import {IMessages} from "../../utils/interface/chatRoom";
 import {
   API_chatWithAmumAmum,
-  API_codeDebugWithAmumAmum,
+  API_codeDebugWithAmumAmum, API_nextStepWithAmumAmum,
   API_specifyChatWithAmumAmum
 } from "../../utils/API/API_ChatGPT";
 import {API_getChatHistories} from "../../utils/API/API_ChatHistories";
@@ -229,30 +229,47 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
   };
 
 
-  const handleGenerateKnowledgeGraph = (functionType: "code_debug" | "deep_learn" | "similar" | "next_step", findPrev: boolean = false) => {
-    setIsSubmitMessage(true);
-    API_specifyChatWithAmumAmum("", taskId, functionType, findPrev).then(response => {
-      let graphData: any = null;
-      if (functionType === 'deep_learn' && response.data?.recommendation_data?.recommendations?.deep_exploration?.[0]?.graph_data) {
-        graphData = response.data.recommendation_data.recommendations.deep_exploration[0].graph_data;
-      } else if (functionType === 'similar' && response.data?.recommendation_data?.recommendations?.related_knowledge?.[0].graph_data) {
-        graphData = response.data.recommendation_data.recommendations.related_knowledge[0].graph_data;
-      } else if (functionType === 'next_step' && response.data?.recommendation_data?.recommendations?.next_step?.[0].graph_data) {
-        graphData = response.data.recommendation_data.recommendations.next_step[0].graph_data;
-      } else {
-        alert("該知識節點沒有辦法再繼續延伸，可能是因為：\n1. 已經到達知識的盡頭。\n2. 實體之間缺乏足夠的關聯。\n 將給您上一次知識圖譜。")
-        if (!findPrev) handleGenerateKnowledgeGraph(functionType, true);
-      }
-      setGraphData(graphData);
-      setOpenGraphDialog(true);
-      setIsSubmitMessage(false);
-    }).catch(error => {
-      console.error(`${functionType} API error:`, error);
-      setIsSubmitMessage(false);
-    });
+  const handleGenerateKnowledgeGraph = (functionType: "generate_graphrag" | "next_step", findPrev: boolean = false) => {
+    setMessageInput("")
+    if (functionType === "generate_graphrag") {
+      setIsSubmitMessage(true);
+      API_specifyChatWithAmumAmum("", taskId, functionType, findPrev).then(response => {
+        let graphData: any = null;
+        if (response.data?.recommendation_data?.recommendations?.generate_graphrag?.[0].graph_data) {
+          graphData = response.data.recommendation_data.recommendations.generate_graphrag[0].graph_data;
+        } else {
+          alert("該知識節點沒有辦法再繼續延伸，可能是因為：\n1. 已經到達知識的盡頭。\n2. 實體之間缺乏足夠的關聯。\n 將給您上一次知識圖譜。")
+          if (!findPrev) handleGenerateKnowledgeGraph(functionType, true);
+        }
+        setGraphData(graphData);
+        setOpenGraphDialog(true);
+        setIsSubmitMessage(false);
+      }).catch(error => {
+        setIsSubmitMessage(false);
+      });
+    } else if (functionType === "next_step") {
+      const message = "請問下一步驟要做什麼？"
+      setIsSubmitMessage(true)
+      sendMyMessage(message)
+      API_nextStepWithAmumAmum(message, taskId).then(response => {
+        const assistant = response.data.assistant
+        setMessages(prevState => {
+          const newMessage: IMessages = {
+            time: assistant.time,
+            name: assistant.name,
+            studentId: assistant.student_id,
+            message: assistant.message,
+          }
+          return [...prevState, newMessage]
+        })
+        setIsSubmitMessage(false)
+      }).catch(error => {
+        setIsSubmitMessage(false);
+      });
+    }
   }
 
-  const sendMyMessage = () => {
+  const sendMyMessage = (customMessage?: string) => {
     // 檢測送出訊息紀錄
     handleCustomRecord({
       action: 'click',
@@ -275,20 +292,15 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
         time: formattedTime,
         name: name,
         studentId: userStudentId || '',
-        message: messageInput,
+        message: customMessage ? customMessage : messageInput,
       }
       return [...prevState, newMessage]
     })
   }
 
-  // 側邊按鈕處理函數
-  const handleDeepLearnClick = () => {
-    handleGenerateKnowledgeGraph('deep_learn');
-  };
-
-  const handleSimilarClick = () => {
-    handleGenerateKnowledgeGraph('similar');
-  };
+  const handleGenerateGraphRagClick = () => {
+    handleGenerateKnowledgeGraph('generate_graphrag');
+  }
 
   const handleNextStepClick = () => {
     handleGenerateKnowledgeGraph('next_step');
@@ -328,8 +340,7 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
         className="overflow-hidden flex flex-col justify-start min-w-[24rem] bg-stamindTask-white-200 rounded-xl shadow-lg shadow-stamindTask-primary-blue-600 animate-tooltipSlideIn">
         <div className='flex justify-between bg-stamindTask-black-850 px-2 gap-x-2 h-[5vh]'>
           <SideActionButtonsComponent
-            onDeepLearnClick={handleDeepLearnClick}
-            onLightBulbClick={handleSimilarClick}
+            handleGenerateGraphRagClick={handleGenerateGraphRagClick}
             onArrowRightClick={handleNextStepClick}
             onGraphClick={handleGraphClick}
           />
@@ -363,7 +374,7 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
           taskId={taskId}
           graphData={graphData}
         />
-        <div className='flex flex-col justify-between w-[90vw] h-[90vh]'>
+        <div className='flex flex-col justify-between w-[35vw] h-[90vh]'>
           <div ref={chatContainerRef} onScroll={handleScrollToChatContainerTop}
                className='overflow-scroll w-full h-[95%] my-2'>
             <div className='flex flex-col h-full px-5'>

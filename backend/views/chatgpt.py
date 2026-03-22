@@ -1,7 +1,7 @@
 import os
-import re
-import subprocess
+import time
 
+from future.backports.http.client import responses
 from openai import OpenAI
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
@@ -10,21 +10,111 @@ from rest_framework.response import Response
 from django.views.decorators.csrf import ensure_csrf_cookie
 from datetime import datetime
 from asgiref.sync import async_to_sync
+from graphrag.query.context_builder.conversation_history import ConversationHistory, ConversationRole
 
 from backend.models import StudentTask, RagRelationships, RagEntities, StudentTaskProcessCode
 from backend.utils.graphrag_utils import extract_graphrag_references, generate_next_step_graph, \
     format_context_data_to_data_tag
-from backend.utils.recommendation_utils import (
-    generate_related_knowledge_recommendations,
-    generate_deep_exploration_recommendations
-)
 
 from backend.utils.graphRAGService import GraphRAGService
+
+SEARCH_ENGINE = GraphRAGService.get_engine()
 
 client = OpenAI(api_key=os.getenv('OPENAI_KEY'))
 
 CODE_DEBUG_ASSISTANT_ID = os.getenv('CODE_DEBUG_ASSISTANT_ID')
 AI_NAME = "Amum Amum"
+
+
+def chat_with_assistant(prompt_message, user_process_code):
+    # 檢查是否有 thread_id，如果沒有則創建新的 thread
+    thread_id = user_process_code.assistant_thread_id
+    if not thread_id:
+        # 創建新的 thread
+        thread = client.beta.threads.create()
+        thread_id = thread.id
+        # 保存 thread_id
+        user_process_code.assistant_thread_id = thread_id
+        user_process_code.save()
+
+    # 將用戶問題添加到 thread
+    client.beta.threads.messages.create(
+        thread_id=thread_id,
+        role="user",
+        content=prompt_message
+    )
+
+    # 運行助手
+    run = client.beta.threads.runs.create(
+        thread_id=thread_id,
+        assistant_id=CODE_DEBUG_ASSISTANT_ID
+    )
+
+    # 等待運行完成
+    max_retries = 30  # 最多等待30秒
+    retry_count = 0
+
+    while True:
+        if retry_count >= max_retries:
+            return {'error': 'Assistant response timeout'}
+
+        run_status = client.beta.threads.runs.retrieve(
+            thread_id=thread_id,
+            run_id=run.id
+        )
+
+        if run_status.status == 'completed':
+            break
+        elif run_status.status in ['failed', 'cancelled', 'expired']:
+            return {'error': f'Assistant run failed with status: {run_status.status}'}
+
+        # 短暫等待後再檢查狀態
+        time.sleep(1)
+        retry_count += 1
+
+    # 獲取助手的回應
+    messages = client.beta.threads.messages.list(
+        thread_id=thread_id
+    )
+
+    # 獲取最新的助手回應
+    assistant_message = None
+    for msg in messages.data:
+        if msg.role == "assistant":
+            assistant_message = msg
+            break
+
+    response_text = ""
+    if assistant_message:
+        # 提取文本內容
+        for content_item in assistant_message.content:
+            if content_item.type == "text":
+                response_text += content_item.text.value
+
+    return response_text
+
+
+def save_assistant_chat(request, user_question, response_text, user_history_data):
+    # 創建用戶消息和助手回應內容
+    user_content = {
+        "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "name": request.user.name,
+        "student_id": request.user.student_id,
+        "message": user_question,
+    }
+    gpt_content = {
+        "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "name": AI_NAME,
+        "student_id": "",
+        "message": response_text,
+    }
+
+    # 更新聊天歷史
+    user_history_data.chat_history.append(user_content)
+    user_history_data.chat_history.append(gpt_content)
+    user_history_data.save()
+
+    return gpt_content
 
 
 # OpenAI integrate
@@ -33,6 +123,7 @@ AI_NAME = "Amum Amum"
 @api_view(['POST'])
 def chat_with_amumamum(request):
     try:
+        start_time = time.time()
         user_question = request.data.get('message')
         task_id = request.data.get('task_id')
         user_history_data = StudentTask.objects.get(student_id=request.user.student_id, task_id=task_id).chat_history
@@ -40,15 +131,13 @@ def chat_with_amumamum(request):
         if user_history_data.chat_history is None:
             user_history_data.chat_history = []
 
-        # 取前 4 則訊息當作回顧輸入
-        # user_history_stringify = ""
-        # for history in user_history_data.chat_history[-4:]:
-        #     cleaned_message = re.sub(r'\s+', ' ', history['message']).strip()
-        #     user_history_stringify += '過去的訊息內容：傳送人:{name}\n時間:{time}\n訊息:{message}\n'.format(
-        #         name=history['name'] if history['name'] != AI_NAME else 'OpenAI Assistant',
-        #         time=history['time'],
-        #         message=cleaned_message
-        #     )
+        user_conversation_history = ConversationHistory()
+        for history in user_history_data.chat_history[-4:]:
+            user_conversation_history.add_turn(
+                role=ConversationRole.USER if history['name'] != AI_NAME else ConversationRole.ASSISTANT,
+                content=history['message']
+            )
+
         user_content = {
             "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "name": request.user.name,
@@ -56,30 +145,29 @@ def chat_with_amumamum(request):
             "message": user_question,
         }
 
-        search_engine = GraphRAGService.get_engine()
-        # query = user_history_stringify + "\n----本次的問題:----\n" + user_question
         query = user_question
 
-        search_func = async_to_sync(search_engine.search)
-        result_object = search_func(query)
+        search_func = async_to_sync(SEARCH_ENGINE.search)
+        result_object = search_func(
+            query=query,
+            user_conversation_history=user_conversation_history
+        )
         output_text = result_object.response
 
         data_tag = format_context_data_to_data_tag(result_object.context_data)
         if data_tag:
             output_text = f"{output_text}\n\n{data_tag}"
 
-        print(result_object.context_data.get('reports', '無資料'))
-        print(result_object.context_data.get('entities', '無資料'))
-        print(result_object.context_data.get('relationships', '無資料'))
-        print(result_object.context_data.get('claims', '無資料'))
-        print(result_object.context_data.get('sources', '無資料'))
-        print(f"生成的 Data 標籤: {data_tag}")
+        # 計算處理時間
+        end_time = time.time()
+        processing_time = round(end_time - start_time, 2)
 
         gpt_content = {
             "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "name": AI_NAME,
             "student_id": "",
             "message": output_text,
+            "processing_time": processing_time
         }
 
         user_history_data.chat_history.append(user_content)
@@ -107,122 +195,78 @@ def code_debug_with_amumamum(request):
         css_code = user_process_code.css_code or ""
         js_code = user_process_code.js_code or ""
 
-        # 檢查是否有 thread_id，如果沒有則創建新的 thread
-        thread_id = user_process_code.assistant_thread_id
-        if not thread_id:
-            # 創建新的 thread
-            thread = client.beta.threads.create()
-            thread_id = thread.id
-            # 保存 thread_id
-            user_process_code.assistant_thread_id = thread_id
-            user_process_code.save()
-
         # 構建提示訊息
         prompt_message = f"""
                 請幫我解決以下程式碼問題：
                 問題描述：{user_question}
-                HTML 代碼：
+                我的程式碼如下：
+                HTML 代碼
                 ```html
                 {html_code}
                 ```
-                CSS 代碼：
+                CSS 代碼
                 ```css
                 {css_code}
                 ```
-                JavaScript 代碼：
+                JavaScript 代碼
                 ```javascript
                 {js_code}
                 ```
-                請提供詳細的解釋和解決方案。
+                請一步一步理解並給予解釋和解決方案。
                 """
 
-        # 將用戶問題添加到 thread
-        message = client.beta.threads.messages.create(
-            thread_id=thread_id,
-            role="user",
-            content=prompt_message
-        )
+        response_text = chat_with_assistant(prompt_message, user_process_code)
+        # 檢查是否有錯誤
+        if isinstance(response_text, dict) and 'error' in response_text:
+            return Response(response_text, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        # 運行助手
-        run = client.beta.threads.runs.create(
-            thread_id=thread_id,
-            assistant_id=CODE_DEBUG_ASSISTANT_ID
-        )
-
-        # 等待運行完成
-        import time
-        max_retries = 30  # 最多等待30秒
-        retry_count = 0
-
-        while True:
-            if retry_count >= max_retries:
-                return Response({'error': 'Assistant response timeout'}, status=status.HTTP_504_GATEWAY_TIMEOUT)
-
-            run_status = client.beta.threads.runs.retrieve(
-                thread_id=thread_id,
-                run_id=run.id
-            )
-
-            if run_status.status == 'completed':
-                break
-            elif run_status.status in ['failed', 'cancelled', 'expired']:
-                return Response(
-                    {'error': f'Assistant run failed with status: {run_status.status}'},
-                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
-                )
-
-            # 短暫等待後再檢查狀態
-            time.sleep(1)
-            retry_count += 1
-
-        # 獲取助手的回應
-        messages = client.beta.threads.messages.list(
-            thread_id=thread_id
-        )
-
-        # 獲取最新的助手回應
-        assistant_message = None
-        for msg in messages.data:
-            if msg.role == "assistant":
-                assistant_message = msg
-                break
-
-        if assistant_message:
-            # 提取文本內容
-            response_text = ""
-            for content_item in assistant_message.content:
-                if content_item.type == "text":
-                    response_text += content_item.text.value
-
-            # 創建用戶消息和助手回應內容
-            user_content = {
-                "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "name": request.user.name,
-                "student_id": request.user.student_id,
-                "message": user_question,
-            }
-            gpt_content = {
-                "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "name": AI_NAME,
-                "student_id": "",
-                "message": response_text,
-            }
-
-            # 更新聊天歷史
-            user_history_data.chat_history.append(user_content)
-            user_history_data.chat_history.append(gpt_content)
-            user_history_data.save()
-
-            return Response({'assistant': gpt_content}, status=status.HTTP_200_OK)
-        else:
-            return Response({'error': 'No assistant response received'},
-                            status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
+        gpt_content = save_assistant_chat(request, user_question, response_text, user_history_data)
+        return Response({'assistant': gpt_content}, status=status.HTTP_200_OK)
     except Exception as e:
         print(f'code debug with amumamum Error: {e}')
         import traceback
         traceback.print_exc()
         return Response({'code debug with amumamum Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@ensure_csrf_cookie
+@permission_classes([IsAuthenticated])
+@api_view(['POST'])
+def next_step_with_amumamum(request):
+    try:
+        user_question = request.data.get('message', "下一步我該做什麼？")
+        task_id = request.data.get('task_id')
+        student_task = StudentTask.objects.get(student_id=request.user.student_id, task_id=task_id)
+        user_process_code = student_task.process.process_code
+        user_history_data = student_task.chat_history
+
+        html_code = user_process_code.html_code or ""
+        css_code = user_process_code.css_code or ""
+        js_code = user_process_code.js_code or ""
+
+        # 構建提示訊息
+        prompt_message = f"""
+                        我目前完成的 code 如以下所示，請問下一步驟要做什麼？
+                        HTML 代碼
+                        ```html
+                        {html_code}
+                        ```
+                        CSS 代碼
+                        ```css
+                        {css_code}
+                        ```
+                        JavaScript 代碼
+                        ```javascript
+                        {js_code}
+                        ```
+                        """
+
+        response_text = chat_with_assistant(prompt_message, user_process_code)
+        gpt_content = save_assistant_chat(request, user_question, response_text, user_history_data)
+        return Response({'assistant': gpt_content}, status=status.HTTP_200_OK)
+    except Exception as e:
+        print(f'next step with amumamum Error: {e}')
+        return Response({'next step with amumamum Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 
 # Specific function for graphRag recommendation
@@ -233,7 +277,9 @@ def specific_chat_with_amumamum(request):
     try:
         find_prev = request.data.get('find_prev', False)
         task_id = request.data.get('task_id')
-        function_type = request.data.get('function_type')  # 'next_step', 'similar', 'deep_learn'
+        function_type = request.data.get('function_type')  # 'generate_graphrag'
+
+        print(function_type)
 
         user_history_data = StudentTask.objects.get(student_id=request.user.student_id, task_id=task_id).chat_history
 
@@ -297,19 +343,12 @@ def specific_chat_with_amumamum(request):
                     'weight': rel['weight']
                 })
 
-            print(f"找到的 Relationships: {len(relationships)} 條關係")
-
             # 3. 根據 function_type 生成不同的推薦
             recommendations = {}
 
-            if function_type == 'next_step':
+            if function_type == 'generate_graphrag':
                 # 直接使用新函數生成圖形格式的推薦
-                recommendations['next_step'] = generate_next_step_graph(entities_info, task_id)
-            elif function_type == 'similar':
-                recommendations['related_knowledge'] = generate_related_knowledge_recommendations(entities_info,
-                                                                                                  task_id)
-            elif function_type == 'deep_learn':
-                recommendations['deep_exploration'] = generate_deep_exploration_recommendations(entities_info, task_id)
+                recommendations['generate_graphrag'] = generate_next_step_graph(entities_info, task_id)
 
             # 4. 整合資料
             recommendation_data = {
@@ -330,4 +369,6 @@ def specific_chat_with_amumamum(request):
 
     except Exception as e:
         print(f'specify chat with amumamum Error: {e}')
+        import traceback
+        traceback.print_exc()
         return Response({'specify chat with amumamum Error': str(e)}, status=status.HTTP_400_BAD_REQUEST)

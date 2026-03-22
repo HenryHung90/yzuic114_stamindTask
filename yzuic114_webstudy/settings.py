@@ -216,7 +216,7 @@ SESSION_COOKIE_AGE = 86400  # 24小時
 # Marked up when publish------------------------------------
 if PROCESS_ON_PRODUCTION:
     DEBUG = True
-    ALLOWED_HOSTS = ["ccj.infocom.yzu.edu.tw", 'localhost']
+    ALLOWED_HOSTS = ["ccj.infocom.yzu.edu.tw", 'localhost', '140.138.147.15', '127.0.0.1']
     X_FRAME_OPTIONS = 'SAMEORIGIN'
     CORS_ALLOW_CREDENTIALS = True  # 允許攜帶憑證（Cookies）
     CORS_ALLOW_ALL_ORIGINS = False  # 不建議設置為 True，改為允許特定來源
@@ -226,6 +226,8 @@ if PROCESS_ON_PRODUCTION:
     CSRF_COOKIE_HTTPONLY = False
     SESSION_COOKIE_HTTPONLY = True
     SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin'
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 else:
     DEBUG = True
     ALLOWED_HOSTS = ["localhost", '127.0.0.1']

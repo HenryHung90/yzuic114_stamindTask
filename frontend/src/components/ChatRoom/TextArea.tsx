@@ -23,7 +23,9 @@ const TextAreaComponent = (props: ITextAreaProps) => {
   const [isComposing, setIsComposing] = React.useState<boolean>(false)
 
   const handleSubmitMessage = () => {
-    setIsSubmitMessage(true)
+    if (messageInput.trim() !== '') {
+      setIsSubmitMessage(true)
+    }
   }
   const handleEnterKeyDown = (e: any) => {
     if (e.key === 'Enter' && !e.shiftKey && !isComposing && !isSubmitMessage && messageInput.trim() !== '') {
