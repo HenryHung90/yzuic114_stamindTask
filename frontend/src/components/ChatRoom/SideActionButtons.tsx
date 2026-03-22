@@ -3,13 +3,11 @@ import {IconButton, Typography} from "@material-tailwind/react";
 import {
   GlobeAltIcon,
   AcademicCapIcon,
-  LightBulbIcon,
   ArrowRightIcon
 } from "@heroicons/react/24/solid";
 
 interface ISideActionButtonsProps {
-  onDeepLearnClick?: () => void;
-  onLightBulbClick?: () => void;
+  handleGenerateGraphRagClick?: () => void;
   onArrowRightClick?: () => void;
   onGraphClick?: () => void;
 }
@@ -24,34 +22,27 @@ interface IButtonConfig {
 }
 
 const SideActionButtonsComponent = (props: ISideActionButtonsProps) => {
-  const {onDeepLearnClick, onLightBulbClick, onArrowRightClick, onGraphClick} = props;
+  const {handleGenerateGraphRagClick, onArrowRightClick, onGraphClick} = props;
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
 
   const buttonConfigs: IButtonConfig[] = [
     {
       icon: <AcademicCapIcon className='h-5 w-5 color-white pointer-events-none'/>,
-      label: "想更深入了解",
-      onClick: onDeepLearnClick,
-      dataObject: "getDeepLearnInfo",
-      dataId: "speedDial_getDeepLearnInfo"
-    },
-    {
-      icon: <LightBulbIcon className='h-5 w-5 color-white pointer-events-none'/>,
-      label: "尋找相似知識",
-      onClick: onLightBulbClick,
-      dataObject: "getLightBulbInfo",
-      dataId: "speedDial_getLightBulbInfo"
+      label: "產生當前知識節點",
+      onClick: handleGenerateGraphRagClick,
+      dataObject: "getNextStepInfo",
+      dataId: "speedDial_getNextStepInfo"
     },
     {
       icon: <ArrowRightIcon className='h-5 w-5 color-white pointer-events-none'/>,
-      label: "下一步可以怎麼做",
+      label: "下一步怎麼做？",
       onClick: onArrowRightClick,
       dataObject: "getArrowRightInfo",
       dataId: "speedDial_getArrowRightInfo"
     },
     {
       icon: <GlobeAltIcon className='h-6 w-6 color-white pointer-events-none'/>, // 更大的圖標
-      label: "知識圖譜儀表板",
+      label: "知識圖譜板",
       onClick: onGraphClick,
       dataObject: "openGraphInfo",
       dataId: "speedDial_openGraphInfo",
@@ -60,7 +51,7 @@ const SideActionButtonsComponent = (props: ISideActionButtonsProps) => {
   ];
 
   return (
-    <div className='absolute -left-2 bottom-14 w-12 h-44 bg-black-10 z-[100]'>
+    <div className='absolute -left-2 bottom-4 w-12 h-44 bg-black-10 z-[100]'>
       {buttonConfigs.map((config, index) => (
         <div key={index} className="relative">
           <IconButton

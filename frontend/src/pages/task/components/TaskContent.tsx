@@ -63,7 +63,7 @@ const TaskContentComponent = (props: ITaskContentProps) => {
 
   return (
     <Dialog open={open} handler={() => {
-    }} placeholder={undefined} size='xl'>
+    }} placeholder={undefined} size='xl' className={`${selectNode.category === 'Process' && 'right-[12vw]'}`}>
       <DialogHeader placeholder={undefined}>{selectNode.text}</DialogHeader>
       <DialogBody placeholder={undefined}>
         {selectNode.category === 'Experience' &&
@@ -121,7 +121,8 @@ const TaskContentComponent = (props: ITaskContentProps) => {
                 <span>Save</span>
             </Button>
         }
-        <Button variant="gradient" color="red" onClick={handleOpen} placeholder={undefined}>
+        <Button variant="gradient" color="red" onClick={handleOpen} placeholder={undefined}
+                className={`${selectNode.category === 'Process' && 'mr-48'}`}>
           <span>Leave</span>
         </Button>
       </DialogFooter>
