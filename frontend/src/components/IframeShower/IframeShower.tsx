@@ -43,7 +43,7 @@ const IframeShowerComponent = (props: IIframeShowerProps) => {
       <iframe
         srcDoc={generateSrcDoc()}
         title="Live Preview"
-        sandbox="allow-scripts allow-modals"
+        sandbox="allow-scripts allow-modals allow-forms"
         style={{
           width: "100%",
           height: "87%",

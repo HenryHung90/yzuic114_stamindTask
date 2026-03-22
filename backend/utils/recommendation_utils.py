@@ -19,7 +19,7 @@ def generate_community_center_recommendations(entities_info, task_id):
             for community in communities:
                 current_communities.add(community.community)
 
-        print(f"當前實體涉及的社群: {current_communities}")
+        # print(f"當前實體涉及的社群: {current_communities}")
 
         if not current_communities:
             print("沒有找到直接相關的社群")
@@ -62,14 +62,14 @@ def generate_community_center_recommendations(entities_info, task_id):
             except RagCommunities.DoesNotExist:
                 continue
 
-        print(f"找到 {len(related_communities)} 個相關社群")
+        # print(f"找到 {len(related_communities)} 個相關社群")
 
         # 3. 為每個相關社群找出重心實體
         for community in related_communities[:5]:  # 限制數量
             if not community.entity_ids:
                 continue
 
-            print(f"處理社群 {community.community}: {community.title}")
+            # print(f"處理社群 {community.community}: {community.title}")
 
             # 解析社群中的實體 UUID
             entity_uuids = parse_entity_ids_from_community(community.entity_ids)
@@ -114,7 +114,7 @@ def generate_community_center_recommendations(entities_info, task_id):
         # 按重要性分數排序
         community_recommendations.sort(key=lambda x: x['importance_score'], reverse=True)
 
-        print(f"生成了 {len(community_recommendations)} 個社群重心推薦")
+        # print(f"生成了 {len(community_recommendations)} 個社群重心推薦")
         return community_recommendations[:5]  # 返回前5個推薦
 
     except Exception as e:

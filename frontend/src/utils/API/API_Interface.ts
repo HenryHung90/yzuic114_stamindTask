@@ -138,8 +138,8 @@ export interface Req_StudentChatHistory extends RequestParams {
 
 export interface Req_ChatWithAmumAmum extends RequestParams {
   task_id: string
-  message: string
-  function_type?: 'code_debug' | 'deep_learn' | 'similar' | 'next_step';
+  message?: string
+  function_type?: 'generate_graphrag' | 'next_step';
   find_prev?: boolean;
 }
 
