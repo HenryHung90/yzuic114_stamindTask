@@ -8,10 +8,14 @@ dotenv
 django-cors-headers
 djangorestframework
 django_extensions
-openai
+openai>=1.68.0
 pandas
 openpyxl
 xlrd
 stopwordsiso
 whitenoise
 graphrag==2.7.0
+litellm>=1.77.1
+tiktoken>=0.11.0
+importlib-metadata<=8.5.0
+tokenizers<=0.20.3,>=0.13.2

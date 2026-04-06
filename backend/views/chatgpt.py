@@ -1,7 +1,6 @@
 import os
 import time
 
-from future.backports.http.client import responses
 from openai import OpenAI
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
@@ -12,13 +11,14 @@ from datetime import datetime
 from asgiref.sync import async_to_sync
 from graphrag.query.context_builder.conversation_history import ConversationHistory, ConversationRole
 
-from backend.models import StudentTask, RagRelationships, RagEntities, StudentTaskProcessCode
+from backend.models import StudentTask, RagRelationships, RagEntities
 from backend.utils.graphrag_utils import extract_graphrag_references, generate_next_step_graph, \
     format_context_data_to_data_tag
 
 from backend.utils.graphRAGService import GraphRAGService
+from backend.utils.prompt.local_search_prompt import GENERATE_SUB_TARGET_PROMPT
 
-SEARCH_ENGINE = GraphRAGService.get_engine()
+SEARCH_ENGINE = GraphRAGService.get_engine(GENERATE_SUB_TARGET_PROMPT)
 
 client = OpenAI(api_key=os.getenv('OPENAI_KEY'))
 

@@ -179,6 +179,9 @@ API_ADMIN_POST = [
     path('admin/upload_experience_file/', upload_experience_file, name='upload_experience_file'),
     # save Task Target
     path('admin/save_task_target/', save_task_target, name='save_task_target'),
+    # generate Sub Target Graph
+    path('admin/generate_sub_target_graph/', generate_sub_target_graph, name='generate_sub_target_graph'),
+
     # upload Task TextBook file
     path('admin/upload_text_book_file/', upload_text_book_file, name='upload_text_book_file'),
     # save Process Hints

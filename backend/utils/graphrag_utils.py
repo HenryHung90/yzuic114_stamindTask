@@ -1,6 +1,6 @@
 import re
 import uuid as uuid_lib
-from backend.models import RagEntities, RagCommunities
+from backend.models import RagEntities, RagCommunities, RagRelationships
 
 
 def extract_graphrag_references(text):
@@ -478,3 +478,239 @@ def generate_next_step_graph(entities_info, task_id):
                                 ],
         'summary': f"發現 {len(community_centers)} 個相關社群中心和 {len(community_exploration)} 個社群探索方向，共 {len(nodes)} 個節點，{len(edges)} 個知識連接"
     }]
+
+
+def generate_entity_relationship_graph(data_text, task_id, importance_threshold=1.5, min_entities=10,
+                                       include_all_relationships=False):
+    """
+    從 [Data: ...] 格式的文本中提取實體和關係資訊，構建圖形結構
+    保留足夠的節點以提供更全面的知識圖譜
+
+    Args:
+        data_text: 包含 [Data: ...] 格式的文本
+        task_id: 任務 ID
+        importance_threshold: 重要性閾值，度數或頻率大於等於此值的節點被視為重要節點
+        min_entities: 最少要保留的實體數量，即使其重要性低於閾值
+        include_all_relationships: 是否包含所有連接到重要實體的次要實體
+
+    Returns:
+        包含 nodes 和 edges 的圖形數據結構
+    """
+    # 提取引用的資料
+    references = extract_graphrag_references(data_text)
+    all_references = references['all_references']
+
+    # 初始化存儲實體和關係的ID
+    entity_ids = []
+    relationship_ids = []
+
+    # 從引用中提取ID
+    for reference in all_references:
+        if reference['type'] == 'Entities':
+            entity_ids.extend(reference['numbers'])
+        elif reference['type'] == 'Relationships':
+            relationship_ids.extend(reference['numbers'])
+
+    # 如果沒有找到實體或關係，返回空結果
+    if not entity_ids and not relationship_ids:
+        return {
+            'nodes': [],
+            'edges': [],
+        }
+
+    # 從資料庫獲取實體和關係資訊
+    entities = RagEntities.objects.filter(
+        task_id=task_id,
+        human_readable_id__in=entity_ids
+    ).values('id', 'title', 'description', 'type', 'degree', 'frequency', 'human_readable_id')
+
+    relationships = RagRelationships.objects.filter(
+        task_id=task_id,
+        human_readable_id__in=relationship_ids
+    ).values('id', 'source', 'target', 'description', 'weight', 'human_readable_id')
+
+    # 顏色映射表
+    color_map = {
+        'MODULE': '#3B82F6',  # 藍色
+        'CONCEPT': '#8B5CF6',  # 紫色
+        'UI_COMPONENT': '#EC4899',  # 粉色
+        'CSS_SELECTOR': '#14B8A6',  # 青色
+        'CSS_PROPERTY': '#06B6D4',  # 淺藍色
+        'HTML_TAG': '#F97316',  # 橙紅色
+        'JAVASCRIPT_FUNCTION': '#EF4444',  # 紅色
+        'DOM_EVENT': '#F59E0B',  # 橙色
+        'VARIABLE': '#84CC16',  # 綠黃色
+        'TECHNOLOGY': '#10B981',  # 綠色
+        'IMPLEMENTATION_DETAIL': '#6366F1'  # 靛色
+    }
+
+    # 計算每個實體的重要性得分
+    entity_importance = {}
+    entity_title_to_data = {}
+
+    for entity in entities:
+        title_upper = entity['title'].upper()
+        # 根據度數和頻率計算重要性，增加權重以保留更多實體
+        importance = 0
+        if 'degree' in entity and entity['degree']:
+            importance += entity['degree']
+        if 'frequency' in entity and entity['frequency']:
+            importance += entity['frequency'] * 0.8  # 增加頻率的權重
+
+        entity_importance[title_upper] = importance
+        entity_title_to_data[title_upper] = entity
+
+    # 統計各個實體在關係中出現的次數
+    relation_counts = {}
+    related_entities = set()  # 記錄所有參與關係的實體
+
+    for relation in relationships:
+        source_title = str(relation['source']).upper()
+        target_title = str(relation['target']).upper()
+
+        related_entities.add(source_title)
+        related_entities.add(target_title)
+
+        if source_title not in relation_counts:
+            relation_counts[source_title] = 0
+        if target_title not in relation_counts:
+            relation_counts[target_title] = 0
+
+        relation_counts[source_title] += 1
+        relation_counts[target_title] += 1
+
+    # 更新實體重要性得分，將關係次數也考慮進去
+    for title, count in relation_counts.items():
+        if title in entity_importance:
+            entity_importance[title] += count * 0.7  # 增加關係數量的權重
+        else:
+            entity_importance[title] = count * 0.7
+
+    # 篩選重要節點，並確保至少保留最低數量的實體
+    sorted_entities = sorted(entity_importance.items(), key=lambda x: x[1], reverse=True)
+
+    # 確保至少保留min_entities個實體
+    important_count = sum(1 for _, score in sorted_entities if score >= importance_threshold)
+    min_count_to_keep = max(min_entities, important_count)
+
+    important_entities = {}
+    for i, (title, score) in enumerate(sorted_entities):
+        if i < min_count_to_keep or score >= importance_threshold:
+            important_entities[title] = score
+
+    # 如果需要包含所有連接到重要實體的次要實體
+    if include_all_relationships:
+        for relation in relationships:
+            source_title = str(relation['source']).upper()
+            target_title = str(relation['target']).upper()
+
+            if source_title in important_entities and target_title not in important_entities:
+                important_entities[target_title] = importance_threshold / 2  # 給較低的重要性分數
+            elif target_title in important_entities and source_title not in important_entities:
+                important_entities[source_title] = importance_threshold / 2  # 給較低的重要性分數
+
+    # 初始化節點和邊
+    nodes = []
+    edges = []
+    entity_title_map = {}  # 實體標題到節點ID的映射
+    current_node_id = 0
+
+    # 將重要實體轉換為節點
+    for title_upper, importance_score in important_entities.items():
+        if title_upper in entity_title_to_data:
+            entity = entity_title_to_data[title_upper]
+            entity_type = entity.get('type', 'CONCEPT')
+            color = color_map.get(entity_type, '#3B82F6')  # 默認藍色
+
+            # 根據重要性調整大小
+            size = 60 + min(importance_score * 5, 40)  # 基礎大小60，最大增加40
+
+            nodes.append({
+                'id': current_node_id,
+                'label': entity['title'],
+                'color': color,
+                'size': size,
+                'type': entity_type,
+                'description': entity.get('description', f"{entity['title']} 是一個 {entity_type.lower()} 類型的實體。"),
+                'original_id': str(entity['id']),
+                'human_readable_id': entity.get('human_readable_id'),
+                'importance_score': importance_score
+            })
+
+            entity_title_map[title_upper] = current_node_id
+            current_node_id += 1
+        else:
+            # 處理關係中出現但數據庫中沒有的重要實體
+            nodes.append({
+                'id': current_node_id,
+                'label': title_upper.capitalize(),
+                'color': '#64748b',  # 灰色 - 未知類型
+                'size': 60 + min(importance_score * 3, 30),
+                'type': 'UNKNOWN',
+                'description': f"{title_upper.capitalize()} 是通過關係引用的重要實體。",
+                'discovered_via_relation': True,
+                'importance_score': importance_score
+            })
+
+            entity_title_map[title_upper] = current_node_id
+            current_node_id += 1
+
+    # 只保留重要實體之間的關係
+    for idx, relation in enumerate(relationships):
+        source_title = str(relation['source']).upper()
+        target_title = str(relation['target']).upper()
+
+        if source_title in entity_title_map and target_title in entity_title_map:
+            # 根據描述推斷關係類型
+            description = relation.get('description', '').upper()
+
+            if 'IS A' in description or 'IS_A' in description:
+                relation_type = 'IS_A'
+                color = '#8B5CF6'  # 紫色 - 是一種
+                label = '是一種'
+            elif 'HAS A' in description or 'HAS_A' in description:
+                relation_type = 'HAS_A'
+                color = '#F59E0B'  # 橙色 - 有一個
+                label = '有一個'
+            elif 'PART OF' in description or 'PART_OF' in description:
+                relation_type = 'PART_OF'
+                color = '#10B981'  # 綠色 - 是...的一部分
+                label = '是...的一部分'
+            elif 'USES' in description:
+                relation_type = 'USES'
+                color = '#3B82F6'  # 藍色 - 使用
+                label = '使用'
+            else:
+                relation_type = '關聯'
+                color = '#64748b'  # 灰色 - 其他關係
+                label = '關聯'
+
+            # 根據權重調整線條寬度
+            width = 1
+            if 'weight' in relation and relation['weight']:
+                width = max(1, min(5, relation['weight']))
+
+            edges.append({
+                'id': f'e{idx + 1}',
+                'from': entity_title_map[source_title],
+                'to': entity_title_map[target_title],
+                'label': label,
+                'color': color,
+                'width': width,
+                'relation_type': relation_type,
+                'human_readable_id': relation.get('human_readable_id')
+            })
+
+    # 返回最終結果
+    return {
+        'nodes': nodes,
+        'edges': edges,
+        'metadata': {
+            'total_entities': len(entities),
+            'important_entities': len(nodes),
+            'filtered_out': len(entities) - len(nodes),
+            'importance_threshold': importance_threshold,
+            'min_entities': min_entities,
+            'include_all_relationships': include_all_relationships
+        }
+    }

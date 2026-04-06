@@ -20,5 +20,13 @@ const API_uploadTaskTarget = (taskId: string, selectNode: number, title: string,
   return new API_POST(import.meta.env.VITE_APP_API_SAVE_TASK_TARGET || '', targetData).sendRequest()
 }
 
-
-export {API_getTaskTarget, API_uploadTaskTarget}
+const API_generateSubTargetGraph = (taskId: string, selectNode: number, title: string, description: string) => {
+  const targetData: Req_targetInfo = {
+    task_id: taskId,
+    select_node: selectNode,
+    target_title: title,
+    target_description: description,
+  }
+  return new API_POST(import.meta.env.VITE_APP_API_GENERATE_SUB_TARGET_GRAPH || '', targetData).sendRequest()
+}
+export {API_getTaskTarget, API_uploadTaskTarget, API_generateSubTargetGraph}
