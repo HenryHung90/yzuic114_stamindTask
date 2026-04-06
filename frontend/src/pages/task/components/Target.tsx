@@ -448,8 +448,8 @@ const TargetComponent = (props: ITaskContentProps) => {
             index={index}
             title={subTarget.title}
             description={subTarget.description}
-            targetNodes={targetNodes[0][index]}
-            targetRelations={targetRelations[0][index]}
+            targetNodes={Array.isArray(targetNodes[0]) && targetNodes[0][index] ? [targetNodes[0][index]] : []}
+            targetRelations={Array.isArray(targetRelations[0]) && targetRelations[0][index] ? [targetRelations[0][index]] : []}
           />
         ))}
       </div>
