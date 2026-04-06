@@ -31,10 +31,37 @@ interface ITaskSubTarget {
   selected?: boolean
 }
 
+export interface ITaskTargetNodes {
+  id: number
+  label: string
+  color: string
+  size: number
+  type: string
+  description: string
+  originalId: number
+  human_readable_id: string
+}
+
+export interface ITaskTargetRelations {
+  id: number
+  from: string
+  to: string
+  label: string
+  color: string
+  width: number
+  description: string
+  relation_type: string
+  human_readable_id: string
+}
+
 interface ITaskSubTargetProps extends ITaskSubTarget {
   index: number | undefined
+  targetNodes: Array<ITaskTargetNodes>
+  targetRelations: Array<ITaskTargetRelations>
+  generatedGraph: boolean
   handleEditSubTargetTitle: (index: number, key: 'title' | 'description', value: string) => void
   handleDeleteSubTargetTitle: (index: number) => void
+  handleGenerateSubTargetGraph: (index: number, title: string, description: string) => void
 }
 
 //Plan

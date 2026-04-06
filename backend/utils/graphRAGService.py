@@ -16,8 +16,6 @@ from graphrag.query.indexer_adapters import (
 from graphrag.query.structured_search.local_search.mixed_context import LocalSearchMixedContext
 from graphrag.query.structured_search.local_search.search import LocalSearch
 
-from .prompt.local_search_prompt import WHACK_A_MOLE_GAME_PROMPT, TODOLIST_PROMPT
-
 from graphrag.vector_stores.lancedb import LanceDBVectorStore
 from graphrag.config.enums import ModelType
 from graphrag.config.models.language_model_config import LanguageModelConfig
@@ -40,7 +38,7 @@ class GraphRAGService:
     _instance = None
 
     @classmethod
-    def get_engine(cls):
+    def get_engine(cls, system_prompt=""):
         if cls._instance is None:
             print(f"[GraphRAG] 正在初始化搜尋引擎... 資料路徑: {OUTPUT_DIR}")
 
@@ -160,7 +158,7 @@ class GraphRAGService:
                     tokenizer=tokenizer,
                     model_params=model_params,
                     context_builder_params=local_context_params,
-                    system_prompt=TODOLIST_PROMPT
+                    system_prompt=system_prompt
                 )
                 print("[GraphRAG] 引擎初始化完成！")
             except Exception as e:
