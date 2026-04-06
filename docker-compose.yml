@@ -10,7 +10,6 @@ services:
         python manage.py collectstatic --noinput --clear &&
         python manage.py migrate &&
         python manage.py create_default_user &&
-        python manage.py create_default_class &&
         gunicorn yzuic114_webstudy.wsgi:application --bind 0.0.0.0:8000 --workers 4 --threads 4 --worker-class gthread --timeout 120 --graceful-timeout 30 --keep-alive 30 --access-logfile - --error-logfile -
       "
     env_file:
