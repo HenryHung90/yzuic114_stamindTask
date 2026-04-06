@@ -1,6 +1,7 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
+
 class Target(models.Model):
     name = models.CharField(
         max_length=120,
@@ -28,6 +29,20 @@ class Target(models.Model):
         blank=True,
         verbose_name='子任務',
         help_text='包含 title 和 description 的 Array<JSON> 格式資料'
+    )
+
+    target_nodes = models.JSONField(
+        null=True,
+        blank=True,
+        verbose_name='目標節點',
+        help_text='包含 name 和 description 的 Array<JSON> 格式資料'
+    )
+
+    target_relations = models.JSONField(
+        null=True,
+        blank=True,
+        verbose_name='目標關係',
+        help_text='包含 source, target 和 relation 的 Array<JSON> 格式資料'
     )
 
     # 時間戳記
