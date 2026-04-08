@@ -352,53 +352,9 @@ const TargetComponent = (props: ITaskContentProps) => {
         const title = response.data.target_titles[selectNode.key] || "";
         const description = response.data.target_descriptions[selectNode.key] || "";
         const subTargets = response.data.sub_target_list[selectNode.key] || [];
-
         // 初始化圖譜數據結構
-        let nodesData: ITaskTargetNodes[][] = [];
-        let relationsData: ITaskTargetRelations[][] = [];
-
-        // 根據 admin 版本處理數據格式
-        if (response.data.target_nodes) {
-          if (Array.isArray(response.data.target_nodes)) {
-            // 如果 target_nodes 直接是陣列，可能是舊格式或測試數據
-            nodesData = [response.data.target_nodes];
-          } else if (typeof response.data.target_nodes === 'object') {
-            // 如果是對象格式，需要轉換為二維陣列
-            // 將 target_nodes[selectNode.key] 的數據提取出來
-            const nodesByKey = response.data.target_nodes[selectNode.key];
-
-            if (Array.isArray(nodesByKey)) {
-              // 如果是陣列，代表這已經是多個子目標的節點數據
-              nodesData = nodesByKey.map(item => Array.isArray(item) ? item : []);
-            } else if (nodesByKey && typeof nodesByKey === 'object') {
-              // 按索引處理各子目標的節點
-              nodesData = Object.values(nodesByKey).map(nodes => Array.isArray(nodes) ? nodes : []);
-            }
-          }
-        }
-
-        // 同理處理 target_relations
-        if (response.data.target_relations) {
-          if (Array.isArray(response.data.target_relations)) {
-            relationsData = [response.data.target_relations];
-          } else if (typeof response.data.target_relations === 'object') {
-            const relationsByKey = response.data.target_relations[selectNode.key];
-
-            if (Array.isArray(relationsByKey)) {
-              relationsData = relationsByKey.map(item => Array.isArray(item) ? item : []);
-            } else if (relationsByKey && typeof relationsByKey === 'object') {
-              relationsData = Object.values(relationsByKey).map(relations => Array.isArray(relations) ? relations : []);
-            }
-          }
-        }
-
-        // 確保數據陣列長度與子目標數量一致
-        while (nodesData.length < subTargets.length) {
-          nodesData.push([]);
-        }
-        while (relationsData.length < subTargets.length) {
-          relationsData.push([]);
-        }
+        let nodesData: ITaskTargetNodes[][] = response.data.target_nodes;
+        let relationsData: ITaskTargetRelations[][] = response.data.target_relations;
 
         setTargetNodes(nodesData);
         setTargetRelations(relationsData);
@@ -425,7 +381,7 @@ const TargetComponent = (props: ITaskContentProps) => {
   }, [taskId, selectNode]);
 
   return (
-    <div className='flex flex-col items-center'>
+    <div className='flex flex-col items-center h-[80vh]'>
       <div className='flex flex-col gap-y-5 w-[80%]'>
         <h3
           className='text-[2rem]'
@@ -448,8 +404,8 @@ const TargetComponent = (props: ITaskContentProps) => {
             index={index}
             title={subTarget.title}
             description={subTarget.description}
-            targetNodes={Array.isArray(targetNodes[0]) && targetNodes[0][index] ? [targetNodes[0][index]] : []}
-            targetRelations={Array.isArray(targetRelations[0]) && targetRelations[0][index] ? [targetRelations[0][index]] : []}
+            targetNodes={targetNodes[index]}
+            targetRelations={targetRelations[index]}
           />
         ))}
       </div>
