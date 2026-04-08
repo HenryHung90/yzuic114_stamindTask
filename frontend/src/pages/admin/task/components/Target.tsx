@@ -484,7 +484,7 @@ const TargetComponent = (props: ITaskTargetProps) => {
   }, [savingTrigger])
 
   return (
-    <div className='flex flex-col items-center'>
+    <div className='flex flex-col items-center h-[80vh]'>
       <AlertMsg content={alertContent} open={alertOpen} setOpen={setAlertOpen}/>
       <div className='flex flex-col gap-y-5 w-[80%]'>
         <Input
@@ -502,7 +502,7 @@ const TargetComponent = (props: ITaskTargetProps) => {
           onChange={(e) => setTargetDescription(e.target.value)}
         />
       </div>
-      <div className='overflow-auto flex flex-col gap-y-5 mt-5 pt-4 w-[80%] h-96 border-stamindTask-black-850'>
+      <div className='overflow-auto flex flex-col gap-y-5 mt-5 pt-4 w-[80%] border-stamindTask-black-850'>
         {subTargetList.map(({title, description}, index) => (
           <SubTargetComponent key={index} index={index} title={title} description={description}
                               targetNodes={targetNodes[index]} targetRelations={targetRelations[index]}
