@@ -309,7 +309,7 @@ const PlanComponent = (props: ITaskPlanProps) => {
         <SubTargetListComponent subTargetList={subTargetList} selectSubList={selectSubList}
                                 setSelectSubList={setSelectSubList}/>
       </div>
-      <div className='max-h-[40vh] overflow-scroll flex flex-col mt-5 gap-y-2'>
+      <div className='flex flex-col mt-5 gap-y-2'>
         {
           selectSubList.map((selected, subTargetIndex) => {
             if (selected) {

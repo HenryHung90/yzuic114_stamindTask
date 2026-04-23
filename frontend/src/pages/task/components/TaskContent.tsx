@@ -17,6 +17,7 @@ import {EGroupType} from "../../../utils/functions/common";
 const TaskContentComponent = (props: ITaskContentProps) => {
   const {
     taskId,
+    name,
     studentId,
     groupType,
     selectNode,
@@ -63,9 +64,9 @@ const TaskContentComponent = (props: ITaskContentProps) => {
 
   return (
     <Dialog open={open} handler={() => {
-    }} placeholder={undefined} size='xl' className={`${selectNode.category === 'Process' && 'right-[12vw]'}`}>
+    }} placeholder={undefined} size='xxl'>
       <DialogHeader placeholder={undefined}>{selectNode.text}</DialogHeader>
-      <DialogBody placeholder={undefined}>
+      <DialogBody placeholder={undefined} className='h-full overflow-auto'>
         {selectNode.category === 'Experience' &&
             <ExperiencePageComponent taskId={taskId} selectNode={selectNode}
                                      settingAlertLogAndLoading={settingAlertLogAndLoading}
@@ -84,7 +85,9 @@ const TaskContentComponent = (props: ITaskContentProps) => {
                            settingAlertLogAndLoading={settingAlertLogAndLoading}/>
         }
         {selectNode.category === 'Process' &&
-            <ProcessComponent taskId={taskId} selectNode={selectNode}
+            <ProcessComponent taskId={taskId}
+                              name={name}
+                              selectNode={selectNode}
                               studentId={studentId} groupType={groupType}
                               setTempStudentRecords={setTempStudentRecords}
                               settingAlertLogAndLoading={settingAlertLogAndLoading}/>
@@ -105,7 +108,7 @@ const TaskContentComponent = (props: ITaskContentProps) => {
                                settingAlertLogAndLoading={settingAlertLogAndLoading}/>
         }
       </DialogBody>
-      <DialogFooter placeholder={undefined} className='gap-x-2'>
+      <DialogFooter placeholder={undefined} className='flex justify-center gap-x-2'>
         {selectNode.category === 'Experience' &&
             <Button variant="gradient" color="green" onClick={reloadIframe} placeholder={undefined}>
                 <span>Reset</span>
@@ -121,8 +124,7 @@ const TaskContentComponent = (props: ITaskContentProps) => {
                 <span>Save</span>
             </Button>
         }
-        <Button variant="gradient" color="red" onClick={handleOpen} placeholder={undefined}
-                className={`${selectNode.category === 'Process' && 'mr-48'}`}>
+        <Button variant="gradient" color="red" onClick={handleOpen} placeholder={undefined}>
           <span>Leave</span>
         </Button>
       </DialogFooter>

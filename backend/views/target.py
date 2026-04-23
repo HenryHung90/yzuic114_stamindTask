@@ -38,13 +38,15 @@ def get_task_target(request):
         target_sub_target_list = target_data.sub_target_list
         target_nodes = target_data.target_nodes
         target_relations = target_data.target_relations
+        target_graph_descriptions = target_data.target_graph_descriptions
 
         return Response({
             'target_titles': target_titles,
             'target_descriptions': target_descriptions,
             'sub_target_list': target_sub_target_list,
             'target_nodes': target_nodes,
-            'target_relations': target_relations
+            'target_relations': target_relations,
+            'target_graph_descriptions': target_graph_descriptions
         }, status=status.HTTP_200_OK)
     except Exception as e:
         print(f'get tasks experience Error: {e}')
@@ -121,21 +123,23 @@ def generate_sub_target_graph(request):
 
         data_target_nodes = [] if data_target.target_nodes is None else data_target.target_nodes
         data_target_relations = [] if data_target.target_relations is None else data_target.target_relations
+        data_target_graph_descriptions = [] if data_target.target_graph_descriptions is None else data_target.target_graph_descriptions
 
-        if len(data_target_nodes) > select_node_index:
-            data_target_nodes[select_node_index] = graph_data['nodes']
-            data_target_relations[select_node_index] = graph_data['edges']
-        else:
-            for i in range(len(data_target_nodes), select_node_index + 1):
-                if i == select_node_index:
-                    data_target_nodes.append(graph_data['nodes'])
-                    data_target_relations.append(graph_data['edges'])
-                else:
-                    data_target_nodes.append('empty')
-                    data_target_relations.append('empty')
+        while len(data_target_nodes) <= select_node_index:
+            data_target_nodes.append('empty')
+        while len(data_target_relations) <= select_node_index:
+            data_target_relations.append('empty')
+        while len(data_target_graph_descriptions) <= select_node_index:
+            data_target_graph_descriptions.append('empty')
+
+            # Now we can safely assign values at select_node_index
+        data_target_nodes[select_node_index] = graph_data['nodes']
+        data_target_relations[select_node_index] = graph_data['edges']
+        data_target_graph_descriptions[select_node_index] = output_text
 
         data_target.target_nodes = data_target_nodes
         data_target.target_relations = data_target_relations
+        data_target.target_graph_descriptions = data_target_graph_descriptions
         data_target.save()
 
         return Response({'response': output_text, 'graph_data': graph_data}, status=status.HTTP_200_OK)

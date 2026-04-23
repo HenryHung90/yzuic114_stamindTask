@@ -14,6 +14,7 @@ import {
   ITaskTargetProps
 } from "../../../../utils/interface/Task";
 import {API_generateSubTargetGraph, API_getTaskTarget, API_uploadTaskTarget} from "../../../../utils/API/API_Targets";
+import MarkDownTextComponent from "../../../../components/MarkDownText/MarkDownText";
 
 // 添加 window.vis 類型宣告
 declare global {
@@ -27,6 +28,7 @@ const SubTargetComponent = (props: ITaskSubTargetProps) => {
     index,
     title,
     description,
+    targetGraphDescriptions,
     targetNodes,
     targetRelations,
     generatedGraph,
@@ -262,7 +264,9 @@ const SubTargetComponent = (props: ITaskSubTargetProps) => {
         value={description}
         onChange={(e) => handleEditSubTargetTitle(index, 'description', e.target.value)}
       />
-
+      <div className='h-64 overflow-auto'>
+        <MarkDownTextComponent text={targetGraphDescriptions}/>
+      </div>
       {/* 圖譜顯示區域 */}
       {hasGraphData && (
         <div className="mt-2">
@@ -281,7 +285,6 @@ const SubTargetComponent = (props: ITaskSubTargetProps) => {
             </svg>
             {showGraph ? "隱藏知識圖譜" : `顯示知識圖譜 (${targetNodes?.length || 0}節點, ${targetRelations?.length || 0}關係)`}
           </Button>
-
           {showGraph && (
             <div className="relative h-[360px]">
               {/* Vis.js 網路圖容器 */}
@@ -317,7 +320,6 @@ const SubTargetComponent = (props: ITaskSubTargetProps) => {
                   </div>
                 )}
               </div>
-
               {/* 控制按鈕 */}
               <div className="flex justify-end mt-1">
                 <Button
@@ -377,6 +379,7 @@ const TargetComponent = (props: ITaskTargetProps) => {
   const [subTargetList, setSubTargetList] = useState<Array<ITaskSubTarget>>([])
   const [targetNodes, setTargetNodes] = useState<ITaskTargetNodes[][]>([[]])
   const [targetRelations, setTargetRelations] = useState<ITaskTargetRelations[][]>([[]])
+  const [targetGraphDescriptions, setTargetGraphDescriptions] = useState<Array<string>>([])
   const [generatedGraph, setGeneratedGraph] = useState(false);
 
   // alert
@@ -458,9 +461,11 @@ const TargetComponent = (props: ITaskTargetProps) => {
       const subTargetList = response.data.sub_target_list[selectNode.key];
       const targetNodes = response.data.target_nodes;
       const targetRelations = response.data.target_relations;
+      const targetGraphDescriptions = response.data.target_graph_descriptions
 
       setTargetTitle(title || '');
       setTargetDescription(description || '');
+      setTargetGraphDescriptions(targetGraphDescriptions || []);
       if (subTargetList) setSubTargetList(subTargetList);
 
       // 檢查圖譜數據結構
@@ -506,6 +511,7 @@ const TargetComponent = (props: ITaskTargetProps) => {
         {subTargetList.map(({title, description}, index) => (
           <SubTargetComponent key={index} index={index} title={title} description={description}
                               targetNodes={targetNodes[index]} targetRelations={targetRelations[index]}
+                              targetGraphDescriptions={targetGraphDescriptions[index]}
                               generatedGraph={generatedGraph}
                               handleEditSubTargetTitle={handleEditSubTargetTitle}
                               handleDeleteSubTargetTitle={handleDeleteSubTargetTitle}
