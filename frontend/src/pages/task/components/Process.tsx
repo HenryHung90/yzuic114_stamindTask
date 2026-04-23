@@ -1,11 +1,11 @@
 import {Rnd} from "react-rnd"
 import React, {useEffect, useState} from "react"
 // style
-
 // API
 import {
   API_getProcessHintReply,
-  API_getStudentTaskProcessCode, API_saveProcessHintReply,
+  API_getStudentTaskProcessCode,
+  API_saveProcessHintReply,
   API_saveStudentTaskProcessCode
 } from "../../../utils/API/API_StudentTaskProcess";
 import {API_getProcessHint} from "../../../utils/API/API_ProcessHint";
@@ -16,16 +16,19 @@ import TabSelectorComponent from "../../../components/TabSelector/TabSelector";
 import CodeEditorComponent from "../../../components/CodeEditor/CodeEditor";
 import IframeShowerComponent from "../../../components/IframeShower/IframeShower";
 import MarkDownTextComponent from "../../../components/MarkDownText/MarkDownText";
-
+import InsertChatRoomComponent from "../../../components/ChatRoom/InsertChatRoom";
 // interface
 import {ITaskProcessHint, ITaskProcessProps} from "../../../utils/interface/Task";
 import {Button, IconButton, Textarea, Typography} from "@material-tailwind/react";
 import {XMarkIcon} from "@heroicons/react/24/solid";
+import {EGroupType} from "../../../utils/functions/common";
+import TargetComponent from "./Target";
 
 export enum LANGUAGE_TYPE {
   HTML = 'html',
   CSS = 'css',
   JS = 'javascript',
+  TARGET = '任務目標'
 }
 
 export enum CODE_STATUS {
@@ -37,7 +40,7 @@ export enum CODE_STATUS {
 
 
 const ProcessComponent = (props: ITaskProcessProps) => {
-  const {taskId, groupType, selectNode, studentId, setTempStudentRecords} = props
+  const {taskId, name, groupType, selectNode, studentId, setTempStudentRecords, settingAlertLogAndLoading} = props
 
   const [activeTab, setActiveTab] = useState<LANGUAGE_TYPE>(LANGUAGE_TYPE.HTML)
   const [htmlCode, setHtmlCode] = useState<string>("")
@@ -48,6 +51,8 @@ const ProcessComponent = (props: ITaskProcessProps) => {
 
   const [openIframe, setOpenIframe] = useState<boolean>(false)
   const [openProcessHint, setOpenProcessHint] = useState<boolean>(false)
+
+  const [leftPanelWidth, setLeftPanelWidth] = useState<number>(65)
 
   // 修改實作提示回覆部分
   const handleChangeProcessHintReply = (e: React.ChangeEvent<HTMLTextAreaElement>, index: number, hintTitle: string) => {
@@ -165,17 +170,38 @@ const ProcessComponent = (props: ITaskProcessProps) => {
     }
   }
 
+  const handleDragStart = () => {
+    document.body.style.cursor = 'col-resize'
+    const handleDrag = (e: MouseEvent) => {
+      const containerWidth = document.querySelector('.flex.gap-x-4')?.clientWidth || 0
+      if (containerWidth === 0) return
+
+      let newWidthPercent = Math.min(Math.max(20, (e.clientX / containerWidth) * 97), 90)
+      if (newWidthPercent > 65) newWidthPercent = 65
+      if (newWidthPercent < 20) newWidthPercent = 20
+      setLeftPanelWidth(newWidthPercent)
+    }
+    const handleDragEnd = () => {
+      document.body.style.cursor = 'default'
+      document.removeEventListener('mousemove', handleDrag)
+      document.removeEventListener('mouseup', handleDragEnd)
+    }
+
+    document.addEventListener('mousemove', handleDrag)
+    document.addEventListener('mouseup', handleDragEnd)
+  }
+
   return (
     <>
       {
         openIframe && <div
-              className='absolute -top-[10vh] -left-[12.5vw] w-[100vw] h-[100vh] z-[10002] bg-opacity-50 pointer-events-none animate-tooltipSlideIn'>
+              className='absolute w-full h-full z-[10002] bg-opacity-50 pointer-events-none animate-tooltipSlideIn'>
               <IframeShowerComponent htmlCode={htmlCode} cssCode={cssCode} jsCode={jsCode} setOpenIframe={setOpenIframe}/>
           </div>
       }
       {
         openProcessHint && <div
-              className='absolute -top-[10vh] -left-[12.5vw] w-[100vw] h-[100vh] z-[10002] bg-opacity-50 pointer-events-none animate-tooltipSlideIn'>
+              className='absolute w-full h-full z-[10002] bg-opacity-50 pointer-events-none animate-tooltipSlideIn'>
               <Rnd
                   default={{
                     x: 0,
@@ -244,22 +270,41 @@ const ProcessComponent = (props: ITaskProcessProps) => {
               </Rnd>
           </div>
       }
-      <div className='relative h-[75vh] rounded-xl overflow-hidden'>
-        <TabSelectorComponent tabData={LANGUAGE_TYPE} activeTab={activeTab} setActiveTab={setActiveTab}/>
-        <CodeEditorComponent
-          codeStatus={codeStatus}
-          language={activeTab}
-          value={selectCodeType()}
-          onChangeFunction={handleCodeChange}
-          handleSaveStudentCode={handleSaveStudentCode}
-          groupType={groupType}
-          openIframe={openIframe}
-          setOpenIframe={setOpenIframe}
-          openProcessHint={openProcessHint}
-          setOpenProcessHint={setOpenProcessHint}
-          studentId={studentId}
-          setTempStudentRecords={setTempStudentRecords}
-        />
+      <div className='flex gap-x-4'>
+        <div className='relative w-[80%] h-[80vh] rounded-xl overflow-hidden' style={{width: `${leftPanelWidth}%`}}>
+          <TabSelectorComponent tabData={LANGUAGE_TYPE} activeTab={activeTab} setActiveTab={setActiveTab}/>
+          {activeTab === LANGUAGE_TYPE.TARGET &&
+              <div className='relative h-[100%] overflow-y-auto'>
+                  <TargetComponent taskId={taskId} selectNode={selectNode} groupType={groupType}
+                                   studentId={studentId}
+                                   setTempStudentRecords={setTempStudentRecords}
+                                   settingAlertLogAndLoading={settingAlertLogAndLoading}/>
+              </div>
+          }
+          {activeTab !== LANGUAGE_TYPE.TARGET && <CodeEditorComponent
+              codeStatus={codeStatus}
+              language={activeTab}
+              value={selectCodeType()}
+              onChangeFunction={handleCodeChange}
+              handleSaveStudentCode={handleSaveStudentCode}
+              groupType={groupType}
+              openIframe={openIframe}
+              setOpenIframe={setOpenIframe}
+              openProcessHint={openProcessHint}
+              setOpenProcessHint={setOpenProcessHint}
+              studentId={studentId}
+              setTempStudentRecords={setTempStudentRecords}
+          />}
+
+        </div>
+        <div
+          className="w-2 h-[80vh] cursor-col-resize bg-gray-300 hover:bg-blue-400 transition-colors duration-200 active:bg-blue-600"
+          onMouseDown={handleDragStart}
+        ></div>
+        <div className="flex-1 overflow-hidden">
+          <InsertChatRoomComponent name={name ?? ''} taskId={taskId ?? ''} userStudentId={studentId}
+                                   groupType={groupType ?? EGroupType.EXPERIMENTAL}/>
+        </div>
       </div>
     </>
   )

@@ -224,7 +224,7 @@ def generate_teacher_feedback(request):
                                      f"任務{task_data.name}_階段{select_node}_{request.user.student_id}學生總結.txt")
             system_prompt = SYSTEM_PROMPT_FOR_EXPERIMENTAL if group_type == StudentGroup.GroupType.EXPERIMENTAL else SYSTEM_PROMPT_FOR_CONTROL
 
-            sending_data = client.chat.completions.create(model="gpt-3.5-turbo",
+            sending_data = client.chat.completions.create(model="gpt-4.1",
                                                           temperature=0.3,
                                                           max_tokens=3000,
                                                           messages=[

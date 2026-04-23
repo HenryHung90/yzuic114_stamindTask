@@ -1,5 +1,6 @@
-import {useEffect, useState, useMemo, useRef} from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
 // style
+import {Tab, Tabs, TabsHeader,} from "@material-tailwind/react";
 
 // API
 import {API_getTaskTarget} from "../../../utils/API/API_Targets";
@@ -14,13 +15,20 @@ import {
   ITaskTargetNodes,
   ITaskTargetRelations,
 } from "../../../utils/interface/Task";
-import {Button} from "@material-tailwind/react";
+import {EGroupType} from "../../../utils/functions/common";
+import {handleCustomRecord} from "../../../utils/listener/action";
 
 // 添加 window.vis 類型宣告
 declare global {
   interface Window {
     vis: any;
   }
+}
+
+// 定義子目標內容標籤類型
+enum SUB_TARGET_CONTENT_TAB {
+  DESCRIPTION = '描述',
+  GRAPH = '知識圖譜'
 }
 
 // 子任務組件
@@ -30,17 +38,40 @@ const SubTargetComponent = (props: {
   description: string;
   targetNodes?: ITaskTargetNodes[];
   targetRelations?: ITaskTargetRelations[];
+  groupType: EGroupType;
+  studentId?: string;
+  setTempStudentRecords?: (records: any) => void;
 }) => {
-  const {index, title, description, targetNodes, targetRelations} = props;
+  const {index, title, description, targetNodes, targetRelations, groupType, studentId, setTempStudentRecords} = props;
 
   const networkRef = useRef<HTMLDivElement>(null);
   const networkInstance = useRef<any>(null);
   const [visLoaded, setVisLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [hoveredNode, setHoveredNode] = useState<any>(null);
-  const [showGraph, setShowGraph] = useState(false);
 
-  console.log(targetNodes, targetRelations)
+  // 子目標內容標籤相關狀態
+  const [activeContentTab, setActiveContentTab] = useState<SUB_TARGET_CONTENT_TAB>(SUB_TARGET_CONTENT_TAB.DESCRIPTION);
+
+  const handleChangeContentTab = (tab: SUB_TARGET_CONTENT_TAB, index: number) => {
+    setActiveContentTab(tab)
+    if (tab === SUB_TARGET_CONTENT_TAB.DESCRIPTION) {
+      handleCustomRecord({
+        action: 'click',
+        type: 'tab',
+        object: `subTargetTabDescription_子任務 ${index + 1} 描述`,
+        id: `task_subTargetTabDescription`
+      }, false, studentId || '', setTempStudentRecords)
+    } else {
+      handleCustomRecord({
+        action: 'click',
+        type: 'tab',
+        object: `subTargetTabGraph_子任務 ${index + 1} 圖譜`,
+        id: `task_subTargetTabGraph`
+      }, false, studentId || '', setTempStudentRecords)
+    }
+
+  }
 
   // 檢查是否有圖譜數據可用
   const hasGraphData = Array.isArray(targetNodes) && Array.isArray(targetRelations) && targetNodes.length > 0;
@@ -48,8 +79,6 @@ const SubTargetComponent = (props: {
   // 轉換節點和關係為 vis.js 需要的格式
   const graphData = useMemo(() => {
     if (!hasGraphData) return null;
-
-    console.log(`SubTarget ${index}: Processing graph data with ${targetNodes.length} nodes and ${targetRelations.length} relations`);
 
     const nodes = targetNodes.map(node => ({
       id: node.id,
@@ -74,11 +103,10 @@ const SubTargetComponent = (props: {
 
   // 動態載入 vis-network (只有在需要顯示圖形且有數據時)
   useEffect(() => {
-    if (!showGraph || !hasGraphData) return;
+    if (activeContentTab !== SUB_TARGET_CONTENT_TAB.GRAPH || !hasGraphData) return;
 
     const loadVis = async () => {
       try {
-        console.log(`SubTarget ${index}: Loading vis.js libraries`);
         // 動態導入 vis 相關庫，與 admin 版本保持一致
         const [{Network}, {DataSet}] = await Promise.all([
           import('vis-network/standalone'),
@@ -95,7 +123,7 @@ const SubTargetComponent = (props: {
     if (!visLoaded) {
       loadVis();
     }
-  }, [visLoaded, hasGraphData, showGraph, index]);
+  }, [visLoaded, hasGraphData, activeContentTab, index]);
 
   // 初始化網路圖
   const initializeNetwork = () => {
@@ -173,7 +201,7 @@ const SubTargetComponent = (props: {
         improvedLayout: true
       },
       autoResize: true,
-      height: '100%',  // 改為 100% 以填滿父容器
+      height: '100%',
       width: '100%'
     };
 
@@ -216,7 +244,7 @@ const SubTargetComponent = (props: {
 
   // 當 vis 載入完成或圖形數據更新時，初始化網絡圖
   useEffect(() => {
-    if (networkRef.current && visLoaded && graphData && showGraph) {
+    if (networkRef.current && visLoaded && graphData && activeContentTab === SUB_TARGET_CONTENT_TAB.GRAPH) {
       setIsLoading(true);
       initializeNetwork();
     }
@@ -228,7 +256,7 @@ const SubTargetComponent = (props: {
         networkInstance.current = null;
       }
     };
-  }, [visLoaded, graphData, showGraph]);
+  }, [visLoaded, graphData, activeContentTab]);
 
   const handleFitView = () => {
     if (networkInstance.current) {
@@ -241,6 +269,124 @@ const SubTargetComponent = (props: {
     }
   };
 
+  // 自定義內容標籤選擇器組件
+  const ContentTabs = () => {
+    const tabs = [SUB_TARGET_CONTENT_TAB.DESCRIPTION];
+
+    // 只有當有圖譜數據時才顯示圖譜標籤
+    if (hasGraphData && groupType === EGroupType.EXPERIMENTAL) {
+      tabs.push(SUB_TARGET_CONTENT_TAB.GRAPH);
+    }
+
+    return (
+      <Tabs value={activeContentTab}>
+        <TabsHeader
+          className="rounded-none border-b border-blue-gray-50 bg-transparent p-0"
+          indicatorProps={{
+            className: "bg-transparent border-b-2 border-gray-900 shadow-none rounded-none",
+          }}
+          placeholder={undefined}
+        >
+          {tabs.map((tab, index) => (
+            <Tab
+              key={index}
+              value={tab}
+              onClick={() => handleChangeContentTab(tab, index)}
+              className={activeContentTab === tab ? "text-gray-900" : ""}
+              placeholder={undefined}
+
+            >
+              <div className='flex items-center gap-x-2'>
+                {tab === SUB_TARGET_CONTENT_TAB.DESCRIPTION ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                       stroke="currentColor" className="w-5 h-5">
+                    <path strokeLinecap="round" strokeLinejoin="round"
+                          d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/>
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                       stroke="currentColor" className="w-5 h-5">
+                    <path strokeLinecap="round" strokeLinejoin="round"
+                          d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z"/>
+                  </svg>
+                )}
+                {tab} {tab === SUB_TARGET_CONTENT_TAB.GRAPH && `(${targetNodes?.length || 0}節點, ${targetRelations?.length || 0}關係)`}
+              </div>
+            </Tab>
+          ))}
+        </TabsHeader>
+      </Tabs>
+    );
+  };
+
+  // 渲染描述內容
+  const renderDescription = () => {
+    return (
+      <p
+        data-action='click'
+        data-type='text'
+        data-object='subTargetDescription'
+        data-id='task_subTargetDescription'
+      >
+        <MarkDownTextComponent text={description}/>
+      </p>
+    );
+  };
+
+  // 渲染圖譜內容
+  const renderGraph = () => {
+    if (!hasGraphData) return null;
+
+    return (
+      <div className="my-4">
+        <div className="flex flex-col items-center h-[560px] mt-4">
+          {/* Vis.js 網路圖容器 */}
+          <div
+            className="border rounded-md overflow-hidden bg-gradient-to-br from-slate-50 to-blue-50 relative w-full h-full">
+            {/* 載入狀態 */}
+            {(isLoading || !visLoaded) && (
+              <div className="absolute inset-0 bg-white bg-opacity-90 flex flex-col items-center justify-center z-10">
+                <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center animate-pulse mb-2">
+                  <span className="text-white font-bold">🧠</span>
+                </div>
+                <p className="text-sm text-gray-600">
+                  {!visLoaded ? '載入圖譜庫...' : '渲染知識圖譜...'}
+                </p>
+              </div>
+            )}
+
+            <div ref={networkRef} className="w-full h-full bg-gradient-to-br"/>
+
+            {/* 節點信息彈出框 */}
+            {hoveredNode && (
+              <div
+                className="absolute top-2 left-2 max-w-xs bg-white p-2 rounded shadow-md border-l-2 border-blue-500 z-20 text-sm">
+                <div className="flex items-center gap-1.5 mb-1">
+                  <div className="w-2 h-2 rounded-full" style={{backgroundColor: hoveredNode.color}}></div>
+                  <strong>{hoveredNode.label}</strong>
+                </div>
+                {hoveredNode.description && (
+                  <p className="text-xs text-gray-600">{hoveredNode.description}</p>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* 控制按鈕 */}
+          <div className="flex justify-end mt-1">
+            <button
+              className="text-xs py-1 px-2 text-blue-600 hover:text-blue-800"
+              disabled={isLoading || !visLoaded}
+              onClick={handleFitView}
+            >
+              重置視圖
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className='flex flex-col p-4 gap-y-3 border-2 border-stamindTask-black-600 rounded-2xl'>
       <h3
@@ -250,91 +396,22 @@ const SubTargetComponent = (props: {
         data-object='subTarget'
         data-id='task_subTarget'
       >🟢 子目標：{title}</h3>
-      <p
-        data-action='click'
-        data-type='text'
-        data-object='subTargetDescription'
-        data-id='task_subTargetDescription'
-      >
-        <MarkDownTextComponent text={description}/>
-      </p>
 
-      {/* 圖譜顯示區域 */}
-      {hasGraphData && (
-        <div className="my-4">
+      {/* 子目標內容標籤選擇器 */}
+      <ContentTabs/>
 
-          <Button
-            variant="text"
-            color="blue"
-            placeholder={undefined}
-            size="sm"
-            onClick={() => setShowGraph(!showGraph)}
-            className="flex items-center gap-2 mb-2"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
-                 stroke="currentColor" className="w-5 h-5">
-              <path strokeLinecap="round" strokeLinejoin="round"
-                    d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z"/>
-            </svg>
-            {showGraph ? "隱藏知識圖譜" : `顯示知識圖譜 (${targetNodes?.length || 0}節點, ${targetRelations?.length || 0}關係)`}
-          </Button>
-          {showGraph && (
-            <div className="relative h-[360px] mt-4">
-              {/* Vis.js 網路圖容器 */}
-              <div
-                className="border rounded-md overflow-hidden bg-gradient-to-br from-slate-50 to-blue-50 relative h-full">
-                {/* 載入狀態 */}
-                {(isLoading || !visLoaded) && (
-                  <div
-                    className="absolute inset-0 bg-white bg-opacity-90 flex flex-col items-center justify-center z-10">
-                    <div
-                      className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center animate-pulse mb-2">
-                      <span className="text-white font-bold">🧠</span>
-                    </div>
-                    <p className="text-sm text-gray-600">
-                      {!visLoaded ? '載入圖譜庫...' : '渲染知識圖譜...'}
-                    </p>
-                  </div>
-                )}
-
-                <div ref={networkRef} className="w-full h-full bg-gradient-to-br"/>
-
-                {/* 節點信息彈出框 */}
-                {hoveredNode && (
-                  <div
-                    className="absolute top-2 left-2 max-w-xs bg-white p-2 rounded shadow-md border-l-2 border-blue-500 z-20 text-sm">
-                    <div className="flex items-center gap-1.5 mb-1">
-                      <div className="w-2 h-2 rounded-full" style={{backgroundColor: hoveredNode.color}}></div>
-                      <strong>{hoveredNode.label}</strong>
-                    </div>
-                    {hoveredNode.description && (
-                      <p className="text-xs text-gray-600">{hoveredNode.description}</p>
-                    )}
-                  </div>
-                )}
-              </div>
-
-              {/* 控制按鈕 */}
-              <div className="flex justify-end mt-1">
-                <button
-                  className="text-xs py-1 px-2 text-blue-600 hover:text-blue-800"
-                  disabled={isLoading || !visLoaded}
-                  onClick={handleFitView}
-                >
-                  重置視圖
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
+      {/* 根據當前活動標籤顯示內容 */}
+      <div className="mt-2">
+        {activeContentTab === SUB_TARGET_CONTENT_TAB.DESCRIPTION && renderDescription()}
+        {activeContentTab === SUB_TARGET_CONTENT_TAB.GRAPH && renderGraph()}
+      </div>
     </div>
   )
 }
 
 // 主目標組件
 const TargetComponent = (props: ITaskContentProps) => {
-  const {taskId, selectNode} = props;
+  const {taskId, selectNode, groupType, studentId, setTempStudentRecords} = props;
 
   const [targetTitle, setTargetTitle] = useState<string>("");
   const [targetDescription, setTargetDescription] = useState<string>("");
@@ -342,12 +419,13 @@ const TargetComponent = (props: ITaskContentProps) => {
   // 與 admin 版本一致，使用二維數組來存儲圖譜數據
   const [targetNodes, setTargetNodes] = useState<ITaskTargetNodes[][]>([[]]);
   const [targetRelations, setTargetRelations] = useState<ITaskTargetRelations[][]>([[]]);
+  // 添加當前選擇的子目標索引
+  const [activeSubTargetIndex, setActiveSubTargetIndex] = useState<number>(0);
 
   useEffect(() => {
     const fetchTaskTarget = async () => {
       try {
         const response = await API_getTaskTarget(taskId || '');
-        console.log("API 回傳數據:", response.data);
 
         const title = response.data.target_titles[selectNode.key] || "";
         const description = response.data.target_descriptions[selectNode.key] || "";
@@ -371,6 +449,8 @@ const TargetComponent = (props: ITaskContentProps) => {
         setTargetTitle(title);
         setTargetDescription(description);
         setSubTargetList(processedSubTargets);
+        // 重置選中的子目標索引
+        setActiveSubTargetIndex(0);
 
       } catch (error) {
         console.error("獲取目標數據時出錯:", error);
@@ -380,8 +460,53 @@ const TargetComponent = (props: ITaskContentProps) => {
     fetchTaskTarget();
   }, [taskId, selectNode]);
 
+  const handleChangeSubTargetTab = (index: number) => {
+    setActiveSubTargetIndex(index)
+    handleCustomRecord({
+      action: 'click',
+      type: 'tab',
+      object: `subTargetTab_子任務${index + 1}`,
+      id: `task_subTargetTab_階段`
+    }, false, studentId || '', setTempStudentRecords)
+  }
+
+  // 子目標標籤選擇器
+  const SubTargetTabs = () => {
+    if (subTargetList.length === 0) return null;
+
+    return (
+      <Tabs value={activeSubTargetIndex.toString()}>
+        <TabsHeader
+          className="rounded-none border-b border-blue-gray-50 bg-transparent p-0"
+          indicatorProps={{
+            className: "bg-transparent border-b-2 border-gray-900 shadow-none rounded-none",
+          }}
+          placeholder={undefined}
+        >
+          {subTargetList.map((subTarget, index) => (
+            <Tab
+              key={index}
+              value={index.toString()}
+              onClick={() => handleChangeSubTargetTab(index)}
+              className={activeSubTargetIndex === index ? "text-gray-900" : ""}
+              placeholder={undefined}
+            >
+              <div className='flex items-center gap-x-2'>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                     stroke="currentColor" className="w-5 h-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                </svg>
+                子目標 {index + 1}
+              </div>
+            </Tab>
+          ))}
+        </TabsHeader>
+      </Tabs>
+    );
+  };
+
   return (
-    <div className='flex flex-col items-center h-[80vh]'>
+    <div className='flex flex-col items-center'>
       <div className='flex flex-col gap-y-5 w-[80%]'>
         <h3
           className='text-[2rem]'
@@ -397,17 +522,29 @@ const TargetComponent = (props: ITaskContentProps) => {
           data-id='task_targetDescription'
         >{targetDescription}</p>
       </div>
-      <div className='overflow-scroll flex flex-col gap-y-5 mt-5 pt-4 h-[60vh] border-stamindTask-black-850'>
-        {subTargetList.map((subTarget, index) => (
+
+      {/* 子目標標籤選擇器 */}
+      {subTargetList.length > 0 && (
+        <div className='w-[80%] mt-5'>
+          <SubTargetTabs/>
+        </div>
+      )}
+
+      {/* 顯示當前選中的子目標 */}
+      <div className='w-[80%] mt-5'>
+        {subTargetList.length > 0 && activeSubTargetIndex < subTargetList.length && (
           <SubTargetComponent
-            key={index}
-            index={index}
-            title={subTarget.title}
-            description={subTarget.description}
-            targetNodes={targetNodes[index]}
-            targetRelations={targetRelations[index]}
+            key={activeSubTargetIndex}
+            index={activeSubTargetIndex}
+            title={subTargetList[activeSubTargetIndex].title}
+            description={subTargetList[activeSubTargetIndex].description}
+            targetNodes={targetNodes[activeSubTargetIndex]}
+            targetRelations={targetRelations[activeSubTargetIndex]}
+            groupType={groupType ?? EGroupType.EXPERIMENTAL}
+            studentId={studentId}
+            setTempStudentRecords={setTempStudentRecords}
           />
-        ))}
+        )}
       </div>
     </div>
   )

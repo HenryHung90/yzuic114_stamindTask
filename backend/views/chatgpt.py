@@ -11,22 +11,24 @@ from datetime import datetime
 from asgiref.sync import async_to_sync
 from graphrag.query.context_builder.conversation_history import ConversationHistory, ConversationRole
 
-from backend.models import StudentTask, RagRelationships, RagEntities
+from backend.models import StudentTask, RagRelationships, RagEntities, StudentGroup
 from backend.utils.graphrag_utils import extract_graphrag_references, generate_next_step_graph, \
     format_context_data_to_data_tag
 
 from backend.utils.graphRAGService import GraphRAGService
-from backend.utils.prompt.local_search_prompt import GENERATE_SUB_TARGET_PROMPT
+from backend.utils.prompt.local_search_prompt import TODOLIST_PROMPT, NEXT_STEP_PROMPT
 
-SEARCH_ENGINE = GraphRAGService.get_engine(GENERATE_SUB_TARGET_PROMPT)
+SEARCH_ENGINE = GraphRAGService.get_engine(TODOLIST_PROMPT)
+NEXT_STEP_ENGINE = GraphRAGService.get_engine(NEXT_STEP_PROMPT)
 
 client = OpenAI(api_key=os.getenv('OPENAI_KEY'))
 
 CODE_DEBUG_ASSISTANT_ID = os.getenv('CODE_DEBUG_ASSISTANT_ID')
+NORMAL_ASSISTANT_ID = os.getenv('NORMAL_ASSISTANT_ID')
 AI_NAME = "Amum Amum"
 
 
-def chat_with_assistant(prompt_message, user_process_code):
+def chat_with_assistant(prompt_message, user_process_code, is_experimental=True):
     # 檢查是否有 thread_id，如果沒有則創建新的 thread
     thread_id = user_process_code.assistant_thread_id
     if not thread_id:
@@ -47,7 +49,7 @@ def chat_with_assistant(prompt_message, user_process_code):
     # 運行助手
     run = client.beta.threads.runs.create(
         thread_id=thread_id,
-        assistant_id=CODE_DEBUG_ASSISTANT_ID
+        assistant_id=NORMAL_ASSISTANT_ID if is_experimental else CODE_DEBUG_ASSISTANT_ID
     )
 
     # 等待運行完成
@@ -126,7 +128,14 @@ def chat_with_amumamum(request):
         start_time = time.time()
         user_question = request.data.get('message')
         task_id = request.data.get('task_id')
-        user_history_data = StudentTask.objects.get(student_id=request.user.student_id, task_id=task_id).chat_history
+        is_experimental = request.user.student_group.group_type == StudentGroup.GroupType.EXPERIMENTAL
+
+        student_task = StudentTask.objects.get(student_id=request.user.student_id, task_id=task_id)
+        user_history_data = student_task.chat_history
+        user_process_code = student_task.process.process_code
+        html_code = user_process_code.html_code or ""
+        css_code = user_process_code.css_code or ""
+        js_code = user_process_code.js_code or ""
 
         if user_history_data.chat_history is None:
             user_history_data.chat_history = []
@@ -145,18 +154,36 @@ def chat_with_amumamum(request):
             "message": user_question,
         }
 
-        query = user_question
+        prompt_message = f"""
+                        我目前完成的 code 如以下所示
+                        HTML 代碼
+                        ```html
+                        {html_code}
+                        ```
+                        CSS 代碼
+                        ```css
+                        {css_code}
+                        ```
+                        JavaScript 代碼
+                        ```javascript
+                        {js_code}
+                        ```
+                        """
 
-        search_func = async_to_sync(SEARCH_ENGINE.search)
-        result_object = search_func(
-            query=query,
-            user_conversation_history=user_conversation_history
-        )
-        output_text = result_object.response
+        query = user_question + prompt_message
 
-        data_tag = format_context_data_to_data_tag(result_object.context_data)
-        if data_tag:
-            output_text = f"{output_text}\n\n{data_tag}"
+        if is_experimental:
+            search_func = async_to_sync(SEARCH_ENGINE.search)
+            result_object = search_func(
+                query=query,
+                user_conversation_history=user_conversation_history
+            )
+            output_text = result_object.response
+            data_tag = format_context_data_to_data_tag(result_object.context_data)
+            if data_tag:
+                output_text = f"{output_text}\n\n{data_tag}"
+        else:
+            output_text = chat_with_assistant(query, user_process_code, False)
 
         # 計算處理時間
         end_time = time.time()
@@ -166,7 +193,7 @@ def chat_with_amumamum(request):
             "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "name": AI_NAME,
             "student_id": "",
-            "message": output_text,
+            "message": output_text if output_text else '',
             "processing_time": processing_time
         }
 
@@ -235,6 +262,7 @@ def code_debug_with_amumamum(request):
 def next_step_with_amumamum(request):
     try:
         user_question = request.data.get('message', "下一步我該做什麼？")
+        start_time = time.time()
         task_id = request.data.get('task_id')
         student_task = StudentTask.objects.get(student_id=request.user.student_id, task_id=task_id)
         user_process_code = student_task.process.process_code
@@ -261,8 +289,33 @@ def next_step_with_amumamum(request):
                         ```
                         """
 
-        response_text = chat_with_assistant(prompt_message, user_process_code)
-        gpt_content = save_assistant_chat(request, user_question, response_text, user_history_data)
+        user_content = {
+            "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "name": request.user.name,
+            "student_id": request.user.student_id,
+            "message": prompt_message,
+        }
+
+        search_func = async_to_sync(SEARCH_ENGINE.search)
+        result_object = search_func(
+            query=prompt_message
+        )
+        output_text = result_object.response
+        data_tag = format_context_data_to_data_tag(result_object.context_data)
+        end_time = time.time()
+        processing_time = round(end_time - start_time, 2)
+
+        gpt_content = {
+            "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "name": AI_NAME,
+            "student_id": "",
+            "message": output_text,
+            "processing_time": processing_time
+        }
+
+        user_history_data.chat_history.append(user_content)
+        user_history_data.chat_history.append(gpt_content)
+        user_history_data.save()
         return Response({'assistant': gpt_content}, status=status.HTTP_200_OK)
     except Exception as e:
         print(f'next step with amumamum Error: {e}')

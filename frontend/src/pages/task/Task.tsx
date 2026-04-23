@@ -94,6 +94,7 @@ const Task = (props: ITaskProps) => {
     <div>
       <TaskContentComponent
         taskId={taskId}
+        name={name}
         studentId={studentId}
         groupType={groupType}
         selectNode={selectNode}

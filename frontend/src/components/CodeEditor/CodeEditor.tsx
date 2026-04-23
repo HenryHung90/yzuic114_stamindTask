@@ -101,7 +101,7 @@ const CodeEditorComponent = (props: ICodeEditorProps) => {
         data-id='task_processCodeEditor'
       />
       <div
-        className='absolute flex flex-col right-5 top-3 z-50 gap-y-4 text-right duration-500 opacity-50 hover:opacity-100'>
+        className='absolute flex flex-col right-5 top-3 z-50 gap-y-4 text-right duration-500 opacity-50 hover:opacity-100 select-none'>
         <FontSizeAdjustButtonComponent fontSize={fontSize} increaseFontSize={increaseFontSize}
                                        decreaseFontSize={decreaseFontSize}/>
         <SavingStatusButtonComponent codeStatus={codeStatus} handleClickSave={handleSaveStudentCode}/>

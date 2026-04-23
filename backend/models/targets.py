@@ -45,6 +45,13 @@ class Target(models.Model):
         help_text='包含 source, target 和 relation 的 Array<JSON> 格式資料'
     )
 
+    target_graph_descriptions = models.JSONField(
+        null=True,
+        blank=True,
+        verbose_name='目標 graphRag 描述',
+        help_text='包和 description 的 Array<JSON> 格式資料'
+    )
+
     # 時間戳記
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

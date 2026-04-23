@@ -14,75 +14,97 @@
     <node id="&#38748;&#24907;&#39592;&#26550;" />
     <node id="CSS&#30340;&#38468;&#33879;&#40670;" />
     <node id="JS&#30340;&#25805;&#20316;&#33310;&#21488;" />
-    <node id="&#24453;&#36774;&#20107;&#38917;&#21015;&#34920;&#23481;&#22120;" />
     <node id="&#21629;&#21517;&#31574;&#30053;" />
-    <node id="&#21807;&#19968;&#24615;" />
-    <node id="&#37325;&#35079;&#24615;" />
     <node id="&#35486;&#24847;&#21270;&#33287;&#21407;&#29983;&#34892;&#28858;" />
-    <node id="&#34920;&#21934;&#25552;&#20132;" />
-    <node id="&#38450;&#21574;&#27231;&#21046;" />
+    <node id="&#27169;&#24335;&#20999;&#25563;&#35373;&#35336;" />
+    <node id="&#24453;&#36774;&#20107;&#38917;&#21015;&#34920;&#23481;&#22120;" />
     <node id="&#20027;&#25033;&#29992;&#23481;&#22120;" />
+    <node id="TODOLIST" />
+    <node id="TODO-FORM" />
     <node id="&#34920;&#21934;&#21312;&#22495;" />
     <node id="SUBMIT&#20107;&#20214;" />
-    <node id="APP" />
-    <node id="TODO-FORM" />
+    <node id="TODO-CARD" />
     <node id="SUBMIT" />
-    <node id="TODOINPUT" />
-    <node id="TODOBUTTON" />
-    <node id="REQUIRED" />
-    <node id="TODO-LIST-ID" />
+    <node id="FORM-BUTTONS" />
     <node id="CSS &#27169;&#32068;" />
     <node id="HTML &#32080;&#27083;" />
     <node id="JAVASCRIPT" />
     <node id="&#38450;&#31142;&#24615;&#35373;&#35336;" />
-    <node id="&#21345;&#29255;&#35373;&#35336;" />
-    <node id="FLEX: 1" />
-    <node id="TODO-CONTENT" />
-    <node id="CARD-BUTTONS" />
-    <node id="&#35222;&#35258;&#29376;&#24907;&#27231;" />
-    <node id="&#32232;&#36655;&#27169;&#24335;" />
-    <node id="DISPLAY: NONE" />
     <node id="&#32178;&#26684;&#31995;&#32113;" />
-    <node id="SPACING MANAGEMENT" />
-    <node id="GAP" />
-    <node id="MAX-WIDTH: 600PX" />
-    <node id="MARGIN: 0 AUTO" />
-    <node id="&#36984;&#25799;&#22120;&#31574;&#30053;" />
-    <node id="&#29305;&#30064;&#24615;" />
-    <node id="MAX-WIDTH" />
-    <node id="TODO-CARD" />
+    <node id="&#35222;&#35258;&#29376;&#24907;&#27231;" />
     <node id="FLEX" />
-    <node id="FLEX-WRAP" />
     <node id="FLEX-DIRECTION" />
-    <node id="MARGIN" />
+    <node id="DISPLAY" />
+    <node id="CARD-BUTTONS" />
+    <node id="EDIT" />
+    <node id="SAVE" />
+    <node id="CANCEL" />
+    <node id="EDIT MODE" />
+    <node id="SAVE BUTTON" />
+    <node id="CANCEL BUTTON" />
+    <node id="BUTTON COLOR SYSTEM" />
+    <node id="TODO LIST" />
+    <node id="TODO CARD" />
+    <node id="GAP PROPERTY" />
+    <node id="BOX SHADOW" />
+    <node id="SPACING MANAGEMENT" />
+    <node id="BODY BACKGROUND" />
+    <node id="&#25353;&#37397;&#33394;&#24425;&#31995;&#32113;" />
+    <node id="&#32232;&#36655;&#25353;&#37397;" />
+    <node id="&#20786;&#23384;&#25353;&#37397;" />
+    <node id="&#21462;&#28040;&#25353;&#37397;" />
+    <node id="&#21034;&#38500;&#25353;&#37397;" />
+    <node id="&#34920;&#21934;&#33287;&#21345;&#29255;&#30340;&#35373;&#35336;&#19968;&#33268;&#24615;" />
+    <node id="&#20849;&#20139;&#29305;&#24501;" />
+    <node id="&#24046;&#30064;&#21270;&#35373;&#35336;" />
+    <node id="&#35222;&#35258;&#32113;&#19968;" />
+    <node id="&#36664;&#20837;&#25511;&#20214;&#30340;&#19968;&#33268;&#24615;&#34389;&#29702;" />
+    <node id="&#20351;&#29992;&#39636;&#39511;" />
+    <node id="CSS&#33287;JAVASCRIPT&#30340;&#21332;&#20316;&#38364;&#20418;" />
+    <node id="&#29376;&#24907;&#20999;&#25563;&#20381;&#36084;" />
+    <node id="&#25353;&#37397;&#39023;&#31034;&#25511;&#21046;" />
+    <node id="&#21205;&#24907;&#20839;&#23481;&#36969;&#25033;" />
+    <node id="&#20107;&#20214;&#34389;&#29702;&#33287;&#35222;&#35258;&#21453;&#39243;" />
+    <node id="CODE_MAPPING" />
+    <node id="BUTTONS" />
+    <node id="TODO-CONTENT" />
+    <node id="TODO CONTENT" />
+    <node id="TODO FORM" />
+    <node id="CARD BUTTONS" />
+    <node id="FORM BUTTONS" />
+    <node id="CARD BUTTONS BUTTON" />
     <node id="JAVASCRIPT &#27169;&#32068;" />
     <node id="CSS &#39006;&#21029;" />
-    <node id="E.PREVENTDEFAULT" />
-    <node id="TODOLIST" />
-    <node id="RENDERTODOS" />
-    <node id="UNIQUE ID" />
-    <node id="E.TARGET" />
-    <node id="SPA&#34892;&#28858;&#25511;&#21046;" />
-    <node id="TODOFORM" />
-    <node id="&#25876;&#25130;&#25552;&#20132;" />
+    <node id="DATA-INDEX" />
     <node id="E.PREVENTDEFAULT()" />
-    <node id="&#21807;&#19968;&#35672;&#21029;&#30908;" />
-    <node id="ADDTODO" />
-    <node id="DATE.NOW()" />
-    <node id="ISEDITING" />
-    <node id="TODOLISTELEMENT" />
-    <node id="BTN-DELETE" />
-    <node id="INDEX.HTML" />
-    <node id="STYLE.CSS" />
-    <node id="SCRIPT.JS" />
-    <node id="TODO FORM" />
-    <node id="ADD TODO" />
-    <node id="TODO LIST" />
+    <node id="TODOFORM" />
+    <node id="STYLE.DISPLAY" />
+    <node id="&#27169;&#24335;&#20999;&#25563;" />
+    <node id="&#29376;&#24907;&#31649;&#29702;" />
+    <node id="&#36039;&#26009;&#26356;&#26032;" />
+    <node id="&#21021;&#22987;&#28210;&#26579;" />
+    <node id="RENDERTODOS" />
+    <node id="VIEW" />
     <node id="RENDER TODOS" />
-    <node id="TODO CARD" />
-    <node id="TODO CONTENT" />
+    <node id="DELETE" />
+    <node id="APP" />
+    <node id="BACKGROUND" />
+    <node id="BOX-SHADOW" />
+    <node id="TODO-TITLE" />
+    <node id="FORM" />
+    <node id="BUTTON" />
+    <node id="EDIT BUTTON" />
+    <node id="DELETE BUTTON" />
+    <node id="TODO FORM ELEMENT" />
+    <node id="TITLE" />
+    <node id="CONTENT" />
     <node id="VIEW MODE" />
-    <node id="EDIT MODE" />
+    <node id="INDEX" />
+    <node id="EVENT OBJECT" />
+    <node id="TARGET" />
+    <node id="EDIT TITLE" />
+    <node id="EDIT CONTENT" />
+    <node id="EVENT" />
     <edge source="HTML" target="CSS">
       <data key="d0">8.0</data>
     </edge>
@@ -98,32 +120,29 @@
     <edge source="CSS" target="FLEXBOX">
       <data key="d0">7.0</data>
     </edge>
-    <edge source="TODO-LIST" target="APP">
-      <data key="d0">13.0</data>
+    <edge source="CSS" target="JAVASCRIPT">
+      <data key="d0">8.0</data>
     </edge>
-    <edge source="TODO-LIST" target="TODO-LIST-ID">
-      <data key="d0">6.0</data>
-    </edge>
-    <edge source="TODO-LIST" target="&#32178;&#26684;&#31995;&#32113;">
-      <data key="d0">7.0</data>
-    </edge>
-    <edge source="TODO-LIST" target="TODO-CARD">
-      <data key="d0">14.0</data>
-    </edge>
-    <edge source="TODO-LIST" target="FLEX">
-      <data key="d0">9.0</data>
-    </edge>
-    <edge source="TODO-LIST" target="FLEX-WRAP">
+    <edge source="CSS" target="CODE_MAPPING">
       <data key="d0">1.0</data>
     </edge>
-    <edge source="TODO-LIST" target="RENDERTODOS">
+    <edge source="TODO-LIST" target="TODO-FORM">
+      <data key="d0">13.0</data>
+    </edge>
+    <edge source="TODO-LIST" target="TODO-CARD">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="TODO-LIST" target="RENDERTODOS()">
       <data key="d0">8.0</data>
     </edge>
     <edge source="RENDERTODOS()" target="INNERHTML">
       <data key="d0">8.0</data>
     </edge>
+    <edge source="RENDERTODOS()" target="TODOLIST">
+      <data key="d0">9.0</data>
+    </edge>
     <edge source="VIEW-MODE" target="EDIT-MODE">
-      <data key="d0">1.0</data>
+      <data key="d0">8.0</data>
     </edge>
     <edge source="VIEW-MODE" target="TODO-CARD">
       <data key="d0">6.0</data>
@@ -135,55 +154,73 @@
       <data key="d0">8.0</data>
     </edge>
     <edge source="HTML&#27169;&#32068;" target="CSS&#30340;&#38468;&#33879;&#40670;">
-      <data key="d0">7.0</data>
+      <data key="d0">8.0</data>
     </edge>
     <edge source="HTML&#27169;&#32068;" target="JS&#30340;&#25805;&#20316;&#33310;&#21488;">
       <data key="d0">8.0</data>
     </edge>
+    <edge source="HTML&#27169;&#32068;" target="&#21629;&#21517;&#31574;&#30053;">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="HTML&#27169;&#32068;" target="&#35486;&#24847;&#21270;&#33287;&#21407;&#29983;&#34892;&#28858;">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="HTML&#27169;&#32068;" target="&#27169;&#24335;&#20999;&#25563;&#35373;&#35336;">
+      <data key="d0">7.0</data>
+    </edge>
     <edge source="JS&#30340;&#25805;&#20316;&#33310;&#21488;" target="&#24453;&#36774;&#20107;&#38917;&#21015;&#34920;&#23481;&#22120;">
       <data key="d0">8.0</data>
     </edge>
-    <edge source="&#21629;&#21517;&#31574;&#30053;" target="&#21807;&#19968;&#24615;">
-      <data key="d0">6.0</data>
+    <edge source="&#20027;&#25033;&#29992;&#23481;&#22120;" target="TODOLIST">
+      <data key="d0">9.0</data>
     </edge>
-    <edge source="&#21629;&#21517;&#31574;&#30053;" target="&#37325;&#35079;&#24615;">
-      <data key="d0">6.0</data>
-    </edge>
-    <edge source="&#35486;&#24847;&#21270;&#33287;&#21407;&#29983;&#34892;&#28858;" target="&#34920;&#21934;&#25552;&#20132;">
-      <data key="d0">7.0</data>
-    </edge>
-    <edge source="&#35486;&#24847;&#21270;&#33287;&#21407;&#29983;&#34892;&#28858;" target="&#38450;&#21574;&#27231;&#21046;">
-      <data key="d0">7.0</data>
-    </edge>
-    <edge source="&#20027;&#25033;&#29992;&#23481;&#22120;" target="&#34920;&#21934;&#21312;&#22495;">
+    <edge source="&#20027;&#25033;&#29992;&#23481;&#22120;" target="TODO-FORM">
       <data key="d0">1.0</data>
     </edge>
-    <edge source="&#34920;&#21934;&#21312;&#22495;" target="SUBMIT&#20107;&#20214;">
-      <data key="d0">8.0</data>
-    </edge>
-    <edge source="APP" target="TODO-FORM">
-      <data key="d0">5.0</data>
-    </edge>
-    <edge source="APP" target="MAX-WIDTH: 600PX">
+    <edge source="TODOLIST" target="TODO-CARD">
       <data key="d0">7.0</data>
     </edge>
-    <edge source="APP" target="MARGIN: 0 AUTO">
+    <edge source="TODOLIST" target="DATA-INDEX">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TODOLIST" target="&#36039;&#26009;&#26356;&#26032;">
       <data key="d0">7.0</data>
     </edge>
-    <edge source="APP" target="MAX-WIDTH">
+    <edge source="TODOLIST" target="&#21021;&#22987;&#28210;&#26579;">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="TODOLIST" target="RENDERTODOS">
       <data key="d0">8.0</data>
     </edge>
     <edge source="TODO-FORM" target="SUBMIT">
       <data key="d0">8.0</data>
     </edge>
-    <edge source="TODO-FORM" target="TODOINPUT">
+    <edge source="TODO-FORM" target="TODO LIST">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TODO-FORM" target="TODO-CARD">
       <data key="d0">7.0</data>
     </edge>
-    <edge source="TODO-FORM" target="TODOBUTTON">
-      <data key="d0">7.0</data>
+    <edge source="TODO-FORM" target="FORM">
+      <data key="d0">8.0</data>
     </edge>
-    <edge source="TODO-FORM" target="REQUIRED">
+    <edge source="&#34920;&#21934;&#21312;&#22495;" target="SUBMIT&#20107;&#20214;">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TODO-CARD" target="FORM-BUTTONS">
       <data key="d0">1.0</data>
+    </edge>
+    <edge source="TODO-CARD" target="CARD-BUTTONS">
+      <data key="d0">13.0</data>
+    </edge>
+    <edge source="TODO-CARD" target="TODO-CONTENT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TODO-CARD" target="TODO-TITLE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="SUBMIT" target="TODO FORM">
+      <data key="d0">9.0</data>
     </edge>
     <edge source="CSS &#27169;&#32068;" target="HTML &#32080;&#27083;">
       <data key="d0">8.0</data>
@@ -191,100 +228,223 @@
     <edge source="CSS &#27169;&#32068;" target="JAVASCRIPT">
       <data key="d0">7.0</data>
     </edge>
+    <edge source="CSS &#27169;&#32068;" target="&#38450;&#31142;&#24615;&#35373;&#35336;">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="CSS &#27169;&#32068;" target="&#32178;&#26684;&#31995;&#32113;">
+      <data key="d0">6.0</data>
+    </edge>
     <edge source="HTML &#32080;&#27083;" target="JAVASCRIPT &#27169;&#32068;">
       <data key="d0">8.0</data>
     </edge>
-    <edge source="&#38450;&#31142;&#24615;&#35373;&#35336;" target="&#21345;&#29255;&#35373;&#35336;">
-      <data key="d0">6.0</data>
+    <edge source="JAVASCRIPT" target="&#35222;&#35258;&#29376;&#24907;&#27231;">
+      <data key="d0">7.0</data>
     </edge>
-    <edge source="&#38450;&#31142;&#24615;&#35373;&#35336;" target="TODO-CARD">
+    <edge source="FLEX" target="FLEX-DIRECTION">
       <data key="d0">5.0</data>
     </edge>
-    <edge source="FLEX: 1" target="TODO-CONTENT">
-      <data key="d0">7.0</data>
-    </edge>
-    <edge source="TODO-CONTENT" target="CARD-BUTTONS">
-      <data key="d0">8.0</data>
-    </edge>
-    <edge source="TODO-CONTENT" target="TODO-CARD">
-      <data key="d0">7.0</data>
-    </edge>
-    <edge source="&#35222;&#35258;&#29376;&#24907;&#27231;" target="&#32232;&#36655;&#27169;&#24335;">
+    <edge source="FLEX" target="DISPLAY">
       <data key="d0">5.0</data>
     </edge>
-    <edge source="&#32232;&#36655;&#27169;&#24335;" target="DISPLAY: NONE">
-      <data key="d0">6.0</data>
-    </edge>
-    <edge source="SPACING MANAGEMENT" target="GAP">
-      <data key="d0">6.0</data>
-    </edge>
-    <edge source="GAP" target="MARGIN">
-      <data key="d0">6.0</data>
-    </edge>
-    <edge source="&#36984;&#25799;&#22120;&#31574;&#30053;" target="&#29305;&#30064;&#24615;">
-      <data key="d0">9.0</data>
-    </edge>
-    <edge source="TODO-CARD" target="FLEX-DIRECTION">
+    <edge source="FLEX" target="TODO FORM">
       <data key="d0">7.0</data>
     </edge>
-    <edge source="TODO-CARD" target="E.TARGET">
-      <data key="d0">7.0</data>
-    </edge>
-    <edge source="JAVASCRIPT &#27169;&#32068;" target="CSS &#39006;&#21029;">
-      <data key="d0">8.0</data>
-    </edge>
-    <edge source="JAVASCRIPT &#27169;&#32068;" target="E.PREVENTDEFAULT">
-      <data key="d0">9.0</data>
-    </edge>
-    <edge source="TODOLIST" target="RENDERTODOS">
-      <data key="d0">7.0</data>
-    </edge>
-    <edge source="TODOLIST" target="UNIQUE ID">
+    <edge source="CARD-BUTTONS" target="BUTTON">
       <data key="d0">1.0</data>
     </edge>
-    <edge source="SPA&#34892;&#28858;&#25511;&#21046;" target="TODOFORM">
+    <edge source="EDIT" target="SAVE">
       <data key="d0">8.0</data>
     </edge>
-    <edge source="&#25876;&#25130;&#25552;&#20132;" target="E.PREVENTDEFAULT()">
-      <data key="d0">9.0</data>
-    </edge>
-    <edge source="&#21807;&#19968;&#35672;&#21029;&#30908;" target="ADDTODO">
-      <data key="d0">7.0</data>
-    </edge>
-    <edge source="ADDTODO" target="DATE.NOW()">
-      <data key="d0">7.0</data>
-    </edge>
-    <edge source="ADDTODO" target="ISEDITING">
+    <edge source="EDIT" target="CANCEL">
       <data key="d0">1.0</data>
     </edge>
-    <edge source="TODOLISTELEMENT" target="BTN-DELETE">
+    <edge source="EDIT" target="VIEW">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="EDIT" target="TODO LIST">
       <data key="d0">6.0</data>
     </edge>
-    <edge source="INDEX.HTML" target="STYLE.CSS">
-      <data key="d0">7.0</data>
-    </edge>
-    <edge source="INDEX.HTML" target="SCRIPT.JS">
-      <data key="d0">7.0</data>
-    </edge>
-    <edge source="TODO FORM" target="ADD TODO">
+    <edge source="SAVE" target="EDIT MODE">
       <data key="d0">8.0</data>
+    </edge>
+    <edge source="SAVE" target="TODO LIST">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CANCEL" target="EDIT MODE">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CANCEL" target="RENDER TODOS">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="EDIT MODE" target="SAVE BUTTON">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="EDIT MODE" target="CANCEL BUTTON">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="EDIT MODE" target="TODO CARD">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="EDIT MODE" target="EDIT BUTTON">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SAVE BUTTON" target="BUTTON COLOR SYSTEM">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="SAVE BUTTON" target="TODO CARD">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="SAVE BUTTON" target="TODO LIST">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="SAVE BUTTON" target="EVENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CANCEL BUTTON" target="BUTTON COLOR SYSTEM">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="CANCEL BUTTON" target="TODO CARD">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="CANCEL BUTTON" target="VIEW MODE">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="CANCEL BUTTON" target="EVENT">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="TODO LIST" target="TODO CARD">
+      <data key="d0">34.0</data>
+    </edge>
+    <edge source="TODO LIST" target="GAP PROPERTY">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TODO LIST" target="BUTTONS">
+      <data key="d0">6.0</data>
     </edge>
     <edge source="TODO LIST" target="RENDER TODOS">
-      <data key="d0">9.0</data>
+      <data key="d0">30.0</data>
     </edge>
-    <edge source="TODO CARD" target="TODO CONTENT">
+    <edge source="TODO LIST" target="DELETE">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="TODO LIST" target="APP">
       <data key="d0">8.0</data>
     </edge>
+    <edge source="TODO LIST" target="TODO FORM">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TODO LIST" target="EDIT TITLE">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="TODO LIST" target="EDIT CONTENT">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="TODO CARD" target="BOX SHADOW">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="TODO CARD" target="CARD BUTTONS">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="TODO CARD" target="BOX-SHADOW">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="TODO CARD" target="EDIT BUTTON">
+      <data key="d0">15.0</data>
+    </edge>
+    <edge source="TODO CARD" target="DELETE BUTTON">
+      <data key="d0">9.0</data>
+    </edge>
     <edge source="TODO CARD" target="VIEW MODE">
-      <data key="d0">6.0</data>
-    </edge>
-    <edge source="TODO CARD" target="EDIT MODE">
-      <data key="d0">6.0</data>
-    </edge>
-    <edge source="TODO CONTENT" target="VIEW MODE">
       <data key="d0">7.0</data>
     </edge>
-    <edge source="TODO CONTENT" target="EDIT MODE">
+    <edge source="GAP PROPERTY" target="SPACING MANAGEMENT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="BOX SHADOW" target="BODY BACKGROUND">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="&#25353;&#37397;&#33394;&#24425;&#31995;&#32113;" target="&#32232;&#36655;&#25353;&#37397;">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="&#25353;&#37397;&#33394;&#24425;&#31995;&#32113;" target="&#20786;&#23384;&#25353;&#37397;">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="&#25353;&#37397;&#33394;&#24425;&#31995;&#32113;" target="&#21462;&#28040;&#25353;&#37397;">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="&#25353;&#37397;&#33394;&#24425;&#31995;&#32113;" target="&#21034;&#38500;&#25353;&#37397;">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="&#34920;&#21934;&#33287;&#21345;&#29255;&#30340;&#35373;&#35336;&#19968;&#33268;&#24615;" target="&#20849;&#20139;&#29305;&#24501;">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="&#34920;&#21934;&#33287;&#21345;&#29255;&#30340;&#35373;&#35336;&#19968;&#33268;&#24615;" target="&#24046;&#30064;&#21270;&#35373;&#35336;">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="&#34920;&#21934;&#33287;&#21345;&#29255;&#30340;&#35373;&#35336;&#19968;&#33268;&#24615;" target="&#35222;&#35258;&#32113;&#19968;">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="&#36664;&#20837;&#25511;&#20214;&#30340;&#19968;&#33268;&#24615;&#34389;&#29702;" target="&#20351;&#29992;&#39636;&#39511;">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="CSS&#33287;JAVASCRIPT&#30340;&#21332;&#20316;&#38364;&#20418;" target="&#29376;&#24907;&#20999;&#25563;&#20381;&#36084;">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CSS&#33287;JAVASCRIPT&#30340;&#21332;&#20316;&#38364;&#20418;" target="&#25353;&#37397;&#39023;&#31034;&#25511;&#21046;">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CSS&#33287;JAVASCRIPT&#30340;&#21332;&#20316;&#38364;&#20418;" target="&#21205;&#24907;&#20839;&#23481;&#36969;&#25033;">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="CSS&#33287;JAVASCRIPT&#30340;&#21332;&#20316;&#38364;&#20418;" target="&#20107;&#20214;&#34389;&#29702;&#33287;&#35222;&#35258;&#21453;&#39243;">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="&#25353;&#37397;&#39023;&#31034;&#25511;&#21046;" target="&#27169;&#24335;&#20999;&#25563;">
+      <data key="d0">5.0</data>
+    </edge>
+    <edge source="TODO CONTENT" target="TODO FORM">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="TODO FORM" target="CARD BUTTONS">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="TODO FORM" target="APP">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TODO FORM" target="BACKGROUND">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="FORM BUTTONS" target="CARD BUTTONS BUTTON">
+      <data key="d0">1.0</data>
+    </edge>
+    <edge source="JAVASCRIPT &#27169;&#32068;" target="CSS &#39006;&#21029;">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="E.PREVENTDEFAULT()" target="TODOFORM">
+      <data key="d0">9.0</data>
+    </edge>
+    <edge source="TODOFORM" target="STYLE.DISPLAY">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="TODOFORM" target="RENDERTODOS">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="&#27169;&#24335;&#20999;&#25563;" target="&#29376;&#24907;&#31649;&#29702;">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="EDIT BUTTON" target="EVENT">
+      <data key="d0">8.0</data>
+    </edge>
+    <edge source="TODO FORM ELEMENT" target="TITLE">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="TODO FORM ELEMENT" target="CONTENT">
+      <data key="d0">6.0</data>
+    </edge>
+    <edge source="INDEX" target="EVENT OBJECT">
+      <data key="d0">7.0</data>
+    </edge>
+    <edge source="EVENT OBJECT" target="TARGET">
       <data key="d0">1.0</data>
     </edge>
   </graph>

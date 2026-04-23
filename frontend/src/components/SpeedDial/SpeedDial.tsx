@@ -66,6 +66,10 @@ const SpeedDialComponent = (props: SpeedDialProps) => {
     }
   }, [openTextBook]);
 
+  useEffect(() => {
+    if (selectNode.category == 'Process') setOpenChatRoom(false)
+  }, [selectNode.category]);
+
   return (
     <div className="flex items-end justify-end fixed w-screen h-screen z-[10001] pointer-events-none">
       <div className="absolute bottom-5 right-5 pointer-events-auto">
@@ -111,7 +115,7 @@ const SpeedDialComponent = (props: SpeedDialProps) => {
               </Typography>
             </SpeedDialAction>
             <SpeedDialAction
-              className={openChatRoom ? 'bg-stamindTask-decoration-primary-1' : ''}
+              className={`${openChatRoom ? 'bg-stamindTask-decoration-primary-1' : ''}${selectNode.category === 'Process' ? 'hidden' : ''}`}
               onClick={() => setOpenChatRoom(!openChatRoom)}
               placeholder={undefined}
               data-action='click'
@@ -156,7 +160,7 @@ const SpeedDialComponent = (props: SpeedDialProps) => {
         </SpeedDial>
       </div>
       <div
-        className={`opacity-100 duration-500 absolute bottom-5 ${selectNode.category === 'Process' ? 'right-0' : 'right-20'} pointer-events-auto ${!openChatRoom && 'hidden'}`}>
+        className={`opacity-100 duration-500 absolute bottom-5 pointer-events-auto ${!openChatRoom && 'hidden'}`}>
         <ChatRoomComponent name={name} taskId={taskId} userStudentId={studentId} openChatRoom={openChatRoom}
                            setTempStudentRecords={setTempStudentRecords}
                            setOpenChatRoom={setOpenChatRoom}/>
