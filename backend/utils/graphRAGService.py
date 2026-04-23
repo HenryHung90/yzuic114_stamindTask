@@ -99,7 +99,7 @@ class GraphRAGService:
                 api_key=api_key,
                 type=ModelType.Chat,
                 model_provider="openai",
-                model="gpt-4o",
+                model="gpt-5.1",
                 max_retries=8,
             )
             chat_model = ModelManager().get_or_create_chat_model(

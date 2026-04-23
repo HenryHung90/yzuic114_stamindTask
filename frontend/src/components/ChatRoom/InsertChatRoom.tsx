@@ -27,6 +27,7 @@ import {
 import {API_getChatHistories} from "../../utils/API/API_ChatHistories";
 import {handleCustomRecord, IStudentRecords} from "../../utils/listener/action";
 import ImageComponent from "../Image/Image";
+import {EGroupType} from "../../utils/functions/common";
 
 // 思考中的訊息集合
 const THINKING_MESSAGES = [
@@ -64,13 +65,12 @@ interface IChatRoomProps {
   name: string
   taskId: string
   userStudentId: string | undefined
-  openChatRoom: boolean
-  setOpenChatRoom: React.Dispatch<React.SetStateAction<boolean>>
+  groupType: EGroupType
   setTempStudentRecords?: React.Dispatch<React.SetStateAction<Array<IStudentRecords>>>;
 }
 
-const ChatRoomComponent = (props: IChatRoomProps) => {
-  const {name, taskId, userStudentId, openChatRoom = true, setOpenChatRoom, setTempStudentRecords} = props
+const InsertChatRoomComponent = (props: IChatRoomProps) => {
+  const {name, taskId, userStudentId, groupType, setTempStudentRecords} = props
 
   const messageOffsetRef = useRef<number>(0);
 
@@ -216,7 +216,7 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
     // 滑到最下方
     if (messageBottomRef.current) messageBottomRef.current.scrollIntoView({behavior: "smooth"});
     if (chatContainerRef.current) previousScrollHeightRef.current = chatContainerRef.current.scrollHeight
-  }, [isSubmitMessage, openChatRoom]);
+  }, [isSubmitMessage]);
 
   // 初始訊息讀取
   useEffect(() => {
@@ -339,11 +339,12 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
       <div
         className="overflow-hidden flex flex-col justify-start min-w-[24rem] bg-stamindTask-white-200 rounded-xl shadow-lg shadow-stamindTask-primary-blue-600 animate-tooltipSlideIn">
         <div className='flex justify-between bg-stamindTask-black-850 px-2 gap-x-2 h-12'>
-          <SideActionButtonsComponent
-            handleGenerateGraphRagClick={handleGenerateGraphRagClick}
-            onArrowRightClick={handleNextStepClick}
-            onGraphClick={handleGraphClick}
-          />
+          {groupType == EGroupType.EXPERIMENTAL &&
+              <SideActionButtonsComponent
+                  handleGenerateGraphRagClick={handleGenerateGraphRagClick}
+                  onArrowRightClick={handleNextStepClick}
+                  onGraphClick={handleGraphClick}
+              />}
           <div className='flex items-center gap-x-2'>
             <ImageComponent
               src={`${import.meta.env.VITE_APP_TEST_DNS}/${import.meta.env.VITE_APP_FILES_ROUTE}/img/logo.PNG`}
@@ -351,20 +352,6 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
               width='36'/>
             <Typography variant="h5" color='blue' textGradient placeholder={undefined}>AmumAmum 助理</Typography>
           </div>
-          <IconButton
-            variant="text"
-            color='white'
-            ripple={false}
-            placeholder={undefined}
-            onClick={() => setOpenChatRoom(false)}
-            className='mt-[2px] hover:bg-stamindTask-black-850'
-            data-action='click'
-            data-type='button'
-            data-object='closeChatRoom'
-            data-id='speedDial_closeChatRoom'
-          >
-            <XMarkIcon className='h-5 w-5 color-white pointer-events-none'/>
-          </IconButton>
         </div>
         {/* Graph Dialog */}
         <GraphDialogComponent
@@ -374,7 +361,7 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
           taskId={taskId}
           graphData={graphData}
         />
-        <div className='flex flex-col justify-between w-[35vw] h-[90vh]'>
+        <div className='flex flex-col justify-between h-[80vh]'>
           <div ref={chatContainerRef} onScroll={handleScrollToChatContainerTop}
                className='overflow-auto w-full my-2'>
             <div className='flex flex-col h-full px-5'>
@@ -396,7 +383,7 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
                   return (
                     <div
                       className={isUserOrOther ? 'self-end text-right text-sm max-w-full' : 'self-start text-left text-sm max-w-full'}
-                         key={i}>
+                      key={i}>
                       <MessageContentComponent
                         taskId={taskId}
                         type={isUserOrOther ? 'User' : 'Other'}
@@ -452,4 +439,4 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
   )
 }
 
-export default ChatRoomComponent;
+export default InsertChatRoomComponent;

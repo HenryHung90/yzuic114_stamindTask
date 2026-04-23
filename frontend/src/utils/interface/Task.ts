@@ -13,6 +13,7 @@ interface ITaskProps {
 
 interface ITaskContentProps extends ITaskProps {
   taskId: string | undefined
+  name?: string
   selectNode: { key: number, category: string, text: string }
   setSelectNode?: React.Dispatch<React.SetStateAction<{ key: number, category: string, text: string }>>
 }
@@ -58,6 +59,7 @@ interface ITaskSubTargetProps extends ITaskSubTarget {
   index: number | undefined
   targetNodes: Array<ITaskTargetNodes>
   targetRelations: Array<ITaskTargetRelations>
+  targetGraphDescriptions: string
   generatedGraph: boolean
   handleEditSubTargetTitle: (index: number, key: 'title' | 'description', value: string) => void
   handleDeleteSubTargetTitle: (index: number) => void
