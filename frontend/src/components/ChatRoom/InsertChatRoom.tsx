@@ -223,10 +223,6 @@ const InsertChatRoomComponent = (props: IChatRoomProps) => {
     fetchMessageHistory()
   }, [])
 
-  // 處理方法切換
-  const handleMethodChange = (method: ChatMethodType) => {
-    setCurrentMethod(method);
-  };
 
 
   const handleGenerateKnowledgeGraph = (functionType: "generate_graphrag" | "next_step", findPrev: boolean = false) => {
@@ -299,10 +295,22 @@ const InsertChatRoomComponent = (props: IChatRoomProps) => {
   }
 
   const handleGenerateGraphRagClick = () => {
+    handleCustomRecord({
+      action: 'click',
+      type: 'button',
+      object: 'generateGraph',
+      id: 'speedDial_generateGraph',
+    }, false, userStudentId || '', setTempStudentRecords);
     handleGenerateKnowledgeGraph('generate_graphrag');
   }
 
   const handleNextStepClick = () => {
+    handleCustomRecord({
+      action: 'click',
+      type: 'button',
+      object: 'nextStep',
+      id: 'speedDial_nextStep',
+    }, false, userStudentId || '', setTempStudentRecords);
     handleGenerateKnowledgeGraph('next_step');
   };
 

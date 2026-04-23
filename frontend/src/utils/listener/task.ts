@@ -16,6 +16,8 @@ const taskTable: Record<string, string> = {
   'targetDescription': '學習目標描述',
   'subTarget': '學習子目標',
   'subTargetDescription': '學習子目標描述',
+  'subTargetTab': '學習子目標分頁',
+  'subTargetTabGraph': '學習子目標圖譜',
   // plan
   'plan': '計畫設定',
   'addPlan': '新增策略',

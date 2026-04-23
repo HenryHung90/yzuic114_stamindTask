@@ -206,6 +206,9 @@ function handleTranslateAction(dataset: IDataset, studentId: string) {
         status: 'created'
       }
     }
+
+    console.log(formattedRecord.context.description)
+
     return formattedRecord
   }
 }

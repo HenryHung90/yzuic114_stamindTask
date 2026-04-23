@@ -10,6 +10,7 @@ from backend.models import Task, StudentTask, User, StudentTaskPlan, StudentTask
     StudentTaskProcessCode, StudentTaskReflection, Feedback, ClassName, ChatHistory
 
 from backend.utils.common_utils import transfer_key_to_values
+from backend.utils.inital_code_utils import INIT_HTML_CODE, INIT_CSS_CODE, INIT_JS_CODE
 
 """
  Response Status List:
@@ -142,7 +143,12 @@ def init_student_task(request):
                 class_name = request.user.class_name
 
                 plan = StudentTaskPlan.objects.create()
-                process_code = StudentTaskProcessCode.objects.create()
+                process_code = StudentTaskProcessCode.objects.create(
+                    html_code=INIT_HTML_CODE,
+                    css_code=INIT_CSS_CODE,
+                    js_code=INIT_JS_CODE
+                )
+
                 process = StudentTaskProcess.objects.create(
                     process_code=process_code,
                 )

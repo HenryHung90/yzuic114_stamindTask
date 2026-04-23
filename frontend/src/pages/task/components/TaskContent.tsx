@@ -57,7 +57,7 @@ const TaskContentComponent = (props: ITaskContentProps) => {
 
   useEffect(() => {
     if (selectNode.category) {
-      if((selectNode.category == 'Plan' || selectNode.category == 'Reflection') && groupType === EGroupType.CONTROL) return
+      if ((selectNode.category == 'Plan' || selectNode.category == 'Reflection') && groupType === EGroupType.CONTROL) return
       handleOpen()
     }
   }, [selectNode]);
@@ -73,7 +73,9 @@ const TaskContentComponent = (props: ITaskContentProps) => {
                                      iframeKey={iframeKey}/>
         }
         {selectNode.category === 'Target' &&
-            <TargetComponent taskId={taskId} selectNode={selectNode}
+            <TargetComponent taskId={taskId} selectNode={selectNode} groupType={groupType}
+                             studentId={studentId}
+                             setTempStudentRecords={setTempStudentRecords}
                              settingAlertLogAndLoading={settingAlertLogAndLoading}/>
         }
         {/*實驗組才可以使用 Plan*/}
