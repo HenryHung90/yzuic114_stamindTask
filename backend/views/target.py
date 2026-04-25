@@ -132,7 +132,8 @@ def generate_sub_target_graph(request):
         while len(data_target_graph_descriptions) <= select_node_index:
             data_target_graph_descriptions.append('empty')
 
-            # Now we can safely assign values at select_node_index
+            # Now we can safely assign values at
+        print(graph_data)
         data_target_nodes[select_node_index] = graph_data['nodes']
         data_target_relations[select_node_index] = graph_data['edges']
         data_target_graph_descriptions[select_node_index] = output_text
