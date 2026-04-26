@@ -11,7 +11,7 @@ import {
 import {
   API_getStudentTaskByClassName,
   API_getStudentTaskByStudentId,
-  API_getAllStudentTasks
+  API_getAllStudentTasks, API_getStudentChatHistoryAnalysis
 } from "../../../../API/API_StudentTasks";
 import {API_getAllStudentRecord} from "../../../../API/API_StudentRecords";
 import {convertToXlsxFile} from "../../../common";
@@ -21,14 +21,14 @@ import {Res_classNamesInfo, Res_studentsInfo} from "../../../../API/API_Interfac
 import {ISettingAlertLogAndLoading} from "../../../../interface/alertLog";
 import {API_getAllChatHistories} from "../../../../API/API_ChatHistories";
 
-function handlePromise(messageTitle: string, messageInfo: string, loading: ISettingAlertLogAndLoading) {
+export function handlePromise(messageTitle: string, messageInfo: string, loading: ISettingAlertLogAndLoading) {
   loading.setAlertLog(messageTitle, messageInfo)
   loading.setLoadingOpen(false)
 }
 
 
 // For StudentManagement
-function handleAddNewStudent(loading: ISettingAlertLogAndLoading) {
+export function handleAddNewStudent(loading: ISettingAlertLogAndLoading) {
   const className = prompt("請輸入年級")
   if (className === '' || className === null) return
   const studentId = prompt("請輸入學號")
@@ -53,7 +53,7 @@ function handleAddNewStudent(loading: ISettingAlertLogAndLoading) {
   }
 }
 
-function handleDownloadStudentList(loading: ISettingAlertLogAndLoading) {
+export function handleDownloadStudentList(loading: ISettingAlertLogAndLoading) {
   loading.setLoadingOpen(true)
   API_getAllStudents().then(response => {
     convertToXlsxFile('student_list', ['students'], [response.data.students_data])
@@ -61,7 +61,7 @@ function handleDownloadStudentList(loading: ISettingAlertLogAndLoading) {
   })
 }
 
-function handleUploadStudentList(event: React.ChangeEvent<HTMLInputElement>, fileInputRef: React.RefObject<HTMLInputElement>, loading: ISettingAlertLogAndLoading) {
+export function handleUploadStudentList(event: React.ChangeEvent<HTMLInputElement>, fileInputRef: React.RefObject<HTMLInputElement>, loading: ISettingAlertLogAndLoading) {
   const file = event.target.files?.[0];
   if (!file) return;
 
@@ -77,7 +77,22 @@ function handleUploadStudentList(event: React.ChangeEvent<HTMLInputElement>, fil
   })
 }
 
-function handleDownloadAllStudentTask(loading: ISettingAlertLogAndLoading) {
+export function handleAnalysisAndDownloadStudentChatHistoryByClassName(loading: ISettingAlertLogAndLoading, classList: Array<Res_classNamesInfo>) {
+  const className = prompt("請輸入欲分析 & 下載年級")
+  if (className === '' || className === null) return
+
+  if (classList.some(value => value.name === className)) {
+    loading.setLoadingOpen(true)
+    API_getStudentChatHistoryAnalysis(className).then(response => {
+      convertToXlsxFile(`${className}_student_chat_analysis`, ['chat_analysis'], [response.data.student_chat_analysis])
+      loading.setLoadingOpen(false)
+    })
+  } else {
+    alert("該年級不存在")
+  }
+}
+
+export function handleDownloadAllStudentTask(loading: ISettingAlertLogAndLoading) {
   loading.setLoadingOpen(true)
   API_getAllStudentTasks().then(response => {
     convertToXlsxFile(`all_student_task_content.xlsx`, response.data.student_id_list, response.data.student_data_list)
@@ -85,7 +100,7 @@ function handleDownloadAllStudentTask(loading: ISettingAlertLogAndLoading) {
   })
 }
 
-function handleDownloadStudentTaskByClassName(loading: ISettingAlertLogAndLoading, classList: Array<Res_classNamesInfo>) {
+export function handleDownloadStudentTaskByClassName(loading: ISettingAlertLogAndLoading, classList: Array<Res_classNamesInfo>) {
   const className = prompt("請輸入欲下載年級")
   if (className === '' || className === null) return
 
@@ -100,7 +115,7 @@ function handleDownloadStudentTaskByClassName(loading: ISettingAlertLogAndLoadin
   }
 }
 
-function handleDownloadStudentTaskByStudentId(loading: ISettingAlertLogAndLoading, studentList: Array<Res_studentsInfo>) {
+export function handleDownloadStudentTaskByStudentId(loading: ISettingAlertLogAndLoading, studentList: Array<Res_studentsInfo>) {
   const studentId = prompt("請輸入欲下載學生學號")
   if (studentId === '' || studentId === null) return
 
@@ -115,7 +130,7 @@ function handleDownloadStudentTaskByStudentId(loading: ISettingAlertLogAndLoadin
   }
 }
 
-function handleDownloadAllStudentRecords(loading: ISettingAlertLogAndLoading) {
+export function handleDownloadAllStudentRecords(loading: ISettingAlertLogAndLoading) {
   loading.setLoadingOpen(true)
   Promise.all([
     API_getAllStudentRecord().then(response => {
@@ -137,7 +152,7 @@ function handleDownloadAllStudentRecords(loading: ISettingAlertLogAndLoading) {
 }
 
 // For classManagement
-function handleAddNewTask(classList: Array<Res_classNamesInfo>, loading: ISettingAlertLogAndLoading) {
+export function handleAddNewTask(classList: Array<Res_classNamesInfo>, loading: ISettingAlertLogAndLoading) {
   const className = prompt("請輸入年級")
   if (className === '' || className === null) return
   if (!classList.some(classInfo => classInfo.name === className)) return handlePromise("錯誤", "此班級不存在", loading)
@@ -154,7 +169,7 @@ function handleAddNewTask(classList: Array<Res_classNamesInfo>, loading: ISettin
 }
 
 // For groupManagement
-function handleAddNewGroup(classList: Array<Res_classNamesInfo>, loading: ISettingAlertLogAndLoading) {
+export function handleAddNewGroup(classList: Array<Res_classNamesInfo>, loading: ISettingAlertLogAndLoading) {
   const className = prompt("請輸入欲新增的年級")
   if (className === '' || className === null) return
   if (classList.some(classInfo => classInfo.name === className)) return handlePromise("錯誤", "此班級已存在", loading)
@@ -166,16 +181,4 @@ function handleAddNewGroup(classList: Array<Res_classNamesInfo>, loading: ISetti
       window.location.reload()
     }, 1000)
   })
-}
-
-export {
-  handleAddNewStudent,
-  handleDownloadStudentList,
-  handleUploadStudentList,
-  handleDownloadStudentTaskByClassName,
-  handleDownloadStudentTaskByStudentId,
-  handleDownloadAllStudentTask,
-  handleDownloadAllStudentRecords,
-  handleAddNewTask,
-  handleAddNewGroup,
 }
