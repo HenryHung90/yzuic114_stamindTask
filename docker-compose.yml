@@ -1,10 +1,20 @@
 version: "3.9"
 
+x-common-web-config: &common-web-config
+  build:
+    context: .
+    dockerfile: Dockerfile
+  volumes:
+    - ./static_data:/app/static
+    - ./media_data:/app/files
+  ports:
+    - "8000:8000"
+  env_file:
+    - .env
+
 services:
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  web-with-db:
+    <<: *common-web-config
     command: >
       sh -c "
         python manage.py collectstatic --noinput --clear &&
@@ -15,19 +25,39 @@ services:
     env_file:
       - .env
     environment:
-      DB_NAME: yzuic114_stamindtask
-      DB_USER: henry
-      DB_PASSWORD: henry_yzuic
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
       DB_HOST: db
-      DB_PORT: 5432
-      PROCESS_ON_PRODUCTION: True
-    volumes:
-      - ./static_data:/app/static
-      - ./media_data:/app/files
-    ports:
-      - "8000:8000"
+      DB_PORT: ${DB_PORT}
+      PROCESS_ON_PRODUCTION: ${PROCESS_ON_PRODUCTION}
     depends_on:
       - db
+    profiles:
+      - with-db
+
+  web-no-db:
+    <<: *common-web-config
+    command: >
+      sh -c "
+        python manage.py collectstatic --noinput --clear &&
+        python manage.py migrate &&
+        python manage.py create_default_user &&
+        gunicorn yzuic114_webstudy.wsgi:application --bind 0.0.0.0:8000 --workers 4 --threads 4 --worker-class gthread --timeout 120 --graceful-timeout 30 --keep-alive 30 --access-logfile - --error-logfile -
+      "
+    env_file:
+      - .env
+    environment:
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: host.docker.internal
+      DB_PORT: ${DB_PORT}
+      PROCESS_ON_PRODUCTION: ${PROCESS_ON_PRODUCTION}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    profiles:
+      - no-db
 
   db:
     image: postgres:15
@@ -40,21 +70,8 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
-
-#  edge-nginx:
-#    image: nginx:stable
-#    ports:
-#      - "80:80"
-#      - "443:443"
-#    volumes:
-#      - ./edge-nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-#      - ./edge-nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
-#      - /etc/letsencrypt:/etc/letsencrypt:ro
-#      - media_volume:/app/files:ro
-#      - static_volume:/app/static:ro
-#    depends_on:
-#      - web
-#    restart: unless-stopped
+    profiles:
+      - with-db
 
 volumes:
   postgres_data:
