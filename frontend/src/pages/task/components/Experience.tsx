@@ -31,7 +31,7 @@ const ExperiencePageComponent = (props: ITaskExperienceProps) => {
       {experienceData ? (
         <iframe
           key={iframeKey}
-          sandbox="allow-scripts allow-modals"
+          sandbox="allow-scripts allow-modals allow-forms"
           srcDoc={experienceData}
           title="Experience File"
           style={{

@@ -10,6 +10,8 @@ frontend/public/files/text_book
 frontend/public/files/process_code_zip
 
 static
+static_data
+media_data
 files/experience_files
 files/code_zip
 files/text_book
