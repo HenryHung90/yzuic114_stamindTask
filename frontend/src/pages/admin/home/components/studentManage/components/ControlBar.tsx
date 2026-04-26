@@ -5,7 +5,7 @@ import {Button, Input, Option, Select} from "@material-tailwind/react"
 import {
   handleAddNewStudent, handleDownloadAllStudentTask,
   handleDownloadStudentList, handleDownloadStudentTaskByClassName, handleDownloadStudentTaskByStudentId,
-  handleUploadStudentList, handleDownloadAllStudentRecords
+  handleUploadStudentList, handleDownloadAllStudentRecords, handleAnalysisAndDownloadStudentChatHistoryByClassName
 } from "../../../../../../utils/functions/admin/home/components/controlBar";
 // components
 import MenuComponent, {IMenuItems} from "../../../../../../components/menu/Menu";
@@ -63,6 +63,25 @@ const ControlBarComponent = (props: IStudentManageControlBarProps) => {
       handleClick: () => handleDownloadStudentTaskByStudentId(settingAlertLogAndLoading, studentList)
     }
   ]
+  // analysis
+  const STUDENT_CHAT_HISTORY_ANALYSIS_MENU_ITEMS = (): Array<IMenuItems> => [
+    {
+      name: '全部學生',
+      handleClick: () => {
+        alert("未開放")
+      }
+    },
+    {
+      name: '依班級',
+      handleClick: () => handleAnalysisAndDownloadStudentChatHistoryByClassName(settingAlertLogAndLoading, classList)
+    },
+    {
+      name: '依學號',
+      handleClick: () => {
+        alert("未開放")
+      }
+    }
+  ]
 
   return (
     <div className='md:flex justify-between my-5 p-5 rounded-2xl bg-stamindTask-black-600 bg-opacity-50'>
@@ -107,6 +126,8 @@ const ControlBarComponent = (props: IStudentManageControlBarProps) => {
           onChange={handleFileChange}
         />
         <MenuComponent menuHandler={"學生管理"} menuItems={STUDENT_MANAGE_MENU_ITEMS()}/>
+        <MenuComponent menuHandler={"學生聊天記錄 & 行為意圖分析"}
+                       menuItems={STUDENT_CHAT_HISTORY_ANALYSIS_MENU_ITEMS()}/>
         <MenuComponent menuHandler={"學生課程資料下載"} menuItems={STUDENT_TASK_CONTENT_MENU_ITEMS()}/>
         <Button
           placeholder={undefined}
