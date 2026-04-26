@@ -206,6 +206,10 @@ API_ADMIN_POST = [
     path('admin/get_task_graphrag_info/', get_task_graphrag_info, name='get_task_graphrag_info'),
     # upload graphrag file
     path('admin/upload_graphrag_file/', upload_graphrag_file, name='upload_graphrag_file'),
+
+    # get student chat analysis by class id
+    path('admin/get_all_student_chat_analysis_by_class_name/', get_all_student_chat_analysis_by_class_name,
+         name='get_all_student_chat_analysis_by_class_name')
 ]
 API_ADMIN_GET = [
     # get all students

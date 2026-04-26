@@ -39,3 +39,10 @@ export const API_getStudentTasksByTaskId = (taskId: string) => {
   }
   return new API_POST(import.meta.env.VITE_APP_API_GET_STUDENT_TASKS_BY_TASK_ID, taskData).sendRequest()
 }
+
+export const API_getStudentChatHistoryAnalysis = (className: string) => {
+  const taskData: Req_tasksInfo = {
+    class_name: className
+  }
+  return new API_POST(import.meta.env.VITE_APP_API_GET_STUDENT_CHAT_ANALYSIS_BY_CLASS_NAME, taskData).sendRequest()
+}
