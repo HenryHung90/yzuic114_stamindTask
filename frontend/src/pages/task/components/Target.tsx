@@ -1,10 +1,6 @@
-import {useEffect, useState, useMemo, useRef} from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
 // style
-import {
-  Tabs,
-  TabsHeader,
-  Tab,
-} from "@material-tailwind/react";
+import {Tab, Tabs, TabsHeader,} from "@material-tailwind/react";
 
 // API
 import {API_getTaskTarget} from "../../../utils/API/API_Targets";
@@ -19,7 +15,8 @@ import {
   ITaskTargetNodes,
   ITaskTargetRelations,
 } from "../../../utils/interface/Task";
-import {Button} from "@material-tailwind/react";
+import {EGroupType} from "../../../utils/functions/common";
+import {handleCustomRecord} from "../../../utils/listener/action";
 
 // 添加 window.vis 類型宣告
 declare global {
@@ -41,8 +38,11 @@ const SubTargetComponent = (props: {
   description: string;
   targetNodes?: ITaskTargetNodes[];
   targetRelations?: ITaskTargetRelations[];
+  groupType: EGroupType;
+  studentId?: string;
+  setTempStudentRecords?: (records: any) => void;
 }) => {
-  const {index, title, description, targetNodes, targetRelations} = props;
+  const {index, title, description, targetNodes, targetRelations, groupType, studentId, setTempStudentRecords} = props;
 
   const networkRef = useRef<HTMLDivElement>(null);
   const networkInstance = useRef<any>(null);
@@ -53,14 +53,32 @@ const SubTargetComponent = (props: {
   // 子目標內容標籤相關狀態
   const [activeContentTab, setActiveContentTab] = useState<SUB_TARGET_CONTENT_TAB>(SUB_TARGET_CONTENT_TAB.DESCRIPTION);
 
+  const handleChangeContentTab = (tab: SUB_TARGET_CONTENT_TAB, index: number) => {
+    setActiveContentTab(tab)
+    if (tab === SUB_TARGET_CONTENT_TAB.DESCRIPTION) {
+      handleCustomRecord({
+        action: 'click',
+        type: 'tab',
+        object: `subTargetTabDescription_子任務 ${index + 1} 描述`,
+        id: `task_subTargetTabDescription`
+      }, false, studentId || '', setTempStudentRecords)
+    } else {
+      handleCustomRecord({
+        action: 'click',
+        type: 'tab',
+        object: `subTargetTabGraph_子任務 ${index + 1} 圖譜`,
+        id: `task_subTargetTabGraph`
+      }, false, studentId || '', setTempStudentRecords)
+    }
+
+  }
+
   // 檢查是否有圖譜數據可用
   const hasGraphData = Array.isArray(targetNodes) && Array.isArray(targetRelations) && targetNodes.length > 0;
 
   // 轉換節點和關係為 vis.js 需要的格式
   const graphData = useMemo(() => {
     if (!hasGraphData) return null;
-
-    console.log(`SubTarget ${index}: Processing graph data with ${targetNodes.length} nodes and ${targetRelations.length} relations`);
 
     const nodes = targetNodes.map(node => ({
       id: node.id,
@@ -89,7 +107,6 @@ const SubTargetComponent = (props: {
 
     const loadVis = async () => {
       try {
-        console.log(`SubTarget ${index}: Loading vis.js libraries`);
         // 動態導入 vis 相關庫，與 admin 版本保持一致
         const [{Network}, {DataSet}] = await Promise.all([
           import('vis-network/standalone'),
@@ -257,7 +274,7 @@ const SubTargetComponent = (props: {
     const tabs = [SUB_TARGET_CONTENT_TAB.DESCRIPTION];
 
     // 只有當有圖譜數據時才顯示圖譜標籤
-    if (hasGraphData) {
+    if (hasGraphData && groupType === EGroupType.EXPERIMENTAL) {
       tabs.push(SUB_TARGET_CONTENT_TAB.GRAPH);
     }
 
@@ -274,9 +291,10 @@ const SubTargetComponent = (props: {
             <Tab
               key={index}
               value={tab}
-              onClick={() => setActiveContentTab(tab)}
+              onClick={() => handleChangeContentTab(tab, index)}
               className={activeContentTab === tab ? "text-gray-900" : ""}
               placeholder={undefined}
+
             >
               <div className='flex items-center gap-x-2'>
                 {tab === SUB_TARGET_CONTENT_TAB.DESCRIPTION ? (
@@ -393,7 +411,7 @@ const SubTargetComponent = (props: {
 
 // 主目標組件
 const TargetComponent = (props: ITaskContentProps) => {
-  const {taskId, selectNode} = props;
+  const {taskId, selectNode, groupType, studentId, setTempStudentRecords} = props;
 
   const [targetTitle, setTargetTitle] = useState<string>("");
   const [targetDescription, setTargetDescription] = useState<string>("");
@@ -408,7 +426,6 @@ const TargetComponent = (props: ITaskContentProps) => {
     const fetchTaskTarget = async () => {
       try {
         const response = await API_getTaskTarget(taskId || '');
-        console.log("API 回傳數據:", response.data);
 
         const title = response.data.target_titles[selectNode.key] || "";
         const description = response.data.target_descriptions[selectNode.key] || "";
@@ -443,6 +460,16 @@ const TargetComponent = (props: ITaskContentProps) => {
     fetchTaskTarget();
   }, [taskId, selectNode]);
 
+  const handleChangeSubTargetTab = (index: number) => {
+    setActiveSubTargetIndex(index)
+    handleCustomRecord({
+      action: 'click',
+      type: 'tab',
+      object: `subTargetTab_子任務${index + 1}`,
+      id: `task_subTargetTab_階段`
+    }, false, studentId || '', setTempStudentRecords)
+  }
+
   // 子目標標籤選擇器
   const SubTargetTabs = () => {
     if (subTargetList.length === 0) return null;
@@ -460,7 +487,7 @@ const TargetComponent = (props: ITaskContentProps) => {
             <Tab
               key={index}
               value={index.toString()}
-              onClick={() => setActiveSubTargetIndex(index)}
+              onClick={() => handleChangeSubTargetTab(index)}
               className={activeSubTargetIndex === index ? "text-gray-900" : ""}
               placeholder={undefined}
             >
@@ -513,6 +540,9 @@ const TargetComponent = (props: ITaskContentProps) => {
             description={subTargetList[activeSubTargetIndex].description}
             targetNodes={targetNodes[activeSubTargetIndex]}
             targetRelations={targetRelations[activeSubTargetIndex]}
+            groupType={groupType ?? EGroupType.EXPERIMENTAL}
+            studentId={studentId}
+            setTempStudentRecords={setTempStudentRecords}
           />
         )}
       </div>

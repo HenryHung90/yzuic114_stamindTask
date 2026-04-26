@@ -226,7 +226,6 @@ def multi_students_upload(request):
                 # 檢查學生是否已存在
                 student_id = student.get('student_id')
                 try:
-                    # 如果學生已存在，更新資料
                     existing_student = User.objects.get(student_id=student_id)
                     existing_student.name = student.get('name')
                     existing_student.password = make_password(student.get('password'))
@@ -235,14 +234,11 @@ def multi_students_upload(request):
                     existing_student.student_group = student_group
                     existing_student.save()
                 except User.DoesNotExist:
-                    # 如果學生不存在，創建新的學生
-                    chat_history = ChatHistory.objects.create()
                     User.objects.create_user(
                         student_id=student_id,
                         password=student.get('password'),
                         name=student.get('name'),
                         user_type=user_type,
-                        chat_history=chat_history,
                         class_name=class_name,
                         student_group=student_group,
                     )

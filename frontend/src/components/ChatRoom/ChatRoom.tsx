@@ -188,19 +188,19 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
           setIsSubmitMessage(false)
         })
       } else if (currentMethod === "code_debug") {
-        API_codeDebugWithAmumAmum(messageInput, taskId).then(response => {
-          const assistant = response.data.assistant
-          setMessages(prevState => {
-            const newMessage: IMessages = {
-              time: assistant.time,
-              name: assistant.name,
-              studentId: assistant.student_id,
-              message: assistant.message,
-            }
-            return [...prevState, newMessage]
-          })
-          setIsSubmitMessage(false)
-        })
+        // API_codeDebugWithAmumAmum(messageInput, taskId).then(response => {
+        //   const assistant = response.data.assistant
+        //   setMessages(prevState => {
+        //     const newMessage: IMessages = {
+        //       time: assistant.time,
+        //       name: assistant.name,
+        //       studentId: assistant.student_id,
+        //       message: assistant.message,
+        //     }
+        //     return [...prevState, newMessage]
+        //   })
+        //   setIsSubmitMessage(false)
+        // })
       } else {
         // 特殊功能
         API_specifyChatWithAmumAmum(messageInput, taskId, currentMethod).then(response => {
@@ -222,11 +222,6 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
   useEffect(() => {
     fetchMessageHistory()
   }, [])
-
-  // 處理方法切換
-  const handleMethodChange = (method: ChatMethodType) => {
-    setCurrentMethod(method);
-  };
 
 
   const handleGenerateKnowledgeGraph = (functionType: "generate_graphrag" | "next_step", findPrev: boolean = false) => {
@@ -299,10 +294,22 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
   }
 
   const handleGenerateGraphRagClick = () => {
+    handleCustomRecord({
+      action: 'click',
+      type: 'button',
+      object: 'generateGraph',
+      id: 'speedDial_generateGraph',
+    }, false, userStudentId || '', setTempStudentRecords);
     handleGenerateKnowledgeGraph('generate_graphrag');
   }
 
   const handleNextStepClick = () => {
+    handleCustomRecord({
+      action: 'click',
+      type: 'button',
+      object: 'nextStep',
+      id: 'speedDial_nextStep',
+    }, false, userStudentId || '', setTempStudentRecords);
     handleGenerateKnowledgeGraph('next_step');
   };
 
@@ -396,7 +403,7 @@ const ChatRoomComponent = (props: IChatRoomProps) => {
                   return (
                     <div
                       className={isUserOrOther ? 'self-end text-right text-sm max-w-full' : 'self-start text-left text-sm max-w-full'}
-                         key={i}>
+                      key={i}>
                       <MessageContentComponent
                         taskId={taskId}
                         type={isUserOrOther ? 'User' : 'Other'}

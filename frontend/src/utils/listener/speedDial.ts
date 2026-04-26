@@ -11,6 +11,8 @@ const speedDialTable: Record<string, string> = {
   'leaveTask': '離開任務',
   'openGraphInfo': '開啟知識圖譜資訊',
   'closeGraphInfo': '關閉知識圖譜資訊',
+  'generateGraph': '產生當前知識圖譜',
+  'nextStep': '下一步該怎麼做',
   'getDeepLearnInfo': '繼續深入探討',
   'getSimilarInfo': '尋找相似概念',
   'getNextStepInfo': '了解下一步'

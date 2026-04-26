@@ -30,15 +30,15 @@ const SideActionButtonsComponent = (props: ISideActionButtonsProps) => {
       icon: <AcademicCapIcon className='h-5 w-5 color-white pointer-events-none'/>,
       label: "產生當前知識節點",
       onClick: handleGenerateGraphRagClick,
-      dataObject: "getNextStepInfo",
-      dataId: "speedDial_getNextStepInfo"
+      dataObject: "generateGraph",
+      dataId: "speedDial_ggenerateGraph"
     },
     {
       icon: <ArrowRightIcon className='h-5 w-5 color-white pointer-events-none'/>,
       label: "下一步怎麼做？",
       onClick: onArrowRightClick,
-      dataObject: "getArrowRightInfo",
-      dataId: "speedDial_getArrowRightInfo"
+      dataObject: "nextStep",
+      dataId: "speedDial_nextStep"
     },
     {
       icon: <GlobeAltIcon className='h-6 w-6 color-white pointer-events-none'/>, // 更大的圖標

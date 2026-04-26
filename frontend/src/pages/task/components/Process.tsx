@@ -275,7 +275,9 @@ const ProcessComponent = (props: ITaskProcessProps) => {
           <TabSelectorComponent tabData={LANGUAGE_TYPE} activeTab={activeTab} setActiveTab={setActiveTab}/>
           {activeTab === LANGUAGE_TYPE.TARGET &&
               <div className='relative h-[100%] overflow-y-auto'>
-                  <TargetComponent taskId={taskId} selectNode={selectNode}
+                  <TargetComponent taskId={taskId} selectNode={selectNode} groupType={groupType}
+                                   studentId={studentId}
+                                   setTempStudentRecords={setTempStudentRecords}
                                    settingAlertLogAndLoading={settingAlertLogAndLoading}/>
               </div>
           }
