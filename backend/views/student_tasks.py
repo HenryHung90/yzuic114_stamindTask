@@ -313,20 +313,20 @@ def get_all_student_chat_analysis_by_class_name(request):
                 prompt = f"以下是學生ID {student_id} 的聊天記錄，請分析每條訊息的類型，並以指定的JSON格式返回分析結果。\n\n"
 
                 for i, msg in enumerate(student_messages):
-                    prompt += f"訊息 {message_indices[i]}: {msg}\n"
+                    prompt += f"訊息 {message_indices[i]}: {msg[0:200]}\n"
 
                 prompt += "\n請將分析結果以下列JSON格式返回，每條訊息的類型必須是以下之一：'詢問方向', '詢問語法', '詢問偵錯', '詢問解釋', '詢問下一步', '其他'。\n"
                 prompt += "例如：[{\"index\":1, \"type\":\"詢問方向\"}, {\"index\":2, \"type\":\"詢問語法\"}]\n"
                 prompt += ""
 
                 response = client.chat.completions.create(
-                    model="gpt-4",
+                    model="gpt-5-mini",
                     messages=[
                         {"role": "system",
                          "content": "你是一個教育分析專家，專門分析學生的聊天訊息。你需要準確分類每條訊息的類型，並嚴格按照要求的格式返回結果，除 JSON 內容外，不要回應其他內容在裡面。"},
                         {"role": "user", "content": prompt}
                     ],
-                    max_tokens=1000)
+                )
 
                 try:
                     response_content = response.choices[0].message.content
