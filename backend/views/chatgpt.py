@@ -1,4 +1,5 @@
 import os
+import re
 import time
 
 from openai import OpenAI
@@ -26,6 +27,54 @@ client = OpenAI(api_key=os.getenv('OPENAI_KEY'))
 CODE_DEBUG_ASSISTANT_ID = os.getenv('CODE_DEBUG_ASSISTANT_ID')
 NORMAL_ASSISTANT_ID = os.getenv('NORMAL_ASSISTANT_ID')
 AI_NAME = "Amum Amum"
+
+# 大量程式碼偵測門檻
+_CODE_BLOCK_PATTERN = re.compile(
+    r'^\s*('
+    r'<[^>]+>|'  # HTML tag：<div>, </p>, <input ...>
+    r'[a-zA-Z_$][\w$]*\s*[=({]|'  # 變數賦值或函式呼叫：foo =, bar(, baz{
+    r'\}\s*;?\s*$|'  # 結尾的 } 或 };
+    r'[a-zA-Z-]+\s*:\s*.+;|'  # CSS 屬性：color: red;
+    r'//.*|'  # 單行注釋 //
+    r'/\*.*|'  # 區塊注釋 /*
+    r'.*\*/$'  # 區塊注釋結尾 */
+    r')',
+    re.MULTILINE
+)
+_CODE_LINE_THRESHOLD = 20  # code block 內超過此行數視為「大量」
+_TOTAL_CODE_BLOCKS_THRESHOLD = 4  # 或同時貼了超過此數量的 code block
+
+_LARGE_CODE_REJECT_MESSAGE = """我注意到你一次貼上了大量的程式碼，這樣我沒辦法好好幫你學習喔！
+
+**請試著這樣做：**
+1. **找出你最困惑的那一段**（例如：某個函式、某幾行邏輯），單獨貼上來問我
+2. **描述你遇到的具體問題**，例如「這個 `for` 迴圈的輸出結果不如預期」
+3. **一次只問一個問題**，我們一步一步來，學習效果會更好！
+
+你可以先告訴我：**你覺得哪個部分最有問題？還是從第一個你看不懂的地方開始？** """
+
+
+def _contains_large_code(message: str) -> bool:
+    """
+    偵測使用者訊息是否包含大量程式碼。
+    條件（滿足其一即觸發）：
+      - 單一 code block 超過 _CODE_LINE_THRESHOLD 行
+      - 訊息中存在超過 _TOTAL_CODE_BLOCKS_THRESHOLD 個 code block
+    """
+    blocks = _CODE_BLOCK_PATTERN.findall(message)
+    print(len(blocks))
+    if not blocks:
+        return False
+    # 條件一：code block 數量過多
+    if len(blocks) >= _TOTAL_CODE_BLOCKS_THRESHOLD:
+        return True
+    # 條件二：任一 code block 行數過多
+    for block in blocks:
+        # 去掉首尾的 ``` 標記行後計算內容行數
+        inner_lines = block.strip().split('\n')[1:-1]
+        if len(inner_lines) >= _CODE_LINE_THRESHOLD:
+            return True
+    return False
 
 
 def chat_with_assistant(prompt_message, user_process_code, is_experimental=True):
@@ -140,8 +189,27 @@ def chat_with_amumamum(request):
         if user_history_data.chat_history is None:
             user_history_data.chat_history = []
 
+        if _contains_large_code(user_question):
+            user_content = {
+                "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "name": request.user.name,
+                "student_id": request.user.student_id,
+                "message": user_question,
+            }
+            gpt_content = {
+                "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "name": AI_NAME,
+                "student_id": "",
+                "message": _LARGE_CODE_REJECT_MESSAGE,
+                "processing_time": 0,
+            }
+            user_history_data.chat_history.append(user_content)
+            user_history_data.chat_history.append(gpt_content)
+            user_history_data.save()
+            return Response({'assistant': gpt_content}, status=status.HTTP_200_OK)
+
         user_conversation_history = ConversationHistory()
-        for history in user_history_data.chat_history[-4:]:
+        for history in user_history_data.chat_history[-2:]:
             user_conversation_history.add_turn(
                 role=ConversationRole.USER if history['name'] != AI_NAME else ConversationRole.ASSISTANT,
                 content=history['message']
@@ -170,7 +238,7 @@ def chat_with_amumamum(request):
                         ```
                         """
 
-        query = user_question + prompt_message
+        query = user_question
 
         if is_experimental:
             search_func = async_to_sync(SEARCH_ENGINE.search)
@@ -293,7 +361,7 @@ def next_step_with_amumamum(request):
             "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "name": request.user.name,
             "student_id": request.user.student_id,
-            "message": prompt_message,
+            "message": user_question,
         }
 
         search_func = async_to_sync(SEARCH_ENGINE.search)
