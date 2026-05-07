@@ -416,7 +416,9 @@ def get_student_record_by_student_id(request):
 @api_view(['GET'])
 def get_all_student_record(request):
     try:
-        record_data = StudentRecord.objects.all().order_by('created_at')
+        record_data = StudentRecord.objects.filter(
+            student__is_active=True,
+        ).order_by('created_at')
         student_task_with_chat = StudentTask.objects.filter(
             chat_history_id__isnull=False,
             student__is_active=True,
