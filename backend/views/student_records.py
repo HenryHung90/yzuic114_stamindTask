@@ -104,7 +104,7 @@ SRL_MAPPING = {
     'processHintTitle': 'P3',
     'changeProcessHintReply': 'P3',
 
-    'subTargetTabGraph': 'G3'
+    'subTargetTabGraph': 'G1'
 }
 
 SRL_CODE = {
@@ -131,8 +131,12 @@ def match_sla_code(match_word):
         return SRL_CODE.get(match_word)
 
 def serialize_record_data(record):
-    stage_code = STAGE_MAPPING.get(record.object_id)
-    other_stage_code = SRL_MAPPING.get(record.object_id)
+    object_id = record.object_id
+    if '_' in object_id:
+        object_id = object_id.split('_')[1]
+
+    stage_code = STAGE_MAPPING.get(object_id)
+    other_stage_code = SRL_MAPPING.get(object_id)
     sla_code = match_sla_code(stage_code) or match_sla_code(other_stage_code)
 
     return {
@@ -463,7 +467,7 @@ def get_student_record_by_student_id(request):
 def get_all_student_record(request):
     try:
         record_data = StudentRecord.objects.filter(
-            student__is_active=True,
+            user__is_active=True,
         ).order_by('created_at')
         student_task_with_chat = StudentTask.objects.filter(
             chat_history_id__isnull=False,
