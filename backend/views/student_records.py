@@ -6,7 +6,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.views.decorators.csrf import ensure_csrf_cookie
 
-from backend.models import ClassName, StudentRecord, User, StudentTask, Task
+from backend.models import ClassName, StudentRecord, User, StudentTask, Task, ChatHistory
+from datetime import datetime
+
 
 from backend.utils.common_utils import calculate_box_plot_data
 
@@ -17,6 +19,18 @@ from backend.utils.common_utils import calculate_box_plot_data
  2. 400: client error
  3. 500: server error
 """
+
+
+def parse_time(time_str):
+    """統一解析兩種時間格式為 datetime 物件"""
+    if not time_str:
+        return datetime.min
+    for fmt in ('%Y-%m-%d %H:%M:%S', '%Y/%m/%d %H:%M:%S'):
+        try:
+            return datetime.strptime(time_str, fmt)
+        except ValueError:
+            continue
+    return datetime.min  # 無法解析時排到最前面
 
 # 階段映射字典，用於確定 object_id 屬於哪個階段
 STAGE_MAPPING = {
@@ -90,6 +104,19 @@ def serialize_record_data(record):
     }
 
 
+def serialize_chat_data(student_id, single_chat):
+    return {
+        '學號': student_id,
+        '動作': single_chat['name'],
+        '物件類別': 'Chat',
+        '物件名稱': single_chat['name'],
+        '物件識別ID': 'Chat',
+        '發生時間': single_chat['time'],
+        '計時器': None,
+        '詳細描述': single_chat['message'],
+        '裝置資訊': None,
+    }
+
 def serialize_records_data(student_record_set):
     serialized_data = []
     for record in student_record_set:
@@ -99,9 +126,10 @@ def serialize_records_data(student_record_set):
     return serialized_data
 
 
-def serialize_multi_student_record_data(student_record_set):
+def serialize_multi_student_record_data(student_record_set, chat_data_set=None):
     """
     處理多位學生並放置在同一資料表中
+    :param chat_data_set:
     :param student_record_set:
     :return:
     """
@@ -119,6 +147,32 @@ def serialize_multi_student_record_data(student_record_set):
             # 將資料加入對應的 student_data_list 中
             index = student_id_list.index(student_id)
             student_data_list[index].append(serialized_data)
+
+    if chat_data_set:
+        for student_task in chat_data_set:
+            student_id = student_task.student_id
+            chat_history = student_task.chat_history.chat_history
+            if not chat_history:
+                continue
+
+            serialized_chats = [
+                serialize_chat_data(student_id, single_chat)
+                for single_chat in chat_history
+                if single_chat['name'] != 'Amum Amum'
+            ]
+
+            if student_id not in student_id_list:
+                student_id_list.append(student_id)
+                student_data_list.append(serialized_chats)
+            else:
+                index = student_id_list.index(student_id)
+                student_data_list[index].extend(serialized_chats)
+
+    for i, student_data in enumerate(student_data_list):
+        student_data_list[i] = sorted(
+            student_data,
+            key=lambda x: parse_time(x['發生時間'])
+        )
 
     return student_id_list, student_data_list
 
@@ -363,7 +417,11 @@ def get_student_record_by_student_id(request):
 def get_all_student_record(request):
     try:
         record_data = StudentRecord.objects.all().order_by('created_at')
-        student_id_list, student_data_list = serialize_multi_student_record_data(record_data)
+        student_task_with_chat = StudentTask.objects.filter(
+            chat_history_id__isnull=False,
+            student__is_active=True,
+        ).select_related('chat_history')
+        student_id_list, student_data_list = serialize_multi_student_record_data(record_data, student_task_with_chat)
         # 計算每個學生在各階段的點擊數據
         student_click_list = calculate_student_click_data_by_id(record_data, student_id_list)
 
