@@ -1,4 +1,5 @@
 import json
+from nis import match
 
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
@@ -45,6 +46,7 @@ STAGE_MAPPING = {
     'targetDescription': 1,
     'subTarget': 1,
     'subTargetDescription': 1,
+    'subTargetTab_階段': 1,
 
     # 計劃設定相關事件 (索引 2)
     'enterPlan': 2,
@@ -56,6 +58,7 @@ STAGE_MAPPING = {
     'changePlandescription': 2,
     'changePlantime': 2,
     'savePlan': 2,
+    'planSelectCheckBox': 2,
 
     # 計劃執行相關事件 (索引 3)
     'enterProcess': 3,
@@ -89,8 +92,50 @@ STAGE_MAPPING = {
     'leaveFeedback': 5
 }
 
+SRL_MAPPING = {
+    'process': 'P1',
+    'processcss': 'P1',
+    'processhtml': 'P1',
+    'processjavascript': 'P1',
+    'processSave': 'P1',
+
+    'enterProcess': 'P2',
+    'processOpenIframe': 'P2',
+    'processOpenProcessHint': 'P3',
+    'processHintTitle': 'P3',
+    'changeProcessHintReply': 'P3',
+
+    'subTargetTabGraph': 'G3'
+}
+
+SRL_CODE = {
+    'M1': 'MSN_EXP',
+    'M2': 'MSN_VW',
+    'P1': 'CODE_WRT',
+    'P2': 'CODE_VIW',
+    'P3': 'HINT_RES',
+    'I1': 'DEBUG_REQ',
+    'I2': 'CHAT_REQ',
+    'I3': 'NXSTP_REQ',
+    'G1': 'GRAPH_VW',
+    'G2': 'NODE_RD',
+    'G3': 'KNLG_REQ'
+}
+
+
+def match_sla_code(match_word):
+    if match_word == 0:
+        return SRL_CODE.get('M1')
+    if match_word in [1, 2]:
+        return SRL_CODE.get('M2')
+    else:
+        return SRL_CODE.get(match_word)
 
 def serialize_record_data(record):
+    stage_code = STAGE_MAPPING.get(record.object_id)
+    other_stage_code = SRL_MAPPING.get(record.object_id)
+    sla_code = match_sla_code(stage_code) or match_sla_code(other_stage_code)
+
     return {
         '學號': record.user_id,
         '動作': record.verb,
@@ -101,20 +146,22 @@ def serialize_record_data(record):
         '計時器': record.timer,
         '詳細描述': record.context.get('description'),
         '裝置資訊': str(record.context.get('device')),
+        'SLA Code': sla_code or '待填入'
     }
 
 
 def serialize_chat_data(student_id, single_chat):
     return {
         '學號': student_id,
-        '動作': single_chat['name'],
+        '動作': '聊天',
         '物件類別': 'Chat',
-        '物件名稱': single_chat['name'],
+        '物件名稱': 'Chat',
         '物件識別ID': 'Chat',
         '發生時間': single_chat['time'],
         '計時器': None,
         '詳細描述': single_chat['message'],
         '裝置資訊': None,
+        'SLA Code': '待填入'
     }
 
 def serialize_records_data(student_record_set):
