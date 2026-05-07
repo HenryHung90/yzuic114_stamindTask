@@ -364,7 +364,7 @@ def next_step_with_amumamum(request):
             "message": user_question,
         }
 
-        search_func = async_to_sync(SEARCH_ENGINE.search)
+        search_func = async_to_sync(NEXT_STEP_ENGINE.search)
         result_object = search_func(
             query=prompt_message
         )
