@@ -45,7 +45,7 @@ STAGE_MAPPING = {
     'targetDescription': 1,
     'subTarget': 1,
     'subTargetDescription': 1,
-    'subTargetTab_階段': 1,
+    'subTargetTab': 1,
 
     # 計劃設定相關事件 (索引 2)
     'enterPlan': 2,
@@ -62,9 +62,13 @@ STAGE_MAPPING = {
     # 計劃執行相關事件 (索引 3)
     'enterProcess': 3,
     'leaveProcess': 3,
+    'processJs': 3,
     'processhtml': 3,
+    'processHtml': 3,
     'processcss': 3,
+    'processCss': 3,
     'processjavascript': 3,
+    'processJavascript': 3,
     'processFontIncrease': 3,
     'processFontDecrease': 3,
     'processSave': 3,
@@ -94,8 +98,12 @@ STAGE_MAPPING = {
 SRL_MAPPING = {
     'process': 'P1',
     'processcss': 'P1',
+    'processCss': 'P1',
     'processhtml': 'P1',
+    'processHtml': 'P1',
     'processjavascript': 'P1',
+    'processJavascript': 'P1',
+    'processJs': 'P1',
     'processSave': 'P1',
 
     'enterProcess': 'P2',
