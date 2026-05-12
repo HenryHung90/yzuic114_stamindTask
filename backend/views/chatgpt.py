@@ -238,7 +238,7 @@ def chat_with_amumamum(request):
                         ```
                         """
 
-        query = user_question
+        query = user_question + prompt_message
 
         if is_experimental:
             search_func = async_to_sync(SEARCH_ENGINE.search)

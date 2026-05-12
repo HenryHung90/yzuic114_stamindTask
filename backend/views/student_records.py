@@ -167,7 +167,7 @@ def serialize_chat_data(student_id, single_chat):
         '動作': '聊天',
         '物件類別': 'Chat',
         '物件名稱': 'Chat',
-        '物件識別ID': 'Chat',
+        '物件識別ID': single_chat['name'],
         '發生時間': single_chat['time'],
         '計時器': None,
         '詳細描述': single_chat['message'],
@@ -228,7 +228,7 @@ def serialize_multi_student_record_data(student_record_set, chat_data_set=None):
 
     for i, student_data in enumerate(student_data_list):
         student_data_list[i] = sorted(
-            student_data,
+            [x for x in student_data if parse_time(x['發生時間']).year != 2025],
             key=lambda x: parse_time(x['發生時間'])
         )
 
